@@ -36,3 +36,22 @@ query Query {
   }
 }
 ```
+
+LOGIN working:
+
+```
+    mutation login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+            user {
+                _id
+                username
+            }
+        }
+    }
+
+  {
+    "email": "d@t.com",
+    "password": "12345"
+  }
+```

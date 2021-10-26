@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { User } = require("../models");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 mongoose.connect(
@@ -12,11 +13,15 @@ mongoose.connect(
     }
 );
 
+const hashPassword = (password) => {
+    return bcrypt.hashSync(password, 10);
+};
+
 const userSeed = [
     {
         username: "david",
         email: "d@t.com",
-        password: "12345",
+        password: hashPassword("12345"),
         savedBooks: [],
     },
 ];

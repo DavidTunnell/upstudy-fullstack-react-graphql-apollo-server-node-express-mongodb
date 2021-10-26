@@ -19,19 +19,19 @@ const Login = () => {
     const [login, { error }] = useMutation(USER_LOGIN);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
+        const { type, value } = event.target;
+        setUserFormData({ ...userFormData, [type]: value });
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         // check if form has everything (as per react-bootstrap docs)
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // }
 
         try {
             const { data } = await login({
@@ -79,29 +79,50 @@ const Login = () => {
                                         <div className="accordion-content-wrapper">
                                             <form>
                                                 <div className="form-group">
-                                                    <label htmlFor="exampleFormControlInput1">
+                                                    <label htmlFor="em">
                                                         Email address
                                                     </label>
                                                     <input
                                                         type="email"
                                                         className="form-control"
-                                                        id="exampleFormControlInput1"
+                                                        id="em"
                                                         placeholder="name@example.com"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            userFormData.email
+                                                        }
+                                                        required
                                                     />
                                                 </div>
                                                 <div className="form-group">
-                                                    <label htmlFor="exampleFormControlInput2">
+                                                    <label htmlFor="pw">
                                                         Password
                                                     </label>
                                                     <input
                                                         type="password"
                                                         className="form-control"
-                                                        id="exampleFormControlInput2"
+                                                        id="pw"
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
+                                                        value={
+                                                            userFormData.password
+                                                        }
+                                                        required
                                                     />
                                                 </div>
                                                 <Link
+                                                    disabled={
+                                                        !(
+                                                            userFormData.email &&
+                                                            userFormData.password
+                                                        )
+                                                    }
                                                     to="/dashboard"
                                                     className="btn btn-primary btn-block"
+                                                    onClick={handleFormSubmit}
                                                 >
                                                     Sign In
                                                 </Link>
