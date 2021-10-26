@@ -14,6 +14,11 @@ const Footer = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                             Login
                                         </Link>
                                     </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/logout">
+                                            Logout
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="col-md-2 text-center">

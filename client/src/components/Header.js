@@ -57,12 +57,14 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                 <li className="nav-item dropdown">
                                     <Link
                                         className="nav-link dropdown-toggle"
-                                        to="/dashboard"
-                                        id="navbarDropdown-2"
+                                        id="navbarDropdown"
                                         role="button"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="false"
+                                        onClick={(event) =>
+                                            event.preventDefault()
+                                        }
                                     >
                                         David Tunnell
                                     </Link>
