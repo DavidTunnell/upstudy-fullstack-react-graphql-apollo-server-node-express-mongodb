@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/interestweb_db",
+    process.env.MONGODB_URI || "mongodb://localhost/" + process.env.DB_NAME,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
