@@ -13,6 +13,30 @@ const Login = () => {
         email: "",
         password: "",
     });
+    const [cardStyles, setCardStyles] = useState({
+        signIn: {
+            top: {
+                transition: "max-height 300ms ease 0s",
+                maxHeight: "283.333px",
+            },
+            inside: {
+                overflow: "hidden",
+                transition: "max-height 300ms ease 0s",
+                maxHeight: "381.075px",
+            },
+        },
+        signUp: {
+            top: {
+                transition: "max-height 300ms ease 0s",
+                maxHeight: "0px",
+            },
+            inside: {
+                overflow: "hidden",
+                transition: "max-height 300ms ease 0s",
+                maxHeight: "0px",
+            },
+        },
+    });
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
@@ -51,43 +75,60 @@ const Login = () => {
         });
     };
 
-    const handleCardToggle = async (event) => {
-        event.preventDefault();
-        const id = event.target.id;
-        console.log(id);
-    };
-
-    //style="transition: max-height 300ms ease 0s; max-height: 283.333px;
-    const styles = {
-        activeCard: {
-            transition: "max-height 300ms ease 0s",
-            maxHeight: "283.333px",
-        },
-        inactiveCard: {
-            transition: "max-height 300ms ease 0s",
-            maxHeight: "0px",
-        },
-        activeInsideCard: {
-            overflow: "hidden",
-            transition: "max-height 300ms ease 0s",
-            maxHeight: "381.075px",
-        },
-        //overflow: hidden; transition: max-height 300ms ease 0s; max-height: 0px;
-        inactiveInsideCard: {
-            overflow: "hidden",
-            transition: "max-height 300ms ease 0s",
-            maxHeight: "0px",
-        },
-    };
-
     useEffect(() => {});
 
-    const handleClick = async (event) => {
+    const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
-            console.log("sign in");
+            setCardStyles({
+                signIn: {
+                    top: {
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "283.333px",
+                    },
+                    inside: {
+                        overflow: "hidden",
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "381.075px",
+                    },
+                },
+                signUp: {
+                    top: {
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "0px",
+                    },
+                    inside: {
+                        overflow: "hidden",
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "0px",
+                    },
+                },
+            });
         } else if (parentEl.classList.contains("signup-card")) {
-            console.log("sign up");
+            setCardStyles({
+                signIn: {
+                    top: {
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "0px",
+                    },
+                    inside: {
+                        overflow: "hidden",
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "0px",
+                    },
+                },
+                signUp: {
+                    top: {
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "283.333px",
+                    },
+                    inside: {
+                        overflow: "hidden",
+                        transition: "max-height 300ms ease 0s",
+                        maxHeight: "381.075px",
+                    },
+                },
+            });
         }
     };
 
@@ -108,7 +149,7 @@ const Login = () => {
                                 <div className="accordion open" data-accordion>
                                     <div
                                         className="signin-card"
-                                        onClick={handleClick}
+                                        onClick={handleCardToggle}
                                     >
                                         <div
                                             className="accordion-control signin-card"
@@ -118,12 +159,12 @@ const Login = () => {
                                         </div>
                                         <div
                                             className="accordion-content"
-                                            style={styles.activeCard}
+                                            style={cardStyles.signIn.top}
                                             data-content
                                         >
                                             <div
                                                 className="accordion-content-wrapper"
-                                                style={styles.activeInsideCard}
+                                                style={cardStyles.signIn.inside}
                                             >
                                                 <form>
                                                     <div className="form-group">
@@ -184,18 +225,18 @@ const Login = () => {
                                 <div className="accordion" data-accordion>
                                     <div
                                         className="signup-card"
-                                        onClick={handleClick}
+                                        onClick={handleCardToggle}
                                     >
                                         <div
                                             className="accordion-control signup-card"
-                                            style={styles.inactiveCard}
+                                            style={cardStyles.signUp.top}
                                             data-control
                                         >
                                             <h5>Create Account</h5>
                                         </div>
                                         <div
                                             className="accordion-content create-account-card"
-                                            style={styles.inactiveInsideCard}
+                                            style={cardStyles.signUp.inside}
                                             data-content
                                         >
                                             <div className="accordion-content-wrapper">
