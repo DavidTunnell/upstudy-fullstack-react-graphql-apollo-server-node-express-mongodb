@@ -10,23 +10,35 @@ const Footer = ({ toTop }) => {
                         <div className="row justify-content-between align-items-center">
                             <div className="col-md-5 text-center text-md-left">
                                 <ul className="nav">
-                                    <li className="nav-item">
-                                        {Auth.loggedIn() ? (
+                                    {Auth.loggedIn() ? (
+                                        <li className="nav-item">
                                             <Link
                                                 className="nav-link"
                                                 onClick={Auth.logout}
                                             >
                                                 Logout
                                             </Link>
-                                        ) : (
-                                            <Link
-                                                className="nav-link"
-                                                to="/login"
-                                            >
-                                                Login
-                                            </Link>
-                                        )}
-                                    </li>
+                                        </li>
+                                    ) : (
+                                        <>
+                                            <li className="nav-item">
+                                                <Link
+                                                    className="nav-link"
+                                                    to="/signup"
+                                                >
+                                                    Sign Up
+                                                </Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link
+                                                    className="nav-link"
+                                                    to="/login"
+                                                >
+                                                    Login
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )}
                                 </ul>
                             </div>
                             <div className="col-md-2 text-center">

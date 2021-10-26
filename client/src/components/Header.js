@@ -89,6 +89,14 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                         <li className="nav-item">
                                             <Link
                                                 className="nav-link"
+                                                to="/singup"
+                                            >
+                                                Sign Up
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                className="nav-link"
                                                 to="/login"
                                             >
                                                 Login
