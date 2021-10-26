@@ -47,41 +47,13 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                         Home
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <a
-                                        className="nav-link"
-                                        href={linkedInUrl}
-                                        role="button"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        LinkedIn
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className="nav-link"
-                                        href={gitHubUrl}
-                                        role="button"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        GitHub
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className="nav-link"
-                                        href={stackOverflowUrl}
-                                        role="button"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        StackOverflow
-                                    </a>
-                                </li>
                             </ul>
-                            {/* <ul className="navbar-nav align-items-center mr-0">
+                            <ul className="navbar-nav align-items-center mr-0">
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">
+                                        Login
+                                    </Link>
+                                </li>
                                 <li className="nav-item dropdown">
                                     <Link
                                         className="nav-link dropdown-toggle"
@@ -113,7 +85,7 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                         </Link>
                                     </div>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </div>
                     </nav>
                 </div>

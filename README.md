@@ -14,3 +14,25 @@ Have a polished UI.
 Be responsive.
 Be interactive (i.e., accept and respond to user input).
 Protect sensitive API key information on the server.
+
+working:
+
+```
+query Query {
+  users {
+    _id
+    username
+    email
+    password
+    savedBooks {
+      _id
+      authors
+      description
+      bookId
+      image
+      link
+      title
+    }
+  }
+}
+```
