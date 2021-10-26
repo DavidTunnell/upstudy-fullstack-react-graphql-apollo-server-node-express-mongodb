@@ -50,6 +50,13 @@ const Login = () => {
             password: "",
         });
     };
+
+    const handleCardToggle = async (event) => {
+        event.preventDefault();
+        const id = event.target.id;
+        console.log(id);
+    };
+
     //style="transition: max-height 300ms ease 0s; max-height: 283.333px;
     const styles = {
         activeCard: {
@@ -75,6 +82,15 @@ const Login = () => {
 
     useEffect(() => {});
 
+    const handleClick = async (event) => {
+        const parentEl = event.target.parentElement;
+        if (parentEl.classList.contains("signin-card")) {
+            console.log("sign in");
+        } else if (parentEl.classList.contains("signup-card")) {
+            console.log("sign up");
+        }
+    };
+
     return (
         <>
             <div className="viewport">
@@ -91,126 +107,138 @@ const Login = () => {
                             >
                                 <div className="accordion open" data-accordion>
                                     <div
-                                        className="accordion-control"
-                                        data-control
-                                    >
-                                        <h5>Sign In</h5>
-                                    </div>
-                                    <div
-                                        className="accordion-content"
-                                        style={styles.activeCard}
-                                        data-content
+                                        className="signin-card"
+                                        onClick={handleClick}
                                     >
                                         <div
-                                            className="accordion-content-wrapper"
-                                            style={styles.activeInsideCard}
+                                            className="accordion-control signin-card"
+                                            data-control
                                         >
-                                            <form>
-                                                <div className="form-group">
-                                                    <label htmlFor="em">
-                                                        Email address
-                                                    </label>
-                                                    <input
-                                                        type="email"
-                                                        className="form-control"
-                                                        id="em"
-                                                        placeholder="name@example.com"
-                                                        onChange={
-                                                            handleInputChange
+                                            <h5>Sign In</h5>
+                                        </div>
+                                        <div
+                                            className="accordion-content"
+                                            style={styles.activeCard}
+                                            data-content
+                                        >
+                                            <div
+                                                className="accordion-content-wrapper"
+                                                style={styles.activeInsideCard}
+                                            >
+                                                <form>
+                                                    <div className="form-group">
+                                                        <label htmlFor="em">
+                                                            Email address
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            className="form-control"
+                                                            id="em"
+                                                            placeholder="name@example.com"
+                                                            onChange={
+                                                                handleInputChange
+                                                            }
+                                                            value={
+                                                                userFormData.email
+                                                            }
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="pw">
+                                                            Password
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            className="form-control"
+                                                            id="pw"
+                                                            onChange={
+                                                                handleInputChange
+                                                            }
+                                                            value={
+                                                                userFormData.password
+                                                            }
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <Link
+                                                        disabled={
+                                                            !(
+                                                                userFormData.email &&
+                                                                userFormData.password
+                                                            )
                                                         }
-                                                        value={
-                                                            userFormData.email
+                                                        to="/dashboard"
+                                                        className="btn btn-primary btn-block"
+                                                        onClick={
+                                                            handleFormSubmit
                                                         }
-                                                        required
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="pw">
-                                                        Password
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        className="form-control"
-                                                        id="pw"
-                                                        onChange={
-                                                            handleInputChange
-                                                        }
-                                                        value={
-                                                            userFormData.password
-                                                        }
-                                                        required
-                                                    />
-                                                </div>
-                                                <Link
-                                                    disabled={
-                                                        !(
-                                                            userFormData.email &&
-                                                            userFormData.password
-                                                        )
-                                                    }
-                                                    to="/dashboard"
-                                                    className="btn btn-primary btn-block"
-                                                    onClick={handleFormSubmit}
-                                                >
-                                                    Sign In
-                                                </Link>
-                                            </form>
+                                                    >
+                                                        Sign In
+                                                    </Link>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="accordion" data-accordion>
                                     <div
-                                        className="accordion-control"
-                                        style={styles.inactiveCard}
-                                        data-control
+                                        className="signup-card"
+                                        onClick={handleClick}
                                     >
-                                        <h5>Create Account</h5>
-                                    </div>
-                                    <div
-                                        className="accordion-content create-account-card"
-                                        style={styles.inactiveInsideCard}
-                                        data-content
-                                    >
-                                        <div className="accordion-content-wrapper">
-                                            <form>
-                                                <div className="form-group">
-                                                    <label htmlFor="exampleFormControlInput3">
-                                                        Email address
-                                                    </label>
-                                                    <input
-                                                        type="email"
-                                                        className="form-control"
-                                                        id="exampleFormControlInput3"
-                                                        placeholder="name@example.com"
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="exampleFormControlInput4">
-                                                        Password
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        className="form-control"
-                                                        id="exampleFormControlInput4"
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="exampleFormControlInput5">
-                                                        Repeat Password
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        className="form-control"
-                                                        id="exampleFormControlInput5"
-                                                    />
-                                                </div>
-                                                <a
-                                                    href="/"
-                                                    className="btn btn-primary btn-block"
-                                                >
-                                                    Sign In
-                                                </a>
-                                            </form>
+                                        <div
+                                            className="accordion-control signup-card"
+                                            style={styles.inactiveCard}
+                                            data-control
+                                        >
+                                            <h5>Create Account</h5>
+                                        </div>
+                                        <div
+                                            className="accordion-content create-account-card"
+                                            style={styles.inactiveInsideCard}
+                                            data-content
+                                        >
+                                            <div className="accordion-content-wrapper">
+                                                <form>
+                                                    <div className="form-group">
+                                                        <label htmlFor="exampleFormControlInput3">
+                                                            Email address
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            className="form-control"
+                                                            id="exampleFormControlInput3"
+                                                            placeholder="name@example.com"
+                                                        />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="exampleFormControlInput4">
+                                                            Password
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            className="form-control"
+                                                            id="exampleFormControlInput4"
+                                                        />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="exampleFormControlInput5">
+                                                            Repeat Password
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            className="form-control"
+                                                            id="exampleFormControlInput5"
+                                                        />
+                                                    </div>
+                                                    <a
+                                                        href="/"
+                                                        className="btn btn-primary btn-block"
+                                                    >
+                                                        Sign In
+                                                    </a>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
