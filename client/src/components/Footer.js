@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 
-const Footer = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
+const Footer = ({ toTop }) => {
     return (
         <>
             <footer className="bg-dark text-white">
@@ -10,14 +11,21 @@ const Footer = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                             <div className="col-md-5 text-center text-md-left">
                                 <ul className="nav">
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="/login">
-                                            Login
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/logout">
-                                            Logout
-                                        </Link>
+                                        {Auth.loggedIn() ? (
+                                            <Link
+                                                className="nav-link"
+                                                to="/logout"
+                                            >
+                                                Logout
+                                            </Link>
+                                        ) : (
+                                            <Link
+                                                className="nav-link"
+                                                to="/login"
+                                            >
+                                                Login
+                                            </Link>
+                                        )}
                                     </li>
                                 </ul>
                             </div>

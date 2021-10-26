@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 
 const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
     return (
@@ -49,44 +50,57 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                 </li>
                             </ul>
                             <ul className="navbar-nav align-items-center mr-0">
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/login">
-                                        Login
-                                    </Link>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <Link
-                                        className="nav-link dropdown-toggle"
-                                        id="navbarDropdown"
-                                        role="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        onClick={(event) =>
-                                            event.preventDefault()
-                                        }
-                                    >
-                                        David Tunnell
-                                    </Link>
-                                    <div
-                                        className="dropdown-menu"
-                                        aria-labelledby="navbarDropdown"
-                                    >
-                                        <Link
-                                            className="dropdown-item"
-                                            to="/dashboard"
-                                        >
-                                            Dashboard
-                                        </Link>
-                                        <div className="dropdown-divider"></div>
-                                        <Link
-                                            className="dropdown-item"
-                                            to="/logout"
-                                        >
+                                {Auth.loggedIn() ? (
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/logout">
                                             Logout
                                         </Link>
-                                    </div>
-                                </li>
+                                    </li>
+                                ) : (
+                                    <>
+                                        <li className="nav-item">
+                                            <Link
+                                                className="nav-link"
+                                                to="/login"
+                                            >
+                                                Login
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item dropdown">
+                                            <Link
+                                                className="nav-link dropdown-toggle"
+                                                id="navbarDropdown"
+                                                role="button"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                                onClick={(event) =>
+                                                    event.preventDefault()
+                                                }
+                                            >
+                                                David Tunnell
+                                            </Link>
+                                            <div
+                                                className="dropdown-menu"
+                                                aria-labelledby="navbarDropdown"
+                                            >
+                                                <Link
+                                                    className="dropdown-item"
+                                                    to="/dashboard"
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                                <div className="dropdown-divider"></div>
+                                                <Link
+                                                    className="dropdown-item"
+                                                    to="/logout"
+                                                >
+                                                    Logout
+                                                </Link>
+                                            </div>
+                                        </li>
+                                    </>
+                                )}
                             </ul>
                         </div>
                     </nav>
