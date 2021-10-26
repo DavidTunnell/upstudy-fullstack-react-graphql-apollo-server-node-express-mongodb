@@ -51,10 +51,38 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                             </ul>
                             <ul className="navbar-nav align-items-center mr-0">
                                 {Auth.loggedIn() ? (
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/logout">
-                                            Logout
+                                    <li className="nav-item dropdown">
+                                        <Link
+                                            className="nav-link dropdown-toggle"
+                                            id="navbarDropdown"
+                                            role="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            onClick={(event) =>
+                                                event.preventDefault()
+                                            }
+                                        >
+                                            {Auth.getProfile().data.username}
                                         </Link>
+                                        <div
+                                            className="dropdown-menu"
+                                            aria-labelledby="navbarDropdown"
+                                        >
+                                            <Link
+                                                className="dropdown-item"
+                                                to="/dashboard"
+                                            >
+                                                Dashboard
+                                            </Link>
+                                            <div className="dropdown-divider"></div>
+                                            <Link
+                                                className="dropdown-item"
+                                                onClick={Auth.logout}
+                                            >
+                                                Logout
+                                            </Link>
+                                        </div>
                                     </li>
                                 ) : (
                                     <>
@@ -65,39 +93,6 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                             >
                                                 Login
                                             </Link>
-                                        </li>
-                                        <li className="nav-item dropdown">
-                                            <Link
-                                                className="nav-link dropdown-toggle"
-                                                id="navbarDropdown"
-                                                role="button"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                                onClick={(event) =>
-                                                    event.preventDefault()
-                                                }
-                                            >
-                                                David Tunnell
-                                            </Link>
-                                            <div
-                                                className="dropdown-menu"
-                                                aria-labelledby="navbarDropdown"
-                                            >
-                                                <Link
-                                                    className="dropdown-item"
-                                                    to="/dashboard"
-                                                >
-                                                    Dashboard
-                                                </Link>
-                                                <div className="dropdown-divider"></div>
-                                                <Link
-                                                    className="dropdown-item"
-                                                    to="/logout"
-                                                >
-                                                    Logout
-                                                </Link>
-                                            </div>
                                         </li>
                                     </>
                                 )}

@@ -19,7 +19,7 @@ const hashPassword = (password) => {
 
 const userSeed = [
     {
-        username: "david",
+        username: "David Tunnell",
         email: "d@t.com",
         password: hashPassword("12345"),
         savedBooks: [],

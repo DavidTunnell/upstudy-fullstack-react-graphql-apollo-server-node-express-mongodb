@@ -14,7 +14,7 @@ const Footer = ({ toTop }) => {
                                         {Auth.loggedIn() ? (
                                             <Link
                                                 className="nav-link"
-                                                to="/logout"
+                                                onClick={Auth.logout}
                                             >
                                                 Logout
                                             </Link>
