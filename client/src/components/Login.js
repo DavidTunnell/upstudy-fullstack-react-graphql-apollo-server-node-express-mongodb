@@ -1,8 +1,56 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+import { useMutation } from "@apollo/client";
+import { USER_LOGIN } from "../utils/mutations";
+
 import useScrollToTop from "../utils/useScrollToTop";
 const Login = () => {
     const bgImage = "./assets/images/login-bg.jpg";
     useScrollToTop();
+
+    const [userFormData, setUserFormData] = useState({
+        email: "",
+        password: "",
+    });
+    const [validated] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+
+    const [login, { error }] = useMutation(USER_LOGIN);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setUserFormData({ ...userFormData, [name]: value });
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        // check if form has everything (as per react-bootstrap docs)
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        try {
+            const { data } = await login({
+                variables: { ...userFormData },
+            });
+
+            Auth.login(data.login.token);
+        } catch (err) {
+            console.error(err);
+            setShowAlert(true);
+        }
+
+        setUserFormData({
+            username: "",
+            email: "",
+            password: "",
+        });
+    };
+
     return (
         <>
             <div className="viewport">
