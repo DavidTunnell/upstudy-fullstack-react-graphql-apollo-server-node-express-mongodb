@@ -37,6 +37,9 @@ const Login = ({
     const [validatorLogin, setValidatorLogin] = useState(
         new SimpleReactValidator()
     );
+    const [validatorCreate, setValidatorCreate] = useState(
+        new SimpleReactValidator()
+    );
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     // validatorLogin.showMessages();
@@ -83,34 +86,42 @@ const Login = ({
 
     const handleFormCreate = async (event) => {
         event.preventDefault();
-        try {
-            const { data } = await addUser({
-                variables: {
-                    username: userCreateData.createUsername,
-                    email: userCreateData.createEmail,
-                    password: userCreateData.createPassword,
-                },
-            });
+        console.log(validatorCreate.allValid());
+        validatorCreate.showMessages();
+        forceUpdate();
+        // if (validatorCreate.allValid()) {
+        //     try {
+        //         const { data } = await addUser({
+        //             variables: {
+        //                 username: userCreateData.createUsername,
+        //                 email: userCreateData.createEmail,
+        //                 password: userCreateData.createPassword,
+        //             },
+        //         });
 
-            Auth.login(data.addUser.token);
-        } catch (err) {
-            console.error(err);
-            setShowAlert(true);
-        }
+        //         Auth.login(data.addUser.token);
+        //     } catch (err) {
+        //         console.error(err);
+        //         setShowAlert(true);
+        //     }
+        // } else {
+        //     validatorCreate.showMessages();
+        //     forceUpdate();
+        // }
     };
 
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
             setSignInTop("283.333px");
-            setSignInInside("481.075px");
+            setSignInInside("581.075px");
             setSignUpTop("0px");
             setSignUpInside("0px");
         } else if (parentEl.classList.contains("signup-card")) {
             setSignInTop("0px");
             setSignInInside("0px");
             setSignUpTop("283.333px");
-            setSignUpInside("481.075px");
+            setSignUpInside("581.075px");
         }
     };
 
@@ -256,7 +267,7 @@ const Login = ({
                                                             Username
                                                         </label>
                                                         <input
-                                                            type="email"
+                                                            type="text"
                                                             className="form-control"
                                                             id="createUsername"
                                                             placeholder="name@example.com"
@@ -267,6 +278,11 @@ const Login = ({
                                                                 userCreateData.createUsername
                                                             }
                                                         />
+                                                        {validatorCreate.message(
+                                                            "username",
+                                                            userCreateData.createUsername,
+                                                            "required"
+                                                        )}
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="createEmail">
@@ -284,6 +300,11 @@ const Login = ({
                                                                 userCreateData.createEmail
                                                             }
                                                         />
+                                                        {validatorCreate.message(
+                                                            "email",
+                                                            userCreateData.createEmail,
+                                                            "required|email"
+                                                        )}
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="createPassword">
@@ -300,6 +321,11 @@ const Login = ({
                                                                 userCreateData.createPassword
                                                             }
                                                         />
+                                                        {validatorCreate.message(
+                                                            "password",
+                                                            userCreateData.createPassword,
+                                                            "required"
+                                                        )}
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="password">
@@ -316,22 +342,20 @@ const Login = ({
                                                                 userCreateData.repeatPassword
                                                             }
                                                         />
+                                                        {validatorCreate.message(
+                                                            "password",
+                                                            userCreateData.repeatPassword,
+                                                            "required"
+                                                        )}
                                                     </div>
                                                     <Link
-                                                        disabled={
-                                                            !(
-                                                                userCreateData.createEmail &&
-                                                                userCreateData.createPassword &&
-                                                                userCreateData.repeatPassword
-                                                            )
-                                                        }
                                                         to="/"
                                                         className="btn btn-primary btn-block"
                                                         onClick={
                                                             handleFormCreate
                                                         }
                                                     >
-                                                        Sign In
+                                                        Sign Up and Sign In
                                                     </Link>
                                                 </form>
                                             </div>
