@@ -5,8 +5,6 @@ import { useMutation } from "@apollo/client";
 import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 
-import useScrollToTop from "../utils/useScrollToTop";
-
 const Login = ({
     signInTopVal,
     signInInsideVal,
@@ -27,12 +25,8 @@ const Login = ({
     const [signInInside, setSignInInside] = useState(signInInsideVal);
     const [signUpTop, setSignUpTop] = useState(signUpTopVal);
     const [signUpInside, setSignUpInside] = useState(signUpInsideVal);
-    const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-
-    const bgImage = "./assets/images/login-bg.jpg";
-    const [login, { error }] = useMutation(USER_LOGIN);
-    const [addUser, { err }] = useMutation(ADD_USER);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [validatorLogin, setValidatorLogin] = useState(
         new SimpleReactValidator()
@@ -42,7 +36,11 @@ const Login = ({
     );
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
-    // validatorLogin.showMessages();
+    const bgImage = "./assets/images/login-bg.jpg";
+
+    const [login] = useMutation(USER_LOGIN);
+    const [addUser] = useMutation(ADD_USER);
+
     useEffect(() => {
         setSignInTop(signInTopVal);
         setSignInInside(signInInsideVal);
@@ -75,7 +73,7 @@ const Login = ({
 
                 Auth.login(data.login.token);
             } catch (err) {
-                console.error(err);
+                setErrorMessage(err.message);
                 setShowAlert(true);
             }
         } else {
@@ -86,30 +84,26 @@ const Login = ({
 
     const handleFormCreate = async (event) => {
         event.preventDefault();
-        console.log(validatorCreate.allValid());
-        validatorCreate.showMessages();
-        forceUpdate();
-        // if (validatorCreate.allValid()) {
-        //     try {
-        //         const { data } = await addUser({
-        //             variables: {
-        //                 username: userCreateData.createUsername,
-        //                 email: userCreateData.createEmail,
-        //                 password: userCreateData.createPassword,
-        //             },
-        //         });
+        if (validatorCreate.allValid()) {
+            try {
+                const { data } = await addUser({
+                    variables: {
+                        username: userCreateData.createUsername,
+                        email: userCreateData.createEmail,
+                        password: userCreateData.createPassword,
+                    },
+                });
 
-        //         Auth.login(data.addUser.token);
-        //     } catch (err) {
-        //         console.error(err);
-        //         setShowAlert(true);
-        //     }
-        // } else {
-        //     validatorCreate.showMessages();
-        //     forceUpdate();
-        // }
+                Auth.login(data.addUser.token);
+            } catch (err) {
+                setErrorMessage(err.message);
+                setShowAlert(true);
+            }
+        } else {
+            validatorCreate.showMessages();
+            forceUpdate();
+        }
     };
-
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
@@ -324,7 +318,12 @@ const Login = ({
                                                         {validatorCreate.message(
                                                             "password",
                                                             userCreateData.createPassword,
-                                                            "required"
+                                                            `required|in:${userCreateData.repeatPassword}`,
+                                                            {
+                                                                messages: {
+                                                                    in: "Passwords need to match.",
+                                                                },
+                                                            }
                                                         )}
                                                     </div>
                                                     <div className="form-group">
@@ -345,7 +344,12 @@ const Login = ({
                                                         {validatorCreate.message(
                                                             "password",
                                                             userCreateData.repeatPassword,
-                                                            "required"
+                                                            `required|in:${userCreateData.createPassword}`,
+                                                            {
+                                                                messages: {
+                                                                    in: "Passwords need to match.",
+                                                                },
+                                                            }
                                                         )}
                                                     </div>
                                                     <Link
@@ -367,6 +371,48 @@ const Login = ({
                     </div>
                 </div>
             </div>
+            <div
+                className={`modal fade ${showAlert ? "show" : ""}`}
+                id="exampleModal"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+                style={{ display: `${showAlert ? "block" : "none"}` }}
+            >
+                <div
+                    className="modal-dialog modal-dialog-centered"
+                    role="document"
+                >
+                    <div className="modal-content">
+                        <div className="justify-content-end">
+                            <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                onClick={() => setShowAlert(false)}
+                            >
+                                <span
+                                    aria-hidden="true"
+                                    className="icon-x"
+                                ></span>
+                            </button>
+                        </div>
+                        <div className="modal-body text-center">
+                            <h3>API Error</h3>
+                            <p>
+                                There was a connection problem with the server.
+                                Please try again later.
+                            </p>
+                            <p>{errorMessage}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                className={` ${showAlert ? "modal-backdrop fade show" : ""}`}
+            ></div>
         </>
     );
 };
