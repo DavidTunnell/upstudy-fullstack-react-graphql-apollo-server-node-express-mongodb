@@ -28,12 +28,8 @@ const Login = ({
     const [showAlert, setShowAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [validatorLogin, setValidatorLogin] = useState(
-        new SimpleReactValidator()
-    );
-    const [validatorCreate, setValidatorCreate] = useState(
-        new SimpleReactValidator()
-    );
+    const [validatorLogin] = useState(new SimpleReactValidator());
+    const [validatorCreate] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     const bgImage = "./assets/images/login-bg.jpg";
@@ -107,14 +103,14 @@ const Login = ({
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
-            setSignInTop("283.333px");
+            setSignInTop("383.333px");
             setSignInInside("581.075px");
             setSignUpTop("0px");
             setSignUpInside("0px");
         } else if (parentEl.classList.contains("signup-card")) {
             setSignInTop("0px");
             setSignInInside("0px");
-            setSignUpTop("283.333px");
+            setSignUpTop("383.333px");
             setSignUpInside("581.075px");
         }
     };
@@ -400,11 +396,7 @@ const Login = ({
                             </button>
                         </div>
                         <div className="modal-body text-center">
-                            <h3>API Error</h3>
-                            <p>
-                                There was a connection problem with the server.
-                                Please try again later.
-                            </p>
+                            <h3>Error</h3>
                             <p>{errorMessage}</p>
                         </div>
                     </div>
