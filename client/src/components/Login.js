@@ -6,39 +6,19 @@ import { USER_LOGIN } from "../utils/mutations";
 
 import useScrollToTop from "../utils/useScrollToTop";
 const Login = () => {
-    const bgImage = "./assets/images/login-bg.jpg";
-    useScrollToTop();
-
     const [userFormData, setUserFormData] = useState({
         email: "",
         password: "",
     });
-    const [cardStyles, setCardStyles] = useState({
-        signIn: {
-            top: {
-                transition: "max-height 300ms ease 0s",
-                maxHeight: "283.333px",
-            },
-            inside: {
-                overflow: "hidden",
-                transition: "max-height 300ms ease 0s",
-                maxHeight: "381.075px",
-            },
-        },
-        signUp: {
-            top: {
-                transition: "max-height 300ms ease 0s",
-                maxHeight: "0px",
-            },
-            inside: {
-                overflow: "hidden",
-                transition: "max-height 300ms ease 0s",
-                maxHeight: "0px",
-            },
-        },
-    });
+    const [signInTop, setSignInTop] = useState("283.333px");
+    const [signInInside, setSignInInside] = useState("381.075px");
+    const [signUpTop, setSignUpTop] = useState("0px");
+    const [signUpInside, setSignUpInside] = useState("0px");
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+
+    const bgImage = "./assets/images/login-bg.jpg";
+    useScrollToTop();
 
     const [login, { error }] = useMutation(USER_LOGIN);
 
@@ -75,60 +55,18 @@ const Login = () => {
         });
     };
 
-    useEffect(() => {});
-
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
-            setCardStyles({
-                signIn: {
-                    top: {
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "283.333px",
-                    },
-                    inside: {
-                        overflow: "hidden",
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "381.075px",
-                    },
-                },
-                signUp: {
-                    top: {
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "0px",
-                    },
-                    inside: {
-                        overflow: "hidden",
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "0px",
-                    },
-                },
-            });
+            setSignInTop("283.333px");
+            setSignInInside("381.075px");
+            setSignUpTop("0px");
+            setSignUpInside("0px");
         } else if (parentEl.classList.contains("signup-card")) {
-            setCardStyles({
-                signIn: {
-                    top: {
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "0px",
-                    },
-                    inside: {
-                        overflow: "hidden",
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "0px",
-                    },
-                },
-                signUp: {
-                    top: {
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "283.333px",
-                    },
-                    inside: {
-                        overflow: "hidden",
-                        transition: "max-height 300ms ease 0s",
-                        maxHeight: "381.075px",
-                    },
-                },
-            });
+            setSignInTop("0px");
+            setSignInInside("0px");
+            setSignUpTop("283.333px");
+            setSignUpInside("381.075px");
         }
     };
 
@@ -159,12 +97,21 @@ const Login = () => {
                                         </div>
                                         <div
                                             className="accordion-content"
-                                            style={cardStyles.signIn.top}
+                                            style={{
+                                                transition:
+                                                    "max-height 300ms ease 0s",
+                                                maxHeight: signInTop,
+                                            }}
                                             data-content
                                         >
                                             <div
                                                 className="accordion-content-wrapper"
-                                                style={cardStyles.signIn.inside}
+                                                style={{
+                                                    overflow: "hidden",
+                                                    transition:
+                                                        "max-height 300ms ease 0s",
+                                                    maxHeight: signInInside,
+                                                }}
                                             >
                                                 <form>
                                                     <div className="form-group">
@@ -229,14 +176,23 @@ const Login = () => {
                                     >
                                         <div
                                             className="accordion-control signup-card"
-                                            style={cardStyles.signUp.top}
+                                            style={{
+                                                transition:
+                                                    "max-height 300ms ease 0s",
+                                                maxHeight: signUpTop,
+                                            }}
                                             data-control
                                         >
                                             <h5>Create Account</h5>
                                         </div>
                                         <div
                                             className="accordion-content create-account-card"
-                                            style={cardStyles.signUp.inside}
+                                            style={{
+                                                overflow: "hidden",
+                                                transition:
+                                                    "max-height 300ms ease 0s",
+                                                maxHeight: signUpInside,
+                                            }}
                                             data-content
                                         >
                                             <div className="accordion-content-wrapper">
