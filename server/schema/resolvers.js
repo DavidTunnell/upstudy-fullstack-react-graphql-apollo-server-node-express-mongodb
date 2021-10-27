@@ -19,12 +19,11 @@ const resolvers = {
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-            if (!user) {
-                throw new AuthenticationError("No user with this email found!");
-            }
             const correctPw = await user.isCorrectPassword(password);
-            if (!correctPw) {
-                throw new AuthenticationError("Incorrect password!");
+            if (!user || !correctPw) {
+                throw new AuthenticationError(
+                    "If the user you entered exists, you entered the wrong username and/or password."
+                );
             }
             const token = signToken(user);
             return { token, user };
