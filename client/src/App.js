@@ -32,7 +32,20 @@ function App() {
                                 <Home />
                             </Route>
                             <Route exact path="/login">
-                                <Login />
+                                <Login
+                                    signInTopVal="283.333px"
+                                    signInInsideVal="381.075px"
+                                    signUpTopVal="0px"
+                                    signUpInsideVal="0px"
+                                />
+                            </Route>
+                            <Route exact path="/signup">
+                                <Login
+                                    signInTopVal="0px"
+                                    signInInsideVal="0px"
+                                    signUpTopVal="283.333px"
+                                    signUpInsideVal="381.075px"
+                                />
                             </Route>
                             <Route exact path="/dashboard">
                                 <Dashboard />

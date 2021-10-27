@@ -5,29 +5,54 @@ import { useMutation } from "@apollo/client";
 import { USER_LOGIN } from "../utils/mutations";
 
 import useScrollToTop from "../utils/useScrollToTop";
-const Login = () => {
-    const [userFormData, setUserFormData] = useState({
+const Login = ({
+    signInTopVal,
+    signInInsideVal,
+    signUpTopVal,
+    signUpInsideVal,
+}) => {
+    const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
     });
-    const [signInTop, setSignInTop] = useState("283.333px");
-    const [signInInside, setSignInInside] = useState("381.075px");
-    const [signUpTop, setSignUpTop] = useState("0px");
-    const [signUpInside, setSignUpInside] = useState("0px");
+    const [userCreateData, setUserCreateData] = useState({
+        createEmail: "",
+        createPassword: "",
+        repeatPassword: "",
+    });
+    const [signInTop, setSignInTop] = useState(signInTopVal);
+    const [signInInside, setSignInInside] = useState(signInInsideVal);
+    const [signUpTop, setSignUpTop] = useState(signUpTopVal);
+    const [signUpInside, setSignUpInside] = useState(signUpInsideVal);
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
     const bgImage = "./assets/images/login-bg.jpg";
-    useScrollToTop();
-
     const [login, { error }] = useMutation(USER_LOGIN);
 
-    const handleInputChange = (event) => {
-        const { type, value } = event.target;
-        setUserFormData({ ...userFormData, [type]: value });
+    useEffect(() => {
+        setSignInTop(signInTopVal);
+        setSignInInside(signInInsideVal);
+        setSignUpTop(signUpTopVal);
+        setSignUpInside(signUpInsideVal);
+    }, [signInTopVal, signInInsideVal, signUpTopVal, signUpInsideVal]);
+
+    useEffect(() => {
+        console.log(userLoginData);
+    });
+
+    const handleLoginInputChange = (event) => {
+        const { id, value } = event.target;
+        setUserLoginData({ ...userLoginData, [id]: value });
     };
 
-    const handleFormSubmit = async (event) => {
+    const handleCreateInputChange = (event) => {
+        const { id, value } = event.target;
+        console.log(id);
+        setUserCreateData({ ...userCreateData, [id]: value });
+    };
+
+    const handleFormLogin = async (event) => {
         event.preventDefault();
 
         // check if form has everything (as per react-bootstrap docs)
@@ -39,7 +64,7 @@ const Login = () => {
 
         try {
             const { data } = await login({
-                variables: { ...userFormData },
+                variables: { ...userLoginData },
             });
 
             Auth.login(data.login.token);
@@ -48,7 +73,7 @@ const Login = () => {
             setShowAlert(true);
         }
 
-        setUserFormData({
+        setUserLoginData({
             username: "",
             email: "",
             password: "",
@@ -121,13 +146,13 @@ const Login = () => {
                                                         <input
                                                             type="email"
                                                             className="form-control"
-                                                            id="em"
+                                                            id="email"
                                                             placeholder="name@example.com"
                                                             onChange={
-                                                                handleInputChange
+                                                                handleLoginInputChange
                                                             }
                                                             value={
-                                                                userFormData.email
+                                                                userLoginData.email
                                                             }
                                                             required
                                                         />
@@ -139,12 +164,12 @@ const Login = () => {
                                                         <input
                                                             type="password"
                                                             className="form-control"
-                                                            id="pw"
+                                                            id="password"
                                                             onChange={
-                                                                handleInputChange
+                                                                handleLoginInputChange
                                                             }
                                                             value={
-                                                                userFormData.password
+                                                                userLoginData.password
                                                             }
                                                             required
                                                         />
@@ -152,14 +177,14 @@ const Login = () => {
                                                     <Link
                                                         disabled={
                                                             !(
-                                                                userFormData.email &&
-                                                                userFormData.password
+                                                                userLoginData.email &&
+                                                                userLoginData.password
                                                             )
                                                         }
                                                         to="/dashboard"
                                                         className="btn btn-primary btn-block"
                                                         onClick={
-                                                            handleFormSubmit
+                                                            handleFormLogin
                                                         }
                                                     >
                                                         Sign In
@@ -204,8 +229,14 @@ const Login = () => {
                                                         <input
                                                             type="email"
                                                             className="form-control"
-                                                            id="exampleFormControlInput3"
+                                                            id="createEmail"
                                                             placeholder="name@example.com"
+                                                            onChange={
+                                                                handleCreateInputChange
+                                                            }
+                                                            value={
+                                                                userCreateData.createEmail
+                                                            }
                                                         />
                                                     </div>
                                                     <div className="form-group">
@@ -215,7 +246,13 @@ const Login = () => {
                                                         <input
                                                             type="password"
                                                             className="form-control"
-                                                            id="exampleFormControlInput4"
+                                                            id="createPassword"
+                                                            onChange={
+                                                                handleCreateInputChange
+                                                            }
+                                                            value={
+                                                                userCreateData.createPassword
+                                                            }
                                                         />
                                                     </div>
                                                     <div className="form-group">
@@ -225,7 +262,13 @@ const Login = () => {
                                                         <input
                                                             type="password"
                                                             className="form-control"
-                                                            id="exampleFormControlInput5"
+                                                            id="repeatPassword"
+                                                            onChange={
+                                                                handleCreateInputChange
+                                                            }
+                                                            value={
+                                                                userCreateData.repeatPassword
+                                                            }
                                                         />
                                                     </div>
                                                     <a
