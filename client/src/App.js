@@ -34,7 +34,7 @@ function App() {
                             <Route exact path="/login">
                                 <Login
                                     signInTopVal="283.333px"
-                                    signInInsideVal="381.075px"
+                                    signInInsideVal="481.075px"
                                     signUpTopVal="0px"
                                     signUpInsideVal="0px"
                                 />
@@ -44,7 +44,7 @@ function App() {
                                     signInTopVal="0px"
                                     signInInsideVal="0px"
                                     signUpTopVal="283.333px"
-                                    signUpInsideVal="381.075px"
+                                    signUpInsideVal="481.075px"
                                 />
                             </Route>
                             <Route exact path="/dashboard">

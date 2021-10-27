@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
-import { USER_LOGIN } from "../utils/mutations";
+import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 
 import useScrollToTop from "../utils/useScrollToTop";
 const Login = ({
@@ -16,6 +16,7 @@ const Login = ({
         password: "",
     });
     const [userCreateData, setUserCreateData] = useState({
+        createUsername: "",
         createEmail: "",
         createPassword: "",
         repeatPassword: "",
@@ -29,6 +30,7 @@ const Login = ({
 
     const bgImage = "./assets/images/login-bg.jpg";
     const [login, { error }] = useMutation(USER_LOGIN);
+    const [addUser, { err }] = useMutation(ADD_USER);
 
     useEffect(() => {
         setSignInTop(signInTopVal);
@@ -38,7 +40,7 @@ const Login = ({
     }, [signInTopVal, signInInsideVal, signUpTopVal, signUpInsideVal]);
 
     useEffect(() => {
-        console.log(userLoginData);
+        console.log(userCreateData);
     });
 
     const handleLoginInputChange = (event) => {
@@ -48,7 +50,6 @@ const Login = ({
 
     const handleCreateInputChange = (event) => {
         const { id, value } = event.target;
-        console.log(id);
         setUserCreateData({ ...userCreateData, [id]: value });
     };
 
@@ -72,26 +73,47 @@ const Login = ({
             console.error(err);
             setShowAlert(true);
         }
+    };
 
-        setUserLoginData({
-            username: "",
-            email: "",
-            password: "",
-        });
+    const handleFormCreate = async (event) => {
+        event.preventDefault();
+
+        console.log(userCreateData);
+
+        // check if form has everything (as per react-bootstrap docs)
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // }
+        try {
+            const { data } = await addUser({
+                variables: {
+                    username: userCreateData.createUsername,
+                    email: userCreateData.createEmail,
+                    password: userCreateData.createPassword,
+                },
+            });
+
+            Auth.login(data.addUser.token);
+        } catch (err) {
+            console.error(err);
+            setShowAlert(true);
+        }
     };
 
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {
             setSignInTop("283.333px");
-            setSignInInside("381.075px");
+            setSignInInside("481.075px");
             setSignUpTop("0px");
             setSignUpInside("0px");
         } else if (parentEl.classList.contains("signup-card")) {
             setSignInTop("0px");
             setSignInInside("0px");
             setSignUpTop("283.333px");
-            setSignUpInside("381.075px");
+            setSignUpInside("481.075px");
         }
     };
 
@@ -224,6 +246,23 @@ const Login = ({
                                                 <form>
                                                     <div className="form-group">
                                                         <label htmlFor="exampleFormControlInput3">
+                                                            Username
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            className="form-control"
+                                                            id="createUsername"
+                                                            placeholder="name@example.com"
+                                                            onChange={
+                                                                handleCreateInputChange
+                                                            }
+                                                            value={
+                                                                userCreateData.createUsername
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="exampleFormControlInput3">
                                                             Email address
                                                         </label>
                                                         <input
@@ -271,12 +310,22 @@ const Login = ({
                                                             }
                                                         />
                                                     </div>
-                                                    <a
-                                                        href="/"
+                                                    <Link
+                                                        disabled={
+                                                            !(
+                                                                userCreateData.createEmail &&
+                                                                userCreateData.createPassword &&
+                                                                userCreateData.repeatPassword
+                                                            )
+                                                        }
+                                                        to="/"
                                                         className="btn btn-primary btn-block"
+                                                        onClick={
+                                                            handleFormCreate
+                                                        }
                                                     >
                                                         Sign In
-                                                    </a>
+                                                    </Link>
                                                 </form>
                                             </div>
                                         </div>
