@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN, ADD_USER } from "../utils/mutations";
+import SimpleReactValidator from "simple-react-validator";
 
 import useScrollToTop from "../utils/useScrollToTop";
+
 const Login = ({
     signInTopVal,
     signInInsideVal,
@@ -32,6 +34,12 @@ const Login = ({
     const [login, { error }] = useMutation(USER_LOGIN);
     const [addUser, { err }] = useMutation(ADD_USER);
 
+    const [validatorLogin, setValidatorLogin] = useState(
+        new SimpleReactValidator()
+    );
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+
+    // validatorLogin.showMessages();
     useEffect(() => {
         setSignInTop(signInTopVal);
         setSignInInside(signInInsideVal);
@@ -39,9 +47,9 @@ const Login = ({
         setSignUpInside(signUpInsideVal);
     }, [signInTopVal, signInInsideVal, signUpTopVal, signUpInsideVal]);
 
-    useEffect(() => {
-        console.log(userCreateData);
-    });
+    // useEffect(() => {
+    //     console.log(userCreateData);
+    // });
 
     const handleLoginInputChange = (event) => {
         const { id, value } = event.target;
@@ -56,36 +64,25 @@ const Login = ({
     const handleFormLogin = async (event) => {
         event.preventDefault();
 
-        // check if form has everything (as per react-bootstrap docs)
-        // const form = event.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        // }
+        if (validatorLogin.allValid()) {
+            try {
+                const { data } = await login({
+                    variables: { ...userLoginData },
+                });
 
-        try {
-            const { data } = await login({
-                variables: { ...userLoginData },
-            });
-
-            Auth.login(data.login.token);
-        } catch (err) {
-            console.error(err);
-            setShowAlert(true);
+                Auth.login(data.login.token);
+            } catch (err) {
+                console.error(err);
+                setShowAlert(true);
+            }
+        } else {
+            validatorLogin.showMessages();
+            forceUpdate();
         }
     };
 
     const handleFormCreate = async (event) => {
         event.preventDefault();
-
-        console.log(userCreateData);
-
-        // check if form has everything (as per react-bootstrap docs)
-        // const form = event.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        // }
         try {
             const { data } = await addUser({
                 variables: {
@@ -162,7 +159,7 @@ const Login = ({
                                             >
                                                 <form>
                                                     <div className="form-group">
-                                                        <label htmlFor="em">
+                                                        <label htmlFor="email">
                                                             Email address
                                                         </label>
                                                         <input
@@ -178,9 +175,14 @@ const Login = ({
                                                             }
                                                             required
                                                         />
+                                                        {validatorLogin.message(
+                                                            "email",
+                                                            userLoginData.email,
+                                                            "required|email"
+                                                        )}
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="pw">
+                                                        <label htmlFor="password">
                                                             Password
                                                         </label>
                                                         <input
@@ -195,6 +197,11 @@ const Login = ({
                                                             }
                                                             required
                                                         />
+                                                        {validatorLogin.message(
+                                                            "password",
+                                                            userLoginData.password,
+                                                            "required"
+                                                        )}
                                                     </div>
                                                     <Link
                                                         disabled={
@@ -245,7 +252,7 @@ const Login = ({
                                             <div className="accordion-content-wrapper">
                                                 <form>
                                                     <div className="form-group">
-                                                        <label htmlFor="exampleFormControlInput3">
+                                                        <label htmlFor="createUsername">
                                                             Username
                                                         </label>
                                                         <input
@@ -262,7 +269,7 @@ const Login = ({
                                                         />
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="exampleFormControlInput3">
+                                                        <label htmlFor="createEmail">
                                                             Email address
                                                         </label>
                                                         <input
@@ -279,7 +286,7 @@ const Login = ({
                                                         />
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="exampleFormControlInput4">
+                                                        <label htmlFor="createPassword">
                                                             Password
                                                         </label>
                                                         <input
@@ -295,7 +302,7 @@ const Login = ({
                                                         />
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="exampleFormControlInput5">
+                                                        <label htmlFor="password">
                                                             Repeat Password
                                                         </label>
                                                         <input

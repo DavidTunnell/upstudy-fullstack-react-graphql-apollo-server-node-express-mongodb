@@ -6,6 +6,13 @@
     visibility: hidden;
 }
 
+.accordion-group-portal .accordion.open .accordion-control::after {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+
 @media only screen and (max-width: 1200px) {
     .mobile-center {
         text-align: center;
