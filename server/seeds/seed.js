@@ -22,6 +22,7 @@ const userSeed = [
         username: "David Tunnell",
         email: "d@t.com",
         password: hashPassword("12345"),
+        isVerified: false,
         savedBooks: [],
     },
 ];

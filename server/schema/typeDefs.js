@@ -16,7 +16,14 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
+        isVerified: Boolean!
         savedBooks: [Book]
+    }
+
+    type TokenEmailVerification {
+        user: User
+        token: String
+        expireAt: String
     }
 
     type Auth {

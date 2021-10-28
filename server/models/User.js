@@ -21,6 +21,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+        isVerified: { type: Boolean, default: false },
         // set savedBooks to be an array of data that adheres to the bookSchema
         savedBooks: [bookSchema],
     },

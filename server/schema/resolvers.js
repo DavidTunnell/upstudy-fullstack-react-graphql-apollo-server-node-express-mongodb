@@ -25,6 +25,7 @@ const resolvers = {
                     "If the user you entered exists, you entered the wrong username and/or password."
                 );
             }
+            console.log(user.isVerified);
             const token = signToken(user);
             return { token, user };
         },
