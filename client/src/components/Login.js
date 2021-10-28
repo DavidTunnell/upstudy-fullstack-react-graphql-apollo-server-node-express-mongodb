@@ -66,7 +66,13 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
-
+                if (!data.login.user.isVerified) {
+                    console.log("User needs to verify email address.");
+                    //maybe forward to email validation here
+                    window.location.assign("/test");
+                } else {
+                    window.location.assign("/");
+                }
                 Auth.login(data.login.token);
             } catch (err) {
                 setErrorMessage(err.message);

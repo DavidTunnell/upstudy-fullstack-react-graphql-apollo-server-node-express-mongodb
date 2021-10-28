@@ -19,13 +19,23 @@ const resolvers = {
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-            const correctPw = await user.isCorrectPassword(password);
-            if (!user || !correctPw) {
+            if (!user) {
                 throw new AuthenticationError(
                     "If the user you entered exists, you entered the wrong username and/or password."
                 );
             }
-            console.log(user.isVerified);
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+                throw new AuthenticationError(
+                    "If the user you entered exists, you entered the wrong username and/or password."
+                );
+            }
+            // if (!user.isVerified) {
+            //     throw new AuthenticationError(
+            //         "Your email address hasn't been verified yet."
+            //     );
+            // }
+            // console.log(user.isVerified);
             const token = signToken(user);
             return { token, user };
         },

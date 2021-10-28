@@ -19,6 +19,7 @@ export const USER_LOGIN = gql`
             user {
                 _id
                 username
+                isVerified
             }
         }
     }
