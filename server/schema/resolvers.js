@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User } = require("../models");
 const { signToken } = require("../utils/auth");
+const { generateToken } = require("../utils/emails");
 
 const resolvers = {
     Query: {
@@ -13,9 +14,27 @@ const resolvers = {
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
-            const user = await User.create({ username, email, password });
-            const token = signToken(user);
-            return { token, user };
+            const userCheck = await User.findOne({
+                $or: [{ email }, { username }],
+            });
+            if (userCheck) {
+                throw new AuthenticationError(
+                    "An account with that email or username already exists. Please try again."
+                );
+            } else {
+                const user = await User.create({ username, email, password });
+                const newUserEmailToken = generateToken(user);
+                newUserEmailToken.save(function (err) {
+                    if (err) {
+                        return res.status(500).send({ msg: err.message });
+                    }
+                });
+                //NEXT: send email
+                //THEN: create new page for users to validate with
+
+                const token = signToken(user);
+                return { token, user };
+            }
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });

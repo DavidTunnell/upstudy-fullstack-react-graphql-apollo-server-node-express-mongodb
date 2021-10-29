@@ -143,3 +143,5 @@ Be deployed using Heroku (with data).
 ✔️Be responsive.
 Be interactive (i.e., accept and respond to user input).
 Protect sensitive API key information on the server.
+
+https://slgupta022.medium.com/email-verification-using-sendgrid-in-node-js-express-js-mongodb-c5803f643e09

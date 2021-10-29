@@ -66,6 +66,7 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
+                Auth.login(data.login.token);
                 if (!data.login.user.isVerified) {
                     console.log("User needs to verify email address.");
                     //maybe forward to email validation here
@@ -73,7 +74,6 @@ const Login = ({
                 } else {
                     window.location.assign("/");
                 }
-                Auth.login(data.login.token);
             } catch (err) {
                 setErrorMessage(err.message);
                 setShowAlert(true);
@@ -97,6 +97,14 @@ const Login = ({
                 });
 
                 Auth.login(data.addUser.token);
+                //will need to forward them to email verification page here also
+                if (!data.addUser.user.isVerified) {
+                    console.log("User needs to verify email address.");
+                    //maybe forward to email validation here
+                    window.location.assign("/test");
+                } else {
+                    window.location.assign("/");
+                }
             } catch (err) {
                 setErrorMessage(err.message);
                 setShowAlert(true);
