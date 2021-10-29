@@ -1,7 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User } = require("../models");
 const { signToken } = require("../utils/auth");
-const { generateToken } = require("../utils/emails");
+const {
+    generateToken,
+    generateEmailOptions,
+    sendVerificationEmail,
+} = require("../utils/emails");
 
 const resolvers = {
     Query: {
@@ -29,7 +33,14 @@ const resolvers = {
                         return res.status(500).send({ msg: err.message });
                     }
                 });
+
                 //NEXT: send email
+                const emailOptions = generateEmailOptions(
+                    user,
+                    newUserEmailToken
+                );
+                console.log(emailOptions);
+                sendVerificationEmail(emailOptions);
                 //THEN: create new page for users to validate with
 
                 const token = signToken(user);

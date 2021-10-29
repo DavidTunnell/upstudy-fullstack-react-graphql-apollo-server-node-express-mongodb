@@ -20,20 +20,29 @@ module.exports = {
             token: crypto.randomBytes(16).toString("hex"),
         });
     },
-    // generateEmailOptions: function (user) {
-    //     return {
-    //         from: "noreply@upstudy.io",
-    //         to: user.email,
-    //         subject: "Account Verification Link",
-    //         text:
-    //             "Hello " +
-    //             user.username +
-    //             ",\n\n" +
-    //             "Please verify your account by clicking the link: \nhttp://www.upstudy.io/confirmation/" +
-    //             user.email +
-    //             "/" +
-    //             token.token +
-    //             "\n\nThank You!\n",
-    //     };
-    // },
+    generateEmailOptions: function (user, token) {
+        return {
+            from: "no-reply@upstudy.io",
+            to: user.email,
+            subject: "Upstudy - Account Verification Link",
+            text:
+                "Hello " +
+                user.username +
+                ",\n\n" +
+                "Please verify your account by clicking the link: \nhttp://www.upstudy.io/confirmation/" +
+                user.email +
+                "/" +
+                token.token +
+                "\n\nThank You!\n",
+        };
+    },
+    sendVerificationEmail: function (emailOptions) {
+        transporter.sendMail(emailOptions, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Verification email sent successfully.");
+            }
+        });
+    },
 };
