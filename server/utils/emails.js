@@ -20,7 +20,7 @@ module.exports = {
             token: crypto.randomBytes(16).toString("hex"),
         });
     },
-    generateEmailOptions: function (user, token) {
+    generateVerificationEmailOptions: function (user, token) {
         return {
             from: "no-reply@upstudy.io",
             to: user.email,
@@ -29,14 +29,16 @@ module.exports = {
                 "Hello " +
                 user.username +
                 ",\n\n" +
-                "Please verify your account by clicking the link: \nhttp://www.upstudy.io/confirmation/" +
+                "Please verify your account by clicking the link: \n" +
+                process.env.APP_DOMAIN +
+                "/validate/" +
                 user.email +
                 "/" +
                 token.token +
                 "\n\nThank You!\n",
         };
     },
-    sendVerificationEmail: function (emailOptions) {
+    sendEmail: function (emailOptions) {
         transporter.sendMail(emailOptions, function (err) {
             if (err) {
                 console.log(err);

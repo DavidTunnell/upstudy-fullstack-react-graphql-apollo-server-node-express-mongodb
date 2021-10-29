@@ -10,4 +10,4 @@ This portion of the repo is for the node.js server that does several things:
 
 ### Installation
 
-This project will be installed and run from the [root directory](https://github.com/DavidTunnell/interest-web-fullstack-react-graphql-apollo-server-node-express-mongodb) using the README instructions there. If you would like to run this server on its own first make sure the node dependencies have been installed with `npm i` and then use `npm run start` or `npm run watch` for development.
+This project will be installed and run from the [root directory](https://github.com/DavidTunnell/upstudy-fullstack-react-graphql-apollo-server-node-express-mongodb) using the README instructions there. If you would like to run this server on its own first make sure the node dependencies have been installed with `npm i` and then use `npm run start` or `npm run watch` for development.

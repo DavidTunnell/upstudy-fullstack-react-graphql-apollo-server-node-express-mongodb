@@ -145,3 +145,8 @@ Be interactive (i.e., accept and respond to user input).
 Protect sensitive API key information on the server.
 
 https://slgupta022.medium.com/email-verification-using-sendgrid-in-node-js-express-js-mongodb-c5803f643e09
+
+For link masking from sendgrid if its an issue:
+
+https://app.sendgrid.com/settings/sender_auth/domain/create
+https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-link-branding#-What-is-link-branding

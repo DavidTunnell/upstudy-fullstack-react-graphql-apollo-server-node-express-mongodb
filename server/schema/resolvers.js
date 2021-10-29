@@ -3,8 +3,8 @@ const { User } = require("../models");
 const { signToken } = require("../utils/auth");
 const {
     generateToken,
-    generateEmailOptions,
-    sendVerificationEmail,
+    generateVerificationEmailOptions,
+    sendEmail,
 } = require("../utils/emails");
 
 const resolvers = {
@@ -35,12 +35,11 @@ const resolvers = {
                 });
 
                 //NEXT: send email
-                const emailOptions = generateEmailOptions(
+                const emailOptions = generateVerificationEmailOptions(
                     user,
                     newUserEmailToken
                 );
-                console.log(emailOptions);
-                sendVerificationEmail(emailOptions);
+                sendEmail(emailOptions);
                 //THEN: create new page for users to validate with
 
                 const token = signToken(user);
