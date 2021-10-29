@@ -70,7 +70,7 @@ const Login = ({
                 if (!data.login.user.isVerified) {
                     console.log("User needs to verify email address.");
                     //maybe forward to email validation here
-                    window.location.assign("/test");
+                    window.location.assign("/verify");
                 } else {
                     window.location.assign("/");
                 }
@@ -101,7 +101,7 @@ const Login = ({
                 if (!data.addUser.user.isVerified) {
                     console.log("User needs to verify email address.");
                     //maybe forward to email validation here
-                    window.location.assign("/test");
+                    window.location.assign("/verify");
                 } else {
                     window.location.assign("/");
                 }

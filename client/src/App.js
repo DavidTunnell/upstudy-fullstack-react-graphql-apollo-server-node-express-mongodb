@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import VerifyEmail from "./components/VerifyEmail";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
@@ -46,6 +47,9 @@ function App() {
                                     signUpTopVal="383.333px"
                                     signUpInsideVal="581.075px"
                                 />
+                            </Route>
+                            <Route exact path="/verify">
+                                <VerifyEmail />
                             </Route>
                             <Route exact path="/dashboard">
                                 <Dashboard />

@@ -47,4 +47,7 @@ module.exports = {
             }
         });
     },
+    verifyEmail: function (emailOptions) {
+
+    },
 };

@@ -5,7 +5,7 @@ const {
     generateToken,
     generateVerificationEmailOptions,
     sendEmail,
-} = require("../utils/emails");
+} = require("../utils/email");
 
 const resolvers = {
     Query: {

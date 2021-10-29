@@ -25971,6 +25971,9 @@ return ImagesLoaded;
 			// fixes `Cannot read property 'smoothScroll' of null` error getting thrown.
 			if (history.state === null) return;
 
+      //custom fix for react error
+      if (history.state.smoothScroll === null) return;
+      
 			// Only run if state is a popstate record for this instantiation
 			if (!history.state.smoothScroll || history.state.smoothScroll !== JSON.stringify(settings)) return;
 
