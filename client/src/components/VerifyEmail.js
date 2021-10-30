@@ -8,7 +8,10 @@ const VerifyEmail = () => {
 
     //http://localhost:3000/verify?name=ferret&color=purple
     const search = window.location.search;
+    //would it be better to use useParams()? -https://i.imgur.com/PB0o9kF.png
+    //if invalid send to 404 or let them know? let them know..
     const params = new URLSearchParams(search);
+
     let n = params.get("name");
     let c = params.get("color");
     console.log(n + " | " + c);
@@ -34,8 +37,14 @@ const VerifyEmail = () => {
                                 you sign in.
                             </p>
                             <p>
+                                {/* add buttons here to return home and resend email validation link 
+                                also add use error for mutation calls in login line on https://i.imgur.com/YSTWiYb.png
+                                loading also works for mutation calls
+                                -consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/TPKx3lO.png
+                                -also, use parameters in routes to pass certain types of data - https://i.imgur.com/PB0o9kF.png
+                                */}
                                 <Link to="/" className="link">
-                                    Return Home
+                                    Continue to Site
                                 </Link>
                             </p>
                         </div>

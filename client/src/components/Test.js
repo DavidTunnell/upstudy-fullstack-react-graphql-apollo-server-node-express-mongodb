@@ -22,6 +22,22 @@ const Test = () => {
                             Logged In:{" "}
                             {Auth.loggedIn() ? <>true</> : <>false</>}
                         </div>
+                        <div>
+                            when using queries, do the loading conditional{" "}
+                            {/* {loading ? (
+                                <div>Loading...</div>
+                            ) : (
+                                <ProfileList
+                                    profiles={profiles}
+                                    title="Here's the current roster of friends..."
+                                />
+                            )} */}
+                            <p>
+                                also, use folder structure of pages and
+                                components for those pages like:
+                                https://i.imgur.com/iID3etR.png
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
