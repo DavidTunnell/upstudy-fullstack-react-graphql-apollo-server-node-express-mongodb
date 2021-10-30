@@ -31,9 +31,9 @@ module.exports = {
                 ",\n\n" +
                 "Please verify your account by clicking the link: \n" +
                 process.env.APP_DOMAIN +
-                "/validate/" +
+                "/verify?email=" +
                 user.email +
-                "/" +
+                "&token=" +
                 token.token +
                 "\n\nThank You!\n",
         };
@@ -47,7 +47,5 @@ module.exports = {
             }
         });
     },
-    verifyEmail: function (emailOptions) {
-
-    },
+    verifyEmail: function (emailOptions) {},
 };

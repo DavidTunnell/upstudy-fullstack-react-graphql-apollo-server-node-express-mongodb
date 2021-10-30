@@ -10,12 +10,12 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                         <Link className="navbar-brand" to="/" onClick={toTop}>
                             <img
                                 className="navbar-logo navbar-logo-light"
-                                src="./assets/images/logo-light.png"
+                                src="/assets/images/logo-light.png"
                                 alt="David Tunnell Logo"
                             />
                             <img
                                 className="navbar-logo navbar-logo-dark"
-                                src="./assets/images/logo-dark.png"
+                                src="/assets/images/logo-dark.png"
                                 alt="David Tunnell Logo"
                             />
                         </Link>

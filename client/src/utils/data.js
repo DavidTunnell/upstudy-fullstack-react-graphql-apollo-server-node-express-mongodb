@@ -1,189 +1,189 @@
 const skills = [
     {
-        graphic: "./assets/images/skills/sequelize.svg",
+        graphic: "/assets/images/skills/sequelize.svg",
         title: "Sequelize ORM",
         url: "https://sequelize.org/",
         id: 1,
     },
     {
-        graphic: "./assets/images/skills/mongoose.png",
+        graphic: "/assets/images/skills/mongoose.png",
         title: "Mongoose ORM",
         url: "https://mongoosejs.com/",
         id: 2,
     },
     {
-        graphic: "./assets/images/skills/javascript.svg",
+        graphic: "/assets/images/skills/javascript.svg",
         title: "JavaScript",
         url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         id: 3,
     },
     {
-        graphic: "./assets/images/skills/nodejs.svg",
+        graphic: "/assets/images/skills/nodejs.svg",
         title: "Node.js",
         url: "https://nodejs.org/",
         id: 4,
     },
     {
-        graphic: "./assets/images/skills/git.svg",
+        graphic: "/assets/images/skills/git.svg",
         title: "Git",
         url: "https://git-scm.com/",
         id: 5,
     },
     {
-        graphic: "./assets/images/skills/react.svg",
+        graphic: "/assets/images/skills/react.svg",
         title: "React",
         url: "https://reactjs.org/",
         id: 6,
     },
     {
-        graphic: "./assets/images/skills/agile-scrum.png",
+        graphic: "/assets/images/skills/agile-scrum.png",
         title: "Agile / Scrum",
         url: "https://agilemanifesto.org/",
         id: 7,
     },
     {
-        graphic: "./assets/images/skills/mongodb.svg",
+        graphic: "/assets/images/skills/mongodb.svg",
         title: "MongoDB",
         url: "https://www.mongodb.com/",
         id: 8,
     },
     {
-        graphic: "./assets/images/skills/mysql.svg",
+        graphic: "/assets/images/skills/mysql.svg",
         title: "MySQL",
         url: "https://www.mysql.com/",
         id: 9,
     },
     {
-        graphic: "./assets/images/skills/postman.svg",
+        graphic: "/assets/images/skills/postman.svg",
         title: "Postman",
         url: "https://www.postman.com//",
         id: 10,
     },
     {
-        graphic: "./assets/images/skills/rest-api.svg",
+        graphic: "/assets/images/skills/rest-api.svg",
         title: "RESTful APIs",
         url: "https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/",
         id: 11,
     },
     {
-        graphic: "./assets/images/skills/expressjs.svg",
+        graphic: "/assets/images/skills/expressjs.svg",
         title: "Express.js",
         url: "https://expressjs.com/",
         id: 12,
     },
     {
-        graphic: "./assets/images/skills/chrome-dev-tools.svg",
+        graphic: "/assets/images/skills/chrome-dev-tools.svg",
         title: "Chrome Dev Tools",
         url: "https://developer.chrome.com/docs/devtools/",
         id: 13,
     },
 
     {
-        graphic: "./assets/images/skills/jira.svg",
+        graphic: "/assets/images/skills/jira.svg",
         title: "JIRA",
         url: "https://www.atlassian.com/software/jira",
         id: 14,
     },
     {
-        graphic: "./assets/images/skills/html-5.svg",
+        graphic: "/assets/images/skills/html-5.svg",
         title: "HTML 5",
         url: "https://html.spec.whatwg.org/multipage/",
         id: 15,
     },
     {
-        graphic: "./assets/images/skills/css-3.svg",
+        graphic: "/assets/images/skills/css-3.svg",
         title: "CSS 3",
         url: "https://www.w3.org/TR/css3-roadmap/",
         id: 16,
     },
     {
-        graphic: "./assets/images/skills/visual-studio-code.svg",
+        graphic: "/assets/images/skills/visual-studio-code.svg",
         title: "VS Code",
         url: "https://code.visualstudio.com/",
         id: 17,
     },
     {
-        graphic: "./assets/images/skills/csharp.svg",
+        graphic: "/assets/images/skills/csharp.svg",
         title: "C#",
         url: "https://docs.microsoft.com/en-us/dotnet/csharp/",
         id: 18,
     },
     {
-        graphic: "./assets/images/skills/dotnet.svg",
+        graphic: "/assets/images/skills/dotnet.svg",
         title: ".NET Framework",
         url: "https://dotnet.microsoft.com/",
         id: 19,
     },
     {
-        graphic: "./assets/images/skills/microsoft-sql-server.svg",
+        graphic: "/assets/images/skills/microsoft-sql-server.svg",
         title: "SQL Server",
         url: "https://www.microsoft.com/en-us/sql-server/",
         id: 20,
     },
     {
-        graphic: "./assets/images/skills/visual-studio.svg",
+        graphic: "/assets/images/skills/visual-studio.svg",
         title: "Microsoft Visual Studio",
         url: "https://visualstudio.microsoft.com/",
         id: 21,
     },
     {
-        graphic: "./assets/images/skills/jquery.svg",
+        graphic: "/assets/images/skills/jquery.svg",
         title: "jQuery",
         url: "https://jquery.com/",
         id: 22,
     },
     {
-        graphic: "./assets/images/skills/atlassian.svg",
+        graphic: "/assets/images/skills/atlassian.svg",
         title: "Atlassian Suite",
         url: "https://www.atlassian.com/",
         id: 23,
     },
     {
-        graphic: "./assets/images/skills/servicenow.svg",
+        graphic: "/assets/images/skills/servicenow.svg",
         title: "ServiceNow",
         url: "https://www.servicenow.com/",
         id: 24,
     },
     {
-        graphic: "./assets/images/skills/bootstrap.svg",
+        graphic: "/assets/images/skills/bootstrap.svg",
         title: "Bootstrap",
         url: "https://jquery.com/",
         id: 25,
     },
     {
-        graphic: "./assets/images/skills/bulma.svg",
+        graphic: "/assets/images/skills/bulma.svg",
         title: "Bulma",
         url: "https://bulma.io/",
         id: 26,
     },
 
     {
-        graphic: "./assets/images/skills/wordpress.svg",
+        graphic: "/assets/images/skills/wordpress.svg",
         title: "WordPress",
         url: "https://wordpress.com/",
         id: 27,
     },
     {
-        graphic: "./assets/images/skills/selenium.svg",
+        graphic: "/assets/images/skills/selenium.svg",
         title: "Selenium",
         url: "https://www.selenium.dev/",
         id: 28,
     },
 
     {
-        graphic: "./assets/images/skills/npm.svg",
+        graphic: "/assets/images/skills/npm.svg",
         title: "Node Package Manager",
         url: "https://www.npmjs.com/",
         id: 29,
     },
     {
-        graphic: "./assets/images/skills/heroku.svg",
+        graphic: "/assets/images/skills/heroku.svg",
         title: "Heroku",
         url: "https://heroku.com/",
         id: 30,
     },
     {
-        graphic: "./assets/images/skills/handlebars.svg",
+        graphic: "/assets/images/skills/handlebars.svg",
         title: "Handlebars.js",
         url: "https://handlebarsjs.com/",
         id: 31,
@@ -194,8 +194,8 @@ const portfolio = [
     {
         id: 1,
         openSource: true,
-        image: "./assets/images/portfolio/david-tunnell-dot-com.jpg",
-        modalImage: "./assets/images/portfolio/david-tunnell-dot-com.jpg",
+        image: "/assets/images/portfolio/david-tunnell-dot-com.jpg",
+        modalImage: "/assets/images/portfolio/david-tunnell-dot-com.jpg",
         title: "DavidTunnell.com",
         techSkills: [1, 2, 3, 4, 5, 6, 13, 17, 21, 23, 27, 31, 34, 35],
         details:
@@ -209,8 +209,8 @@ const portfolio = [
     {
         id: 2,
         openSource: false,
-        image: "./assets/images/portfolio/lmi.jpg",
-        modalImage: "./assets/images/portfolio/lmi.jpg",
+        image: "/assets/images/portfolio/lmi.jpg",
+        modalImage: "/assets/images/portfolio/lmi.jpg",
         title: "LMI IT Projects",
         techSkills: [24, 25, 28, 29, 30, 31, 32],
         details:
@@ -224,8 +224,8 @@ const portfolio = [
     {
         id: 3,
         openSource: true,
-        image: "./assets/images/portfolio/feedster.jpg",
-        modalImage: "./assets/images/portfolio/feedster.jpg",
+        image: "/assets/images/portfolio/feedster.jpg",
+        modalImage: "/assets/images/portfolio/feedster.jpg",
         title: "Feedster",
         techSkills: [1, 3, 4, 5, 6, 16, 18, 20, 22, 23, 24, 27, 31, 34, 35],
         details:
@@ -239,8 +239,8 @@ const portfolio = [
     {
         id: 4,
         openSource: false,
-        image: "./assets/images/portfolio/smart.jpg",
-        modalImage: "./assets/images/portfolio/smart.jpg",
+        image: "/assets/images/portfolio/smart.jpg",
+        modalImage: "/assets/images/portfolio/smart.jpg",
         title: "SMART DoD Scholarships",
         techSkills: [7, 19, 25, 28, 29, 30, 32, 33],
         details:
@@ -269,8 +269,8 @@ const portfolio = [
     {
         id: 6,
         openSource: true,
-        image: "./assets/images/portfolio/microblog.jpg",
-        modalImage: "./assets/images/portfolio/microblog.jpg",
+        image: "/assets/images/portfolio/microblog.jpg",
+        modalImage: "/assets/images/portfolio/microblog.jpg",
         title: "Microblog",
         techSkills: [1, 2, 3, 4, 5, 6, 13, 21, 23, 24, 27, 34, 35],
         details:
@@ -284,8 +284,8 @@ const portfolio = [
     {
         id: 7,
         openSource: true,
-        image: "./assets/images/portfolio/discogra.jpg",
-        modalImage: "./assets/images/portfolio/discogra.jpg",
+        image: "/assets/images/portfolio/discogra.jpg",
+        modalImage: "/assets/images/portfolio/discogra.jpg",
         title: "Discogra: Music Finder",
         techSkills: [1, 5, 6, 18, 23, 27, 31],
         details:
@@ -300,8 +300,8 @@ const portfolio = [
     {
         id: 8,
         openSource: false,
-        image: "./assets/images/portfolio/hintd.jpg",
-        modalImage: "./assets/images/portfolio/hintd.jpg",
+        image: "/assets/images/portfolio/hintd.jpg",
+        modalImage: "/assets/images/portfolio/hintd.jpg",
         title: "Hinted",
         techSkills: [1, 5, 6, 8, 9, 12, 13, 16, 29],
         details:
@@ -315,8 +315,8 @@ const portfolio = [
     {
         id: 9,
         openSource: true,
-        image: "./assets/images/portfolio/previous-portfolio.jpg",
-        modalImage: "./assets/images/portfolio/previous-portfolio.jpg",
+        image: "/assets/images/portfolio/previous-portfolio.jpg",
+        modalImage: "/assets/images/portfolio/previous-portfolio.jpg",
         title: "My Previous Web Portfolio",
         techSkills: [1, 3, 4, 5, 6, 23, 27],
         details:
@@ -329,8 +329,8 @@ const portfolio = [
     {
         id: 10,
         openSource: false,
-        image: "./assets/images/portfolio/gerimed.jpg",
-        modalImage: "./assets/images/portfolio/gerimed.jpg",
+        image: "/assets/images/portfolio/gerimed.jpg",
+        modalImage: "/assets/images/portfolio/gerimed.jpg",
         title: "GeriMed",
         techSkills: [1, 5, 6, 7, 12, 14, 24, 35, 36, 37, 38],
         details:
@@ -344,8 +344,8 @@ const portfolio = [
     {
         id: 11,
         openSource: false,
-        image: "./assets/images/portfolio/ts-inc.jpg",
-        modalImage: "./assets/images/portfolio/ts-inc.jpg",
+        image: "/assets/images/portfolio/ts-inc.jpg",
+        modalImage: "/assets/images/portfolio/ts-inc.jpg",
         title: "Visual Fast Mutual Fund Software",
         techSkills: [7, 11, 14, 38],
         details:
@@ -359,8 +359,8 @@ const portfolio = [
     {
         id: 12,
         openSource: false,
-        image: "./assets/images/portfolio/zachry-group.jpg",
-        modalImage: "./assets/images/portfolio/zachry-group.jpg",
+        image: "/assets/images/portfolio/zachry-group.jpg",
+        modalImage: "/assets/images/portfolio/zachry-group.jpg",
         title: "Zachry Group IT Projects",
         techSkills: [1, 5, 6, 7, 8, 10, 12, 14, 15, 26, 30, 32, 35, 38],
         details:
@@ -375,42 +375,42 @@ const portfolio = [
 
 const carrouselCards = [
     {
-        image: "./assets/images/carrousel/travel-1.jpg",
+        image: "/assets/images/carrousel/travel-1.jpg",
         title: "1",
         flavor: "test",
         topRight: "other test",
         id: 1,
     },
     {
-        image: "./assets/images/carrousel/travel-2.jpg",
+        image: "/assets/images/carrousel/travel-2.jpg",
         title: "2",
         flavor: "test",
         topRight: "other test",
         id: 2,
     },
     {
-        image: "./assets/images/carrousel/travel-3.jpg",
+        image: "/assets/images/carrousel/travel-3.jpg",
         title: "3",
         flavor: "test",
         topRight: "other test",
         id: 3,
     },
     {
-        image: "./assets/images/carrousel/travel-4.jpg",
+        image: "/assets/images/carrousel/travel-4.jpg",
         title: "4",
         flavor: "test",
         topRight: "other test",
         id: 4,
     },
     {
-        image: "./assets/images/carrousel/travel-5.jpg",
+        image: "/assets/images/carrousel/travel-5.jpg",
         title: "5",
         flavor: "test",
         topRight: "other test",
         id: 5,
     },
     {
-        image: "./assets/images/carrousel/travel-6.jpg",
+        image: "/assets/images/carrousel/travel-6.jpg",
         title: "6",
         flavor: "test",
         topRight: "other test",

@@ -50,7 +50,7 @@ const Footer = ({ toTop }) => {
                                 >
                                     <img
                                         className="logo-sm"
-                                        src="./assets/images/logo-light.png"
+                                        src="/assets/images/logo-light.png"
                                         alt="davidtunnell.com logo"
                                     />
                                 </Link>

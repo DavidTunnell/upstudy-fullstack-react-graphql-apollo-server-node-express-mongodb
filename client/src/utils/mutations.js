@@ -13,6 +13,27 @@ export const ADD_USER = gql`
     }
 `;
 
+export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
+    mutation addEmailVerificationToken(
+        $userId: String!
+        $email: String!
+        $password: String!
+    ) {
+        addEmailVerificationToken(
+            username: $username
+            email: $email
+            password: $password
+        ) {
+            token
+            user {
+                _id
+                username
+                isVerified
+            }
+        }
+    }
+`;
+
 export const USER_LOGIN = gql`
     mutation login($email: String!, $password: String!) {
         login(email: $email, password: $password) {

@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
-import { USER_LOGIN, ADD_USER } from "../utils/mutations";
+import {
+    USER_LOGIN,
+    ADD_USER,
+    ADD_EMAIL_VERIFICATION_TOKEN,
+} from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 
 const Login = ({
@@ -32,7 +36,7 @@ const Login = ({
     const [validatorCreate] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
-    const bgImage = "./assets/images/login-bg.jpg";
+    const bgImage = "/assets/images/login-bg.jpg";
 
     const [login] = useMutation(USER_LOGIN);
     const [addUser] = useMutation(ADD_USER);
@@ -47,7 +51,7 @@ const Login = ({
     // useEffect(() => {
     //     console.log(userCreateData);
     // });
-
+    const history = useHistory();
     const handleLoginInputChange = (event) => {
         const { id, value } = event.target;
         setUserLoginData({ ...userLoginData, [id]: value });
@@ -68,11 +72,9 @@ const Login = ({
                 });
                 Auth.login(data.login.token);
                 if (!data.login.user.isVerified) {
-                    console.log("User needs to verify email address.");
-                    //maybe forward to email validation here
-                    window.location.assign("/verify");
+                    history.push("/verify?id=" + data.addUser.user._id);
                 } else {
-                    window.location.assign("/");
+                    history.push("/");
                 }
             } catch (err) {
                 setErrorMessage(err.message);
@@ -99,11 +101,9 @@ const Login = ({
                 Auth.login(data.addUser.token);
                 //will need to forward them to email verification page here also
                 if (!data.addUser.user.isVerified) {
-                    console.log("User needs to verify email address.");
-                    //maybe forward to email validation here
-                    window.location.assign("/verify");
+                    history.push("/verify?id=" + data.addUser.user._id);
                 } else {
-                    window.location.assign("/");
+                    history.push("/");
                 }
             } catch (err) {
                 setErrorMessage(err.message);

@@ -27,25 +27,30 @@ const resolvers = {
                 );
             } else {
                 const user = await User.create({ username, email, password });
-                const newUserEmailToken = generateToken(user);
-                newUserEmailToken.save(function (err) {
-                    if (err) {
-                        return res.status(500).send({ msg: err.message });
-                    }
-                });
 
-                //NEXT: send email
-                const emailOptions = generateVerificationEmailOptions(
-                    user,
-                    newUserEmailToken
-                );
-                sendEmail(emailOptions);
                 //THEN: create new page for users to validate with
-
                 const token = signToken(user);
                 return { token, user };
             }
         },
+        addEmailVerificationToken: async (parent, { user }) => {
+            const newUserEmailToken = generateToken(user);
+            newUserEmailToken.save(function (err) {
+                if (err) {
+                    return res.status(500).send({ msg: err.message });
+                }
+            });
+
+            //NEXT: send email
+            const emailOptions = generateVerificationEmailOptions(
+                user,
+                newUserEmailToken
+            );
+            sendEmail(emailOptions);
+        },
+        // verifyEmail: async () => {
+        //     return "";
+        // },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
@@ -68,6 +73,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+
         addBook: async (
             parent,
             { userId, authors, description, bookId, image, link, title }

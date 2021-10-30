@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 const Hero = () => {
-    const heroPopInImage = "./assets/images/hero-pop-in.svg";
+    const heroPopInImage = "/assets/images/hero-pop-in.svg";
     const fullResumePdf =
-        "./assets/files/David-Tunnell-Resume-2021-ATS-Template.pdf";
+        "/assets/files/David-Tunnell-Resume-2021-ATS-Template.pdf";
     const onePageResumePdf =
-        "./assets/files/David-Tunnell-Resume-2021-One-Page.pdf";
+        "/assets/files/David-Tunnell-Resume-2021-One-Page.pdf";
     const bgColor = "#f94144";
     return (
         <>

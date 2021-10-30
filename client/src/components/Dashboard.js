@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 const Dashboard = () => {
-    const bgImage = "./assets/images/login-bg.jpg";
+    const bgImage = "/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
     return (
         <>

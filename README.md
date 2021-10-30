@@ -150,3 +150,12 @@ For link masking from sendgrid if its an issue:
 
 https://app.sendgrid.com/settings/sender_auth/domain/create
 https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-link-branding#-What-is-link-branding
+
+TODO:
+
+-                                 {/* add buttons here to return home and resend email validation link
+                                  also add use error for mutation calls in login line on https://i.imgur.com/YSTWiYb.png
+                                  loading also works for mutation calls
+                                  -consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/TPKx3lO.png
+                                  -also, use parameters in routes to pass certain types of data - https://i.imgur.com/PB0o9kF.png
+                                  */}
