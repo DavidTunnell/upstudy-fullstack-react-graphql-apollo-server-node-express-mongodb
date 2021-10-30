@@ -39,19 +39,18 @@ const resolvers = {
         ) => {
             const newUserEmailToken = generateToken(userId);
 
-            // newUserEmailToken.save(function (err) {
-            //     if (err) {
-            //         return res.status(500).send({ msg: err.message });
-            //     }
-            // });
+            newUserEmailToken.save(function (err) {
+                if (err) {
+                    return res.status(500).send({ msg: err.message });
+                }
+            });
             // //NEXT: send email
             const emailOptions = generateVerificationEmailOptions(
                 username,
                 email,
                 newUserEmailToken
             );
-            console.log(emailOptions);
-            // sendEmail(emailOptions);
+            sendEmail(emailOptions);
         },
         // verifyEmail: async () => {
         //     return "";

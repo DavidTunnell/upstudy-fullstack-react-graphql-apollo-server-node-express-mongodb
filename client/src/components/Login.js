@@ -2,10 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
-import {
-    USER_LOGIN,
-    ADD_USER,
-} from "../utils/mutations";
+import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 
 const Login = ({
@@ -100,7 +97,15 @@ const Login = ({
                 Auth.login(data.addUser.token);
                 //will need to forward them to email verification page here also
                 if (!data.addUser.user.isVerified) {
-                    history.push("/verify?id=" + data.addUser.user._id);
+                    //NEED TO UPDATE HERE
+                    history.push(
+                        "/verify?id=" +
+                            data.addUser.user._id +
+                            "&username=" +
+                            userCreateData.createUsername +
+                            "&email=" +
+                            userCreateData.createEmail
+                    );
                 } else {
                     history.push("/");
                 }

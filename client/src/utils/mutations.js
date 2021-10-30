@@ -14,13 +14,23 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
-    mutation addEmailVerificationToken($userId: String!) {
-        addEmailVerificationToken(userId: $userId) {
+    mutation AddEmailVerificationTokenMutation(
+        $userId: String!
+        $username: String!
+        $email: String!
+    ) {
+        addEmailVerificationToken(
+            userId: $userId
+            username: $username
+            email: $email
+        ) {
             user {
-                _id
                 username
+                email
                 isVerified
             }
+            token
+            expireAt
         }
     }
 `;

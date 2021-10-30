@@ -19,20 +19,28 @@ const VerifyEmail = () => {
     let createdEmail = params.get("email");
     let createdToken = params.get("token");
     let userId = params.get("id");
+    let username = params.get("username");
+    let resend = params.get("resend");
 
     // console.log(createdEmail + " | " + createdToken + " | " + createdTokenId);
 
     useEffect(() => {
-        const generateVerificationEmail = async (id) => {
+        const generateVerificationEmail = async (userId, username, email) => {
             const { data } = await addEmailVerificationToken({
                 variables: {
-                    userId: id,
+                    userId,
+                    username,
+                    email,
                 },
             });
             console.log(data);
+            //NEXT: now fix logic to only run above if the correct url params are coming through
+            //if token is coming in we need to check and validate the DB now finally then update page to tell them it was done and they can proceed.
         };
-
-        generateVerificationEmail(userId);
+        if (!createdToken) {
+            generateVerificationEmail(userId, username, createdEmail);
+        } else {
+        }
     }, []);
 
     return (
