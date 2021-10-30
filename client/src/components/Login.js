@@ -5,7 +5,6 @@ import { useMutation } from "@apollo/client";
 import {
     USER_LOGIN,
     ADD_USER,
-    ADD_EMAIL_VERIFICATION_TOKEN,
 } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 

@@ -33,20 +33,25 @@ const resolvers = {
                 return { token, user };
             }
         },
-        addEmailVerificationToken: async (parent, { user }) => {
-            const newUserEmailToken = generateToken(user);
-            newUserEmailToken.save(function (err) {
-                if (err) {
-                    return res.status(500).send({ msg: err.message });
-                }
-            });
+        addEmailVerificationToken: async (
+            parent,
+            { userId, username, email }
+        ) => {
+            const newUserEmailToken = generateToken(userId);
 
-            //NEXT: send email
+            // newUserEmailToken.save(function (err) {
+            //     if (err) {
+            //         return res.status(500).send({ msg: err.message });
+            //     }
+            // });
+            // //NEXT: send email
             const emailOptions = generateVerificationEmailOptions(
-                user,
+                username,
+                email,
                 newUserEmailToken
             );
-            sendEmail(emailOptions);
+            console.log(emailOptions);
+            // sendEmail(emailOptions);
         },
         // verifyEmail: async () => {
         //     return "";

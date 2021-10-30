@@ -1,4 +1,5 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN } from "../utils/mutations";
 const VerifyEmail = () => {
@@ -12,19 +13,27 @@ const VerifyEmail = () => {
     );
     //http://localhost:3000/verify?name=ferret&color=purple
     const search = window.location.search;
-    //would it be better to use useParams()? -https://i.imgur.com/PB0o9kF.png
     //if invalid send to 404 or let them know? let them know..
     const params = new URLSearchParams(search);
 
-    let n = params.get("email");
-    let c = params.get("token");
-    let id = params.get("id");
+    let createdEmail = params.get("email");
+    let createdToken = params.get("token");
+    let userId = params.get("id");
 
-    console.log(n + " | " + c + " | " + id);
+    // console.log(createdEmail + " | " + createdToken + " | " + createdTokenId);
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // });
+    useEffect(() => {
+        const generateVerificationEmail = async (id) => {
+            const { data } = await addEmailVerificationToken({
+                variables: {
+                    userId: id,
+                },
+            });
+            console.log(data);
+        };
+
+        generateVerificationEmail(userId);
+    }, []);
 
     return (
         <>
@@ -50,7 +59,7 @@ const VerifyEmail = () => {
                                 -consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/TPKx3lO.png
                                 -also, use parameters in routes to pass certain types of data - https://i.imgur.com/B0Po9kF.png
                                 */}
-                                <div className="mt-2">
+                                <div className="mt-3">
                                     <Link
                                         to="/"
                                         target="_blank"

@@ -43,7 +43,8 @@ const typeDefs = gql`
 
         addEmailVerificationToken(
             userId: String!
-            token: String!
+            username: String!
+            email: String!
         ): TokenEmailVerification
 
         addBook(

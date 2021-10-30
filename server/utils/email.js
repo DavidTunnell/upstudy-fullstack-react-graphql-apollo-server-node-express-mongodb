@@ -14,25 +14,25 @@ const transporter = nodemailer.createTransport(
 
 module.exports = {
     // function for our authenticated routes
-    generateToken: function (user) {
+    generateToken: function (userId) {
         return new TokenEmailVerification({
-            _userId: user._id,
+            _userId: userId,
             token: crypto.randomBytes(16).toString("hex"),
         });
     },
-    generateVerificationEmailOptions: function (user, token) {
+    generateVerificationEmailOptions: function (username, email, token) {
         return {
             from: "no-reply@upstudy.io",
-            to: user.email,
+            to: email,
             subject: "Upstudy - Account Verification Link",
             text:
                 "Hello " +
-                user.username +
+                username +
                 ",\n\n" +
                 "Please verify your account by clicking the link: \n" +
                 process.env.APP_DOMAIN +
                 "/verify?email=" +
-                user.email +
+                email +
                 "&token=" +
                 token.token +
                 "\n\nThank You!\n",
