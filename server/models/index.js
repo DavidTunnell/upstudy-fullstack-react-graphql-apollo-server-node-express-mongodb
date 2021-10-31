@@ -1,3 +1,4 @@
-const User = require('./User');
+const User = require("./User");
+const TokenEmailVerification = require("./TokenEmailVerification");
 
-module.exports = { User };
+module.exports = { User, TokenEmailVerification };
