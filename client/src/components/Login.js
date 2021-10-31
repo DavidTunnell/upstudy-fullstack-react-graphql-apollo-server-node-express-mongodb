@@ -73,7 +73,14 @@ const Login = ({
                 });
                 Auth.login(data.login.token);
                 if (!data.login.user.isVerified) {
-                    history.push("/verify_test?id=" + data.addUser.user._id);
+                    history.push(
+                        "/verify?id=" +
+                            data.login.user._id +
+                            "&username=" +
+                            data.login.user.username +
+                            "&email=" +
+                            userLoginData.email
+                    );
                 } else {
                     history.push("/");
                 }
