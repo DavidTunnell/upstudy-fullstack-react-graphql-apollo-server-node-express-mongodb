@@ -1,17 +1,25 @@
 import { useState } from "react";
+// import { useHistory } from "react-router-dom";
+const Modal = (params) => {
+    //showModal, title, content
+    const [showModal, setShowModal] = useState(params.showArg);
+    const [title, setTitle] = useState(params.titleArg);
+    const [content, setContent] = useState(params.contentArg);
+    console.log(params);
+    // const history = useHistory();
+    // const errorData = history.location.state?.data;
+    // console.log(errorData);
 
-const Modal = (showModal, errorMessage) => {
-    const [showAlert, setShowAlert] = useState(false);
     return (
         <>
             <div
-                className={`modal fade ${showAlert ? "show" : ""}`}
+                className={`modal fade ${showModal ? "show" : ""}`}
                 id="exampleModal"
                 tabIndex="-1"
                 role="dialog"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
-                style={{ display: `${showAlert ? "block" : "none"}` }}
+                style={{ display: `${showModal ? "block" : "none"}` }}
             >
                 <div
                     className="modal-dialog modal-dialog-centered"
@@ -24,7 +32,7 @@ const Modal = (showModal, errorMessage) => {
                                 className="close"
                                 data-dismiss="modal"
                                 aria-label="Close"
-                                onClick={() => setShowAlert(false)}
+                                onClick={() => setShowModal(false)}
                             >
                                 <span
                                     aria-hidden="true"
@@ -33,14 +41,14 @@ const Modal = (showModal, errorMessage) => {
                             </button>
                         </div>
                         <div className="modal-body text-center">
-                            <h3>Error</h3>
-                            <p>{errorMessage}</p>
+                            <h3>{title}</h3>
+                            <p>{content}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div
-                className={` ${showAlert ? "modal-backdrop fade show" : ""}`}
+                className={` ${showModal ? "modal-backdrop fade show" : ""}`}
             ></div>
         </>
     );

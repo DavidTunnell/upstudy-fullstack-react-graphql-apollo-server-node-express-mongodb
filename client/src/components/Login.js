@@ -4,6 +4,7 @@ import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
+import Modal from "./Modal";
 
 const Login = ({
     signInTopVal,
@@ -73,8 +74,13 @@ const Login = ({
                     history.push("/");
                 }
             } catch (err) {
-                setErrorMessage(err.message);
-                setShowAlert(true);
+                // setErrorMessage(err.message);
+                // setShowAlert(true);
+                history.push("/error", {
+                    showModal: true,
+                    title: "Error",
+                    content: err.message,
+                });
             }
         } else {
             validatorLogin.showMessages();
@@ -379,44 +385,7 @@ const Login = ({
                     </div>
                 </div>
             </div>
-            <div
-                className={`modal fade ${showAlert ? "show" : ""}`}
-                id="exampleModal"
-                tabIndex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-                style={{ display: `${showAlert ? "block" : "none"}` }}
-            >
-                <div
-                    className="modal-dialog modal-dialog-centered"
-                    role="document"
-                >
-                    <div className="modal-content">
-                        <div className="justify-content-end">
-                            <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                                onClick={() => setShowAlert(false)}
-                            >
-                                <span
-                                    aria-hidden="true"
-                                    className="icon-x"
-                                ></span>
-                            </button>
-                        </div>
-                        <div className="modal-body text-center">
-                            <h3>Error</h3>
-                            <p>{errorMessage}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                className={` ${showAlert ? "modal-backdrop fade show" : ""}`}
-            ></div>
+            <Modal showArg={true} titleArg="Error" contentArg="test" />
         </>
     );
 };
