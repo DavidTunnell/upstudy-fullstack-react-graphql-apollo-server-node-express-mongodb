@@ -55,63 +55,75 @@ const resolvers = {
         verifyEmail: async (parent, { email, token }) => {
             console.log(email);
             console.log(token);
-            const test = TokenEmailVerification.findOne(
-                { token: token },
-                function (err, token) {
-                    // token is not found into database i.e. token may have expired
-                    if (!token) {
-                        console.log("none found");
-                    }
-                    // if token is found then check valid user
-                    else {
-                        console.log("found");
-                        // User.findOne(
-                        //     { _id: token._userId, email: req.params.email },
-                        //     function (err, user) {
-                        //         // not valid user
-                        //         if (!user) {
-                        //             return res
-                        //                 .status(401)
-                        //                 .send({
-                        //                     msg: "We were unable to find a user for this verification. Please SignUp!",
-                        //                 });
-                        //         }
-                        //         // user is already verified
-                        //         else if (user.isVerified) {
-                        //             return res
-                        //                 .status(200)
-                        //                 .send(
-                        //                     "User has been already verified. Please Login"
-                        //                 );
-                        //         }
-                        //         // verify user
-                        //         else {
-                        //             // change isVerified to true
-                        //             user.isVerified = true;
-                        //             user.save(function (err) {
-                        //                 // error occur
-                        //                 if (err) {
-                        //                     return res
-                        //                         .status(500)
-                        //                         .send({ msg: err.message });
-                        //                 }
-                        //                 // account successfully verified
-                        //                 else {
-                        //                     return res
-                        //                         .status(200)
-                        //                         .send(
-                        //                             "Your account has been successfully verified"
-                        //                         );
-                        //                 }
-                        //             });
-                        //         }
-                        //     }
-                        // );
-                    }
-                }
-            );
+            const tokenReturned = await TokenEmailVerification.findOne({
+                token: token,
+            });
+            const userReturned = await User.findOne({
+                token: token,
+                email: email,
+            });
+            console.log(tokenReturned);
+            console.log(userReturned);
+            return { user: userReturned };
+            // const test = await TokenEmailVerification.findOne(
+            //     { token: token },
+            //     function (err, tokenObject) {
+            //         // token is not found into database i.e. token may have expired
+            //         if (!token) {
+            //             console.log("none found");
+            //         }
+            //         // if token is found then check valid user
+            //         else {
+            //             // console.log(tokenObject);
+            //             // console.log(tokenObject._userId);
+            //             var user = User.findOne(
+            //                 { token: token, email: email },
+            //                 function (err, user) {
+            //                     console.log(user);
+            //                     return user;
+            //                     // // not valid user
+            //                     // if (!user) {
+            //                     //     return res
+            //                     //         .status(401)
+            //                     //         .send({
+            //                     //             msg: "We were unable to find a user for this verification. Please SignUp!",
+            //                     //         });
+            //                     // }
+            //                     // // user is already verified
+            //                     // else if (user.isVerified) {
+            //                     //     return res
+            //                     //         .status(200)
+            //                     //         .send(
+            //                     //             "User has been already verified. Please Login"
+            //                     //         );
+            //                     // }
+            //                     // // verify user
+            //                     // else {
+            //                     //     // change isVerified to true
+            //                     //     user.isVerified = true;
+            //                     //     user.save(function (err) {
+            //                     //         // error occur
+            //                     //         if (err) {
+            //                     //             return res
+            //                     //                 .status(500)
+            //                     //                 .send({ msg: err.message });
+            //                     //         }
+            //                     //         // account successfully verified
+            //                     //         else {
+            //                     //             return res
+            //                     //                 .status(200)
+            //                     //                 .send(
+            //                     //                     "Your account has been successfully verified"
+            //                     //                 );
+            //                     //         }
+            //                     //     });
+            //                     // }
+            //                 }
+            //             );
+            //         }
+            //     }
+            // );
             // console.log(test);
-            return "";
             //NEXT: call this and then build it out, once backend working then do react
             //get token object from db
         },

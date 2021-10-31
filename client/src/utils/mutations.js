@@ -35,6 +35,19 @@ export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     }
 `;
 
+export const VERIFY_EMAIL = gql`
+    mutation VerifyEmailMutation($email: String!, $token: String!) {
+        verifyEmail(email: $email, token: $token) {
+            user {
+                _id
+                username
+                email
+                isVerified
+            }
+        }
+    }
+`;
+
 export const USER_LOGIN = gql`
     mutation login($email: String!, $password: String!) {
         login(email: $email, password: $password) {

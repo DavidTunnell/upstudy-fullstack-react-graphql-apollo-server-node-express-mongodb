@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_EMAIL_VERIFICATION_TOKEN } from "../utils/mutations";
+import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
 const VerifyEmail = () => {
     const styles = {
         notFoundStyle: {
@@ -11,6 +11,8 @@ const VerifyEmail = () => {
     const [addEmailVerificationToken] = useMutation(
         ADD_EMAIL_VERIFICATION_TOKEN
     );
+    const [verifyEmail] = useMutation(VERIFY_EMAIL);
+
     //http://localhost:3000/verify?name=ferret&color=purple
     const search = window.location.search;
     //if invalid send to 404 or let them know? let them know..
@@ -40,6 +42,9 @@ const VerifyEmail = () => {
         if (!createdToken) {
             generateVerificationEmail(userId, username, createdEmail);
         } else {
+            console.log(createdEmail);
+            console.log(createdToken);
+            // verifyEmail(createdEmail, createdToken);
         }
     }, []);
 

@@ -34,12 +34,13 @@ const typeDefs = gql`
     type Query {
         users: [User]!
         user(userId: ID!): User
+        userByEmail(email: String!): User
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        verifyEmail(email: String!, token: String!): User
+        verifyEmail(email: String!, token: String!): TokenEmailVerification
 
         addEmailVerificationToken(
             userId: String!
