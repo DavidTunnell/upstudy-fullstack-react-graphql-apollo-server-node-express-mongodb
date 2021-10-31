@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
-const NotFound = () => {
+import { Link, useHistory } from "react-router-dom";
+const Error = () => {
     const styles = {
         notFoundStyle: {
-            backgroundImage: "url(./assets/images/404-bg.jpg)",
+            backgroundImage: "url(/assets/images/404-bg.jpg)",
         },
     };
+    const history = useHistory();
+    const errorData = history.location.state?.data;
+    console.log(errorData);
     return (
         <>
             <div className="viewport">
@@ -15,11 +18,11 @@ const NotFound = () => {
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-4 text-white text-center">
-                            <h1 className="error-text">404</h1>
+                            <h1>Error</h1>
+                            <p>{errorData.message}</p>
                             <p>
-                                The page you were looking for wasn't found,
                                 <Link to="/" className="link">
-                                    click here to return home.
+                                    Click here to return home.
                                 </Link>
                             </p>
                         </div>
@@ -30,4 +33,4 @@ const NotFound = () => {
     );
 };
 
-export default NotFound;
+export default Error;

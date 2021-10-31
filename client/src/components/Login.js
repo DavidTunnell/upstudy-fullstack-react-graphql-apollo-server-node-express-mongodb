@@ -223,12 +223,6 @@ const Login = ({
                                                         )}
                                                     </div>
                                                     <Link
-                                                        disabled={
-                                                            !(
-                                                                userLoginData.email &&
-                                                                userLoginData.password
-                                                            )
-                                                        }
                                                         to="/dashboard"
                                                         className="btn btn-primary btn-block"
                                                         onClick={

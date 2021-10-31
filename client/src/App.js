@@ -5,6 +5,7 @@ import NotFound from "./components/NotFound";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
+import Error from "./components/Error";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
@@ -57,6 +58,9 @@ function App() {
                             {/* all other routes go to a 404 page - must be at bottom*/}
                             <Route path="/404">
                                 <NotFound />
+                            </Route>
+                            <Route path="/error">
+                                <Error error="test" />
                             </Route>
                             <Route path="*">
                                 <NotFound />
