@@ -56,7 +56,7 @@ const resolvers = {
             console.log(email);
             console.log(token);
             const test = TokenEmailVerification.findOne(
-                {},
+                { token: token },
                 function (err, token) {
                     // token is not found into database i.e. token may have expired
                     if (!token) {
