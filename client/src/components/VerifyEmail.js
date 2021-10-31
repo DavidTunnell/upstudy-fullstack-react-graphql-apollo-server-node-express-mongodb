@@ -27,23 +27,25 @@ const VerifyEmail = () => {
 
     // console.log(createdEmail + " | " + createdToken + " | " + createdTokenId);
     const generateVerificationEmail = async (userId, username, email) => {
-        const { data } = await addEmailVerificationToken({
+        await addEmailVerificationToken({
             variables: {
                 userId,
                 username,
                 email,
             },
         });
-        console.log(data);
     };
     const verifyUserEmail = async (email, token) => {
-        const { data } = await verifyEmail({
+        await verifyEmail({
             variables: {
                 email,
                 token,
             },
         });
-        console.log(data);
+    };
+    const handleResendVerificationEmail = async (event) => {
+        event.preventDefault();
+        console.log("handleResendVerificationEmail");
     };
     useEffect(() => {
         if (username) {
@@ -85,18 +87,16 @@ const VerifyEmail = () => {
                                 </p>
                                 <p>
                                     <div className="mt-3">
-                                        <Link
-                                            to="/"
-                                            target="_blank"
-                                            // download
+                                        <button
+                                            className="btn btn-white mr-1 mb-1"
+                                            type="button"
+                                            onClick={
+                                                handleResendVerificationEmail
+                                            }
                                         >
-                                            <button
-                                                className="btn btn-white mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                Resend Email
-                                            </button>
-                                        </Link>
+                                            Resend Email
+                                        </button>
+
                                         <Link to="/">
                                             <button
                                                 className="btn btn-white mr-1 mb-1"

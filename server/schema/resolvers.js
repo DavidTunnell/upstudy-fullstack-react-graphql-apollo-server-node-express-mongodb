@@ -38,7 +38,6 @@ const resolvers = {
             { userId, username, email }
         ) => {
             const newUserEmailToken = generateToken(userId);
-
             newUserEmailToken.save(function (err) {
                 if (err) {
                     return res.status(500).send({ msg: err.message });
@@ -50,7 +49,13 @@ const resolvers = {
                 email,
                 newUserEmailToken
             );
-            sendEmail(emailOptions);
+            try {
+                sendEmail(emailOptions);
+            } catch (error) {
+                throw new AuthenticationError(
+                    "Failed to send email. Try again later."
+                );
+            }
         },
         verifyEmail: async (parent, { email, token }) => {
             //Need to filter out tokens older than x hours - need to understand what date is made on create
