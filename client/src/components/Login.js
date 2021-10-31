@@ -59,6 +59,10 @@ const Login = ({
         setUserCreateData({ ...userCreateData, [id]: value });
     };
 
+    const handleModalClose = (event) => {
+        setShowAlert(false);
+    };
+
     const handleFormLogin = async (event) => {
         event.preventDefault();
 
@@ -74,13 +78,8 @@ const Login = ({
                     history.push("/");
                 }
             } catch (err) {
-                // setErrorMessage(err.message);
-                // setShowAlert(true);
-                history.push("/error", {
-                    showModal: true,
-                    title: "Error",
-                    content: err.message,
-                });
+                setErrorMessage(err.message);
+                setShowAlert(true);
             }
         } else {
             validatorLogin.showMessages();
@@ -141,6 +140,12 @@ const Login = ({
 
     return (
         <>
+            <Modal
+                show={showAlert}
+                title="Error"
+                content={errorMessage}
+                closeModal={handleModalClose}
+            />
             <div className="viewport">
                 <div
                     className="image image-overlay"
@@ -385,7 +390,6 @@ const Login = ({
                     </div>
                 </div>
             </div>
-            <Modal showArg={true} titleArg="Error" contentArg="test" />
         </>
     );
 };

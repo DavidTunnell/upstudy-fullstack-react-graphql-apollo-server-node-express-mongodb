@@ -1,15 +1,8 @@
-import { useState } from "react";
-// import { useHistory } from "react-router-dom";
 const Modal = (params) => {
-    //showModal, title, content
-    const [showModal, setShowModal] = useState(params.showArg);
-    const [title, setTitle] = useState(params.titleArg);
-    const [content, setContent] = useState(params.contentArg);
-    console.log(params);
-    // const history = useHistory();
-    // const errorData = history.location.state?.data;
-    // console.log(errorData);
-
+    let showModal = params.show;
+    let closeModal = params.closeModal;
+    let title = params.title;
+    let content = params.content;
     return (
         <>
             <div
@@ -32,7 +25,7 @@ const Modal = (params) => {
                                 className="close"
                                 data-dismiss="modal"
                                 aria-label="Close"
-                                onClick={() => setShowModal(false)}
+                                onClick={() => closeModal()}
                             >
                                 <span
                                     aria-hidden="true"
