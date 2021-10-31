@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
 import Error from "./components/Error";
+import ForgotPassword from "./components/ForgotPassword";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
@@ -52,6 +53,9 @@ function App() {
                             </Route>
                             <Route exact path="/verify">
                                 <VerifyEmail />
+                            </Route>
+                            <Route exact path="/forgot">
+                                <ForgotPassword />
                             </Route>
                             <Route exact path="/dashboard">
                                 <Dashboard />

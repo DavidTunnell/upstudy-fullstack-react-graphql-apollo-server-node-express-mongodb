@@ -147,12 +147,6 @@ const Login = ({
 
     return (
         <>
-            <Modal
-                show={showAlert}
-                title="Error"
-                content={errorMessage}
-                closeModal={handleModalClose}
-            />
             <div className="viewport">
                 <div
                     className="image image-overlay"
@@ -393,10 +387,25 @@ const Login = ({
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-5 mx-auto pt-2">
+                                    <div class="text-center">
+                                        <Link to="/forgot">
+                                            Forgot Password
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showAlert}
+                title="Error"
+                content={errorMessage}
+                closeModal={handleModalClose}
+            />
         </>
     );
 };
