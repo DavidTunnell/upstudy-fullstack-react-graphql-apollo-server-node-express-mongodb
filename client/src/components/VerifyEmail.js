@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
 const VerifyEmail = () => {
     const [hasBeenVerified, setHasBeenVerified] = useState(false);
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
     const styles = {
         notFoundStyle: {
             backgroundImage: "url(./assets/images/verify-bg.jpg)",
@@ -25,7 +26,6 @@ const VerifyEmail = () => {
     let username = params.get("username");
     let resend = params.get("resend");
 
-    // console.log(createdEmail + " | " + createdToken + " | " + createdTokenId);
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
             variables: {
@@ -46,6 +46,14 @@ const VerifyEmail = () => {
     const handleResendVerificationEmail = async (event) => {
         event.preventDefault();
         console.log("handleResendVerificationEmail");
+        await addEmailVerificationToken({
+            variables: {
+                userId,
+                username,
+                email: createdEmail,
+            },
+        });
+        setIsDisabledButton(true);
     };
     useEffect(() => {
         if (username) {
@@ -93,6 +101,7 @@ const VerifyEmail = () => {
                                             onClick={
                                                 handleResendVerificationEmail
                                             }
+                                            disabled={isDisabledButton}
                                         >
                                             Resend Email
                                         </button>
@@ -129,12 +138,6 @@ const VerifyEmail = () => {
                     </div>
                 </div>
             </div>
-            {/* add buttons here to return home and resend email validation link 
-                                also add use error for mutation calls in login line on https://i.imgur.com/YSTWiYb.png
-                                loading also works for mutation calls
-                                -consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/TPKx3lO.png
-                                -also, use parameters in routes to pass certain types of data - https://i.imgur.com/B0Po9kF.png
-                                */}
         </>
     );
 };
