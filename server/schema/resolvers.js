@@ -53,79 +53,33 @@ const resolvers = {
             sendEmail(emailOptions);
         },
         verifyEmail: async (parent, { email, token }) => {
-            console.log(email);
-            console.log(token);
+            //Need to filter out tokens older than x hours - need to understand what date is made on create
             const tokenReturned = await TokenEmailVerification.findOne({
                 token: token,
+                expireAt: { $gt: new Date(Date.now() - 86400000) },
             });
+            if (!tokenReturned) {
+                throw new AuthenticationError(
+                    "This token doesn't exist or has expired."
+                );
+            }
             const userReturned = await User.findOne({
                 token: token,
                 email: email,
             });
-            console.log(tokenReturned);
-            console.log(userReturned);
+            if (!userReturned) {
+                throw new AuthenticationError(
+                    "There is no user associated with that token."
+                );
+            }
+            userReturned.isVerified = true;
+            var updatedUser = await userReturned.save();
+            if (!updatedUser) {
+                throw new AuthenticationError(
+                    "There was an error verifying this email address."
+                );
+            }
             return { user: userReturned };
-            // const test = await TokenEmailVerification.findOne(
-            //     { token: token },
-            //     function (err, tokenObject) {
-            //         // token is not found into database i.e. token may have expired
-            //         if (!token) {
-            //             console.log("none found");
-            //         }
-            //         // if token is found then check valid user
-            //         else {
-            //             // console.log(tokenObject);
-            //             // console.log(tokenObject._userId);
-            //             var user = User.findOne(
-            //                 { token: token, email: email },
-            //                 function (err, user) {
-            //                     console.log(user);
-            //                     return user;
-            //                     // // not valid user
-            //                     // if (!user) {
-            //                     //     return res
-            //                     //         .status(401)
-            //                     //         .send({
-            //                     //             msg: "We were unable to find a user for this verification. Please SignUp!",
-            //                     //         });
-            //                     // }
-            //                     // // user is already verified
-            //                     // else if (user.isVerified) {
-            //                     //     return res
-            //                     //         .status(200)
-            //                     //         .send(
-            //                     //             "User has been already verified. Please Login"
-            //                     //         );
-            //                     // }
-            //                     // // verify user
-            //                     // else {
-            //                     //     // change isVerified to true
-            //                     //     user.isVerified = true;
-            //                     //     user.save(function (err) {
-            //                     //         // error occur
-            //                     //         if (err) {
-            //                     //             return res
-            //                     //                 .status(500)
-            //                     //                 .send({ msg: err.message });
-            //                     //         }
-            //                     //         // account successfully verified
-            //                     //         else {
-            //                     //             return res
-            //                     //                 .status(200)
-            //                     //                 .send(
-            //                     //                     "Your account has been successfully verified"
-            //                     //                 );
-            //                     //         }
-            //                     //     });
-            //                     // }
-            //                 }
-            //             );
-            //         }
-            //     }
-            // );
-            // console.log(test);
-            //NEXT: call this and then build it out, once backend working then do react
-            //get token object from db
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
