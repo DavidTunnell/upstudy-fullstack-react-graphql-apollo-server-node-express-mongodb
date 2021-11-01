@@ -71,6 +71,7 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
+                console.log(data);
                 Auth.login(data.login.token);
                 if (!data.login.user.isVerified) {
                     history.push(

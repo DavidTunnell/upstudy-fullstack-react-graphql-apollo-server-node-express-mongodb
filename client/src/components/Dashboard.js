@@ -1,7 +1,32 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Auth from "../utils/auth";
 const Dashboard = () => {
-    const bgImage = "/images/login-bg.jpg";
+    const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
+
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
+    const [isVerified, setIsVerified] = useState();
+    const [password, setPassword] = useState();
+
+    useEffect(() => {
+        const userLoggedIn = Auth.getProfile().data;
+        console.log(userLoggedIn);
+        setUsername(userLoggedIn.username);
+        setEmail(userLoggedIn.email);
+        setIsVerified(userLoggedIn.isVerified);
+    }, []);
+
+    const handlePasswordInputChange = (event) => {
+        const { value } = event.target;
+        setPassword(value);
+    };
+
+    const handleSubmit = (event) => {
+        console.log(password);
+    };
+
     return (
         <>
             <div className="viewport">
@@ -53,7 +78,9 @@ const Dashboard = () => {
                                                                             className="form-control"
                                                                             id="username"
                                                                             aria-describedby="username"
-                                                                            placeholder="enddream"
+                                                                            placeholder={
+                                                                                username
+                                                                            }
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -69,19 +96,24 @@ const Dashboard = () => {
                                                                             className="form-control"
                                                                             id="email"
                                                                             aria-describedby="email"
-                                                                            placeholder="d@t.com"
+                                                                            placeholder={
+                                                                                email
+                                                                            }
                                                                             disabled
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="form-row">
+                                                            <div className="form-row mt-1 mb-3">
                                                                 <div className="col">
-                                                                    <div class="custom-control custom-checkbox">
+                                                                    <div class="custom-control custom-checkbox ml-1">
                                                                         <input
                                                                             type="checkbox"
                                                                             class="custom-control-input"
                                                                             id="customCheckDisabled"
+                                                                            checked={
+                                                                                isVerified
+                                                                            }
                                                                             disabled
                                                                         />
                                                                         <label
@@ -107,13 +139,25 @@ const Dashboard = () => {
                                                                             id="userMail"
                                                                             aria-describedby="userMail"
                                                                             placeholder="********"
+                                                                            onChange={
+                                                                                handlePasswordInputChange
+                                                                            }
+                                                                            value={
+                                                                                password
+                                                                            }
+                                                                            required
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div className="form-row mt-1 align-items-center">
                                                                 <div className="col-3">
-                                                                    <button className="btn btn-secondary">
+                                                                    <button
+                                                                        className="btn btn-secondary"
+                                                                        onClick={
+                                                                            handleSubmit
+                                                                        }
+                                                                    >
                                                                         Save
                                                                         Changes
                                                                     </button>
