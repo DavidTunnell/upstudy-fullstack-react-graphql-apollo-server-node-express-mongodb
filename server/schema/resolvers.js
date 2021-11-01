@@ -133,7 +133,21 @@ const resolvers = {
             }
             return user;
         },
+        updatePassword: async (parent, { email, oldPassword, newPassword }) => {
+            var encryptedPw = bcrypt.hashSync(newPassword, 10);
+            //think i need to encrypt old password too
+            const user = await User.findOneAndUpdate(
+                { email, oldPassword },
+                { password: encryptedPw }
+            );
+            if (!user) {
+                throw new AuthenticationError(
+                    "There was an error retrieving this user. Is the password correct?"
+                );
+            }
 
+            return user;
+        },
         addBook: async (
             parent,
             { userId, authors, description, bookId, image, link, title }

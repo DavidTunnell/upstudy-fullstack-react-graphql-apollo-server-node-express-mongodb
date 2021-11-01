@@ -131,6 +131,7 @@ const Dashboard = () => {
                                                                 <div className="col">
                                                                     <div className="form-group">
                                                                         <label htmlFor="userMail">
+                                                                            Update
                                                                             Password
                                                                         </label>
                                                                         <input
