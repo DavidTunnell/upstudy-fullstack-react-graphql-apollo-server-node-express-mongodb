@@ -1,17 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 
 const ForgotPassword = () => {
     const bgImage = "/assets/images/login-bg.jpg";
     const [emailInput, setEmailInput] = useState("");
     const [validatorEmail] = useState(new SimpleReactValidator());
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const handleEmailInputChange = (event) => {
         const { value } = event.target;
         setEmailInput(value);
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(emailInput);
+        if (validatorEmail.allValid()) {
+            try {
+                // const { data } = await login({
+                //     variables: { ...userLoginData },
+                // });
+                // Auth.login(data.login.token);
+                // if (!data.login.user.isVerified) {
+                //     history.push(
+                //         "/verify?id=" +
+                //             data.login.user._id +
+                //             "&username=" +
+                //             data.login.user.username +
+                //             "&email=" +
+                //             userLoginData.email
+                //     );
+                // } else {
+                //     history.push("/");
+                // }
+            } catch (err) {
+                // setErrorMessage(err.message);
+                // setShowAlert(true);
+            }
+        } else {
+            validatorEmail.showMessages();
+            forceUpdate();
+        }
     };
     return (
         <>
@@ -60,6 +86,11 @@ const ForgotPassword = () => {
                                                             value={emailInput}
                                                             required
                                                         />
+                                                        {validatorEmail.message(
+                                                            "email",
+                                                            emailInput,
+                                                            "required|email"
+                                                        )}
                                                     </div>
                                                     <button
                                                         className="btn btn-primary btn-block"
