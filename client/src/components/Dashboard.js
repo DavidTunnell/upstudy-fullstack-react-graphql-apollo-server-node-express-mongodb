@@ -22,16 +22,9 @@ const Dashboard = () => {
                                             <Link
                                                 className="nav-item nav-link active"
                                                 data-toggle="tab"
-                                                to="/"
+                                                to="/dashboard"
                                             >
-                                                Projects
-                                            </Link>
-                                            <Link
-                                                className="nav-item nav-link"
-                                                data-toggle="tab"
-                                                to="/"
-                                            >
-                                                Video Games
+                                                Profile
                                             </Link>
                                         </div>
                                     </div>
@@ -41,7 +34,7 @@ const Dashboard = () => {
                                         className="tab-pane show active"
                                         role="tabpanel"
                                     >
-                                        <div className="row justify-content-center">
+                                        <div className="row justify-content-center pb-10 mb-10">
                                             <div className="col-md-10 col-lg-8">
                                                 <div className="row">
                                                     <div className="col ">
@@ -53,138 +46,72 @@ const Dashboard = () => {
                                                                 <div className="col">
                                                                     <div className="form-group">
                                                                         <label htmlFor="firstName">
-                                                                            First
-                                                                            Name
+                                                                            Username
                                                                         </label>
                                                                         <input
-                                                                            type="email"
+                                                                            type="text"
                                                                             className="form-control"
-                                                                            id="firstName"
-                                                                            aria-describedby="firstName"
-                                                                            placeholder="John/"
+                                                                            id="username"
+                                                                            aria-describedby="username"
+                                                                            placeholder="enddream"
+                                                                            disabled
                                                                         />
                                                                     </div>
                                                                 </div>
                                                                 <div className="col">
                                                                     <div className="form-group">
                                                                         <label htmlFor="secondName">
-                                                                            Second
-                                                                            Name
+                                                                            Email
+                                                                            Address
                                                                         </label>
                                                                         <input
                                                                             type="email"
                                                                             className="form-control"
-                                                                            id="secondName"
-                                                                            aria-describedby="secondName"
-                                                                            placeholder="Doe"
+                                                                            id="email"
+                                                                            aria-describedby="email"
+                                                                            placeholder="d@t.com"
+                                                                            disabled
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div className="form-row">
                                                                 <div className="col">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="customCheckDisabled"
+                                                                            disabled
+                                                                        />
+                                                                        <label
+                                                                            class="custom-control-label is-verified-label"
+                                                                            for="customCheckDisabled"
+                                                                        >
+                                                                            Is
+                                                                            Verified
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr class="mt-2 mb-2" />
+                                                            <div className="form-row">
+                                                                <div className="col">
                                                                     <div className="form-group">
                                                                         <label htmlFor="userMail">
-                                                                            Email
-                                                                            address
+                                                                            Password
                                                                         </label>
                                                                         <input
                                                                             type="email"
                                                                             className="form-control"
                                                                             id="userMail"
                                                                             aria-describedby="userMail"
-                                                                            placeholder="johndoe@example.com"
+                                                                            placeholder="********"
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div className="form-row mt-1 align-items-center">
-                                                                <div className="col-3">
-                                                                    <button className="btn btn-secondary">
-                                                                        Save
-                                                                        Changes
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <h5 className="mb-2 fs-20 font-weight-normal">
-                                                            Profile Information
-                                                        </h5>
-                                                        <form>
-                                                            <div className="form-row">
-                                                                <div className="col">
-                                                                    <div className="form-group">
-                                                                        <label htmlFor="userCity">
-                                                                            City
-                                                                        </label>
-                                                                        <input
-                                                                            type="email"
-                                                                            className="form-control"
-                                                                            id="userCity"
-                                                                            aria-describedby="userCity"
-                                                                            placeholder="New York"
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col">
-                                                                    <div className="form-group">
-                                                                        <label htmlFor="userCountry">
-                                                                            Country
-                                                                        </label>
-                                                                        <input
-                                                                            type="email"
-                                                                            className="form-control"
-                                                                            id="userCountry"
-                                                                            aria-describedby="userCountry"
-                                                                            placeholder="United States"
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="form-row">
-                                                                <div className="col">
-                                                                    <div className="form-group">
-                                                                        <label htmlFor="userTwitter">
-                                                                            Twitter
-                                                                        </label>
-                                                                        <div className="input-group">
-                                                                            <div className="input-group-prepend">
-                                                                                <span className="input-group-text">
-                                                                                    @
-                                                                                </span>
-                                                                            </div>
-                                                                            <input
-                                                                                type="text"
-                                                                                id="userTwitter"
-                                                                                className="form-control"
-                                                                                placeholder="Username"
-                                                                                aria-label="Username"
-                                                                                aria-describedby="userTwitter"
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="form-row">
-                                                                <div className="col">
-                                                                    <div className="form-group">
-                                                                        <label htmlFor="exampleFormControlTextarea1">
-                                                                            About
-                                                                        </label>
-                                                                        <textarea
-                                                                            className="form-control"
-                                                                            id="exampleFormControlTextarea1"
-                                                                            rows="3"
-                                                                        ></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="form-row">
                                                                 <div className="col-3">
                                                                     <button className="btn btn-secondary">
                                                                         Save

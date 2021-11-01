@@ -11,7 +11,9 @@
     -moz-transform: rotate(0deg);
     transform: rotate(0deg);
 }
-
+.is-verified-label {
+    padding-top: 3px;
+}
 @media only screen and (max-width: 1200px) {
     .mobile-center {
         text-align: center;
