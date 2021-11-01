@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 
-const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
+const Header = ({ toTop, isLoggedIn }) => {
+    console.log(isLoggedIn);
     return (
         <>
             <header className="header-sticky header-dark">
@@ -50,7 +51,7 @@ const Header = ({ linkedInUrl, gitHubUrl, stackOverflowUrl, toTop }) => {
                                 </li>
                             </ul>
                             <ul className="navbar-nav align-items-center mr-0">
-                                {Auth.loggedIn() ? (
+                                {isLoggedIn ? (
                                     <li className="nav-item dropdown">
                                         <Link
                                             className="nav-link dropdown-toggle"

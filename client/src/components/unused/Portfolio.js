@@ -1,7 +1,7 @@
-import { portfolio } from "../utils/data";
+import { portfolio } from "../../utils/data";
 import PortfolioModal from "./PortfolioModal";
 import { useState } from "react";
-import { badges } from "../utils/data";
+import { badges } from "../../utils/data";
 
 const PortfolioAlt = () => {
     const [projectData, setProjectData] = useState(null);

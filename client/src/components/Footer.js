@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 
-const Footer = ({ toTop }) => {
+const Footer = ({ toTop, isLoggedIn }) => {
     return (
         <>
             <footer className="bg-dark text-white">
@@ -10,7 +10,7 @@ const Footer = ({ toTop }) => {
                         <div className="row justify-content-between align-items-center">
                             <div className="col-md-5 text-center text-md-left">
                                 <ul className="nav">
-                                    {Auth.loggedIn() ? (
+                                    {isLoggedIn ? (
                                         <li className="nav-item">
                                             <Link
                                                 className="nav-link"
