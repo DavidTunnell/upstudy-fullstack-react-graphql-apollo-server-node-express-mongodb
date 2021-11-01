@@ -12,7 +12,6 @@
     transform: rotate(0deg);
 }
 
-
 @media only screen and (max-width: 1200px) {
     .mobile-center {
         text-align: center;

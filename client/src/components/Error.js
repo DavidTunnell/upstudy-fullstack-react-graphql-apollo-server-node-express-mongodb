@@ -1,4 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
 const Error = () => {
     const styles = {
         notFoundStyle: {
@@ -7,7 +8,6 @@ const Error = () => {
     };
     const history = useHistory();
     const errorData = history.location.state?.data;
-    console.log(errorData);
     return (
         <>
             <div className="viewport">
@@ -19,7 +19,7 @@ const Error = () => {
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-4 text-white text-center">
                             <h1>Error</h1>
-                            <p>{errorData.message}</p>
+                            <p>{errorData?.message}</p>
                             <p>
                                 <Link to="/" className="link">
                                     Click here to return home.

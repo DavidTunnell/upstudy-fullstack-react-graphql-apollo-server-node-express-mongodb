@@ -234,15 +234,14 @@ const Login = ({
                                                             "required"
                                                         )}
                                                     </div>
-                                                    <Link
-                                                        to="/dashboard"
+                                                    <button
                                                         className="btn btn-primary btn-block"
                                                         onClick={
                                                             handleFormLogin
                                                         }
                                                     >
                                                         Sign In
-                                                    </Link>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -372,15 +371,14 @@ const Login = ({
                                                             }
                                                         )}
                                                     </div>
-                                                    <Link
-                                                        to="/"
+                                                    <button
                                                         className="btn btn-primary btn-block"
                                                         onClick={
                                                             handleFormCreate
                                                         }
                                                     >
                                                         Sign Up and Sign In
-                                                    </Link>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>

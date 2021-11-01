@@ -1,13 +1,18 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { Link, useHistory } from "react-router-dom";
-import Auth from "../utils/auth";
-import { useMutation } from "@apollo/client";
-import { USER_LOGIN, ADD_USER } from "../utils/mutations";
+import React, { useState } from "react";
 import SimpleReactValidator from "simple-react-validator";
-import Modal from "./Modal";
 
 const ForgotPassword = () => {
     const bgImage = "/assets/images/login-bg.jpg";
+    const [emailInput, setEmailInput] = useState("");
+    const [validatorEmail] = useState(new SimpleReactValidator());
+    const handleEmailInputChange = (event) => {
+        const { value } = event.target;
+        setEmailInput(value);
+    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(emailInput);
+    };
     return (
         <>
             <div className="viewport">
@@ -19,16 +24,20 @@ const ForgotPassword = () => {
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-5">
                             <div
-                                className="accordion-group accordion-group-portal"
+                                className="accordion-group accordion-group-portal forgot-portal"
                                 data-accordion-group
                             >
                                 <div className="accordion open" data-accordion>
                                     <div className="signin-card">
-                                        <div
-                                            className="accordion-control signin-card"
-                                            data-control
-                                        >
-                                            <h5>Forgot Password</h5>
+                                        <div className="p-3" data-control>
+                                            <h5
+                                                style={{
+                                                    fontSize: "1.25rem",
+                                                    fontWeight: "500",
+                                                }}
+                                            >
+                                                Forgot Password
+                                            </h5>
                                         </div>
                                         <div
                                             className="accordion-content"
@@ -45,15 +54,19 @@ const ForgotPassword = () => {
                                                             className="form-control"
                                                             id="email"
                                                             placeholder="name@example.com"
+                                                            onChange={
+                                                                handleEmailInputChange
+                                                            }
+                                                            value={emailInput}
                                                             required
                                                         />
                                                     </div>
-                                                    <Link
-                                                        to="/dashboard"
+                                                    <button
                                                         className="btn btn-primary btn-block"
+                                                        onClick={handleSubmit}
                                                     >
                                                         Get Email Link
-                                                    </Link>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
