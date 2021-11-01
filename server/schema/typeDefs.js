@@ -41,6 +41,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         verifyEmail(email: String!, token: String!): TokenEmailVerification
+        forgotPassword(email: String!): User
 
         addEmailVerificationToken(
             userId: String!

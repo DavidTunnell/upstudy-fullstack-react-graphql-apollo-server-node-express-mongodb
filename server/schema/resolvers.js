@@ -1,10 +1,12 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, TokenEmailVerification } = require("../models");
 const { signToken } = require("../utils/auth");
+const crypto = require("crypto");
 const {
     generateToken,
     generateVerificationEmailOptions,
     sendEmail,
+    generatePassword,
 } = require("../utils/email");
 
 const resolvers = {
@@ -101,6 +103,25 @@ const resolvers = {
             }
             const token = signToken(user);
             return { token, user };
+        },
+        forgotPassword: async (parent, { email }) => {
+            const user = await User.findOne({ email });
+            var newPw = generatePassword(10);
+            console.log(user);
+            console.log(newPw);
+            if (!user) {
+                throw new AuthenticationError(
+                    "If the user you entered exists, you entered the wrong username and/or password."
+                );
+            }
+            // const correctPw = await user.isCorrectPassword(password);
+            // if (!correctPw) {
+            //     throw new AuthenticationError(
+            //         "If the user you entered exists, you entered the wrong username and/or password."
+            //     );
+            // }
+            // const token = signToken(user);
+            // return { token, user };
         },
 
         addBook: async (
