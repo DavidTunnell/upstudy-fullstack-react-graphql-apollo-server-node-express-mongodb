@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
+import { USER_UPDATE_PASSWORD } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
 const Dashboard = () => {
     const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
@@ -8,7 +11,11 @@ const Dashboard = () => {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [isVerified, setIsVerified] = useState();
-    const [password, setPassword] = useState();
+    const [oldPassword, setOldPassword] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [repeatNewPassword, setRepeatNewPassword] = useState();
+
+    const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
 
     useEffect(() => {
         const userLoggedIn = Auth.getProfile().data;
@@ -18,13 +25,21 @@ const Dashboard = () => {
         setIsVerified(userLoggedIn.isVerified);
     }, []);
 
-    const handlePasswordInputChange = (event) => {
+    const handleOldPasswordInputChange = (event) => {
         const { value } = event.target;
-        setPassword(value);
+        setOldPassword(value);
+    };
+    const handleNewPasswordInputChange = (event) => {
+        const { value } = event.target;
+        setNewPassword(value);
+    };
+    const handleRepeatNewPasswordInputChange = (event) => {
+        const { value } = event.target;
+        setRepeatNewPassword(value);
     };
 
     const handleSubmit = (event) => {
-        console.log(password);
+        console.log();
     };
 
     return (
@@ -128,10 +143,14 @@ const Dashboard = () => {
                                                             </div>
                                                             <hr class="mt-2 mb-2" />
                                                             <div className="form-row">
-                                                                <div className="col">
+                                                                <div className="col-6">
+                                                                    <h5 className="mb-2 fs-20 font-weight-normal">
+                                                                        Update
+                                                                        Password
+                                                                    </h5>
                                                                     <div className="form-group">
                                                                         <label htmlFor="userMail">
-                                                                            Update
+                                                                            Old
                                                                             Password
                                                                         </label>
                                                                         <input
@@ -141,10 +160,46 @@ const Dashboard = () => {
                                                                             aria-describedby="userMail"
                                                                             placeholder="********"
                                                                             onChange={
-                                                                                handlePasswordInputChange
+                                                                                handleOldPasswordInputChange
                                                                             }
                                                                             value={
-                                                                                password
+                                                                                oldPassword
+                                                                            }
+                                                                            required
+                                                                        />
+                                                                        <label htmlFor="userMail">
+                                                                            New
+                                                                            Password
+                                                                        </label>
+                                                                        <input
+                                                                            type="email"
+                                                                            className="form-control"
+                                                                            id="userMail"
+                                                                            aria-describedby="userMail"
+                                                                            placeholder="********"
+                                                                            onChange={
+                                                                                handleNewPasswordInputChange
+                                                                            }
+                                                                            value={
+                                                                                newPassword
+                                                                            }
+                                                                            required
+                                                                        />
+                                                                        <label htmlFor="userMail">
+                                                                            Repeat
+                                                                            Password
+                                                                        </label>
+                                                                        <input
+                                                                            type="email"
+                                                                            className="form-control"
+                                                                            id="userMail"
+                                                                            aria-describedby="userMail"
+                                                                            placeholder="********"
+                                                                            onChange={
+                                                                                handleRepeatNewPasswordInputChange
+                                                                            }
+                                                                            value={
+                                                                                repeatNewPassword
                                                                             }
                                                                             required
                                                                         />

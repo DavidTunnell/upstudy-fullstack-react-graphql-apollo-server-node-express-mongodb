@@ -69,7 +69,21 @@ export const USER_FORGOT_PASSWORD = gql`
         }
     }
 `;
-
+export const USER_UPDATE_PASSWORD = gql`
+    mutation UpdatePasswordMutation(
+        $email: String!
+        $oldPassword: String!
+        $newPassword: String!
+    ) {
+        updatePassword(
+            email: $email
+            oldPassword: $oldPassword
+            newPassword: $newPassword
+        ) {
+            _id
+        }
+    }
+`;
 export const ADD_BOOK = gql`
     mutation addBook(
         $userId: ID!
