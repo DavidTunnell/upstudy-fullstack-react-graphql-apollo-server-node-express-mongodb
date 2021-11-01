@@ -38,12 +38,30 @@ module.exports = {
                 "\n\nThank You!\n",
         };
     },
+    generatePasswordResetEmailOptions: function (username, email, newPw) {
+        return {
+            from: "no-reply@upstudy.io",
+            to: email,
+            subject: "Upstudy - Reset Password",
+            text:
+                "Hello " +
+                username +
+                ",\n\n" +
+                "Your password has been changed to: " +
+                newPw +
+                "\n\n" +
+                "Click here to login: \n" +
+                process.env.APP_DOMAIN +
+                "/login" +
+                "\n\nThank You!\n",
+        };
+    },
     sendEmail: function (emailOptions) {
         transporter.sendMail(emailOptions, function (err) {
             if (err) {
                 console.log(err);
             } else {
-                console.log("Verification email sent successfully.");
+                console.log("Email sent: \n" + emailOptions.text);
             }
         });
     },

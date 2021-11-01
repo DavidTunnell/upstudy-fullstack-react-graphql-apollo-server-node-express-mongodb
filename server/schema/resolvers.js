@@ -1,10 +1,12 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, TokenEmailVerification } = require("../models");
 const { signToken } = require("../utils/auth");
-const crypto = require("crypto");
+
+const bcrypt = require("bcrypt");
 const {
     generateToken,
     generateVerificationEmailOptions,
+    generatePasswordResetEmailOptions,
     sendEmail,
     generatePassword,
 } = require("../utils/email");
@@ -105,15 +107,31 @@ const resolvers = {
             return { token, user };
         },
         forgotPassword: async (parent, { email }) => {
-            const user = await User.findOne({ email });
             var newPw = generatePassword(10);
-            console.log(user);
-            console.log(newPw);
+            var encryptedPw = bcrypt.hashSync(newPw, 10);
+            const user = await User.findOneAndUpdate(
+                { email },
+                { password: encryptedPw }
+            );
             if (!user) {
                 throw new AuthenticationError(
-                    "If the user you entered exists, you entered the wrong username and/or password."
+                    "If the email you entered exists, you will be sent an email with a new password."
                 );
             }
+            //send email with new password
+            const emailOptions = generatePasswordResetEmailOptions(
+                user.username,
+                user.email,
+                newPw
+            );
+            try {
+                sendEmail(emailOptions);
+            } catch (error) {
+                throw new AuthenticationError(
+                    "Failed to send email. Try again later."
+                );
+            }
+
             // const correctPw = await user.isCorrectPassword(password);
             // if (!correctPw) {
             //     throw new AuthenticationError(
