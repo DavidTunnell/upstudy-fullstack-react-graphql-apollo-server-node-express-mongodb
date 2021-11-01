@@ -1,11 +1,18 @@
 import React, { useState, useReducer } from "react";
+import { useMutation } from "@apollo/client";
+import { USER_FORGOT_PASSWORD } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
+import Modal from "./Modal";
 
 const ForgotPassword = () => {
     const bgImage = "/assets/images/login-bg.jpg";
     const [emailInput, setEmailInput] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
     const [validatorEmail] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+    const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
     const handleEmailInputChange = (event) => {
         const { value } = event.target;
         setEmailInput(value);
@@ -14,25 +21,24 @@ const ForgotPassword = () => {
         event.preventDefault();
         if (validatorEmail.allValid()) {
             try {
-                // const { data } = await login({
-                //     variables: { ...userLoginData },
-                // });
-                // Auth.login(data.login.token);
-                // if (!data.login.user.isVerified) {
-                //     history.push(
-                //         "/verify?id=" +
-                //             data.login.user._id +
-                //             "&username=" +
-                //             data.login.user.username +
-                //             "&email=" +
-                //             userLoginData.email
-                //     );
-                // } else {
-                //     history.push("/");
-                // }
+                const { data } = await forgotPassword({
+                    variables: { email: emailInput },
+                });
+                if (data) {
+                    setModalMessage(
+                        "A new password has been sent to the email address if it exists. Check your email."
+                    );
+                    setModalTitle("Success");
+                    setShowAlert(true);
+                } else {
+                    setModalTitle("Fail");
+                    setModalMessage("There was an error.");
+                    setShowAlert(true);
+                }
             } catch (err) {
-                // setErrorMessage(err.message);
-                // setShowAlert(true);
+                setModalTitle("Fail");
+                setModalMessage(err.message);
+                setShowAlert(true);
             }
         } else {
             validatorEmail.showMessages();
@@ -108,12 +114,12 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </div>
-            {/* <Modal
+            <Modal
                 show={showAlert}
-                title="Error"
-                content={errorMessage}
-                closeModal={handleModalClose}
-            /> */}
+                title={modalTitle}
+                content={modalMessage}
+                closeModal={() => setShowAlert(false)}
+            />
         </>
     );
 };

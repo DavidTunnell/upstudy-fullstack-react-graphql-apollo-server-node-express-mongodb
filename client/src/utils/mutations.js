@@ -61,6 +61,14 @@ export const USER_LOGIN = gql`
     }
 `;
 
+export const USER_FORGOT_PASSWORD = gql`
+    mutation ForgotPasswordMutation($email: String!) {
+        forgotPassword(email: $email) {
+            _id
+        }
+    }
+`;
+
 export const ADD_BOOK = gql`
     mutation addBook(
         $userId: ID!

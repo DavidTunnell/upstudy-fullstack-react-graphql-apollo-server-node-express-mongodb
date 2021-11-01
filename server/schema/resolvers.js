@@ -131,15 +131,7 @@ const resolvers = {
                     "Failed to send email. Try again later."
                 );
             }
-
-            // const correctPw = await user.isCorrectPassword(password);
-            // if (!correctPw) {
-            //     throw new AuthenticationError(
-            //         "If the user you entered exists, you entered the wrong username and/or password."
-            //     );
-            // }
-            // const token = signToken(user);
-            // return { token, user };
+            return user;
         },
 
         addBook: async (
