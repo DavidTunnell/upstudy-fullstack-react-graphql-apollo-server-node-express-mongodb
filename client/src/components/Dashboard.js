@@ -23,7 +23,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         const userLoggedIn = Auth.getProfile().data;
-        console.log(userLoggedIn);
         setUsername(userLoggedIn.username);
         setEmail(userLoggedIn.email);
         setIsVerified(userLoggedIn.isVerified);
@@ -42,15 +41,19 @@ const Dashboard = () => {
         setRepeatNewPassword(value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(oldPassword, newPassword, repeatNewPassword);
         if (validatorPassword.allValid()) {
             try {
-                // const { data } = await login({
-                //     variables: { ...userLoginData },
-                // });
-                // console.log(data);
+                const { data } = await updatePassword({
+                    variables: {
+                        email,
+                        oldPassword,
+                        newPassword,
+                    },
+                });
+                console.log(data);
                 // Auth.login(data.login.token);
                 // if (!data.login.user.isVerified) {
                 //     history.push(
@@ -182,7 +185,7 @@ const Dashboard = () => {
                                                                     </h5>
                                                                     <div className="form-group">
                                                                         <label htmlFor="userMail">
-                                                                            Old
+                                                                            Existing
                                                                             Password
                                                                         </label>
                                                                         <input

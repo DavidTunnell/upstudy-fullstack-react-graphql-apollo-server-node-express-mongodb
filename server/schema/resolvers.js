@@ -134,19 +134,30 @@ const resolvers = {
             return user;
         },
         updatePassword: async (parent, { email, oldPassword, newPassword }) => {
-            var encryptedPw = bcrypt.hashSync(newPassword, 10);
-            //think i need to encrypt old password too
-            const user = await User.findOneAndUpdate(
-                { email, oldPassword },
-                { password: encryptedPw }
-            );
+            const user = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError(
-                    "There was an error retrieving this user. Is the password correct?"
+                    "The email does not have a record associated with it."
                 );
             }
-
-            return user;
+            const correctPw = await user.isCorrectPassword(oldPassword);
+            if (!correctPw) {
+                throw new AuthenticationError(
+                    "The existing password you entered is incorrect."
+                );
+            }
+            //if we are here they existing password was correct, so create and update with new password.
+            var encryptedPw = bcrypt.hashSync(newPassword, 10);
+            const userUpdated = await User.findOneAndUpdate(
+                { email },
+                { password: encryptedPw }
+            );
+            if (!userUpdated) {
+                throw new AuthenticationError(
+                    "There was a problem updating your password."
+                );
+            }
+            return userUpdated;
         },
         addBook: async (
             parent,
