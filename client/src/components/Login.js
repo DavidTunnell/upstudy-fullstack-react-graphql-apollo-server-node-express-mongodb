@@ -338,7 +338,7 @@ const Login = ({
                                                         {validatorCreate.message(
                                                             "password",
                                                             userCreateData.createPassword,
-                                                            `required|in:${userCreateData.repeatPassword}`,
+                                                            `required|in:${userCreateData.repeatPassword}|min:5`,
                                                             {
                                                                 messages: {
                                                                     in: "Passwords need to match.",
@@ -364,7 +364,7 @@ const Login = ({
                                                         {validatorCreate.message(
                                                             "password",
                                                             userCreateData.repeatPassword,
-                                                            `required|in:${userCreateData.createPassword}`,
+                                                            `required|in:${userCreateData.createPassword}|min:5`,
                                                             {
                                                                 messages: {
                                                                     in: "Passwords need to match.",

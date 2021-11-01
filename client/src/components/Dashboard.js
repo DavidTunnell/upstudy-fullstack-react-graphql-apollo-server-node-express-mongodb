@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import SimpleReactValidator from "simple-react-validator";
 
 const Dashboard = () => {
     const bgImage = "./assets/images/login-bg.jpg";
@@ -16,6 +17,9 @@ const Dashboard = () => {
     const [repeatNewPassword, setRepeatNewPassword] = useState();
 
     const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
+
+    const [validatorPassword] = useState(new SimpleReactValidator());
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     useEffect(() => {
         const userLoggedIn = Auth.getProfile().data;
@@ -39,7 +43,35 @@ const Dashboard = () => {
     };
 
     const handleSubmit = (event) => {
-        console.log();
+        event.preventDefault();
+        console.log(oldPassword, newPassword, repeatNewPassword);
+        if (validatorPassword.allValid()) {
+            try {
+                // const { data } = await login({
+                //     variables: { ...userLoginData },
+                // });
+                // console.log(data);
+                // Auth.login(data.login.token);
+                // if (!data.login.user.isVerified) {
+                //     history.push(
+                //         "/verify?id=" +
+                //             data.login.user._id +
+                //             "&username=" +
+                //             data.login.user.username +
+                //             "&email=" +
+                //             userLoginData.email
+                //     );
+                // } else {
+                //     history.push("/");
+                // }
+            } catch (err) {
+                // setErrorMessage(err.message);
+                // setShowAlert(true);
+            }
+        } else {
+            validatorPassword.showMessages();
+            forceUpdate();
+        }
     };
 
     return (
@@ -154,7 +186,7 @@ const Dashboard = () => {
                                                                             Password
                                                                         </label>
                                                                         <input
-                                                                            type="email"
+                                                                            type="password"
                                                                             className="form-control"
                                                                             id="userMail"
                                                                             aria-describedby="userMail"
@@ -167,12 +199,17 @@ const Dashboard = () => {
                                                                             }
                                                                             required
                                                                         />
+                                                                        {validatorPassword.message(
+                                                                            "password",
+                                                                            oldPassword,
+                                                                            "required|min:5"
+                                                                        )}
                                                                         <label htmlFor="userMail">
                                                                             New
                                                                             Password
                                                                         </label>
                                                                         <input
-                                                                            type="email"
+                                                                            type="password"
                                                                             className="form-control"
                                                                             id="userMail"
                                                                             aria-describedby="userMail"
@@ -185,12 +222,23 @@ const Dashboard = () => {
                                                                             }
                                                                             required
                                                                         />
+                                                                        {validatorPassword.message(
+                                                                            "password",
+                                                                            newPassword,
+                                                                            `required|in:${repeatNewPassword}|min:5`,
+                                                                            {
+                                                                                messages:
+                                                                                    {
+                                                                                        in: "Passwords need to match.",
+                                                                                    },
+                                                                            }
+                                                                        )}
                                                                         <label htmlFor="userMail">
                                                                             Repeat
                                                                             Password
                                                                         </label>
                                                                         <input
-                                                                            type="email"
+                                                                            type="password"
                                                                             className="form-control"
                                                                             id="userMail"
                                                                             aria-describedby="userMail"
@@ -203,6 +251,17 @@ const Dashboard = () => {
                                                                             }
                                                                             required
                                                                         />
+                                                                        {validatorPassword.message(
+                                                                            "password",
+                                                                            repeatNewPassword,
+                                                                            `required|in:${newPassword}|min:5`,
+                                                                            {
+                                                                                messages:
+                                                                                    {
+                                                                                        in: "Passwords need to match.",
+                                                                                    },
+                                                                            }
+                                                                        )}
                                                                     </div>
                                                                 </div>
                                                             </div>
