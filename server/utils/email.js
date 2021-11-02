@@ -57,13 +57,7 @@ module.exports = {
         };
     },
     sendEmail: function (emailOptions) {
-        transporter.sendMail(emailOptions, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("Email sent: \n" + emailOptions);
-            }
-        });
+        return transporter.sendMail(emailOptions);
     },
     //https://stackoverflow.com/questions/1497481/javascript-password-generator
     generatePassword: function (len) {

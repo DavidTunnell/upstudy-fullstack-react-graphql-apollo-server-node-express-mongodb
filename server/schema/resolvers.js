@@ -56,8 +56,9 @@ const resolvers = {
             try {
                 sendEmail(emailOptions);
             } catch (error) {
+                console.log(error);
                 throw new AuthenticationError(
-                    "Failed to send email. Try again later."
+                    "Failed to send email. Try again later!!\n\n" + error
                 );
             }
         },
@@ -125,10 +126,12 @@ const resolvers = {
                 newPw
             );
             try {
-                sendEmail(emailOptions);
+                var test = await sendEmail(emailOptions);
+                console.log(test);
             } catch (error) {
+                console.log(error);
                 throw new AuthenticationError(
-                    "Failed to send email. Try again later."
+                    "Failed to send email. Try again later. " + error
                 );
             }
             return user;
