@@ -4,6 +4,8 @@ Upstudy is a new way to find relevant learning content by allowing the highest q
 
 Since you can't fork your own repos, this project was initially duplicated from my [web portfolio repo](https://github.com/DavidTunnell/david-tunnell-dot-com-react-mern). I then integrated the user account, authentication, GraphQL, Apollo server and client functionality from my [reading list search engine repo](https://github.com/DavidTunnell/reading-list-search-engine-graphql-apollo-server-react-node-express-mongodb). The web apps functionality is being built on top of this base.
 
+The user management system utilizes JSON Web Tokens generated on the server during login and then passed on subsequent calls from the client for additional security. The token also contains information about the user that is logged in. The server also checks the validity of these tokens when making calls that are behind authentication via custom middleware (`authMiddleware()`). Since it is added as a header for the Apollo Server wrapper it works everywhere in the React application.
+
 This project uses the following technologies/libraries.
 
 -   [GraphQL](https://graphql.org/) as an API Querying Language
@@ -19,6 +21,7 @@ This project uses the following technologies/libraries.
 -   [Nodemon](https://nodemon.io/) for More Pleasant Node.js Development
 -   [Bcrypt Package](https://www.npmjs.com/package/bcrypt) for Password Hashing and Management
 -   [React-Ga](https://www.npmjs.com/package/react-ga) to Track Website Traffic data with Google Analytics
+-   [JSON Web Tokens](https://jwt.io/) for Additional User Security
 -   [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 -   [Jwt-Decode](https://www.npmjs.com/package/jwt-decode)
 -   [Simple-React-Validator](https://www.npmjs.com/package/simple-react-validator)
@@ -159,16 +162,11 @@ user functionality: https://flatlogic.com/templates/user-management-react
 -roles, admin, user,
 -add redux
 
--add jwt tokens to login? is it being used? is it in exercises from class?
---the idea is after creating the token on login/create account its in local storage, now whenever i do anything else and check authentication it verifies the token is valid, so the pw is sent back and forth much less
--SO make sure the token is being checked when doing things, ex: updatePassword, future stuff like add book
--make saure areact auth file is being used everywhere such as logout()
 -does refreshing email page resend emails over and over? http://localhost:3000/verify?id=61818844b72051a6e26c1416&username=David%20Tunnell&email=d@t.com
-
--i dont think logout expiration is working. TokenEmailVerification https://i.imgur.com/AqNxpsX.png
 -styling colors etc
+-for voting on links, look at week 21 mini project it has voting
+-also for loading data via graphql on page load, just usequery and then work with data, no need for state ususally
 
 AFTER CLASS:
-add text section for authentication - how its at app level, checks jtw token and then is checked against on components that need it.
 -test and move both timeouts to .env file... token for verify email, token for logged in account
--add authMiddleware where needed hopefully class explains
+-i dont think logout expiration is working. TokenEmailVerification https://i.imgur.com/AqNxpsX.png
