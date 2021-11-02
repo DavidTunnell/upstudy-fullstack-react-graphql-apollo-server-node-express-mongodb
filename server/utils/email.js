@@ -61,7 +61,7 @@ module.exports = {
             if (err) {
                 console.log(err);
             } else {
-                console.log("Email sent: \n" + emailOptions.text);
+                console.log("Email sent: \n" + emailOptions);
             }
         });
     },

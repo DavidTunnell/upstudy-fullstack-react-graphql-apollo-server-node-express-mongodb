@@ -24,6 +24,7 @@ const ForgotPassword = () => {
                 const { data } = await forgotPassword({
                     variables: { email: emailInput },
                 });
+                console.log(data);
                 if (data) {
                     setModalMessage(
                         "A new password has been sent to the email address if it exists. Check your email."
