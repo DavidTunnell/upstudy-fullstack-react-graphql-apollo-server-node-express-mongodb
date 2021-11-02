@@ -14,7 +14,10 @@ const Footer = ({ toTop, isLoggedIn }) => {
                                         <li className="nav-item">
                                             <Link
                                                 className="nav-link"
-                                                onClick={Auth.logout}
+                                                to="/"
+                                                onClick={() => {
+                                                    Auth.logout();
+                                                }}
                                             >
                                                 Logout
                                             </Link>

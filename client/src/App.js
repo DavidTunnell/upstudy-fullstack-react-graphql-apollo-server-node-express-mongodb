@@ -34,6 +34,7 @@ function App() {
         () =>
             history.listen(() => {
                 setIsLoggedIn(Auth.loggedIn());
+                console.log("Auth.loggedIn() was run - token check");
             }),
         []
     );
@@ -74,7 +75,7 @@ function App() {
                             <ForgotPassword />
                         </Route>
                         <Route exact path="/dashboard">
-                            <Dashboard />
+                            <Dashboard isLoggedIn={isLoggedIn} />
                         </Route>
                         {/* all other routes go to a 404 page - must be at bottom*/}
                         <Route path="/404">

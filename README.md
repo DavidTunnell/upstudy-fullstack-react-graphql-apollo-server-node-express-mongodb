@@ -141,25 +141,31 @@ Use queries and mutations for retrieving, adding, updating, and deleting data.
 Be deployed using Heroku (with data).
 ✔️Have a polished UI.
 ✔️Be responsive.
-Be interactive (i.e., accept and respond to user input).
-Protect sensitive API key information on the server.
+✔️Be interactive (i.e., accept and respond to user input).
+✔️Protect sensitive API key information on the server.
 
 https://slgupta022.medium.com/email-verification-using-sendgrid-in-node-js-express-js-mongodb-c5803f643e09
 
-For link masking from sendgrid if its an issue:
-
-https://app.sendgrid.com/settings/sender_auth/domain/create
-https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-link-branding#-What-is-link-branding
-
 TODO:
-
--                                         {/* add buttons here to return home and resend email validation link
-                                          also add use error for mutation calls in login line on https://i.imgur.com/YSTWiYb.png
-                                          loading also works for mutation calls
-                                          -consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/TPKx3lO.png
-                                          -also, use parameters in routes to pass certain types of data - https://i.imgur.com/PB0o9kF.png
-                                          */}
 
 example categories: https://tutorbin.com/online-homework-help/
 user functionality: https://flatlogic.com/templates/user-management-react
--add throttling to sending emails to each unique user (forgot password, verify email)
+-gamify contribution - https://i.imgur.com/N5th0rO.png - https://openbase.com/leaderboard
+-consider using cache for better performance (reduces db calls)- https://i.imgur.com/kjEpUyZ.png - https://i.imgur.com/
+
+-social login (google, fb, apple?) - future
+
+-bug report page w/ image upload
+-roles, admin, user,
+-add redux
+
+-add jwt tokens to login? is it being used? is it in exercises from class?
+--the idea is after creating the token on login/create account its in local storage, now whenever i do anything else and check authentication it verifies the token is valid, so the pw is sent back and forth much less
+-SO make sure the token is being checked when doing things, ex: updatePassword, future stuff like add book
+-make saure areact auth file is being used everywhere such as logout()
+
+-i dont think logout expiration is working. TokenEmailVerification https://i.imgur.com/AqNxpsX.png
+-styling colors etc
+
+AFTER CLASS:
+add text section for authentication - how its at app level, checks jtw token and then is checked against on components that need it.

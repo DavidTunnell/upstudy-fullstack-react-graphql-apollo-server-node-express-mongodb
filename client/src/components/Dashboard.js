@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect, useReducer } from "react";
 import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/client";
 import SimpleReactValidator from "simple-react-validator";
 import Modal from "./Modal";
 
-const Dashboard = () => {
+const Dashboard = ({ isLoggedIn }) => {
     const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
 
@@ -26,11 +26,18 @@ const Dashboard = () => {
     const [validatorPassword] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
+    const history = useHistory();
+
     useEffect(() => {
-        const userLoggedIn = Auth.getProfile().data;
-        setUsername(userLoggedIn.username);
-        setEmail(userLoggedIn.email);
-        setIsVerified(userLoggedIn.isVerified);
+        console.log(isLoggedIn);
+        if (isLoggedIn) {
+            const userLoggedIn = Auth.getProfile().data;
+            setUsername(userLoggedIn.username);
+            setEmail(userLoggedIn.email);
+            setIsVerified(userLoggedIn.isVerified);
+        } else {
+            history.push("/login");
+        }
     }, []);
 
     const handleOldPasswordInputChange = (event) => {

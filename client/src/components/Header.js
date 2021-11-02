@@ -79,7 +79,10 @@ const Header = ({ toTop, isLoggedIn }) => {
                                             <div className="dropdown-divider"></div>
                                             <Link
                                                 className="dropdown-item"
-                                                onClick={Auth.logout}
+                                                to="/"
+                                                onClick={() => {
+                                                    Auth.logout();
+                                                }}
                                             >
                                                 Logout
                                             </Link>
