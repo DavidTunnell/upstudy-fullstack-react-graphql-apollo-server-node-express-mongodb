@@ -10,6 +10,7 @@ const ForgotPassword = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalMessage, setModalMessage] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
     const [validatorEmail] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
@@ -31,6 +32,7 @@ const ForgotPassword = () => {
                     );
                     setModalTitle("Success");
                     setShowAlert(true);
+                    setIsDisabled(true);
                 } else {
                     setModalTitle("Fail");
                     setModalMessage("There was an error.");
@@ -102,6 +104,7 @@ const ForgotPassword = () => {
                                                     <button
                                                         className="btn btn-primary btn-block"
                                                         onClick={handleSubmit}
+                                                        disabled={isDisabled}
                                                     >
                                                         Get Email Link
                                                     </button>
