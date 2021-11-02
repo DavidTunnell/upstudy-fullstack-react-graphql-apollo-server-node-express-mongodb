@@ -49,7 +49,7 @@ export const VERIFY_EMAIL = gql`
 `;
 
 export const USER_LOGIN = gql`
-    mutation ForgotPasswordMutation($email: String!, $password: String!) {
+    mutation LoginMutation($email: String!, $password: String!) {
         login(email: $email, password: $password) {
             token
             user {

@@ -163,9 +163,12 @@ user functionality: https://flatlogic.com/templates/user-management-react
 --the idea is after creating the token on login/create account its in local storage, now whenever i do anything else and check authentication it verifies the token is valid, so the pw is sent back and forth much less
 -SO make sure the token is being checked when doing things, ex: updatePassword, future stuff like add book
 -make saure areact auth file is being used everywhere such as logout()
+-does refreshing email page resend emails over and over? http://localhost:3000/verify?id=61818844b72051a6e26c1416&username=David%20Tunnell&email=d@t.com
 
 -i dont think logout expiration is working. TokenEmailVerification https://i.imgur.com/AqNxpsX.png
 -styling colors etc
 
 AFTER CLASS:
 add text section for authentication - how its at app level, checks jtw token and then is checked against on components that need it.
+-test and move both timeouts to .env file... token for verify email, token for logged in account
+-add authMiddleware where needed hopefully class explains

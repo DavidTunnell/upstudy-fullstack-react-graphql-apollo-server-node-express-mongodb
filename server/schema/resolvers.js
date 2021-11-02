@@ -55,6 +55,7 @@ const resolvers = {
             );
             try {
                 sendEmail(emailOptions);
+                console.log("addEmailVerificationToken email sent");
             } catch (error) {
                 console.log(error);
                 throw new AuthenticationError(
@@ -126,8 +127,8 @@ const resolvers = {
                 newPw
             );
             try {
-                var test = await sendEmail(emailOptions);
-                console.log(test);
+                sendEmail(emailOptions);
+                console.log("forgotPassword email sent");
             } catch (error) {
                 console.log(error);
                 throw new AuthenticationError(
@@ -136,31 +137,41 @@ const resolvers = {
             }
             return user;
         },
-        updatePassword: async (parent, { email, oldPassword, newPassword }) => {
-            const user = await User.findOne({ email });
-            if (!user) {
-                throw new AuthenticationError(
-                    "The email does not have a record associated with it."
+        updatePassword: async (
+            parent,
+            { email, oldPassword, newPassword },
+            context
+        ) => {
+            console.log(context);
+            if (context.user) {
+                const user = await User.findOne({ email });
+                if (!user) {
+                    throw new AuthenticationError(
+                        "The email does not have a record associated with it."
+                    );
+                }
+                const correctPw = await user.isCorrectPassword(oldPassword);
+                if (!correctPw) {
+                    throw new AuthenticationError(
+                        "The existing password you entered is incorrect."
+                    );
+                }
+                //if we are here they existing password was correct, so create and update with new password.
+                var encryptedPw = bcrypt.hashSync(newPassword, 10);
+                const userUpdated = await User.findOneAndUpdate(
+                    { email },
+                    { password: encryptedPw }
                 );
+                if (!userUpdated) {
+                    throw new AuthenticationError(
+                        "There was a problem updating your password."
+                    );
+                }
+                return userUpdated;
             }
-            const correctPw = await user.isCorrectPassword(oldPassword);
-            if (!correctPw) {
-                throw new AuthenticationError(
-                    "The existing password you entered is incorrect."
-                );
-            }
-            //if we are here they existing password was correct, so create and update with new password.
-            var encryptedPw = bcrypt.hashSync(newPassword, 10);
-            const userUpdated = await User.findOneAndUpdate(
-                { email },
-                { password: encryptedPw }
+            throw new AuthenticationError(
+                "You must be logged in to perform this action."
             );
-            if (!userUpdated) {
-                throw new AuthenticationError(
-                    "There was a problem updating your password."
-                );
-            }
-            return userUpdated;
         },
         addBook: async (
             parent,

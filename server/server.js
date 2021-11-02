@@ -4,8 +4,8 @@ const db = require("./config/connection");
 const cors = require("cors");
 
 const { ApolloServer } = require("apollo-server-express");
+const { authMiddleware } = require("./utils/auth");
 const { typeDefs, resolvers } = require("./schema");
-
 // require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
@@ -14,8 +14,9 @@ const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    // Add context to our server so data from the `authMiddleware()` function can pass data to our resolver functions
+    context: authMiddleware,
 });
-
 server.start().then(() => {
     server.applyMiddleware({ app });
 });
