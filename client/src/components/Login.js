@@ -59,10 +59,6 @@ const Login = ({
         setUserCreateData({ ...userCreateData, [id]: value });
     };
 
-    const handleModalClose = (event) => {
-        setShowAlert(false);
-    };
-
     const handleFormLogin = async (event) => {
         event.preventDefault();
 
@@ -403,7 +399,7 @@ const Login = ({
                 show={showAlert}
                 title="Error"
                 content={errorMessage}
-                closeModal={handleModalClose}
+                closeModal={() => setShowAlert(false)}
             />
         </>
     );

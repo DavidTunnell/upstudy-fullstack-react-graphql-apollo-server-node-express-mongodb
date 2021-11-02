@@ -4,6 +4,7 @@ import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import SimpleReactValidator from "simple-react-validator";
+import Modal from "./Modal";
 
 const Dashboard = () => {
     const bgImage = "./assets/images/login-bg.jpg";
@@ -15,6 +16,10 @@ const Dashboard = () => {
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [repeatNewPassword, setRepeatNewPassword] = useState();
+    const [showAlert, setShowAlert] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalTitle, setModalTitle] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
 
@@ -43,7 +48,8 @@ const Dashboard = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(oldPassword, newPassword, repeatNewPassword);
+        // console.log(oldPassword, newPassword, repeatNewPassword);
+        console.log(validatorPassword.allValid());
         if (validatorPassword.allValid()) {
             try {
                 const { data } = await updatePassword({
@@ -53,23 +59,24 @@ const Dashboard = () => {
                         newPassword,
                     },
                 });
-                console.log(data);
-                // Auth.login(data.login.token);
-                // if (!data.login.user.isVerified) {
-                //     history.push(
-                //         "/verify?id=" +
-                //             data.login.user._id +
-                //             "&username=" +
-                //             data.login.user.username +
-                //             "&email=" +
-                //             userLoginData.email
-                //     );
-                // } else {
-                //     history.push("/");
-                // }
+                if (data) {
+                    //tell modal
+                    setModalTitle("Success");
+                    setModalMessage(
+                        "Your password has been updated successfully."
+                    );
+                } else {
+                    setModalTitle("Error");
+                    setModalMessage(
+                        "There was a problem updating your password."
+                    );
+                }
+                setIsDisabled(true);
+                setShowAlert(true);
             } catch (err) {
-                // setErrorMessage(err.message);
-                // setShowAlert(true);
+                setModalTitle("Error");
+                setModalMessage(err.message);
+                setShowAlert(true);
             }
         } else {
             validatorPassword.showMessages();
@@ -200,6 +207,9 @@ const Dashboard = () => {
                                                                             value={
                                                                                 oldPassword
                                                                             }
+                                                                            disabled={
+                                                                                isDisabled
+                                                                            }
                                                                             required
                                                                         />
                                                                         {validatorPassword.message(
@@ -222,6 +232,9 @@ const Dashboard = () => {
                                                                             }
                                                                             value={
                                                                                 newPassword
+                                                                            }
+                                                                            disabled={
+                                                                                isDisabled
                                                                             }
                                                                             required
                                                                         />
@@ -252,6 +265,9 @@ const Dashboard = () => {
                                                                             value={
                                                                                 repeatNewPassword
                                                                             }
+                                                                            disabled={
+                                                                                isDisabled
+                                                                            }
                                                                             required
                                                                         />
                                                                         {validatorPassword.message(
@@ -275,6 +291,9 @@ const Dashboard = () => {
                                                                         onClick={
                                                                             handleSubmit
                                                                         }
+                                                                        disabled={
+                                                                            isDisabled
+                                                                        }
                                                                     >
                                                                         Save
                                                                         Changes
@@ -293,6 +312,12 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showAlert}
+                title={modalTitle}
+                content={modalMessage}
+                closeModal={() => setShowAlert(false)}
+            />
         </>
     );
 };
