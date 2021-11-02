@@ -25,6 +25,7 @@ const userSchema = new Schema(
         // set savedBooks to be an array of data that adheres to the bookSchema
         savedBooks: [bookSchema],
     },
+    { timestamps: {} },
     // set this to use virtual below
     {
         toJSON: {
@@ -33,6 +34,7 @@ const userSchema = new Schema(
     }
 );
 
+userSchema.set("timestamps", true);
 // hash user password
 userSchema.pre("save", async function (next) {
     if (this.isNew || this.isModified("password")) {

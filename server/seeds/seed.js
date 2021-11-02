@@ -24,6 +24,9 @@ const userSeed = [
         password: hashPassword("12345"),
         isVerified: false,
         savedBooks: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        //fix to iso string above
     },
 ];
 
