@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { User } = require("../models");
+const { User, TokenEmailVerification } = require("../models");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -12,6 +12,13 @@ mongoose.connect(
         // useFindAndModify: false,
     }
 );
+
+const syncIndexes = async () => {
+    await TokenEmailVerification.syncIndexes();
+    await User.syncIndexes();
+};
+
+syncIndexes();
 
 const hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
