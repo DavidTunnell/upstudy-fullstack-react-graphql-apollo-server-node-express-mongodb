@@ -7,6 +7,7 @@ const expiration = process.env.AUTH_EXPIRATION;
 module.exports = {
     // function for our authenticated routes
     authMiddleware: function ({ req }) {
+        console.log("authMiddleware ran");
         let token =
             req.body.token || req.query.token || req.headers.authorization;
 
@@ -21,6 +22,7 @@ module.exports = {
         try {
             const { data } = jwt.verify(token, secret, { maxAge: expiration });
             req.user = data;
+            console.log(req.user);
         } catch {
             console.log("Invalid token");
         }

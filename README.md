@@ -166,7 +166,3 @@ user functionality: https://flatlogic.com/templates/user-management-react
 -styling colors etc
 -for voting on links, look at week 21 mini project it has voting
 -also for loading data via graphql on page load, just usequery and then work with data, no need for state ususally
-
-AFTER CLASS:
--test and move both timeouts to .env file... token for verify email, token for logged in account
--i dont think logout expiration is working. TokenEmailVerification https://i.imgur.com/AqNxpsX.png
