@@ -50,14 +50,14 @@ const Test = () => {
                             <p>Counter: {counter}</p>
                             <button
                                 onClick={() =>
-                                    dispatch(counterActions.increment())
+                                    dispatch(counterActions.increment(2))
                                 }
                             >
                                 +
                             </button>
                             <button
                                 onClick={() =>
-                                    dispatch(counterActions.decrement())
+                                    dispatch(counterActions.decrement(2))
                                 }
                             >
                                 -

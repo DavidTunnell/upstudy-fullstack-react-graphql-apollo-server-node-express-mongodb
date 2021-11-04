@@ -1,8 +1,8 @@
 import * as actions from "../actionTypes";
 
-export const increment = () => {
-    return { type: actions.INCREMENT };
+export const increment = (incrementBy) => {
+    return { type: actions.INCREMENT, payload: { incrementBy } };
 };
-export const decrement = () => {
-    return { type: actions.DECREMENT };
+export const decrement = (decrementBy) => {
+    return { type: actions.DECREMENT, payload: { decrementBy } };
 };
