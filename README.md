@@ -13,6 +13,7 @@ This project uses the following technologies/libraries.
 -   [@apollo/client](https://www.npmjs.com/package/@apollo/client) to Work with GraphQL on the React App
 -   [React](https://reactjs.org/) as a Fast and Powerful Frontend
 -   [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) for URL routing, URL parameters, Browser History Stack Usage, and Linking without Calling the Server
+-   [Redux](https://redux.js.org/) and [React-Redux](https://react-redux.js.org/) for Global State Management and Predictability
 -   [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) as a CSS Framework
 -   [GO Bootstrap Template](https://themes.getbootstrap.com/product/go-multipurpose-landing-page-template/) as a Template that was Imported into React
 -   [Node.js](https://nodejs.org/en/) and [Express.js](https://expressjs.com/) as the Server for API and HTTP Requests and Serving the React Build Directory Frontend

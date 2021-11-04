@@ -1,15 +1,15 @@
 import * as actions from "../actionTypes";
 
-function counterReducer(state = 0, action) {
+const isLoggedReducer = (state = false, action) => {
     switch (action.type) {
-        case actions.INCREMENT:
-            return state + 1;
-        case actions.DECREMENT:
-            return state - 1;
+        case actions.SIGN_IN:
+            return true;
+        case actions.SIGN_OUT:
+            return false;
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;
     }
-}
+};
 
-export default counterReducer;
+export default isLoggedReducer;

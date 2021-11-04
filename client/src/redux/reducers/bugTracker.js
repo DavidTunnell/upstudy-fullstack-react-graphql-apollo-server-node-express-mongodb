@@ -5,7 +5,7 @@ let lastId = 0;
 //set default state as empty array because redux will look at the reducer on startup to get the initial state
 //This reducer is a PURE FUNCTION, and it has to be one. A particular input will always result in the same output.
 //No randomness or external factors effect the function. Free of side-effects.
-function bugTracker(state = [], action) {
+function bugTrackerReducer(state = [], action) {
     switch (action.type) {
         case actions.BUG_ADDED:
             return [
@@ -29,4 +29,4 @@ function bugTracker(state = [], action) {
     }
 }
 
-export default bugTracker;
+export default bugTrackerReducer;

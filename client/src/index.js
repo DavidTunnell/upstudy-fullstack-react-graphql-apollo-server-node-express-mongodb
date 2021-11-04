@@ -4,26 +4,25 @@ import "./styles/styles.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { bugTrackerStore, counterStore } from "./redux/store";
-import { increment, decrement, bugAdded, bugRemoved } from "./redux/actions";
+import store from "./redux/store";
+import { increment, decrement } from "./redux/actions/counter";
+import { bugAdded, bugRemoved, bugResolved } from "./redux/actions/bugTracker";
 
 //Redux Store - Globalized State
-bugTrackerStore.subscribe(() =>
-    console.log("bugTrackerStore updated: ", bugTrackerStore.getState())
-);
-counterStore.subscribe(() =>
-    console.log("counterStore updated: ", bugTrackerStore.getState())
+store.subscribe(() =>
+    console.log("combined store updated: ", store.getState())
 );
 
-bugTrackerStore.dispatch(bugAdded("Bug #1"));
-bugTrackerStore.dispatch(bugAdded("Bug #2"));
+store.dispatch(bugAdded("Bug #1"));
+store.dispatch(bugAdded("Bug #2"));
 
-counterStore.dispatch(increment());
-counterStore.dispatch(increment());
-counterStore.dispatch(decrement());
+store.dispatch(increment());
+store.dispatch(increment());
+store.dispatch(decrement());
 
-bugTrackerStore.dispatch(bugAdded("Bug #3"));
-bugTrackerStore.dispatch(bugRemoved(2));
+store.dispatch(bugResolved(1));
+store.dispatch(bugAdded("Bug #3"));
+store.dispatch(bugRemoved(2));
 
 ReactDOM.render(
     <React.StrictMode>
