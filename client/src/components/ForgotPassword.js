@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     const [validatorEmail] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
-    
+
     const handleEmailInputChange = (event) => {
         const { value } = event.target;
         setEmailInput(value);
@@ -124,12 +124,6 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </div>
-            <Modal
-                show={modalSettings.show}
-                title={modalSettings.title}
-                content={modalSettings.content}
-                closeModal={() => dispatch(modalActions.hideModal())}
-            />
         </>
     );
 };

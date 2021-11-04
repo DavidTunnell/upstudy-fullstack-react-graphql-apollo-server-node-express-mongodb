@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Dashboard from "./components/Dashboard";
@@ -23,6 +24,11 @@ import {
     createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { modalActions } from "./redux/actions/";
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
     uri: "/graphql",
@@ -49,6 +55,9 @@ const client = new ApolloClient({
 
 //top use the react router package, surround the whole app with the router component
 function App() {
+    const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
+    const dispatch = useDispatch();
+
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
     const toTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -113,6 +122,12 @@ function App() {
                         </Route>
                     </Switch>
                 </div>
+                <Modal
+                    show={modalSettings.show}
+                    title={modalSettings.title}
+                    content={modalSettings.content}
+                    closeModal={() => dispatch(modalActions.hideModal())}
+                />
                 <Footer toTop={toTop} isLoggedIn={isLoggedIn} />
             </div>
         </ApolloProvider>
