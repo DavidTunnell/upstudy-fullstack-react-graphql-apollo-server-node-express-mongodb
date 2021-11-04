@@ -1,7 +1,6 @@
 import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "../redux/actions/counter";
-import * as actions from "../redux/actionTypes";
+import { counterActions } from "../redux/actions/";
 
 const Test = () => {
     const bgColor = "#000";
@@ -49,10 +48,18 @@ const Test = () => {
                         <div>
                             <h2>Redux State Store</h2>
                             <p>Counter: {counter}</p>
-                            <button onClick={() => dispatch(increment())}>
+                            <button
+                                onClick={() =>
+                                    dispatch(counterActions.increment())
+                                }
+                            >
                                 +
                             </button>
-                            <button onClick={() => dispatch(decrement())}>
+                            <button
+                                onClick={() =>
+                                    dispatch(counterActions.decrement())
+                                }
+                            >
                                 -
                             </button>
                             <p>
