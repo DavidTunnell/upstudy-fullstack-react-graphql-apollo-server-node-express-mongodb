@@ -1,6 +1,8 @@
 import Auth from "../utils/auth";
+import { useSelector } from "react-redux";
 const Test = () => {
     const bgColor = "#000";
+    const counter = useSelector((state) => state.counter);
     return (
         <>
             {/* to set !important in react: https://joshtronic.com/2018/03/22/how-to-important-inline-styles-in-react/ */}
@@ -37,6 +39,10 @@ const Test = () => {
                                 components for those pages like:
                                 https://i.imgur.com/iID3etR.png
                             </p>
+                        </div>
+                        <div>
+                            <h2>Redux State Store</h2>
+                            <p>Counter: {counter}</p>
                         </div>
                     </div>
                 </div>
