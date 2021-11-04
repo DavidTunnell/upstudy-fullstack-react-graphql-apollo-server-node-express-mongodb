@@ -1,6 +1,6 @@
 import * as actions from "../actionTypes";
 
-export const increment = () => {
+export const increment = async () => {
     return { type: actions.INCREMENT };
 };
 export const decrement = () => {

@@ -1,8 +1,14 @@
 import Auth from "../utils/auth";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../redux/actions/counter";
+import * as actions from "../redux/actionTypes";
+
 const Test = () => {
     const bgColor = "#000";
     const counter = useSelector((state) => state.counter);
+    const isLoggedIn = useSelector((state) => state.isLoggedIn);
+    const dispatch = useDispatch();
+
     return (
         <>
             {/* to set !important in react: https://joshtronic.com/2018/03/22/how-to-important-inline-styles-in-react/ */}
@@ -43,6 +49,20 @@ const Test = () => {
                         <div>
                             <h2>Redux State Store</h2>
                             <p>Counter: {counter}</p>
+                            <button
+                                onClick={() =>
+                                    dispatch({ type: actions.INCREMENT })
+                                }
+                            >
+                                +
+                            </button>
+                            <button onClick={() => dispatch(decrement)}>
+                                -
+                            </button>
+                            <p>
+                                Fake Logged in:{" "}
+                                {isLoggedIn ? <>true</> : <>false</>}
+                            </p>
                         </div>
                     </div>
                 </div>
