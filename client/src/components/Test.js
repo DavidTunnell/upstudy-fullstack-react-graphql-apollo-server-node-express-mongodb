@@ -49,14 +49,10 @@ const Test = () => {
                         <div>
                             <h2>Redux State Store</h2>
                             <p>Counter: {counter}</p>
-                            <button
-                                onClick={() =>
-                                    dispatch({ type: actions.INCREMENT })
-                                }
-                            >
+                            <button onClick={() => dispatch(increment())}>
                                 +
                             </button>
-                            <button onClick={() => dispatch(decrement)}>
+                            <button onClick={() => dispatch(decrement())}>
                                 -
                             </button>
                             <p>
