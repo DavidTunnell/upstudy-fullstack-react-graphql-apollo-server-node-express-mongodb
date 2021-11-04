@@ -3,17 +3,21 @@ import { useMutation } from "@apollo/client";
 import { USER_FORGOT_PASSWORD } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 import Modal from "./Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { modalActions } from "../redux/actions/";
 
 const ForgotPassword = () => {
+    const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
+    const dispatch = useDispatch();
+
     const bgImage = "/assets/images/login-bg.jpg";
+
     const [emailInput, setEmailInput] = useState("");
-    const [showAlert, setShowAlert] = useState(false);
-    const [modalTitle, setModalTitle] = useState("");
-    const [modalMessage, setModalMessage] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [validatorEmail] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
+    
     const handleEmailInputChange = (event) => {
         const { value } = event.target;
         setEmailInput(value);
@@ -27,21 +31,23 @@ const ForgotPassword = () => {
                 });
                 console.log(data);
                 if (data) {
-                    setModalMessage(
-                        "A new password has been sent to the email address if it exists. Check your email."
+                    dispatch(
+                        modalActions.updateAndShowModal(
+                            "Success",
+                            "A new password has been sent to the email address if it exists. Check your email."
+                        )
                     );
-                    setModalTitle("Success");
-                    setShowAlert(true);
                     setIsDisabled(true);
                 } else {
-                    setModalTitle("Fail");
-                    setModalMessage("There was an error.");
-                    setShowAlert(true);
+                    dispatch(
+                        modalActions.updateAndShowModal(
+                            "Fail",
+                            "There was an error."
+                        )
+                    );
                 }
             } catch (err) {
-                setModalTitle("Fail");
-                setModalMessage(err.message);
-                setShowAlert(true);
+                dispatch(modalActions.updateAndShowModal("Hmm", err.message));
             }
         } else {
             validatorEmail.showMessages();
@@ -119,10 +125,10 @@ const ForgotPassword = () => {
                 </div>
             </div>
             <Modal
-                show={showAlert}
-                title={modalTitle}
-                content={modalMessage}
-                closeModal={() => setShowAlert(false)}
+                show={modalSettings.show}
+                title={modalSettings.title}
+                content={modalSettings.content}
+                closeModal={() => dispatch(modalActions.hideModal())}
             />
         </>
     );

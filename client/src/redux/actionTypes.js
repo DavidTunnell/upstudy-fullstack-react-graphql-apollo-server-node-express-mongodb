@@ -6,4 +6,7 @@ export const INCREMENT = "increment";
 export const DECREMENT = "decrement";
 
 export const SIGN_IN = "signIn";
-export const SIGN_OUT = "SignOut";
+export const SIGN_OUT = "signOut";
+
+export const UPDATE_AND_SHOW_MODAL = "updateAndShowModal";
+export const HIDE_MODAL = "hideModal";
