@@ -3,7 +3,6 @@ import * as actions from "../actionTypes";
 function userReducer(state = { loggedIn: false }, action) {
     switch (action.type) {
         case actions.LOGIN_REDUX:
-            console.log(action.payload);
             return {
                 id: action.payload.id,
                 username: action.payload.username,

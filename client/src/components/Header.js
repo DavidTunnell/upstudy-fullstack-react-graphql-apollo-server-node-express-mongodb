@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
+import { useSelector } from "react-redux";
 
-const Header = ({ toTop, isLoggedIn }) => {
-    console.log(isLoggedIn);
+const Header = ({ toTop }) => {
+    //fix is logged in parameters, remove and use redux (footer too)
+    const user = useSelector((state) => state.loggedInUser);
     return (
         <>
             <header className="header-sticky header-dark">
@@ -51,7 +53,7 @@ const Header = ({ toTop, isLoggedIn }) => {
                                 </li>
                             </ul>
                             <ul className="navbar-nav align-items-center mr-0">
-                                {isLoggedIn ? (
+                                {user.loggedIn ? (
                                     <li className="nav-item dropdown">
                                         <Link
                                             className="nav-link dropdown-toggle"
@@ -64,7 +66,7 @@ const Header = ({ toTop, isLoggedIn }) => {
                                                 event.preventDefault()
                                             }
                                         >
-                                            {Auth.getProfile().data.username}
+                                            {user.username}
                                         </Link>
                                         <div
                                             className="dropdown-menu"

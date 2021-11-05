@@ -22,7 +22,7 @@ import { setContext } from "@apollo/client/link/context";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { modalActions } from "./redux/actions/";
+import { modalActions, userActions } from "./redux/actions/";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -52,26 +52,40 @@ const client = new ApolloClient({
 function App() {
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
-
+    const setUserStore = (message) => {
+        if (Auth.loggedIn()) {
+            console.log("logged in " + message);
+            const userProfile = Auth.getProfile().data;
+            dispatch(
+                userActions.loginRedux(
+                    userProfile._id,
+                    userProfile.username,
+                    userProfile.email,
+                    userProfile.isVerified
+                )
+            );
+        } else {
+            console.log("logged out " + message);
+            dispatch(userActions.logoutRedux());
+        }
+    };
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
     const toTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
     const history = useHistory();
-    useEffect(
-        () =>
-            history.listen(() => {
-                setIsLoggedIn(Auth.loggedIn());
-                console.log("Auth.loggedIn() was run - token check");
-            }),
-        []
-    );
+    useEffect(() => {
+        setUserStore("1st load");
+        history.listen(() => {
+            setUserStore("history.listen load");
+        });
+    });
 
     return (
         <ApolloProvider client={client}>
             {/* ^ Here the app is wrapped with the router */}
             <div className="App">
-                <Header toTop={toTop} isLoggedIn={isLoggedIn} />
+                <Header toTop={toTop} />
                 <div className="content">
                     {/* Next is the decision of where page content to go based on different routes
                         All routes go in the switch component so only one renders at a time based on route  */}
@@ -123,7 +137,7 @@ function App() {
                     content={modalSettings.content}
                     closeModal={() => dispatch(modalActions.hideModal())}
                 />
-                <Footer toTop={toTop} isLoggedIn={isLoggedIn} />
+                <Footer toTop={toTop} />
             </div>
         </ApolloProvider>
     );

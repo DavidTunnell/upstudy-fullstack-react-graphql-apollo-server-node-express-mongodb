@@ -68,7 +68,6 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
-                console.log(data);
                 Auth.login(
                     data.login.token,
                     data.login.user._id,
