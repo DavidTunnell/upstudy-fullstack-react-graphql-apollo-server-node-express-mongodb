@@ -64,6 +64,9 @@ function App() {
                     userProfile.isVerified
                 )
             );
+            console.log("asdasdasdasdasd");
+            console.log(userProfile.isVerified);
+            console.log("asdasdasdasdasd");
         } else {
             console.log("logged out " + message);
             dispatch(userActions.logoutRedux());

@@ -75,18 +75,19 @@ const Login = ({
                     data.login.user.email,
                     data.login.user.isVerified
                 );
-                if (!data.login.user.isVerified) {
-                    history.push(
-                        "/verify?id=" +
-                            data.login.user._id +
-                            "&username=" +
-                            data.login.user.username +
-                            "&email=" +
-                            userLoginData.email
-                    );
-                } else {
-                    history.push("/");
-                }
+                history.push("/");
+                // if (!data.login.user.isVerified) {
+                //     history.push(
+                //         "/verify?id=" +
+                //             data.login.user._id +
+                //             "&username=" +
+                //             data.login.user.username +
+                //             "&email=" +
+                //             userLoginData.email
+                //     );
+                // } else {
+                //     history.push("/");
+                // }
             } catch (err) {
                 dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
