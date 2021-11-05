@@ -2,12 +2,10 @@ import React, { useState, useReducer } from "react";
 import { useMutation } from "@apollo/client";
 import { USER_FORGOT_PASSWORD } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
-import Modal from "./Modal";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
 const ForgotPassword = () => {
-    const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
 
     const bgImage = "/assets/images/login-bg.jpg";

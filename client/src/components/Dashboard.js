@@ -4,9 +4,12 @@ import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import SimpleReactValidator from "simple-react-validator";
-import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../redux/actions/";
 
 const Dashboard = ({ isLoggedIn }) => {
+    const dispatch = useDispatch();
+
     const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
 
@@ -16,9 +19,6 @@ const Dashboard = ({ isLoggedIn }) => {
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [repeatNewPassword, setRepeatNewPassword] = useState();
-    const [showAlert, setShowAlert] = useState(false);
-    const [modalMessage, setModalMessage] = useState("");
-    const [modalTitle, setModalTitle] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
 
     const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
@@ -67,23 +67,23 @@ const Dashboard = ({ isLoggedIn }) => {
                     },
                 });
                 if (data) {
-                    //tell modal
-                    setModalTitle("Success");
-                    setModalMessage(
-                        "Your password has been updated successfully."
+                    dispatch(
+                        modalActions.updateAndShowModal(
+                            "Success",
+                            "Your password has been updated successfully."
+                        )
                     );
                 } else {
-                    setModalTitle("Error");
-                    setModalMessage(
-                        "There was a problem updating your password."
+                    dispatch(
+                        modalActions.updateAndShowModal(
+                            "Error",
+                            "There was a problem updating your password."
+                        )
                     );
                 }
                 setIsDisabled(true);
-                setShowAlert(true);
             } catch (err) {
-                setModalTitle("Error");
-                setModalMessage(err.message);
-                setShowAlert(true);
+                dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
             validatorPassword.showMessages();
@@ -319,12 +319,6 @@ const Dashboard = ({ isLoggedIn }) => {
                     </div>
                 </div>
             </div>
-            <Modal
-                show={showAlert}
-                title={modalTitle}
-                content={modalMessage}
-                closeModal={() => setShowAlert(false)}
-            />
         </>
     );
 };

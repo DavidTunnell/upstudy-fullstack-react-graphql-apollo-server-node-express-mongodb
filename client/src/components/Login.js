@@ -4,7 +4,8 @@ import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
-import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../redux/actions/";
 
 const Login = ({
     signInTopVal,
@@ -12,6 +13,8 @@ const Login = ({
     signUpTopVal,
     signUpInsideVal,
 }) => {
+    const dispatch = useDispatch();
+
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
@@ -26,8 +29,6 @@ const Login = ({
     const [signInInside, setSignInInside] = useState(signInInsideVal);
     const [signUpTop, setSignUpTop] = useState(signUpTopVal);
     const [signUpInside, setSignUpInside] = useState(signUpInsideVal);
-    const [showAlert, setShowAlert] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
 
     const [validatorLogin] = useState(new SimpleReactValidator());
     const [validatorCreate] = useState(new SimpleReactValidator());
@@ -82,8 +83,7 @@ const Login = ({
                     history.push("/");
                 }
             } catch (err) {
-                setErrorMessage(err.message);
-                setShowAlert(true);
+                dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
             validatorLogin.showMessages();
@@ -119,8 +119,7 @@ const Login = ({
                     history.push("/");
                 }
             } catch (err) {
-                setErrorMessage(err.message);
-                setShowAlert(true);
+                dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
             validatorCreate.showMessages();
@@ -395,12 +394,6 @@ const Login = ({
                     </div>
                 </div>
             </div>
-            <Modal
-                show={showAlert}
-                title="Error"
-                content={errorMessage}
-                closeModal={() => setShowAlert(false)}
-            />
         </>
     );
 };
