@@ -10,7 +10,7 @@ import Error from "./components/Error";
 import ForgotPassword from "./components/ForgotPassword";
 import Auth from "./utils/auth";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import {
     ApolloClient,

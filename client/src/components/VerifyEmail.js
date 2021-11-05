@@ -99,8 +99,8 @@ const VerifyEmail = () => {
                                 <p>
                                     Click the link to verify your email address.
                                     You can continue to use the site but will be
-                                    prompted to verify your email address each
-                                    time you sign in.
+                                    reminded to verify your email address until
+                                    you do so.
                                 </p>
                                 <p>
                                     <div className="mt-3">
