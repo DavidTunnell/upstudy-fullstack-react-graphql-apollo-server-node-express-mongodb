@@ -4,18 +4,15 @@ import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import SimpleReactValidator from "simple-react-validator";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
-const Dashboard = ({ isLoggedIn }) => {
+const Dashboard = () => {
     const dispatch = useDispatch();
 
     const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
 
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [isVerified, setIsVerified] = useState();
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [repeatNewPassword, setRepeatNewPassword] = useState();
@@ -28,17 +25,13 @@ const Dashboard = ({ isLoggedIn }) => {
 
     const history = useHistory();
 
+    const user = useSelector((state) => state.loggedInUser);
+
     useEffect(() => {
-        console.log(isLoggedIn);
-        if (isLoggedIn) {
-            const userLoggedIn = Auth.getProfile().data;
-            setUsername(userLoggedIn.username);
-            setEmail(userLoggedIn.email);
-            setIsVerified(userLoggedIn.isVerified);
-        } else {
+        if (!Auth.loggedIn()) {
             history.push("/login");
         }
-    }, []);
+    });
 
     const handleOldPasswordInputChange = (event) => {
         const { value } = event.target;
@@ -61,7 +54,7 @@ const Dashboard = ({ isLoggedIn }) => {
             try {
                 const { data } = await updatePassword({
                     variables: {
-                        email,
+                        email: user.email,
                         oldPassword,
                         newPassword,
                     },
@@ -143,7 +136,7 @@ const Dashboard = ({ isLoggedIn }) => {
                                                                             id="username"
                                                                             aria-describedby="username"
                                                                             placeholder={
-                                                                                username
+                                                                                user.username
                                                                             }
                                                                             disabled
                                                                         />
@@ -161,7 +154,7 @@ const Dashboard = ({ isLoggedIn }) => {
                                                                             id="email"
                                                                             aria-describedby="email"
                                                                             placeholder={
-                                                                                email
+                                                                                user.email
                                                                             }
                                                                             disabled
                                                                         />
@@ -176,7 +169,7 @@ const Dashboard = ({ isLoggedIn }) => {
                                                                             class="custom-control-input"
                                                                             id="customCheckDisabled"
                                                                             checked={
-                                                                                isVerified
+                                                                                user.isVerified
                                                                             }
                                                                             disabled
                                                                         />

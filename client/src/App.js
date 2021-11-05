@@ -69,7 +69,6 @@ function App() {
             dispatch(userActions.logoutRedux());
         }
     };
-    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
     const toTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -117,7 +116,7 @@ function App() {
                             <ForgotPassword />
                         </Route>
                         <Route exact path="/dashboard">
-                            <Dashboard isLoggedIn={isLoggedIn} />
+                            <Dashboard />
                         </Route>
                         {/* all other routes go to a 404 page - must be at bottom*/}
                         <Route path="/404">
