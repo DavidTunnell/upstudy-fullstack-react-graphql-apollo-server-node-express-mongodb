@@ -5,7 +5,6 @@ import { counterActions } from "../redux/actions/";
 const Test = () => {
     const bgColor = "#000";
     const counter = useSelector((state) => state.counter);
-    const isLoggedIn = useSelector((state) => state.isLoggedIn);
     const dispatch = useDispatch();
 
     return (
@@ -25,10 +24,6 @@ const Test = () => {
             >
                 <div className="container">
                     <div className="row align-items-center justify-content-between py-5 py-md-10">
-                        <div className="col-12 col-lg-6 text-lg-left mobile-center">
-                            Logged In:{" "}
-                            {Auth.loggedIn() ? <>true</> : <>false</>}
-                        </div>
                         <div>
                             when using queries, do the loading conditional{" "}
                             {/* {loading ? (
@@ -62,10 +57,6 @@ const Test = () => {
                             >
                                 -
                             </button>
-                            <p>
-                                Fake Logged in:{" "}
-                                {isLoggedIn ? <>true</> : <>false</>}
-                            </p>
                         </div>
                     </div>
                 </div>

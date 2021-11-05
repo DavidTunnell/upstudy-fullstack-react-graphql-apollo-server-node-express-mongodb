@@ -3,7 +3,7 @@ import Auth from "../utils/auth";
 import { useSelector } from "react-redux";
 
 const Footer = ({ toTop }) => {
-    const userLoginStatus = useSelector((state) => state.loggedInUser.loggedIn);
+    const isLoggedIn = useSelector((state) => state.loggedInUser.loggedIn);
     return (
         <>
             <footer className="bg-dark text-white">
@@ -12,7 +12,7 @@ const Footer = ({ toTop }) => {
                         <div className="row justify-content-between align-items-center">
                             <div className="col-md-5 text-center text-md-left">
                                 <ul className="nav">
-                                    {userLoginStatus ? (
+                                    {isLoggedIn ? (
                                         <li className="nav-item">
                                             <Link
                                                 className="nav-link"
