@@ -15,16 +15,13 @@ const VerifyEmail = () => {
     );
     const [verifyEmail] = useMutation(VERIFY_EMAIL);
     const history = useHistory();
-    //http://localhost:3000/verify?name=ferret&color=purple
     const search = window.location.search;
-    //if invalid send to 404 or let them know? let them know..
     const params = new URLSearchParams(search);
 
     let createdEmail = params.get("email");
     let createdToken = params.get("token");
     let userId = params.get("id");
     let username = params.get("username");
-    let resend = params.get("resend");
 
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({

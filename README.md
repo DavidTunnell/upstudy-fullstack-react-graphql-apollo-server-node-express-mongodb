@@ -1,4 +1,4 @@
-# Upstudy.io - React, GraphQL, Apollo Server, MongoDB, Mongoose, Node.js, Express.js, Fullstack, MERN
+# Upstudy.io - React, Redux, GraphQL, Apollo Server, MongoDB, Mongoose, Node.js, Express.js, Fullstack, MERN
 
 Upstudy is a new way to find relevant learning content by allowing the highest quality material for any subject rise to the top. Currently, there are many different places to look when searching for study material on a particular topic. You might find results at YouTube, Khan Academy or Stack Overflow but which is the best place to spend your time learning? Upstudy allows users to delve into specific study topics and be presented with the top content links as voted by the community as well as meta discussions and moderation on the study topic.
 
