@@ -69,7 +69,13 @@ const Login = ({
                     variables: { ...userLoginData },
                 });
                 console.log(data);
-                Auth.login(data.login.token);
+                Auth.login(
+                    data.login.token,
+                    data.login.user._id,
+                    data.login.user.username,
+                    data.login.user.email,
+                    data.login.user.isVerified
+                );
                 if (!data.login.user.isVerified) {
                     history.push(
                         "/verify?id=" +
@@ -103,7 +109,13 @@ const Login = ({
                     },
                 });
 
-                Auth.login(data.addUser.token);
+                Auth.login(
+                    data.addUser.token,
+                    data.addUser.user._id,
+                    data.addUser.user.username,
+                    data.addUser.user.email,
+                    data.addUser.user.isVerified
+                );
                 //will need to forward them to email verification page here also
                 if (!data.addUser.user.isVerified) {
                     //NEED TO UPDATE HERE

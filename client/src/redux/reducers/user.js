@@ -1,20 +1,20 @@
 import * as actions from "../actionTypes";
 
-function userReducer(state = 0, action) {
+function userReducer(state = { loggedIn: false }, action) {
     switch (action.type) {
         case actions.LOGIN_REDUX:
-
-        //
-
-
-
-
-
-
             console.log(action.payload);
-            return state + action.payload.incrementBy;
+            return {
+                id: action.payload.id,
+                username: action.payload.username,
+                email: action.payload.email,
+                isVerified: action.payload.isVerified,
+                loggedIn: true,
+            };
         case actions.LOGOUT_REDUX:
-            return state - action.payload.decrementBy;
+            return {
+                loggedIn: false,
+            };
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;

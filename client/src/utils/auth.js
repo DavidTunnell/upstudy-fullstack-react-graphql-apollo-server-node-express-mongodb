@@ -1,7 +1,7 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { modalActions } from "../redux/actions/";
+import store from "../redux/store";
+import { userActions } from "../redux/actions/";
 
 // create a new class to instantiate for a user
 class AuthService {
@@ -14,7 +14,7 @@ class AuthService {
     loggedIn() {
         // Checks if there is a saved token and it's still valid
         const token = this.getToken();
-        return !!token && !this.isTokenExpired(token); // handwaiving here
+        return !!token && !this.isTokenExpired(token);
     }
 
     // check if token is expired
@@ -34,15 +34,19 @@ class AuthService {
         return localStorage.getItem("id_token");
     }
 
-    login(idToken) {
+    login(idToken, id, username, email, isVerified) {
         // Saves user token to localStorage
         localStorage.setItem("id_token", idToken);
+        //add user data to redux state
+        store.dispatch(userActions.loginRedux(id, username, email, isVerified));
     }
 
     logout() {
         // Clear user token and profile data from localStorage
         localStorage.removeItem("id_token");
-        // this will reload the page and reset the state of the application
+        //update redux store
+        store.dispatch(userActions.logoutRedux());
+        // this will reload the page and reset the state of the application, a no-no for react, unless for logout
         window.location.assign("/");
     }
 }

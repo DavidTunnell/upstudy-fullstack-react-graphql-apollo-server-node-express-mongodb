@@ -1,8 +1,11 @@
 import * as actions from "../actionTypes";
 
-export const loginRedux = (incrementBy) => {
-    return { type: actions.LOGIN_REDUX, payload: { incrementBy } };
+export const loginRedux = (id, username, email, isVerified) => {
+    return {
+        type: actions.LOGIN_REDUX,
+        payload: { id, username, email, isVerified },
+    };
 };
-export const logoutRedux = (decrementBy) => {
-    return { type: actions.LOGOUT_REDUX, payload: { decrementBy } };
+export const logoutRedux = () => {
+    return { type: actions.LOGOUT_REDUX };
 };
