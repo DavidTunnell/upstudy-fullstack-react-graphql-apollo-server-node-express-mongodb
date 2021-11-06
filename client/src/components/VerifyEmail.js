@@ -6,9 +6,9 @@ import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
 const VerifyEmail = () => {
+    const user = useSelector((state) => state.loggedInUser);
     const dispatch = useDispatch();
 
-    const [hasBeenVerified, setHasBeenVerified] = useState(false);
     const [isDisabledButton, setIsDisabledButton] = useState(false);
     const styles = {
         notFoundStyle: {
@@ -27,10 +27,6 @@ const VerifyEmail = () => {
     let createdToken = params.get("token");
     let userId = params.get("id");
     let username = params.get("username");
-
-    // console.log("zzzzzzzzzzz");
-    // console.log(user);
-    // console.log("zzzzzzzzzzz");
 
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
@@ -66,7 +62,6 @@ const VerifyEmail = () => {
             if (username && Auth.loggedIn()) {
                 try {
                     generateVerificationEmail(userId, username, createdEmail);
-                    setHasBeenVerified(false);
                 } catch (error) {
                     history.push("/error", { data: error });
                 }
@@ -86,9 +81,9 @@ const VerifyEmail = () => {
                             user.isVerified
                         )
                     );
+
                     //THIS needs to be replaced with redux global state, and then whatever uses this state needs to be updated
                     //the if else statement here is based on the query string being passed in
-                    setHasBeenVerified(true);
                     //update this with upating global state to true for user
                 } catch (error) {
                     history.push("/error", { data: error });
@@ -109,7 +104,7 @@ const VerifyEmail = () => {
                 ></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">
-                        {!hasBeenVerified ? (
+                        {!user.isVerified ? (
                             <div className="col-md-6 col-lg-4 text-white text-center">
                                 <h1>Check your email</h1>
                                 <p>

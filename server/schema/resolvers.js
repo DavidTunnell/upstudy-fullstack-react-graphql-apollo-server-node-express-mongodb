@@ -142,7 +142,6 @@ const resolvers = {
             { email, oldPassword, newPassword },
             context
         ) => {
-            console.log(context);
             if (context.user) {
                 const user = await User.findOne({ email });
                 if (!user) {
@@ -185,7 +184,6 @@ const resolvers = {
                 link,
                 title,
             };
-            console.log(book);
 
             return User.findOneAndUpdate(
                 { _id: userId },

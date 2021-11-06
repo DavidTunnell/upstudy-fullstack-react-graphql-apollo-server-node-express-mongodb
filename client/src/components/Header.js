@@ -55,7 +55,7 @@ const Header = ({ toTop }) => {
                             <ul className="navbar-nav align-items-center mr-0">
                                 {user.loggedIn ? (
                                     <>
-                                        {!user.isVerified && (
+                                        {user.loggedIn && !user.isVerified && (
                                             <li className="nav-item">
                                                 <Link
                                                     className="nav-link"

@@ -76,7 +76,10 @@ function App() {
     useEffect(() => {
         // setUserStore("1st load");
         history.listen(() => {
-            // setUserStore("history.listen load");
+            if (!Auth.loggedIn()) {
+                dispatch(userActions.logoutRedux());
+            }
+            console.log("Auth.loggedIn() was run - token check");
         });
     });
 

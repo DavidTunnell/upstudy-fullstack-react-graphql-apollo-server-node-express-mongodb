@@ -175,3 +175,17 @@ inside, each sub category - apply to be a mod, suggest a sub category, or click 
 -this means i need to add user types, admin, mod, user
 -once clicked into a sub category are each of the subjects (for js: closures, oop, variables, every subject), add search for this page too
 -click into one and it opens up the link list with voting, each one is a container with commenting and voting on comments, add search
+
+
+known bug: 
+-when authentication times out and you are logged out - has to do with this on header:
+                                        {/* {!user.isVerified && (
+                                            <li className="nav-item">
+                                                <Link
+                                                    className="nav-link"
+                                                    to="/verify"
+                                                >
+                                                    Verify Email
+                                                </Link>
+                                            </li>
+                                        )} */}
