@@ -2,10 +2,11 @@ import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
+import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
 const VerifyEmail = () => {
-    const user = useSelector((state) => state.loggedInUser);
+    const dispatch = useDispatch();
 
     const [hasBeenVerified, setHasBeenVerified] = useState(false);
     const [isDisabledButton, setIsDisabledButton] = useState(false);
@@ -62,7 +63,7 @@ const VerifyEmail = () => {
     };
     useEffect(() => {
         async function processUrlParams() {
-            if (username) {
+            if (username && Auth.loggedIn()) {
                 try {
                     generateVerificationEmail(userId, username, createdEmail);
                     setHasBeenVerified(false);
@@ -76,7 +77,15 @@ const VerifyEmail = () => {
                         createdEmail,
                         createdToken
                     );
-                    console.log(userData.data.verifyEmail);
+                    const user = userData.data.verifyEmail.user;
+                    dispatch(
+                        userActions.loginRedux(
+                            user._id,
+                            user.username,
+                            user.email,
+                            user.isVerified
+                        )
+                    );
                     //THIS needs to be replaced with redux global state, and then whatever uses this state needs to be updated
                     //the if else statement here is based on the query string being passed in
                     setHasBeenVerified(true);

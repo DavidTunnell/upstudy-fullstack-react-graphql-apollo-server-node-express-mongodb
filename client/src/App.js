@@ -52,31 +52,31 @@ const client = new ApolloClient({
 function App() {
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
-    const setUserStore = (message) => {
-        if (Auth.loggedIn()) {
-            console.log("logged in " + message);
-            const userProfile = Auth.getProfile().data;
-            dispatch(
-                userActions.loginRedux(
-                    userProfile._id,
-                    userProfile.username,
-                    userProfile.email,
-                    userProfile.isVerified
-                )
-            );
-        } else {
-            console.log("logged out " + message);
-            dispatch(userActions.logoutRedux());
-        }
-    };
+    // const setUserStore = (message) => {
+    //     if (Auth.loggedIn()) {
+    //         console.log("logged in " + message);
+    //         const userProfile = Auth.getProfile().data;
+    //         dispatch(
+    //             userActions.loginRedux(
+    //                 userProfile._id,
+    //                 userProfile.username,
+    //                 userProfile.email,
+    //                 userProfile.isVerified
+    //             )
+    //         );
+    //     } else {
+    //         console.log("logged out " + message);
+    //         dispatch(userActions.logoutRedux());
+    //     }
+    // };
     const toTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
     const history = useHistory();
     useEffect(() => {
-        setUserStore("1st load");
+        // setUserStore("1st load");
         history.listen(() => {
-            setUserStore("history.listen load");
+            // setUserStore("history.listen load");
         });
     });
 
