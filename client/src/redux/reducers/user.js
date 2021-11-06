@@ -14,6 +14,11 @@ function userReducer(state = { loggedIn: false }, action) {
             return {
                 loggedIn: false,
             };
+        case actions.UPDATE_EMAIL_VERIFICATION:
+            console.log("state");
+            console.log(state);
+            console.log("state");
+            return state;
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;

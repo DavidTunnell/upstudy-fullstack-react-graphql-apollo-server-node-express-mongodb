@@ -27,9 +27,9 @@ const VerifyEmail = () => {
     let userId = params.get("id");
     let username = params.get("username");
 
-    console.log("zzzzzzzzzzz");
-    console.log(user);
-    console.log("zzzzzzzzzzz");
+    // console.log("zzzzzzzzzzz");
+    // console.log(user);
+    // console.log("zzzzzzzzzzz");
 
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
@@ -41,7 +41,7 @@ const VerifyEmail = () => {
         });
     };
     const verifyUserEmail = async (email, token) => {
-        await verifyEmail({
+        return await verifyEmail({
             variables: {
                 email,
                 token,
@@ -61,27 +61,34 @@ const VerifyEmail = () => {
         setIsDisabledButton(true);
     };
     useEffect(() => {
-        if (username) {
-            try {
-                generateVerificationEmail(userId, username, createdEmail);
-                setHasBeenVerified(false);
-            } catch (error) {
-                history.push("/error", { data: error });
+        async function processUrlParams() {
+            if (username) {
+                try {
+                    generateVerificationEmail(userId, username, createdEmail);
+                    setHasBeenVerified(false);
+                } catch (error) {
+                    history.push("/error", { data: error });
+                }
+            } else if (createdToken) {
+                try {
+                    //graphql call
+                    const userData = await verifyUserEmail(
+                        createdEmail,
+                        createdToken
+                    );
+                    console.log(userData.data.verifyEmail);
+                    //THIS needs to be replaced with redux global state, and then whatever uses this state needs to be updated
+                    //the if else statement here is based on the query string being passed in
+                    setHasBeenVerified(true);
+                    //update this with upating global state to true for user
+                } catch (error) {
+                    history.push("/error", { data: error });
+                }
+            } else {
+                history.push("/404");
             }
-        } else if (createdToken) {
-            try {
-                //graphql call
-                verifyUserEmail(createdEmail, createdToken);
-
-                //THIS needs to be replaced with redux global state, and then whatever uses this state needs to be updated
-                //the if else statement here is based on the query string being passed in
-                setHasBeenVerified(true);
-            } catch (error) {
-                history.push("/error", { data: error });
-            }
-        } else {
-            history.push("/404");
         }
+        processUrlParams();
     }, []);
 
     return (

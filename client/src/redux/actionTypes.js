@@ -13,3 +13,4 @@ export const HIDE_MODAL = "hideModal";
 
 export const LOGIN_REDUX = "loginRedux";
 export const LOGOUT_REDUX = "logoutRedux";
+export const UPDATE_EMAIL_VERIFICATION = "updateEmailVerification";

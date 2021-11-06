@@ -9,3 +9,7 @@ export const loginRedux = (id, username, email, isVerified) => {
 export const logoutRedux = () => {
     return { type: actions.LOGOUT_REDUX };
 };
+
+export const updateEmailVerification = () => {
+    return { type: actions.UPDATE_EMAIL_VERIFICATION };
+};
