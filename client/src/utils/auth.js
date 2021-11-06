@@ -1,6 +1,6 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
-import store from "../redux/store";
+import { store } from "../redux/store";
 import { userActions } from "../redux/actions/";
 
 // create a new class to instantiate for a user
