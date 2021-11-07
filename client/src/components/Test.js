@@ -1,4 +1,3 @@
-import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { counterActions } from "../redux/actions/";
 

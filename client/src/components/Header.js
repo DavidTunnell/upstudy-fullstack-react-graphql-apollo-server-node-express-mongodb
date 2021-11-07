@@ -73,6 +73,7 @@ const Header = ({ toTop }) => {
                                                 data-toggle="dropdown"
                                                 aria-haspopup="true"
                                                 aria-expanded="false"
+                                                to="/"
                                                 onClick={(event) =>
                                                     event.preventDefault()
                                                 }

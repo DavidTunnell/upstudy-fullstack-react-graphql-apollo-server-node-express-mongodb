@@ -5,7 +5,6 @@ function modalReducer(state = {}, action) {
         case actions.UPDATE_AND_SHOW_MODAL:
             return action.payload;
         case actions.HIDE_MODAL:
-            console.log(action.payload);
             return { show: false };
         default:
             //always return state at the end so the whole app doesn't break if there is an issue

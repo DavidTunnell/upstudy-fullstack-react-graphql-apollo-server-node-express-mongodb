@@ -103,6 +103,7 @@ const VerifyEmail = () => {
             }
         }
         processUrlParams();
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -123,46 +124,40 @@ const VerifyEmail = () => {
                                     reminded to verify your email address until
                                     you do so.
                                 </p>
-                                <p>
-                                    <div className="mt-3">
+                                <div className="mt-3">
+                                    <button
+                                        className="btn btn-white mr-1 mb-1"
+                                        type="button"
+                                        onClick={handleResendVerificationEmail}
+                                        disabled={isDisabledButton}
+                                    >
+                                        Resend Email
+                                    </button>
+
+                                    <Link to="/">
                                         <button
                                             className="btn btn-white mr-1 mb-1"
                                             type="button"
-                                            onClick={
-                                                handleResendVerificationEmail
-                                            }
-                                            disabled={isDisabledButton}
                                         >
-                                            Resend Email
+                                            Go Home
                                         </button>
-
-                                        <Link to="/">
-                                            <button
-                                                className="btn btn-white mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                Go Home
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </p>
+                                    </Link>
+                                </div>
                             </div>
                         ) : (
                             <div className="col-md-6 col-lg-4 text-white text-center">
                                 <h1>Your email address has been verified.</h1>
                                 <p>Thanks, let's do some learning!</p>
-                                <p>
-                                    <div className="mt-3">
-                                        <Link to="/">
-                                            <button
-                                                className="btn btn-white mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                Go Home
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </p>
+                                <div className="mt-3">
+                                    <Link to="/">
+                                        <button
+                                            className="btn btn-white mr-1 mb-1"
+                                            type="button"
+                                        >
+                                            Go Home
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
                         )}
                     </div>

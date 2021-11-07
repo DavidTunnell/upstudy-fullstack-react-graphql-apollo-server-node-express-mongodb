@@ -14,6 +14,7 @@ const ForgotPassword = () => {
     const [emailInput, setEmailInput] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [validatorEmail] = useState(new SimpleReactValidator());
+    // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
     //keep user input in state
@@ -50,7 +51,10 @@ const ForgotPassword = () => {
                     );
                 }
             } catch (err) {
-                dispatch(modalActions.updateAndShowModal("Hmm", err.message));
+                //report success so it's not clear that the email doesn't exist
+                dispatch(
+                    modalActions.updateAndShowModal("Success", err.message)
+                );
             }
         } else {
             //show issues with validation

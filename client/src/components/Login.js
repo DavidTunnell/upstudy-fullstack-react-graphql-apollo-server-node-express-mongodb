@@ -34,6 +34,7 @@ const Login = ({
     //keep state of client side field validators
     const [validatorLogin] = useState(new SimpleReactValidator());
     const [validatorCreate] = useState(new SimpleReactValidator());
+    // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     //local styling
     const bgImage = "/assets/images/login-bg.jpg";
@@ -390,9 +391,9 @@ const Login = ({
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-5 mx-auto pt-2">
-                                    <div class="text-center">
+                            <div className="row">
+                                <div className="col-5 mx-auto pt-2">
+                                    <div className="text-center">
                                         <Link to="/forgot">
                                             Forgot Password
                                         </Link>

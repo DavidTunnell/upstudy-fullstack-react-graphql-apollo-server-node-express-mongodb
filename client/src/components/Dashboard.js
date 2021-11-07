@@ -17,11 +17,12 @@ const Dashboard = () => {
     const cardBgColor = "#f5f5f5";
 
     //state
-    const [oldPassword, setOldPassword] = useState();
-    const [newPassword, setNewPassword] = useState();
-    const [repeatNewPassword, setRepeatNewPassword] = useState();
+    const [oldPassword, setOldPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [repeatNewPassword, setRepeatNewPassword] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [validatorPassword] = useState(new SimpleReactValidator());
+    // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
     //graphql mutation to update password
@@ -174,10 +175,10 @@ const Dashboard = () => {
                                                             </div>
                                                             <div className="form-row mt-1 mb-3">
                                                                 <div className="col">
-                                                                    <div class="custom-control custom-checkbox ml-1">
+                                                                    <div className="custom-control custom-checkbox ml-1">
                                                                         <input
                                                                             type="checkbox"
-                                                                            class="custom-control-input"
+                                                                            className="custom-control-input"
                                                                             id="customCheckDisabled"
                                                                             checked={
                                                                                 user.isVerified
@@ -185,8 +186,8 @@ const Dashboard = () => {
                                                                             disabled
                                                                         />
                                                                         <label
-                                                                            class="custom-control-label is-verified-label"
-                                                                            for="customCheckDisabled"
+                                                                            className="custom-control-label is-verified-label"
+                                                                            htmlFor="customCheckDisabled"
                                                                         >
                                                                             Is
                                                                             Verified
@@ -194,7 +195,7 @@ const Dashboard = () => {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <hr class="mt-2 mb-2" />
+                                                            <hr className="mt-2 mb-2" />
                                                             <div className="form-row">
                                                                 <div className="col-6">
                                                                     <h5 className="mb-2 fs-20 font-weight-normal">
@@ -209,7 +210,6 @@ const Dashboard = () => {
                                                                         <input
                                                                             type="password"
                                                                             className="form-control"
-                                                                            id="userMail"
                                                                             aria-describedby="userMail"
                                                                             placeholder="********"
                                                                             onChange={
@@ -235,7 +235,6 @@ const Dashboard = () => {
                                                                         <input
                                                                             type="password"
                                                                             className="form-control"
-                                                                            id="userMail"
                                                                             aria-describedby="userMail"
                                                                             placeholder="********"
                                                                             onChange={
@@ -267,7 +266,6 @@ const Dashboard = () => {
                                                                         <input
                                                                             type="password"
                                                                             className="form-control"
-                                                                            id="userMail"
                                                                             aria-describedby="userMail"
                                                                             placeholder="********"
                                                                             onChange={
