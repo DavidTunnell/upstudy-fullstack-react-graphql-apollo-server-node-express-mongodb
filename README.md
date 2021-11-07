@@ -14,18 +14,21 @@ This project uses the following technologies/libraries.
 -   [React](https://reactjs.org/) as a Fast and Powerful Frontend
 -   [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) for URL routing, URL parameters, Browser History Stack Usage, and Linking without Calling the Server
 -   [Redux](https://redux.js.org/) and [React-Redux](https://react-redux.js.org/) for Global State Management and Predictability
+-   [Redux-Persist](https://redux.js.org/) to Maintain Redux Data Stores across Server Refreshes
 -   [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) as a CSS Framework
 -   [GO Bootstrap Template](https://themes.getbootstrap.com/product/go-multipurpose-landing-page-template/) as a Template that was Imported into React
 -   [Node.js](https://nodejs.org/en/) and [Express.js](https://expressjs.com/) as the Server for API and HTTP Requests and Serving the React Build Directory Frontend
 -   [MongoDB](https://www.mongodb.com/) as a NoSQL Database
 -   [Mongoose](https://mongoosejs.com/) for [Object Relational Mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping), Database Interaction, [Routing](https://expressjs.com/en/guide/routing.html) and Collection Generation and Seeding
 -   [Nodemon](https://nodemon.io/) for More Pleasant Node.js Development
+-   [Concurrently](https://nodemon.io/) to Run Multiple Dev Commands on a Single Terminal
 -   [Bcrypt Package](https://www.npmjs.com/package/bcrypt) for Password Hashing and Management
 -   [React-Ga](https://www.npmjs.com/package/react-ga) to Track Website Traffic data with Google Analytics
 -   [JSON Web Tokens](https://jwt.io/) for Additional User Security
--   [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
--   [Jwt-Decode](https://www.npmjs.com/package/jwt-decode)
--   [Simple-React-Validator](https://www.npmjs.com/package/simple-react-validator)
+-   [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) to Utilize JWT Technology in the App
+-   [Jwt-Decode](https://www.npmjs.com/package/jwt-decode) to Decode Token Data
+-   [Simple-React-Validator](https://www.npmjs.com/package/simple-react-validator) for Client-Side User Input Validation
+-   [Nodemailer](https://www.npmjs.com/package/nodemailer) and [Nodemailer-Sendgrid-Transport](https://www.npmjs.com/package/nodemailer-sendgrid-transport) to Send Email Communications to Users
 -   [Open-Graph-Scraper](https://github.com/jshemas/openGraphScraper)
 
 ## Installation
@@ -176,16 +179,16 @@ inside, each sub category - apply to be a mod, suggest a sub category, or click 
 -once clicked into a sub category are each of the subjects (for js: closures, oop, variables, every subject), add search for this page too
 -click into one and it opens up the link list with voting, each one is a container with commenting and voting on comments, add search
 
-
-known bug: 
+known bug:
 -when authentication times out and you are logged out - has to do with this on header:
-                                        {/* {!user.isVerified && (
-                                            <li className="nav-item">
-                                                <Link
+{/\_ {!user.isVerified && (
+
+<li className="nav-item">
+<Link
                                                     className="nav-link"
                                                     to="/verify"
                                                 >
-                                                    Verify Email
-                                                </Link>
-                                            </li>
-                                        )} */}
+Verify Email
+</Link>
+</li>
+)} _/}
