@@ -6,28 +6,33 @@ import { useDispatch } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
 const ForgotPassword = () => {
+    //to save data to redux store
     const dispatch = useDispatch();
-
+    //local styling
     const bgImage = "/assets/images/login-bg.jpg";
-
+    //state
     const [emailInput, setEmailInput] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [validatorEmail] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [forgotPassword] = useMutation(USER_FORGOT_PASSWORD);
-
+    //keep user input in state
     const handleEmailInputChange = (event) => {
         const { value } = event.target;
         setEmailInput(value);
     };
+    //handle submit of forgot password by user
     const handleSubmit = async (event) => {
+        //prevent server reload of page on click
         event.preventDefault();
+        //check that client field validation is good
         if (validatorEmail.allValid()) {
             try {
+                //create a new password and email it to user if it exists via graphql
                 const { data } = await forgotPassword({
                     variables: { email: emailInput },
                 });
-                console.log(data);
+                //provide user feedback on action
                 if (data) {
                     dispatch(
                         modalActions.updateAndShowModal(
@@ -48,7 +53,9 @@ const ForgotPassword = () => {
                 dispatch(modalActions.updateAndShowModal("Hmm", err.message));
             }
         } else {
+            //show issues with validation
             validatorEmail.showMessages();
+            //force update state to show validation messages to user
             forceUpdate();
         }
     };

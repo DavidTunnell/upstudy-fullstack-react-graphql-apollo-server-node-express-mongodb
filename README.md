@@ -4,7 +4,7 @@ Upstudy is a new way to find relevant learning content by allowing the highest q
 
 Since you can't fork your own repos, this project was initially duplicated from my [web portfolio repo](https://github.com/DavidTunnell/david-tunnell-dot-com-react-mern). I then integrated the user account, authentication, GraphQL, Apollo server and client functionality from my [reading list search engine repo](https://github.com/DavidTunnell/reading-list-search-engine-graphql-apollo-server-react-node-express-mongodb). The web apps functionality is being built on top of this base.
 
-The user management system utilizes JSON Web Tokens generated on the server during login and then passed on subsequent calls from the client for additional security. The token also contains information about the user that is logged in. The server also checks the validity of these tokens when making calls that are behind authentication via custom middleware (`authMiddleware()`). Since it is added as a header for the Apollo Server wrapper it works everywhere in the React application.
+The user management system utilizes JSON Web Tokens generated on the server during login and then passed on subsequent calls from the client for additional security. The token also contains information about the user that is logged in. The server also checks the validity of these tokens when making calls that are behind authentication via custom middleware (`authMiddleware()`). Since it is added as a header for the Apollo Server wrapper it works everywhere in the React application. Additionally, there is functionality to send emails for various user actions such as verifying an email address, forgetting a password and more using Send Grid.
 
 This project uses the following technologies/libraries.
 

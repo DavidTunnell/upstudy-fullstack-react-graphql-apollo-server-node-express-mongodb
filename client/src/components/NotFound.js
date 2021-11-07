@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 const NotFound = () => {
+    //local styling
     const styles = {
         notFoundStyle: {
             backgroundImage: "url(./assets/images/404-bg.jpg)",

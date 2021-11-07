@@ -1,7 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, TokenEmailVerification } = require("../models");
 const { signToken } = require("../utils/auth");
-
 const bcrypt = require("bcrypt");
 const {
     generateToken,
@@ -22,17 +21,18 @@ const resolvers = {
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
+            //check if user with the credentials provided already exists
             const userCheck = await User.findOne({
                 $or: [{ email }, { username }],
             });
+            //if so let user know
             if (userCheck) {
                 throw new AuthenticationError(
                     "An account with that email or username already exists. Please try again."
                 );
             } else {
+                //otherwise create the new user, and a sign in token and return it
                 const user = await User.create({ username, email, password });
-
-                //THEN: create new page for users to validate with
                 const token = signToken(user);
                 return { token, user };
             }
@@ -41,18 +41,21 @@ const resolvers = {
             parent,
             { userId, username, email }
         ) => {
+            //create a email verification token and associated user id
             const newUserEmailToken = generateToken(userId);
-            newUserEmailToken.save(function (err) {
-                if (err) {
-                    return res.status(500).send({ msg: err.message });
-                }
-            });
-            // //NEXT: send email
+            //save it to mongodb
+            try {
+                newUserEmailToken.save();
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
+            // generate options for verification email
             const emailOptions = generateVerificationEmailOptions(
                 username,
                 email,
                 newUserEmailToken
             );
+            //send email with options
             try {
                 sendEmail(emailOptions);
                 console.log("addEmailVerificationToken email sent");
@@ -64,25 +67,29 @@ const resolvers = {
             }
         },
         verifyEmail: async (parent, { email, token }) => {
-            //Need to filter out tokens older than x hours - need to understand what date is made on create
+            //find the token associated with the email verification
             const tokenReturned = await TokenEmailVerification.findOne({
                 token: token,
                 expireAt: { $gt: new Date(Date.now() - 86400000) },
             });
+            //if the token doesn't exist or has expired let user know
             if (!tokenReturned) {
                 throw new AuthenticationError(
                     "This token doesn't exist or has expired."
                 );
             }
+            //get the associated user
             const userReturned = await User.findOne({
                 token: token,
                 email: email,
             });
+            //if the user doesn't exist let user know
             if (!userReturned) {
                 throw new AuthenticationError(
                     "There is no user associated with that token."
                 );
             }
+            //if both exist, verify email in mongodb
             userReturned.isVerified = true;
             var updatedUser = await userReturned.save();
             if (!updatedUser) {
@@ -93,39 +100,49 @@ const resolvers = {
             return { user: userReturned };
         },
         login: async (parent, { email, password }) => {
+            //find user based on provided email
             const user = await User.findOne({ email });
+            //if it doesn't exist, let the user know in a generic message to prevent giving too much info to malicious actors
             if (!user) {
                 throw new AuthenticationError(
                     "If the user you entered exists, you entered the wrong username and/or password."
                 );
             }
+            //check if password for found user is correct
             const correctPw = await user.isCorrectPassword(password);
+            //if not let user know
             if (!correctPw) {
                 throw new AuthenticationError(
                     "If the user you entered exists, you entered the wrong username and/or password."
                 );
             }
+            //if both are found create a sign in token and pass it and the user data back to client
             const token = signToken(user);
             return { token, user };
         },
         forgotPassword: async (parent, { email }) => {
+            //generate a 10 character random password
             var newPw = generatePassword(10);
+            //encrypt the new password for the database
             var encryptedPw = bcrypt.hashSync(newPw, 10);
+            //find the user and update their passwords
             const user = await User.findOneAndUpdate(
                 { email },
                 { password: encryptedPw }
             );
+            //if the user doesn't exist let user know
             if (!user) {
                 throw new AuthenticationError(
                     "If the email you entered exists, you will be sent an email with a new password."
                 );
             }
-            //send email with new password
+            //create email options for forgot password
             const emailOptions = generatePasswordResetEmailOptions(
                 user.username,
                 user.email,
                 newPw
             );
+            //send email with new password to user
             try {
                 sendEmail(emailOptions);
                 console.log("forgotPassword email sent");
@@ -142,25 +159,33 @@ const resolvers = {
             { email, oldPassword, newPassword },
             context
         ) => {
+            //context (set in app.js on the client) shows there is a valid token associated with the user for security
+            //checking the context has a user is server side validation that the login is valid, and should be used on all actions that require the user to be logged in
             if (context.user) {
+                //find user by email
                 const user = await User.findOne({ email });
+                //if it doesn't exist let the user know (unlikely in this scenario)
                 if (!user) {
                     throw new AuthenticationError(
                         "The email does not have a record associated with it."
                     );
                 }
+                //if the user exists confirm the existing password entered is correct
                 const correctPw = await user.isCorrectPassword(oldPassword);
+                //if not let user know
                 if (!correctPw) {
                     throw new AuthenticationError(
                         "The existing password you entered is incorrect."
                     );
                 }
-                //if we are here they existing password was correct, so create and update with new password.
+                //the existing password is correct, so take the new one and encrypt it
                 var encryptedPw = bcrypt.hashSync(newPassword, 10);
+                //update database with new encrypted password
                 const userUpdated = await User.findOneAndUpdate(
                     { email },
                     { password: encryptedPw }
                 );
+                //if no data was returned there was an error updating the password
                 if (!userUpdated) {
                     throw new AuthenticationError(
                         "There was a problem updating your password."

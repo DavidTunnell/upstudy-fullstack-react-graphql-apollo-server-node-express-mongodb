@@ -3,9 +3,8 @@ import decode from "jwt-decode";
 import { store } from "../redux/store";
 import { userActions } from "../redux/actions/";
 
-// create a new class to instantiate for a user
 class AuthService {
-    // get user data
+    // get user data from encoded token
     getProfile() {
         return decode(this.getToken());
     }
@@ -37,18 +36,19 @@ class AuthService {
     login(idToken, id, username, email, isVerified) {
         // Saves user token to localStorage
         localStorage.setItem("id_token", idToken);
-        //add user data to redux state
+        //add user data to redux state on login
         store.dispatch(userActions.loginRedux(id, username, email, isVerified));
     }
 
     logout() {
         // Clear user token and profile data from localStorage
         localStorage.removeItem("id_token");
-        //update redux store
+        //update redux store removing logged in users data
         store.dispatch(userActions.logoutRedux());
-        // this will reload the page and reset the state of the application, a no-no for react, unless for logout
+        // this will reload the page and reset the state of the application, a no-no for react, unless for logout to refresh user experience
         window.location.assign("/");
     }
 }
 
+// create a new class to instantiate for a user
 export default new AuthService();

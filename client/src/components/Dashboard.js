@@ -8,31 +8,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
 const Dashboard = () => {
+    //to save and get data to redux store
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.loggedInUser);
 
+    //local styling
     const bgImage = "./assets/images/login-bg.jpg";
     const cardBgColor = "#f5f5f5";
 
+    //state
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
     const [repeatNewPassword, setRepeatNewPassword] = useState();
     const [isDisabled, setIsDisabled] = useState(false);
-
-    const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
-
     const [validatorPassword] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
+    //graphql mutation to update password
+    const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
+
+    //use react router history
     const history = useHistory();
 
-    const user = useSelector((state) => state.loggedInUser);
-
+    //if the user isn't logged in send them to login screen
     useEffect(() => {
         if (!Auth.loggedIn()) {
             history.push("/login");
         }
     });
 
+    //update state for field input
     const handleOldPasswordInputChange = (event) => {
         const { value } = event.target;
         setOldPassword(value);
@@ -46,12 +51,14 @@ const Dashboard = () => {
         setRepeatNewPassword(value);
     };
 
+    //on update password submit
     const handleSubmit = async (event) => {
+        //prevent server reload of page on click
         event.preventDefault();
-        // console.log(oldPassword, newPassword, repeatNewPassword);
-        console.log(validatorPassword.allValid());
+        //check that client field validation is good
         if (validatorPassword.allValid()) {
             try {
+                //update password via graphql
                 const { data } = await updatePassword({
                     variables: {
                         email: user.email,
@@ -59,6 +66,7 @@ const Dashboard = () => {
                         newPassword,
                     },
                 });
+                //give user feedback of action
                 if (data) {
                     dispatch(
                         modalActions.updateAndShowModal(
@@ -74,12 +82,15 @@ const Dashboard = () => {
                         )
                     );
                 }
+                //disable update button to prevent spamming
                 setIsDisabled(true);
             } catch (err) {
                 dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
+            //show issues with validation
             validatorPassword.showMessages();
+            //force update state to show validation messages to user
             forceUpdate();
         }
     };

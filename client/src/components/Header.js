@@ -3,7 +3,7 @@ import Auth from "../utils/auth";
 import { useSelector } from "react-redux";
 
 const Header = ({ toTop }) => {
-    //fix is logged in parameters, remove and use redux (footer too)
+    //get current logged in user data from redux store
     const user = useSelector((state) => state.loggedInUser);
     return (
         <>

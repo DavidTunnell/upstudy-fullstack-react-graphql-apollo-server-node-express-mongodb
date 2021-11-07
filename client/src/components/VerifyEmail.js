@@ -6,28 +6,33 @@ import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
 const VerifyEmail = () => {
+    //to save and get data to redux store
     const user = useSelector((state) => state.loggedInUser);
     const dispatch = useDispatch();
-
-    const [isDisabledButton, setIsDisabledButton] = useState(false);
+    //local styling
     const styles = {
         notFoundStyle: {
             backgroundImage: "url(./assets/images/verify-bg.jpg)",
         },
     };
+    //state
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
+    //graphql mutations to save and send a token to user and to verify with that token
     const [addEmailVerificationToken] = useMutation(
         ADD_EMAIL_VERIFICATION_TOKEN
     );
     const [verifyEmail] = useMutation(VERIFY_EMAIL);
+
+    //use react router history
     const history = useHistory();
+    //get url query string parameters
     const search = window.location.search;
     const params = new URLSearchParams(search);
-
     let createdEmail = params.get("email");
     let createdToken = params.get("token");
     let userId = params.get("id");
     let username = params.get("username");
-
+    //wrapped mutation to create and generate token for email validation
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
             variables: {
@@ -37,6 +42,7 @@ const VerifyEmail = () => {
             },
         });
     };
+    //wrapped mutation to save that an email was verified
     const verifyUserEmail = async (email, token) => {
         return await verifyEmail({
             variables: {
@@ -45,6 +51,7 @@ const VerifyEmail = () => {
             },
         });
     };
+    //create a new token and resent to user via email
     const handleResendVerificationEmail = async (event) => {
         event.preventDefault();
         console.log("handleResendVerificationEmail");
@@ -57,21 +64,27 @@ const VerifyEmail = () => {
         });
         setIsDisabledButton(true);
     };
+    //on  1st render run the following
     useEffect(() => {
+        //internal function so it can be async
         async function processUrlParams() {
+            //check if there is a username url query parameter and if the user is logged in
             if (username && Auth.loggedIn()) {
+                //if so send them a verification email
                 try {
                     generateVerificationEmail(userId, username, createdEmail);
                 } catch (error) {
                     history.push("/error", { data: error });
                 }
             } else if (createdToken) {
+                //else if the token is in the url param
                 try {
-                    //graphql call
+                    //graphql call to verify the email address associated with the token
                     const userData = await verifyUserEmail(
                         createdEmail,
                         createdToken
                     );
+                    //get data from the verification mutation return and login with it
                     const user = userData.data.verifyEmail.user;
                     dispatch(
                         userActions.loginRedux(
@@ -81,14 +94,11 @@ const VerifyEmail = () => {
                             user.isVerified
                         )
                     );
-
-                    //THIS needs to be replaced with redux global state, and then whatever uses this state needs to be updated
-                    //the if else statement here is based on the query string being passed in
-                    //update this with upating global state to true for user
                 } catch (error) {
                     history.push("/error", { data: error });
                 }
             } else {
+                //if the query string is invalid send to 404 page
                 history.push("/404");
             }
         }

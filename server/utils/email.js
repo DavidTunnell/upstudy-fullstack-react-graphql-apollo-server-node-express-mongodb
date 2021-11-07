@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const TokenEmailVerification = require("../models/TokenEmailVerification");
 
+//create nodemailer transport with sendgrid api key
 const transporter = nodemailer.createTransport(
     sendgridTransport({
         auth: {
@@ -13,13 +14,14 @@ const transporter = nodemailer.createTransport(
 );
 
 module.exports = {
-    // function for our authenticated routes
+    // generate a token for email verification
     generateToken: function (userId) {
         return new TokenEmailVerification({
             _userId: userId,
             token: crypto.randomBytes(16).toString("hex"),
         });
     },
+    //create options object for email verification
     generateVerificationEmailOptions: function (username, email, token) {
         return {
             from: "no-reply@upstudy.io",
@@ -38,6 +40,7 @@ module.exports = {
                 "\n\nThank You!\n",
         };
     },
+    //create options object for password reset email
     generatePasswordResetEmailOptions: function (username, email, newPw) {
         return {
             from: "no-reply@upstudy.io",
@@ -56,9 +59,11 @@ module.exports = {
                 "\n\nThank You!\n",
         };
     },
+    //send email with options provided
     sendEmail: function (emailOptions) {
         return transporter.sendMail(emailOptions);
     },
+    //generate a random password
     //https://stackoverflow.com/questions/1497481/javascript-password-generator
     generatePassword: function (len) {
         var length = len ? len : 10;

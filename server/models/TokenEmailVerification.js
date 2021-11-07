@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
-// const userSchema = require("./User");
 
+//model definition
 const tokenSchema = new Schema({
     _userId: {
         type: Schema.Types.ObjectId,
@@ -25,9 +25,7 @@ tokenSchema.index(
 
 const TokenEmailVerification = model("TokenEmailVerification", tokenSchema);
 
-//sync index on startup
-//db.tokenemailverifications.getIndexes()
-//db.tokenemailverifications.dropIndex('expireAt_1')
+//sync index on startup to ensure token expirations happen
 const syncIndexes = async () => {
     await TokenEmailVerification.syncIndexes();
 };

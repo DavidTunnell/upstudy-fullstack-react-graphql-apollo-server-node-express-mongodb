@@ -9,7 +9,6 @@ import VerifyEmail from "./components/VerifyEmail";
 import Error from "./components/Error";
 import ForgotPassword from "./components/ForgotPassword";
 import Auth from "./utils/auth";
-
 import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import {
@@ -19,12 +18,11 @@ import {
     createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions, userActions } from "./redux/actions/";
 
-// Construct our main GraphQL API endpoint
+// Construct the main GraphQL API endpoint
 const httpLink = createHttpLink({
     uri: "/graphql",
 });
@@ -50,32 +48,20 @@ const client = new ApolloClient({
 
 //top use the react router package, surround the whole app with the router component
 function App() {
+    //get redux store data for modal
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
-    // const setUserStore = (message) => {
-    //     if (Auth.loggedIn()) {
-    //         console.log("logged in " + message);
-    //         const userProfile = Auth.getProfile().data;
-    //         dispatch(
-    //             userActions.loginRedux(
-    //                 userProfile._id,
-    //                 userProfile.username,
-    //                 userProfile.email,
-    //                 userProfile.isVerified
-    //             )
-    //         );
-    //     } else {
-    //         console.log("logged out " + message);
-    //         dispatch(userActions.logoutRedux());
-    //     }
-    // };
+    //smooth scroll to top function to be passed as a parameter, should this be replaced with ./utils/useScrollToTop?
     const toTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+    //use react router history
     const history = useHistory();
+    //run every change
     useEffect(() => {
-        // setUserStore("1st load");
+        //run only when a router changes
         history.listen(() => {
+            //if the user is found not to be logged in via jwt then log them out as far as redux is concerned
             if (!Auth.loggedIn()) {
                 dispatch(userActions.logoutRedux());
             }
@@ -85,14 +71,12 @@ function App() {
 
     return (
         <ApolloProvider client={client}>
-            {/* ^ Here the app is wrapped with the router */}
+            {/* ^ the apollo provider wrapper allows the use of graphql calls throughout the app */}
             <div className="App">
                 <Header toTop={toTop} />
                 <div className="content">
-                    {/* Next is the decision of where page content to go based on different routes
-                        All routes go in the switch component so only one renders at a time based on route  */}
+                    {/* switch/route renders different components based on url */}
                     <Switch>
-                        {/* add a route for each component AND the component itself nested*/}
                         <Route exact path="/">
                             <Home />
                         </Route>
@@ -121,18 +105,19 @@ function App() {
                         <Route exact path="/dashboard">
                             <Dashboard />
                         </Route>
-                        {/* all other routes go to a 404 page - must be at bottom*/}
                         <Route path="/404">
                             <NotFound />
                         </Route>
                         <Route path="/error">
                             <Error error="test" />
                         </Route>
+                        {/* all other routes go to a 404 page - must be at bottom*/}
                         <Route path="*">
                             <NotFound />
                         </Route>
                     </Switch>
                 </div>
+                {/* the modal is available everywhere and modified via redux store*/}
                 <Modal
                     show={modalSettings.show}
                     title={modalSettings.title}

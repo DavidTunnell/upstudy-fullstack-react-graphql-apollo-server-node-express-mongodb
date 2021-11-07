@@ -1,4 +1,5 @@
 const Modal = (params) => {
+    //get params passed in when calling modal, these are ultimately derived form redux store
     let showModal = params.show;
     let closeModal = params.closeModal;
     let title = params.title;

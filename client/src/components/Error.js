@@ -1,12 +1,14 @@
 import { Link, useHistory } from "react-router-dom";
-import React, { useEffect } from "react";
 const Error = () => {
+    //local styling
     const styles = {
         notFoundStyle: {
             backgroundImage: "url(/assets/images/404-bg.jpg)",
         },
     };
+    //use react router history
     const history = useHistory();
+    //get data passed via history on another component
     const errorData = history.location.state?.data;
     return (
         <>

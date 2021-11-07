@@ -7,14 +7,16 @@ import SimpleReactValidator from "simple-react-validator";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
+//get parameters for size of cards to use in component
 const Login = ({
     signInTopVal,
     signInInsideVal,
     signUpTopVal,
     signUpInsideVal,
 }) => {
+    //to save data to redux store
     const dispatch = useDispatch();
-
+    //state
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
@@ -29,45 +31,45 @@ const Login = ({
     const [signInInside, setSignInInside] = useState(signInInsideVal);
     const [signUpTop, setSignUpTop] = useState(signUpTopVal);
     const [signUpInside, setSignUpInside] = useState(signUpInsideVal);
-
+    //keep state of client side field validators
     const [validatorLogin] = useState(new SimpleReactValidator());
     const [validatorCreate] = useState(new SimpleReactValidator());
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-
+    //local styling
     const bgImage = "/assets/images/login-bg.jpg";
-
+    //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);
     const [addUser] = useMutation(ADD_USER);
-
+    //on load (and whenever params change) set CSS of cards
     useEffect(() => {
         setSignInTop(signInTopVal);
         setSignInInside(signInInsideVal);
         setSignUpTop(signUpTopVal);
         setSignUpInside(signUpInsideVal);
     }, [signInTopVal, signInInsideVal, signUpTopVal, signUpInsideVal]);
-
-    // useEffect(() => {
-    //     console.log(userCreateData);
-    // });
+    //use react router history
     const history = useHistory();
+    //keep user input in state
     const handleLoginInputChange = (event) => {
         const { id, value } = event.target;
         setUserLoginData({ ...userLoginData, [id]: value });
     };
-
     const handleCreateInputChange = (event) => {
         const { id, value } = event.target;
         setUserCreateData({ ...userCreateData, [id]: value });
     };
-
+    //on login button click
     const handleFormLogin = async (event) => {
+        //prevent server reload of page on click
         event.preventDefault();
-
+        //check that client field validation is good
         if (validatorLogin.allValid()) {
             try {
+                //check login via graphql mutation
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
+                //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
                 Auth.login(
                     data.login.token,
                     data.login.user._id,
@@ -75,32 +77,25 @@ const Login = ({
                     data.login.user.email,
                     data.login.user.isVerified
                 );
+                //send user to homepage after login
                 history.push("/");
-                // if (!data.login.user.isVerified) {
-                //     history.push(
-                //         "/verify?id=" +
-                //             data.login.user._id +
-                //             "&username=" +
-                //             data.login.user.username +
-                //             "&email=" +
-                //             userLoginData.email
-                //     );
-                // } else {
-                //     history.push("/");
-                // }
             } catch (err) {
+                //provide user with error message in modal using redux state date
                 dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
+            //show issues with validation
             validatorLogin.showMessages();
+            //force update state to show validation messages to user
             forceUpdate();
         }
     };
-
+    //on create user button click
     const handleFormCreate = async (event) => {
         event.preventDefault();
         if (validatorCreate.allValid()) {
             try {
+                //create user via graphql mutation
                 const { data } = await addUser({
                     variables: {
                         username: userCreateData.createUsername,
@@ -108,7 +103,7 @@ const Login = ({
                         password: userCreateData.createPassword,
                     },
                 });
-
+                //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
                 Auth.login(
                     data.addUser.token,
                     data.addUser.user._id,
@@ -116,9 +111,8 @@ const Login = ({
                     data.addUser.user.email,
                     data.addUser.user.isVerified
                 );
-                //will need to forward them to email verification page here also
+                //after user is created, forward them to a page to verify their email address
                 if (!data.addUser.user.isVerified) {
-                    //NEED TO UPDATE HERE
                     history.push(
                         "/verify?id=" +
                             data.addUser.user._id +
@@ -128,9 +122,11 @@ const Login = ({
                             userCreateData.createEmail
                     );
                 } else {
+                    //if already verified (which is not currently possible), send user to homepage
                     history.push("/");
                 }
             } catch (err) {
+                //provide user with error message in modal using redux state date
                 dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         } else {
@@ -138,6 +134,7 @@ const Login = ({
             forceUpdate();
         }
     };
+    //handle changes to css based on user action, toggle which card shows for user
     const handleCardToggle = async (event) => {
         const parentEl = event.target.parentElement;
         if (parentEl.classList.contains("signin-card")) {

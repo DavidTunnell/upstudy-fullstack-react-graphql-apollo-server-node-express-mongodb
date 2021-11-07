@@ -2,11 +2,9 @@ const express = require("express");
 const path = require("path");
 const db = require("./config/connection");
 const cors = require("cors");
-
 const { ApolloServer } = require("apollo-server-express");
 const { authMiddleware } = require("./utils/auth");
 const { typeDefs, resolvers } = require("./schema");
-// require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -32,6 +30,7 @@ if (process.env.NODE_ENV === "production") {
     router.sendFile(path.join(__dirname, "../client/build/", "index.html"));
 }
 
+//start server and listen
 db.once("open", () => {
     app.listen(PORT, () => {
         console.log(`API server running on port ${PORT}!`);
