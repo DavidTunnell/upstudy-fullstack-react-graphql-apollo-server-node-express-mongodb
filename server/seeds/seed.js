@@ -44,7 +44,13 @@ const userSeed = [
         password: hashPassword("12345"),
         isVerified: false,
         roles: [
-            { role: "mod", associatedId: "ID of sub/section etc here" },
+            {
+                role: "mod",
+                associatedIds: [
+                    "mongo generated id #1",
+                    "mongo generated id #2",
+                ],
+            },
             { role: "user" },
         ],
         savedBooks: [],

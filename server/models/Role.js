@@ -8,8 +8,9 @@ const roleSchema = new Schema(
             required: true,
         },
         // saved book id from GoogleBooks
-        associatedId: {
-            type: String,
+        associatedIds: {
+            type: [String],
+            default: undefined,
         },
     },
     { _id: false }

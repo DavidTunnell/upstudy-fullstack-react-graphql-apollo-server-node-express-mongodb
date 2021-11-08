@@ -13,7 +13,7 @@ const typeDefs = gql`
 
     type Role {
         role: String
-        associatedId: String
+        associatedIds: [String]
     }
 
     type User {
