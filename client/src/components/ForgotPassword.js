@@ -52,9 +52,7 @@ const ForgotPassword = () => {
                 }
             } catch (err) {
                 //report success so it's not clear that the email doesn't exist
-                dispatch(
-                    modalActions.updateAndShowModal("Success", err.message)
-                );
+                dispatch(modalActions.updateAndShowModal("Hmm", err.message));
             }
         } else {
             //show issues with validation

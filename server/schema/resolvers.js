@@ -9,6 +9,9 @@ const {
     sendEmail,
     generatePassword,
 } = require("../utils/email");
+const { getGraphQLRateLimiter } = require("graphql-rate-limit");
+
+const rateLimiter = getGraphQLRateLimiter({ identifyContext: (ctx) => ctx.id });
 
 const resolvers = {
     Query: {
@@ -39,8 +42,23 @@ const resolvers = {
         },
         addEmailVerificationToken: async (
             parent,
-            { userId, username, email }
+            { userId, username, email },
+            context,
+            info
         ) => {
+            // console.log("graphQlRateLimit");
+            // console.log(getGraphQLRateLimiter);
+            // console.log("graphQlRateLimit");
+            var args = { userId, username, email };
+            const errorMessage = await rateLimiter(
+                { parent, args, context, info },
+                {
+                    max: 2,
+                    window: "10s",
+                    message: "You are doing that too often.",
+                }
+            );
+            if (errorMessage) throw new AuthenticationError(errorMessage);
             //create a email verification token and associated user id
             const newUserEmailToken = generateToken(userId);
             //save it to mongodb
@@ -120,7 +138,17 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        forgotPassword: async (parent, { email }) => {
+        forgotPassword: async (parent, { email }, context, info) => {
+            var args = { email };
+            const errorMessage = await rateLimiter(
+                { parent, args, context, info },
+                {
+                    max: 1,
+                    window: "10s",
+                    message: "You are doing that too often.",
+                }
+            );
+            if (errorMessage) throw new AuthenticationError(errorMessage);
             //generate a 10 character random password
             var newPw = generatePassword(10);
             //encrypt the new password for the database

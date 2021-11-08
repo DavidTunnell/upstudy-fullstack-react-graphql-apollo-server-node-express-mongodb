@@ -72,7 +72,11 @@ const VerifyEmail = () => {
             if (username && Auth.loggedIn()) {
                 //if so send them a verification email
                 try {
-                    generateVerificationEmail(userId, username, createdEmail);
+                    await generateVerificationEmail(
+                        userId,
+                        username,
+                        createdEmail
+                    );
                 } catch (error) {
                     history.push("/error", { data: error });
                 }

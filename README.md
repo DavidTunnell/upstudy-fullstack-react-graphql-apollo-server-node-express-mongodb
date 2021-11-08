@@ -13,6 +13,7 @@ This project uses the following technologies/libraries.
 -   [GraphQL](https://graphql.org/) as an API Querying Language
 -   [Apollo-Server-Express](https://www.npmjs.com/package/apollo-server-express) to Run a Spec-Compliant GraphQL Server with Express
 -   [@apollo/client](https://www.npmjs.com/package/@apollo/client) to Work with GraphQL on the React App
+-   [GraphQL-Rate-Limit](https://www.npmjs.com/package/graphql-rate-limit) for Rate Limiting on Server Calls where Necessary
 -   [React](https://reactjs.org/) as a Fast and Powerful Frontend
 -   [React-Router-Dom](https://www.npmjs.com/package/react-router-dom) for URL routing, URL parameters, Browser History Stack Usage, and Linking without Calling the Server
 -   [Redux](https://redux.js.org/) and [React-Redux](https://react-redux.js.org/) for Global State Management and Predictability
