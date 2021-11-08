@@ -1,4 +1,6 @@
+import Categories from "./Categories";
 import Test from "./Test";
+import SearchBar from "./SearchBar";
 import useScrollToTop from "../utils/useScrollToTop";
 
 const Home = () => {
@@ -7,6 +9,8 @@ const Home = () => {
     return (
         <div className="home">
             <Test />
+            <SearchBar />
+            <Categories />
         </div>
     );
 };

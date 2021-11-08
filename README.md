@@ -182,6 +182,8 @@ inside, each sub category - apply to be a mod, suggest a sub category, or click 
 -once clicked into a sub category are each of the subjects (for js: closures, oop, variables, every subject), add search for this page too
 -click into one and it opens up the link list with voting, each one is a container with commenting and voting on comments, add search
 
+design the app <<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
+
 known bug:
 -when authentication times out and you are logged out - has to do with this on header:
 {/\_ {!user.isVerified && (
