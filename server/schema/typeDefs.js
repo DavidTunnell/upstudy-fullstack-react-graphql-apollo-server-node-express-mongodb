@@ -11,12 +11,18 @@ const typeDefs = gql`
         title: String
     }
 
+    type Role {
+        role: String
+        associatedId: String
+    }
+
     type User {
         _id: ID
         username: String
         email: String
         password: String
         isVerified: Boolean!
+        roles: [Role]
         savedBooks: [Book]
     }
 

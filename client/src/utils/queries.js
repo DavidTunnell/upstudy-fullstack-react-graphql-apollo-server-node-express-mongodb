@@ -15,6 +15,10 @@ export const GET_USERS = gql`
                 link
                 title
             }
+            roles {
+                role
+                associatedId
+            }
         }
     }
 `;
@@ -33,6 +37,10 @@ export const GET_USER = gql`
                 image
                 link
                 title
+            }
+            roles {
+                role
+                associatedId
             }
         }
     }

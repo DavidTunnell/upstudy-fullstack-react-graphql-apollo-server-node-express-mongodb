@@ -23,7 +23,11 @@ const userSchema = new Schema(
             required: true,
         },
         isVerified: { type: Boolean, default: false },
-        roles: [roleSchema],
+        roles: {
+            type: [roleSchema],
+            required: true,
+            default: { role: "user" },
+        },
         // set savedBooks to be an array of data that adheres to the bookSchema
         savedBooks: [bookSchema],
     },

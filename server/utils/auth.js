@@ -8,6 +8,7 @@ module.exports = {
     // token validation middleware for user security
     authMiddleware: function ({ req }) {
         console.log("authMiddleware ran");
+        // console.log(req);
         //get the token
         let token =
             req.body.token || req.query.token || req.headers.authorization;
@@ -28,9 +29,9 @@ module.exports = {
         //return updated request
         return req;
     },
-    signToken: function ({ username, email, _id, isVerified }) {
+    signToken: function ({ username, email, _id, isVerified, roles }) {
         //create object with user data
-        const payload = { username, email, _id, isVerified };
+        const payload = { username, email, _id, isVerified, roles };
         //sign token with this data included
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     },

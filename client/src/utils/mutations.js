@@ -9,6 +9,10 @@ export const ADD_USER = gql`
                 username
                 email
                 isVerified
+                roles {
+                    role
+                    associatedId
+                }
             }
         }
     }

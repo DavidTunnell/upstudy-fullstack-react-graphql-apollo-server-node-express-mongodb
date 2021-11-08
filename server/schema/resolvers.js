@@ -46,15 +46,12 @@ const resolvers = {
             context,
             info
         ) => {
-            // console.log("graphQlRateLimit");
-            // console.log(getGraphQLRateLimiter);
-            // console.log("graphQlRateLimit");
             var args = { userId, username, email };
             const errorMessage = await rateLimiter(
                 { parent, args, context, info },
                 {
                     max: 2,
-                    window: "10s",
+                    window: "20s",
                     message: "You are doing that too often.",
                 }
             );

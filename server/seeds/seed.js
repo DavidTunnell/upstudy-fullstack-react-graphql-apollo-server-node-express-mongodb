@@ -33,11 +33,7 @@ const userSeed = [
         email: "admin@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
-        roles: [
-            { role: "admin", associatedId: null },
-            { role: "mod", associatedId: "ID of sub/section etc here" },
-            { role: "user", associatedId: null },
-        ],
+        roles: [{ role: "admin" }, { role: "user" }],
         savedBooks: [],
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -49,7 +45,7 @@ const userSeed = [
         isVerified: false,
         roles: [
             { role: "mod", associatedId: "ID of sub/section etc here" },
-            { role: "user", associatedId: null },
+            { role: "user" },
         ],
         savedBooks: [],
         createdAt: new Date(),
@@ -60,7 +56,6 @@ const userSeed = [
         email: "user@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
-        roles: [{ role: "user", associatedId: null }],
         savedBooks: [],
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -69,9 +64,9 @@ const userSeed = [
 
 //first delete user data in database and then populate with seed data
 User.deleteMany({})
-    .then(() => User.collection.insertMany(userSeed))
+    .then(() => User.insertMany(userSeed))
     .then((data) => {
-        console.log(data.insertedCount + " records inserted.");
+        console.log(data.length + " records inserted.");
         process.exit(0);
     })
     .catch((err) => {
