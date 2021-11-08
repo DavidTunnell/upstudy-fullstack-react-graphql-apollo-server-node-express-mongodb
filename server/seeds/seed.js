@@ -29,10 +29,38 @@ const hashPassword = (password) => {
 //data object to be inserted in to db
 const userSeed = [
     {
-        username: "David Tunnell",
-        email: "d@t.com",
+        username: "Admin Man",
+        email: "admin@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
+        roles: [
+            { role: "admin", associatedId: null },
+            { role: "mod", associatedId: "ID of sub/section etc here" },
+            { role: "user", associatedId: null },
+        ],
+        savedBooks: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        username: "Mod Buddy",
+        email: "mod@upstudy.io",
+        password: hashPassword("12345"),
+        isVerified: false,
+        roles: [
+            { role: "mod", associatedId: "ID of sub/section etc here" },
+            { role: "user", associatedId: null },
+        ],
+        savedBooks: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        username: "User Dude",
+        email: "user@upstudy.io",
+        password: hashPassword("12345"),
+        isVerified: false,
+        roles: [{ role: "user", associatedId: null }],
         savedBooks: [],
         createdAt: new Date(),
         updatedAt: new Date(),

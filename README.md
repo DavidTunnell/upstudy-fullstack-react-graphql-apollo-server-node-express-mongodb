@@ -26,7 +26,7 @@ This project uses the following technologies/libraries.
 -   [Nodemon](https://nodemon.io/) for More Pleasant Node.js Development
 -   [Concurrently](https://nodemon.io/) to Run Multiple Dev Commands on a Single Terminal
 -   [Bcrypt Package](https://www.npmjs.com/package/bcrypt) for Password Hashing and Management
--   [React-Ga](https://www.npmjs.com/package/react-ga) to Track Website Traffic data with Google Analytics
+-   [React-Ga](https://www.npmjs.com/package/react-ga) to Track Website Traffic Data with Google Analytics
 -   [JSON Web Tokens](https://jwt.io/) for Additional User Security
 -   [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) to Utilize JWT Technology in the App
 -   [Jwt-Decode](https://www.npmjs.com/package/jwt-decode) to Decode Token Data
