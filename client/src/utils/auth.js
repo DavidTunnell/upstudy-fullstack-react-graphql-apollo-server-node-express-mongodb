@@ -42,13 +42,13 @@ class AuthService {
         );
     }
 
-    logout() {
+    async logout() {
         // Clear user token and profile data from localStorage
         localStorage.removeItem("id_token");
         //update redux store removing logged in users data
-        store.dispatch(userActions.logoutRedux());
+        await store.dispatch(userActions.logoutRedux());
         // this will reload the page and reset the state of the application, a no-no for react, unless for logout to refresh user experience
-        // window.location.assign("/");
+        window.location.assign("/");
     }
 }
 
