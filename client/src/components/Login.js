@@ -67,6 +67,7 @@ const Login = ({
         if (validatorLogin.allValid()) {
             try {
                 //check login via graphql mutation
+                //this line breaks
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
@@ -76,7 +77,8 @@ const Login = ({
                     data.login.user._id,
                     data.login.user.username,
                     data.login.user.email,
-                    data.login.user.isVerified
+                    data.login.user.isVerified,
+                    data.login.user.roles
                 );
                 //send user to homepage after login
                 history.push("/");
@@ -110,7 +112,8 @@ const Login = ({
                     data.addUser.user._id,
                     data.addUser.user.username,
                     data.addUser.user.email,
-                    data.addUser.user.isVerified
+                    data.addUser.user.isVerified,
+                    data.addUser.user.roles
                 );
                 //after user is created, forward them to a page to verify their email address
                 if (!data.addUser.user.isVerified) {

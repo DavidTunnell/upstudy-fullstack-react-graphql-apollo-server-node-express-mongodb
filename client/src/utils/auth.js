@@ -33,11 +33,13 @@ class AuthService {
         return localStorage.getItem("id_token");
     }
 
-    login(idToken, id, username, email, isVerified) {
+    login(idToken, id, username, email, isVerified, roles) {
         // Saves user token to localStorage
         localStorage.setItem("id_token", idToken);
         //add user data to redux state on login
-        store.dispatch(userActions.loginRedux(id, username, email, isVerified));
+        store.dispatch(
+            userActions.loginRedux(id, username, email, isVerified, roles)
+        );
     }
 
     logout() {
@@ -46,7 +48,7 @@ class AuthService {
         //update redux store removing logged in users data
         store.dispatch(userActions.logoutRedux());
         // this will reload the page and reset the state of the application, a no-no for react, unless for logout to refresh user experience
-        window.location.assign("/");
+        // window.location.assign("/");
     }
 }
 

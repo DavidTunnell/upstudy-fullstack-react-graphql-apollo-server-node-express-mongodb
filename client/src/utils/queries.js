@@ -17,7 +17,7 @@ export const GET_USERS = gql`
             }
             roles {
                 role
-                associatedId
+                associatedIds
             }
         }
     }
@@ -40,7 +40,7 @@ export const GET_USER = gql`
             }
             roles {
                 role
-                associatedId
+                associatedIds
             }
         }
     }

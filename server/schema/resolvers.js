@@ -131,6 +131,7 @@ const resolvers = {
                     "If the user you entered exists, you entered the wrong username and/or password."
                 );
             }
+            console.log(user);
             //if both are found create a sign in token and pass it and the user data back to client
             const token = signToken(user);
             return { token, user };

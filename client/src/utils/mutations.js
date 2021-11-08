@@ -11,7 +11,7 @@ export const ADD_USER = gql`
                 isVerified
                 roles {
                     role
-                    associatedId
+                    associatedIds
                 }
             }
         }
@@ -64,7 +64,7 @@ export const USER_LOGIN = gql`
                 isVerified
                 roles {
                     role
-                    associatedId
+                    associatedIds
                 }
             }
         }
