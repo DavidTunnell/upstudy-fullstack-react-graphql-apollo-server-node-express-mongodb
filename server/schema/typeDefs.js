@@ -1,6 +1,16 @@
 const { gql } = require("apollo-server-express");
-
+//https://janikvonrotz.ch/2020/01/29/apollo-graphql-server-and-client-sorting/
 const typeDefs = gql`
+    enum Order {
+        ASC
+        DESC
+    }
+
+    input SortBy {
+        field: String!
+        order: Order!
+    }
+
     type Book {
         _id: String
         authors: [String]
@@ -49,7 +59,7 @@ const typeDefs = gql`
     type Query {
         users: [User]!
         user(userId: ID!): User
-        subjects: [Subject]!
+        subjects(sortBy: SortBy): [Subject]!
         subject(subjectId: ID!): Subject
     }
 

@@ -45,3 +45,29 @@ export const GET_USER = gql`
         }
     }
 `;
+
+export const GET_SUBJECTS = gql`
+    query Subject {
+        subjects(sortBy: { field: "name", order: ASC }) {
+            _id
+            name
+            description
+            image
+            bgColor
+            createdBy
+        }
+    }
+`;
+
+export const GET_SUBJECT = gql`
+    query Subject($subjectId: ID!) {
+        subject(subjectId: $subjectId) {
+            _id
+            name
+            description
+            image
+            bgColor
+            createdBy
+        }
+    }
+`;

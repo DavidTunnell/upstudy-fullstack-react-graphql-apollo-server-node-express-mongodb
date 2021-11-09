@@ -21,8 +21,13 @@ const resolvers = {
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId });
         },
-        subjects: async () => {
-            return Subject.find();
+        subjects: async (obj, args, context) => {
+            const sortBy = {};
+            if (args.sortBy) {
+                sortBy[args.sortBy.field] =
+                    args.sortBy.order === "ASC" ? 1 : -1;
+            }
+            return await Subject.find({}).sort(sortBy);
         },
         subject: async (parent, { subjectId }) => {
             return Subject.findOne({ _id: subjectId });
