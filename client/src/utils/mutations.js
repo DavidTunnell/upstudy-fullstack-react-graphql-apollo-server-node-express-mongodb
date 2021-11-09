@@ -18,6 +18,31 @@ export const ADD_USER = gql`
     }
 `;
 
+export const ADD_SUBJECT = gql`
+    mutation AddSubject(
+        $name: String!
+        $description: String!
+        $bgColor: String!
+        $createdBy: String!
+        $image: String
+    ) {
+        addSubject(
+            name: $name
+            description: $description
+            bgColor: $bgColor
+            createdBy: $createdBy
+            image: $image
+        ) {
+            _id
+            name
+            description
+            image
+            bgColor
+            createdBy
+        }
+    }
+`;
+
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     mutation AddEmailVerificationTokenMutation(
         $userId: String!

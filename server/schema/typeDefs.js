@@ -26,6 +26,15 @@ const typeDefs = gql`
         savedBooks: [Book]
     }
 
+    type Subject {
+        _id: ID
+        name: String
+        description: String
+        image: String
+        bgColor: String
+        createdBy: String
+    }
+
     type TokenEmailVerification {
         user: User
         token: String
@@ -59,6 +68,14 @@ const typeDefs = gql`
             username: String!
             email: String!
         ): TokenEmailVerification
+
+        addSubject(
+            name: String!
+            description: String!
+            image: String
+            bgColor: String!
+            createdBy: String!
+        ): Subject
 
         addBook(
             userId: ID!

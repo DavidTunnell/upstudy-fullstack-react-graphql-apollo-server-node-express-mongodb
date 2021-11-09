@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, TokenEmailVerification } = require("../models");
+const { User, TokenEmailVerification, Subject } = require("../models");
 const { signToken } = require("../utils/auth");
 const bcrypt = require("bcrypt");
 const {
@@ -38,6 +38,32 @@ const resolvers = {
                 const user = await User.create({ username, email, password });
                 const token = signToken(user);
                 return { token, user };
+            }
+        },
+        addSubject: async (
+            parent,
+            { name, description, image, bgColor, createdBy }
+        ) => {
+            //check if user with the credentials provided already exists
+            console.log("addSubject");
+            const subjectCheck = await Subject.findOne({ name });
+            console.log(subjectCheck);
+
+            //if so let user know
+            if (subjectCheck) {
+                throw new AuthenticationError(
+                    "A subject with this name already exists."
+                );
+            } else {
+                //otherwise create the new user, and a sign in token and return it
+                const subject = await Subject.create({
+                    name,
+                    description,
+                    image,
+                    bgColor,
+                    createdBy,
+                });
+                return subject;
             }
         },
         addEmailVerificationToken: async (
