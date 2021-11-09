@@ -28,7 +28,12 @@ const subjectSchema = new Schema(
         // mods
         //
     },
-    { timestamps: {} }
+    { timestamps: {} },
+    {
+        toJSON: {
+            virtuals: true,
+        },
+    }
 );
 
 const Subject = model("Subject", subjectSchema);
