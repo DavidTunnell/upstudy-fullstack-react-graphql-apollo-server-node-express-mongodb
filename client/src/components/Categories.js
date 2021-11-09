@@ -1,4 +1,10 @@
+import { useQuery } from "@apollo/client";
+import { GET_SUBJECTS } from "../utils/queries";
+
 const Categories = () => {
+    const { loading, data } = useQuery(GET_SUBJECTS);
+    console.log(loading);
+    console.log(data);
     return (
         <>
             <section className="m-10">
