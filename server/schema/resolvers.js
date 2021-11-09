@@ -21,6 +21,12 @@ const resolvers = {
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId });
         },
+        subjects: async () => {
+            return Subject.find();
+        },
+        subject: async (parent, { subjectId }) => {
+            return Subject.findOne({ _id: subjectId });
+        },
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
@@ -42,28 +48,31 @@ const resolvers = {
         },
         addSubject: async (
             parent,
-            { name, description, image, bgColor, createdBy }
+            { name, description, image, bgColor, createdBy },
+            context
         ) => {
-            //check if user with the credentials provided already exists
-            console.log("addSubject");
-            const subjectCheck = await Subject.findOne({ name });
-            console.log(subjectCheck);
+            if (context.user) {
+                //check if user with the credentials provided already exists
+                console.log("addSubject");
+                const subjectCheck = await Subject.findOne({ name });
+                console.log(subjectCheck);
 
-            //if so let user know
-            if (subjectCheck) {
-                throw new AuthenticationError(
-                    "A subject with this name already exists."
-                );
-            } else {
-                //otherwise create the new user, and a sign in token and return it
-                const subject = await Subject.create({
-                    name,
-                    description,
-                    image,
-                    bgColor,
-                    createdBy,
-                });
-                return subject;
+                //if so let user know
+                if (subjectCheck) {
+                    throw new AuthenticationError(
+                        "A subject with this name already exists."
+                    );
+                } else {
+                    //otherwise create the new user, and a sign in token and return it
+                    const subject = await Subject.create({
+                        name,
+                        description,
+                        image,
+                        bgColor,
+                        createdBy,
+                    });
+                    return subject;
+                }
             }
         },
         addEmailVerificationToken: async (
