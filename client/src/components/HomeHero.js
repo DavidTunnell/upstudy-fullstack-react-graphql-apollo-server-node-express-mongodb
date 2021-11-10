@@ -29,13 +29,22 @@ const HomeHero = () => {
                                         The <b>first place</b> to look when you
                                         study.
                                     </h1>
-
-                                    <Link
-                                        to="/signup"
-                                        class="btn btn-white btn-lg btn-rounded px-5"
-                                    >
-                                        Sign Up
-                                    </Link>
+                                    <span className="p-1">
+                                        <Link
+                                            to="/signup"
+                                            class="btn btn-white btn-lg btn-rounded px-5"
+                                        >
+                                            Sign Up
+                                        </Link>
+                                    </span>
+                                    {/* <span className="p-1">
+                                        <Link
+                                            to="/signup"
+                                            class="btn btn-white btn-lg btn-rounded px-5"
+                                        >
+                                            How It Works
+                                        </Link>
+                                    </span> */}
                                 </div>
                             </div>
                         </div>

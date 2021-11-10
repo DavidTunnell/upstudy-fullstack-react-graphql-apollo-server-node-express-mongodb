@@ -8,11 +8,11 @@ const Categories = () => {
     console.log(subjects);
     return (
         <>
-            <section class="bg-white m-5">
+            <section class="bg-white p-5">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-8 text-center">
-                            <h2>What do you want to learn today?</h2>
+                            <h5>What do you want to learn today?</h5>
                         </div>
                     </div>
                     <div class="row bordered separated gutter-0 ">
@@ -25,7 +25,7 @@ const Categories = () => {
                                                 <span>
                                                     <img
                                                         src={subject.image}
-                                                        alt="t"
+                                                        alt={subject.name}
                                                     />
                                                 </span>
                                             </i>
@@ -41,9 +41,16 @@ const Categories = () => {
                             <div class="feature-square">
                                 <Link to="/">
                                     <div>
-                                        <i class="svg-icon mb-2"></i>
+                                        <i class="svg-icon mb-2">
+                                            <span>
+                                                <img
+                                                    src="./assets/images/subjects/dark/suggest-new-subject.svg"
+                                                    alt="t"
+                                                />
+                                            </span>
+                                        </i>
                                         <h4 class="fs-18 font-weight-normal text-dark">
-                                            Suggest a Subject
+                                            Suggest a New Subject
                                         </h4>
                                     </div>
                                 </Link>
