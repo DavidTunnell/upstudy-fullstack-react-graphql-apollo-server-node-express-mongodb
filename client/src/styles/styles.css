@@ -19,6 +19,14 @@
     border-radius: 3vh !important;
 }
 
+.subject-button-controls {
+    padding: 0.6rem;
+}
+
+.control-color {
+    color: #7a7b86 !important;
+}
+
 @media (min-width: 576px) {
     .card-columns {
         column-count: 1;

@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark, faShareSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Categories = () => {
     const { loading, data } = useQuery(GET_SUBJECTS);
@@ -11,17 +13,42 @@ const Categories = () => {
             <section>
                 <div class="card-columns p-1 subject-card-columns">
                     <div
-                        class="card text-white text-center bg-success"
-                        // style={{ maxWidth: "400px" }}
+                        class="card text-white text-center"
+                        style={{ backgroundColor: "#31AF38" }}
                     >
                         <img
                             class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/6/67/Babbage40.png"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
-                            <h5 class="card-title">Computer Science</h5>
-                            <p class="card-text">1 sub category</p>
+                        <div class="card-body mt-0 pt-0">
+                            <h3 class="card-title">Computer Science</h3>
+                            <div class="btn-group">
+                                <label class="btn btn-secondary subject-button-controls">
+                                    <div>
+                                        <span class="control-color">
+                                            <FontAwesomeIcon
+                                                icon={faShareSquare}
+                                            />
+                                        </span>
+                                        <span class="control-color m-1">
+                                            Share
+                                        </span>
+                                    </div>
+                                </label>
+                                <label class="btn btn-secondary subject-button-controls">
+                                    <div>
+                                        <span class="control-color">
+                                            <FontAwesomeIcon
+                                                icon={faBookmark}
+                                            />
+                                        </span>
+                                        <span class="control-color m-1">
+                                            Save
+                                        </span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -33,7 +60,7 @@ const Categories = () => {
                             src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Z3_Deutsches_Museum.JPG"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
+                        <div class="card-body mt-0 pt-0">
                             <h5 class="card-title">Computer Science</h5>
                             <p class="card-text">1 sub category</p>
                         </div>
@@ -47,7 +74,7 @@ const Categories = () => {
                             src="https://upload.wikimedia.org/wikipedia/commons/2/21/Euclid.jpg"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
+                        <div class="card-body mt-0 pt-0">
                             <h5 class="card-title">Computer Science</h5>
                             <p class="card-text">1 sub category</p>
                         </div>
@@ -61,7 +88,7 @@ const Categories = () => {
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/RedCrossNursen.jpg/330px-RedCrossNursen.jpg"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
+                        <div class="card-body mt-0 pt-0">
                             <h5 class="card-title">Computer Science</h5>
                             <p class="card-text">1 sub category</p>
                         </div>
@@ -75,8 +102,8 @@ const Categories = () => {
                             src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Philippine-stock-market-board.jpg"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
-                            <h5 class="card-title">Computer Science</h5>
+                        <div class="card-body mt-0 pt-0">
+                            <h1 class="card-title">Computer Science</h1>
                             <p class="card-text">1 sub category</p>
                         </div>
                     </div>
@@ -86,7 +113,7 @@ const Categories = () => {
                             src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Product_life_cycle.png"
                             alt="Card  cap"
                         />
-                        <div class="card-body">
+                        <div class="card-body mt-0 pt-0">
                             <h5 class="card-title">Computer Science</h5>
                             <p class="card-text">1 sub category</p>
                         </div>
@@ -149,18 +176,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
-// <div
-//     class="card p-3 m-3 text-white text-center bg-success"
-//     style={{ maxWidth: "400px" }}
-// >
-//     <img
-//         class="card-img-top"
-//         src="https://upload.wikimedia.org/wikipedia/commons/6/67/Babbage40.png"
-//         alt="Card  cap"
-//     />
-//     <div class="card-body">
-//         <h5 class="card-title">Computer Science</h5>
-//         <p class="card-text">1 sub category</p>
-//     </div>
-// </div>;
