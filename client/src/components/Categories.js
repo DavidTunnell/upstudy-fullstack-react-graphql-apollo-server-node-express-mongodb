@@ -9,9 +9,9 @@ const Categories = () => {
     return (
         <>
             <section>
-                <div class="card-columns">
+                <div class="card-columns p-1 subject-card-columns">
                     <div
-                        class="card p-3 m-3 text-white text-center bg-success"
+                        class="card text-white text-center bg-success"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -25,7 +25,7 @@ const Categories = () => {
                         </div>
                     </div>
                     <div
-                        class="card p-3 m-3 text-white text-center bg-primary"
+                        class="card text-white text-center bg-primary"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -39,7 +39,7 @@ const Categories = () => {
                         </div>
                     </div>
                     <div
-                        class="card p-3 m-3 text-white text-center bg-danger"
+                        class="card text-white text-center bg-danger"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -53,7 +53,7 @@ const Categories = () => {
                         </div>
                     </div>
                     <div
-                        class="card p-3 m-3 text-white text-center bg-warning"
+                        class="card text-white text-center bg-warning"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -67,7 +67,7 @@ const Categories = () => {
                         </div>
                     </div>
                     <div
-                        class="card p-3 m-3 text-white text-center bg-info"
+                        class="card text-white text-center bg-info"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -81,7 +81,7 @@ const Categories = () => {
                         </div>
                     </div>
                     <div
-                        class="card p-3 m-3 text-white text-center bg-success"
+                        class="card text-white text-center bg-success"
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
@@ -105,7 +105,7 @@ const Categories = () => {
                     </div>
                     <div class="row bordered separated gutter-0 ">
                         {subjects.map((subject) => (
-                            <div class="col-6 col-lg-3 ">
+                            <div class="col-sm-12 col-lg-6 col-lg-3 ">
                                 <div class="feature-square">
                                     <Link to="/">
                                         <div>
@@ -125,7 +125,7 @@ const Categories = () => {
                                 </div>
                             </div>
                         ))}
-                        <div class="col-6 col-lg-3 ">
+                        <div class="col-sm-12 col-lg-6 col-lg-3 ">
                             <div class="feature-square">
                                 <Link to="/">
                                     <div>
