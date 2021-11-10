@@ -15,7 +15,7 @@ const Categories = () => {
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/6/67/Babbage40.png"
                             alt="Card  cap"
                         />
@@ -29,7 +29,7 @@ const Categories = () => {
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Z3_Deutsches_Museum.JPG"
                             alt="Card  cap"
                         />
@@ -43,7 +43,7 @@ const Categories = () => {
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/2/21/Euclid.jpg"
                             alt="Card  cap"
                         />
@@ -57,7 +57,7 @@ const Categories = () => {
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/RedCrossNursen.jpg/330px-RedCrossNursen.jpg"
                             alt="Card  cap"
                         />
@@ -71,7 +71,7 @@ const Categories = () => {
                         // style={{ maxWidth: "400px" }}
                     >
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Philippine-stock-market-board.jpg"
                             alt="Card  cap"
                         />
@@ -80,12 +80,9 @@ const Categories = () => {
                             <p class="card-text">1 sub category</p>
                         </div>
                     </div>
-                    <div
-                        class="card text-white text-center bg-success"
-                        // style={{ maxWidth: "400px" }}
-                    >
+                    <div class="card text-white text-center bg-success">
                         <img
-                            class="card-img-top"
+                            class="card-img-top p-2 subject-image"
                             src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Product_life_cycle.png"
                             alt="Card  cap"
                         />
