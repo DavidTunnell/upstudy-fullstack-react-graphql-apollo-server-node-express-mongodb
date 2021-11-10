@@ -11,8 +11,8 @@ const SearchBar = () => {
                             <div class="col-md-6 mt-1 mt-md-0">
                                 <p>
                                     Did you find a bug? Want to make a
-                                    suggestion? If you have any feedback about
-                                    the web application please let us know.
+                                    suggestion? If you have any feedback please
+                                    let us know.
                                 </p>
                             </div>
                             <div class="col-md-3 mt-1 mt-md-0 text-lg-right">

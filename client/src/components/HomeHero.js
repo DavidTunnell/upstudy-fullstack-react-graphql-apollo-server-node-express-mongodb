@@ -14,6 +14,7 @@ const HomeHero = () => {
                         );
                     }
                 }}
+                style={{ overflow: "hidden" }}
             >
                 <div
                     class="swiper-container text-white"
