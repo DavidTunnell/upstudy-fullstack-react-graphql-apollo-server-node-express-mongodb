@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
 import Error from "./components/Error";
 import ForgotPassword from "./components/ForgotPassword";
+import BetaNotice from "./components/BetaNotice";
 import Auth from "./utils/auth";
 import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
@@ -124,6 +125,7 @@ function App() {
                     content={modalSettings.content}
                     closeModal={() => dispatch(modalActions.hideModal())}
                 />
+                <BetaNotice />
                 <Footer toTop={toTop} />
             </div>
         </ApolloProvider>
