@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 const HomeHero = () => {
-    const bgColor = "#blue";
+    const bgColor = "#2e4fc7";
     return (
         <>
             <section

@@ -38,6 +38,7 @@ const Login = ({
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     //local styling
     const bgImage = "/assets/images/login-bg.jpg";
+    const bgColor = "#3c66ff";
     //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);
     const [addUser] = useMutation(ADD_USER);
@@ -156,12 +157,13 @@ const Login = ({
 
     return (
         <>
-            <div className="viewport">
+            <section className="viewport">
                 <div
                     className="image image-overlay"
-                    style={{ backgroundImage: `url(${bgImage})` }}
+                    // style={{ backgroundImage: `url(${bgImage})` }}
+                    style={{ backgroundColor: bgColor }}
                 ></div>
-                <div className="container">
+                <div className="container mt-10">
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-5">
                             <div
@@ -396,7 +398,7 @@ const Login = ({
                             </div>
                             <div className="row">
                                 <div className="col-5 mx-auto pt-2">
-                                    <div className="text-center">
+                                    <div className="text-center text-white">
                                         <Link to="/forgot">
                                             Forgot Password
                                         </Link>
@@ -406,7 +408,7 @@ const Login = ({
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     );
 };

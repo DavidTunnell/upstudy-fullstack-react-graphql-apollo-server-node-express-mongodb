@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faShareSquare } from "@fortawesome/free-solid-svg-icons";
-
+import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
+// import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 const Categories = () => {
     const { loading, data } = useQuery(GET_SUBJECTS);
     const subjects = data?.subjects || [];
@@ -24,7 +24,7 @@ const Categories = () => {
                                 alt={subject.name}
                             />
                             <div class="card-body mt-0 pt-0">
-                                <h3 class="card-title">{subject.name}</h3>
+                                <h4 class="card-title">{subject.name}</h4>
                                 <div class="btn-group">
                                     <label class="btn btn-secondary subject-button-controls">
                                         <div>

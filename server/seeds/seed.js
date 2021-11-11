@@ -234,6 +234,7 @@ const subjectSeed = [
             "Chemistry is the scientific study of the properties and behavior of matter.",
         image: "./assets/images/subjects/open/chemistry.jpg",
         bgColor: "#f3c442",
+        // bgColor: "#f3c442",
         createdBy: "ADMIN_SEED",
     },
     {

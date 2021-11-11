@@ -1,7 +1,7 @@
 const SearchBar = () => {
     return (
         <>
-            <section class="bg-white p-6">
+            <section class="bg-light p-6">
                 <div class="container ">
                     <div class="boxed bg-primary p-5 text-white">
                         <div class="row justify-content-between align-items-center text-center text-md-left">
