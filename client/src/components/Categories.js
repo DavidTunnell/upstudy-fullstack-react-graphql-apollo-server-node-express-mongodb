@@ -32,11 +32,11 @@ const Categories = () => {
 
     return (
         <>
-            <section>
+            <section className="p-3">
                 <div className="card-columns p-1 subject-card-columns">
                     {filteredCategories.map((subject) => (
                         <div
-                            className="card text-white text-center category-cards"
+                            className="card text-white text-center category-cards mt-1"
                             key={subject.id}
                             style={{ backgroundColor: subject.bgColor }}
                         >
