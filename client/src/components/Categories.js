@@ -36,7 +36,7 @@ const Categories = () => {
                 <div className="card-columns p-1 subject-card-columns">
                     {filteredCategories.map((subject) => (
                         <div
-                            className="card text-white text-center"
+                            className="card text-white text-center category-cards"
                             key={subject.id}
                             style={{ backgroundColor: subject.bgColor }}
                         >
