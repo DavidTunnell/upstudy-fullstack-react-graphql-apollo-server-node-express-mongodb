@@ -4,13 +4,13 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState, useEffect, useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { categoriesActions } from "../redux/actions/";
 
 // import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 const Categories = () => {
+    const categories = useSelector((state) => state.categories);
     const { loading, data } = useQuery(GET_SUBJECTS);
-    const subjects = data?.subjects || [];
     const dispatch = useDispatch();
     function getCategories() {
         dispatch(categoriesActions.categories(data));
@@ -29,7 +29,7 @@ const Categories = () => {
         <>
             <section>
                 <div className="card-columns p-1 subject-card-columns">
-                    {subjects.map((subject) => (
+                    {categories.map((subject) => (
                         <div
                             className="card text-white text-center"
                             key={subject.id}
