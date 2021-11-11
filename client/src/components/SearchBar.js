@@ -1,13 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { categoriesActions } from "../redux/actions/";
 const SearchBar = () => {
+    // const categories = useSelector((state) => state.categories);
     const [searchInput, setSearchInput] = useState("");
+    const dispatch = useDispatch();
     const handleSearchInputChange = (event) => {
         const { value } = event.target;
         setSearchInput(value);
-        console.log(searchInput);
+        dispatch(categoriesActions.filterCategories(value));
     };
+
     return (
         <>
             <section className="bg-light p-2">
