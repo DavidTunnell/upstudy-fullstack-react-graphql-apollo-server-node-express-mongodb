@@ -1,27 +1,35 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import React, { useState } from "react";
 const SearchBar = () => {
+    const [searchInput, setSearchInput] = useState("");
+    const handleSearchInputChange = (event) => {
+        const { value } = event.target;
+        setSearchInput(value);
+        console.log(searchInput);
+    };
     return (
         <>
             <section className="bg-light p-2">
                 <div className="container ">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col-md-12">
-                            <div class="input-group rounded">
+                    <div className="row justify-content-between align-items-center">
+                        <div className="col-md-12">
+                            <div className="input-group rounded">
                                 <input
-                                    class="form-control py-2 border-right-0 border"
+                                    className="form-control py-2 border-right-0 border"
                                     type="search"
                                     placeholder="Search subjects..."
+                                    onChange={handleSearchInputChange}
+                                    value={searchInput}
                                 />
                                 <span
-                                    class="input-group-append"
+                                    className="input-group-append"
                                     style={{
                                         border: "1px solid #e5e5e5",
                                         borderRadius: "0.25rem",
                                     }}
                                 >
-                                    <div class="input-group-text bg-white text-muted">
+                                    <div className="input-group-text bg-white text-muted">
                                         <FontAwesomeIcon icon={faSearch} />
                                     </div>
                                 </span>
@@ -30,7 +38,7 @@ const SearchBar = () => {
                     </div>
                 </div>
             </section>
-            {/* <div class="border-top"></div> */}
+            {/* <div className="border-top"></div> */}
         </>
     );
 };

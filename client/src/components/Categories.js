@@ -1,51 +1,68 @@
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect, useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { categoriesActions } from "../redux/actions/";
+
 // import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 const Categories = () => {
     const { loading, data } = useQuery(GET_SUBJECTS);
     const subjects = data?.subjects || [];
-    console.log(subjects);
+    const dispatch = useDispatch();
+    function getCategories() {
+        dispatch(categoriesActions.categories(data));
+    }
+    if (!loading) {
+        getCategories();
+    }
+    // useEffect(() => {
+    //     // if (!loading) {
+    //     //     dispatch(categoriesActions.categories(data));
+    //     // }
+    //     console.log("inside: " + loading);
+    // }, []);
+
     return (
         <>
             <section>
-                <div class="card-columns p-1 subject-card-columns">
+                <div className="card-columns p-1 subject-card-columns">
                     {subjects.map((subject) => (
                         <div
-                            class="card text-white text-center"
+                            className="card text-white text-center"
                             key={subject.id}
                             style={{ backgroundColor: subject.bgColor }}
                         >
                             <img
-                                class="card-img-top p-2 subject-image"
+                                className="card-img-top p-2 subject-image"
                                 src={subject.image}
                                 alt={subject.name}
                             />
-                            <div class="card-body mt-0 pt-0">
-                                <h4 class="card-title">{subject.name}</h4>
-                                <div class="btn-group">
-                                    <label class="btn btn-secondary subject-button-controls">
+                            <div className="card-body mt-0 pt-0">
+                                <h4 className="card-title">{subject.name}</h4>
+                                <div className="btn-group">
+                                    <label className="btn btn-secondary subject-button-controls">
                                         <div>
-                                            <span class="control-color">
+                                            <span className="control-color">
                                                 <FontAwesomeIcon
                                                     icon={faShareSquare}
                                                 />
                                             </span>
-                                            <span class="control-color m-1">
+                                            <span className="control-color m-1">
                                                 Share
                                             </span>
                                         </div>
                                     </label>
-                                    <label class="btn btn-secondary subject-button-controls">
+                                    <label className="btn btn-secondary subject-button-controls">
                                         <div>
-                                            <span class="control-color">
+                                            <span className="control-color">
                                                 <FontAwesomeIcon
                                                     icon={faBookmark}
                                                 />
                                             </span>
-                                            <span class="control-color m-1">
+                                            <span className="control-color m-1">
                                                 Save
                                             </span>
                                         </div>
@@ -56,20 +73,20 @@ const Categories = () => {
                     ))}
                 </div>
             </section>
-            {/* <section class="bg-white p-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 text-center">
+            {/* <section className="bg-white p-5">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-8 text-center">
                             <h5>What do you want to learn today?</h5>
                         </div>
                     </div>
-                    <div class="row bordered separated gutter-0 ">
+                    <div className="row bordered separated gutter-0 ">
                         {subjects.map((subject) => (
-                            <div class="col-sm-12 col-lg-6 col-lg-3 ">
-                                <div class="feature-square">
+                            <div className="col-sm-12 col-lg-6 col-lg-3 ">
+                                <div className="feature-square">
                                     <Link to="/">
                                         <div>
-                                            <i class="svg-icon mb-2">
+                                            <i className="svg-icon mb-2">
                                                 <span>
                                                     <img
                                                         src={subject.image}
@@ -77,7 +94,7 @@ const Categories = () => {
                                                     />
                                                 </span>
                                             </i>
-                                            <h4 class="fs-18 font-weight-normal text-dark">
+                                            <h4 className="fs-18 font-weight-normal text-dark">
                                                 {subject.name}
                                             </h4>
                                         </div>
@@ -85,11 +102,11 @@ const Categories = () => {
                                 </div>
                             </div>
                         ))}
-                        <div class="col-sm-12 col-lg-6 col-lg-3 ">
-                            <div class="feature-square">
+                        <div className="col-sm-12 col-lg-6 col-lg-3 ">
+                            <div className="feature-square">
                                 <Link to="/">
                                     <div>
-                                        <i class="svg-icon mb-2">
+                                        <i className="svg-icon mb-2">
                                             <span>
                                                 <img
                                                     src="./assets/images/subjects/dark/suggest-new-subject.svg"
@@ -97,7 +114,7 @@ const Categories = () => {
                                                 />
                                             </span>
                                         </i>
-                                        <h4 class="fs-18 font-weight-normal text-dark">
+                                        <h4 className="fs-18 font-weight-normal text-dark">
                                             Suggest a New Subject
                                         </h4>
                                     </div>

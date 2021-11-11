@@ -163,7 +163,7 @@ const Login = ({
                     // style={{ backgroundImage: `url(${bgImage})` }}
                     style={{ backgroundColor: bgColor }}
                 ></div>
-                <div className="container mt-10">
+                <div className="container mt-8">
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-5">
                             <div
