@@ -7,10 +7,6 @@ function categoriesReducer(state = [], action) {
                 return action.payload.subjects;
             }
             return state;
-        case actions.FILTER_CATEGORIES:
-            console.log("FILTER_CATEGORIES in reducer");
-            console.log(action.payload.userInput);
-            return state;
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;

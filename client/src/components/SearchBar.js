@@ -2,15 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { categoriesActions } from "../redux/actions/";
+import { filteredCategoriesActions } from "../redux/actions/";
 const SearchBar = () => {
-    // const categories = useSelector((state) => state.categories);
+    const categories = useSelector((state) => state.categories);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
     const handleSearchInputChange = (event) => {
         const { value } = event.target;
         setSearchInput(value);
-        dispatch(categoriesActions.filterCategories(value));
+        console.log(searchInput, categories);
+        // dispatch(filteredCategoriesActions.categories(value));
+        dispatch(filteredCategoriesActions.filterCategories(value));
     };
 
     return (
