@@ -17,5 +17,6 @@ export const LOGOUT_REDUX = "logoutRedux";
 export const CATEGORIES = "Categories";
 
 export const FILTER_CATEGORIES = "filterCategories";
+export const SET_ALL_CATEGORIES = "SET_ALL_CATEGORIES";
 
 export const CATEGORY = "Category";

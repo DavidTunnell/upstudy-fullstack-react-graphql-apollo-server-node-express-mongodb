@@ -7,6 +7,7 @@ const SearchBar = () => {
     const categories = useSelector((state) => state.categories);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
+    // filteredCategoriesActions.filterCategories({ value: "", categories });
     const handleSearchInputChange = (event) => {
         const { value } = event.target;
         setSearchInput(value);

@@ -5,31 +5,36 @@ import React, { useState, useEffect, useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { categoriesActions } from "../redux/actions/";
+import {
+    categoriesActions,
+    filteredCategoriesActions,
+} from "../redux/actions/";
 
 // import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 const Categories = () => {
-    const categories = useSelector((state) => state.categories);
+    let filteredCategories = useSelector((state) => state.filteredCategories);
     const { loading, data } = useQuery(GET_SUBJECTS);
     const dispatch = useDispatch();
-    function getCategories() {
-        dispatch(categoriesActions.categories(data));
-    }
-    if (!loading) {
-        getCategories();
-    }
-    // useEffect(() => {
-    //     // if (!loading) {
-    //     //     dispatch(categoriesActions.categories(data));
-    //     // }
-    //     console.log("inside: " + loading);
-    // }, []);
+    useEffect(() => {
+        if (!loading) {
+            dispatch(categoriesActions.categories(data));
+            dispatch(filteredCategoriesActions.setAllCategories(data));
+        }
+    }, [data]);
+
+    // const currentCategories = () => {
+    //     if (filteredCategories.length === 0) {
+    //         return categories;
+    //     } else {
+    //         return filteredCategories;
+    //     }
+    // };
 
     return (
         <>
             <section>
                 <div className="card-columns p-1 subject-card-columns">
-                    {categories.map((subject) => (
+                    {filteredCategories.map((subject) => (
                         <div
                             className="card text-white text-center"
                             key={subject.id}
