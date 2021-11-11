@@ -10,9 +10,9 @@ const SearchBar = () => {
     const handleSearchInputChange = (event) => {
         const { value } = event.target;
         setSearchInput(value);
-        console.log(searchInput, categories);
-        // dispatch(filteredCategoriesActions.categories(value));
-        dispatch(filteredCategoriesActions.filterCategories(value));
+        dispatch(
+            filteredCategoriesActions.filterCategories({ value, categories })
+        );
     };
 
     return (
