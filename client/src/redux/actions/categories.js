@@ -1,7 +1,6 @@
 import * as actions from "../actionTypes";
 
 export const categories = (allCategories) => {
-    console.log("getCategories was called");
     return { type: actions.CATEGORIES, payload: allCategories };
 };
 export const category = (id) => {

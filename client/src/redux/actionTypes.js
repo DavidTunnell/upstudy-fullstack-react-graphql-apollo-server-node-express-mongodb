@@ -15,5 +15,6 @@ export const LOGIN_REDUX = "loginRedux";
 export const LOGOUT_REDUX = "logoutRedux";
 
 export const CATEGORIES = "Categories";
-export const CATEGORY = "Category";
 export const FILTER_CATEGORIES = "filterCategories";
+
+export const CATEGORY = "Category";
