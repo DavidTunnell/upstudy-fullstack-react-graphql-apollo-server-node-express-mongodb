@@ -2,12 +2,7 @@ import React, { useState } from "react";
 
 const SearchBar = () => {
     const [showModal, setShowModal] = useState(false);
-    const openModal = () => {
-        setShowModal(true);
-    };
-    const closeModal = () => {
-        setShowModal(false);
-    };
+
     return (
         <>
             <section className="bg-light p-6">
@@ -26,7 +21,9 @@ const SearchBar = () => {
                             </div>
                             <div className="col-md-3 mt-1 mt-md-0 text-lg-right">
                                 <button
-                                    onClick={() => openModal()}
+                                    onClick={() => {
+                                        setShowModal(true);
+                                    }}
                                     className="btn btn-white btn-rounded px-5"
                                 >
                                     Write Us
@@ -47,17 +44,19 @@ const SearchBar = () => {
                     style={{ display: `${showModal ? "block" : "none"}` }}
                 >
                     <div
-                        className="modal-dialog modal-dialog-centered"
+                        className="modal-dialog modal-dialog-centered modal-xl"
                         role="document"
                     >
-                        <div className="modal-content">
+                        <div className="modal-content bg-light">
                             <div className="justify-content-end">
                                 <button
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
                                     aria-label="Close"
-                                    onClick={() => closeModal()}
+                                    onClick={() => {
+                                        setShowModal(false);
+                                    }}
                                 >
                                     <span
                                         aria-hidden="true"
@@ -65,9 +64,119 @@ const SearchBar = () => {
                                     ></span>
                                 </button>
                             </div>
-                            <div className="modal-body text-center">
-                                <h3>title</h3>
-                                <p>content</p>
+                            <div className="modal-body text-left mt-n3">
+                                <div class="container">
+                                    <div class="text-center">
+                                        <h2>Write Us</h2>
+                                        <p class="lead">
+                                            Did you find a bug? Want to make a
+                                            suggestion? If you have any feedback
+                                            please let us know.
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="mt-2">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="firstName">
+                                                            Username
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    @
+                                                                </span>
+                                                            </div>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="username"
+                                                                placeholder="Username"
+                                                                required
+                                                            />
+                                                            <div
+                                                                class="invalid-feedback"
+                                                                style={{
+                                                                    width: "100%",
+                                                                }}
+                                                            >
+                                                                Your username is
+                                                                required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="lastName">
+                                                            Email
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            class="form-control"
+                                                            placeholder="user@upstudy.io"
+                                                            value=""
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 mt-n5">
+                                                    <label for="email">
+                                                        Category
+                                                    </label>
+                                                    <div class="form-group">
+                                                        <select class="form-control">
+                                                            <option>
+                                                                Suggestion
+                                                            </option>
+                                                            <option>Bug</option>
+                                                            <option>
+                                                                Other
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="address">
+                                                        Message
+                                                    </label>
+                                                    <textarea
+                                                        type="text"
+                                                        class="form-control"
+                                                        rows="6"
+                                                        style={{
+                                                            height: "100%",
+                                                        }}
+                                                        placeholder="I noticed that..."
+                                                        required
+                                                    />
+                                                </div>
+                                                <hr class="mb-2" />
+                                                <div>
+                                                    <div class="form-group">
+                                                        <label for="image">
+                                                            Image Upload
+                                                            (Optional)
+                                                        </label>
+                                                        <input
+                                                            type="file"
+                                                            class="form-control"
+                                                            name="image"
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-lg btn-primary w-100"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

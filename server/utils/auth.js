@@ -7,8 +7,6 @@ const expiration = process.env.AUTH_EXPIRATION;
 module.exports = {
     // token validation middleware for user security
     authMiddleware: function ({ req }) {
-        console.log("authMiddleware ran");
-        // console.log(req);
         //get the token
         let token =
             req.body.token || req.query.token || req.headers.authorization;
