@@ -13,7 +13,7 @@ const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
 
     //local styling
-    const bgImage = "./assets/images/login-bg.jpg";
+    const bgColor = "#3c66ff";
     const cardBgColor = "#f5f5f5";
 
     //state
@@ -101,7 +101,7 @@ const Dashboard = () => {
             <div className="viewport">
                 <div
                     className="image image-overlay image-blur "
-                    style={{ backgroundImage: `url(${bgImage})` }}
+                    style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container mt-10 mb-3">
                     <div className="row justify-content-center align-items-center">

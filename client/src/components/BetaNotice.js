@@ -1,8 +1,8 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { useMutation } from "@apollo/client";
 import { ADD_BETA_FEEDBACK } from "../utils/mutations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 const SearchBar = () => {
     const [username, setUsername] = useState("");
@@ -13,10 +13,26 @@ const SearchBar = () => {
     const [validatorFeedback] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-    const [isDisabledButton, setIsDisabledButton] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isMuted, setIsMuted] = useState("");
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
     //to save data to redux store
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.loggedInUser);
+
+    useEffect(() => {
+        if (user.email) {
+            setIsDisabled(true);
+            setEmail(user.email);
+            setUsername(user.username);
+            setIsMuted("text-muted");
+        } else {
+            setIsDisabled(false);
+            setEmail("");
+            setUsername("");
+            setIsMuted("");
+        }
+    }, [user]);
 
     const onSubmit = async (event) => {
         //prevent server reload of page on click
@@ -159,7 +175,7 @@ const SearchBar = () => {
                                                         </div>
                                                         <input
                                                             type="text"
-                                                            class="form-control"
+                                                            class={`form-control ${isMuted}`}
                                                             onChange={(
                                                                 event
                                                             ) => {
@@ -170,6 +186,9 @@ const SearchBar = () => {
                                                             }}
                                                             value={username}
                                                             placeholder="Username"
+                                                            disabled={
+                                                                isDisabled
+                                                            }
                                                         />
                                                     </div>
                                                     {validatorFeedback.message(
@@ -184,7 +203,7 @@ const SearchBar = () => {
                                                     </label>
                                                     <input
                                                         type="email"
-                                                        class="form-control"
+                                                        class={`form-control ${isMuted}`}
                                                         placeholder="user@upstudy.io"
                                                         onChange={(event) => {
                                                             setEmail(
@@ -193,6 +212,7 @@ const SearchBar = () => {
                                                             );
                                                         }}
                                                         value={email}
+                                                        disabled={isDisabled}
                                                     />
                                                     {validatorFeedback.message(
                                                         "email",
@@ -265,7 +285,6 @@ const SearchBar = () => {
                                                     type="submit"
                                                     class="btn btn-lg btn-primary w-100"
                                                     onClick={onSubmit}
-                                                    disabled={isDisabledButton}
                                                 >
                                                     Submit
                                                 </button>

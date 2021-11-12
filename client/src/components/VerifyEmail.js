@@ -12,7 +12,7 @@ const VerifyEmail = () => {
     //local styling
     const styles = {
         notFoundStyle: {
-            backgroundImage: "url(./assets/images/verify-bg.jpg)",
+            backgroundColor: "#3c66ff",
         },
     };
     //state
