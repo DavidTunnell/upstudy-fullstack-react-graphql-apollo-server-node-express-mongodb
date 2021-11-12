@@ -71,3 +71,16 @@ export const GET_SUBJECT = gql`
         }
     }
 `;
+
+export const GET_BETA_FEEDBACK = gql`
+    query BetaFeedback($sortBy: SortBy) {
+        betaFeedback(sortBy: $sortBy) {
+            _id
+            username
+            email
+            category
+            message
+            image
+        }
+    }
+`;

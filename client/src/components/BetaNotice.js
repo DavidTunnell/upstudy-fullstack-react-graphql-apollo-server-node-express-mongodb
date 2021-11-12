@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
-
+import { useMutation } from "@apollo/client";
+import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 const SearchBar = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -10,8 +11,8 @@ const SearchBar = () => {
     const [validatorFeedback] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-
-    const onSubmit = () => {
+    const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
+    const onSubmit = async () => {
         const selectedCategory = document
             .querySelector(".feedback-type")
             .querySelector(".selectric")
@@ -19,7 +20,22 @@ const SearchBar = () => {
         setCategory(selectedCategory);
 
         if (validatorFeedback.allValid()) {
-            console.log("yay");
+            try {
+                const { data } = await addBetaFeedback({
+                    variables: {
+                        username,
+                        email,
+                        category: selectedCategory,
+                        message,
+                        image,
+                    },
+                });
+                console.log(data);
+            } catch (err) {
+                //provide user with error message in modal using redux state date
+                // dispatch(modalActions.updateAndShowModal("Error", err.message));
+                console.log(err);
+            }
         } else {
             validatorFeedback.showMessages();
             //force update state to show validation messages to user

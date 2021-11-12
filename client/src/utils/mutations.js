@@ -43,6 +43,31 @@ export const ADD_SUBJECT = gql`
     }
 `;
 
+export const ADD_BETA_FEEDBACK = gql`
+    mutation Mutation(
+        $username: String!
+        $email: String!
+        $category: String!
+        $message: String!
+        $image: String
+    ) {
+        addBetaFeedback(
+            username: $username
+            email: $email
+            category: $category
+            message: $message
+            image: $image
+        ) {
+            _id
+            username
+            email
+            category
+            message
+            image
+        }
+    }
+`;
+
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     mutation AddEmailVerificationTokenMutation(
         $userId: String!
