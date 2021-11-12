@@ -45,6 +45,15 @@ const typeDefs = gql`
         createdBy: String
     }
 
+    type BetaFeedback {
+        _id: ID
+        username: String
+        email: String
+        category: String
+        message: String
+        image: String
+    }
+
     type TokenEmailVerification {
         user: User
         token: String
@@ -61,6 +70,7 @@ const typeDefs = gql`
         user(userId: ID!): User
         subjects(sortBy: SortBy): [Subject]!
         subject(subjectId: ID!): Subject
+        BetaFeedback(sortBy: SortBy): [BetaFeedback]!
     }
 
     type Mutation {
@@ -87,6 +97,14 @@ const typeDefs = gql`
             bgColor: String!
             createdBy: String!
         ): Subject
+
+        addBetaFeedback(
+            username: String!
+            email: String!
+            category: String!
+            message: String!
+            image: String
+        ): BetaFeedback
 
         addBook(
             userId: ID!
