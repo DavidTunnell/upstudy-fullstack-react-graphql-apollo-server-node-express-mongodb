@@ -1,5 +1,10 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, TokenEmailVerification, Subject } = require("../models");
+const {
+    User,
+    TokenEmailVerification,
+    Subject,
+    BetaFeedback,
+} = require("../models");
 const { signToken } = require("../utils/auth");
 const bcrypt = require("bcrypt");
 const {
@@ -31,6 +36,24 @@ const resolvers = {
         },
         subject: async (parent, { subjectId }) => {
             return Subject.findOne({ _id: subjectId });
+        },
+        betaFeedback: async (obj, args, context) => {
+            const sortBy = {};
+            if (args.sortBy) {
+                sortBy[args.sortBy.field] =
+                    args.sortBy.order === "ASC" ? 1 : -1;
+            }
+            return await BetaFeedback.find({}).sort(sortBy);
+            // query Subject {
+            //     subjects(sortBy: { field: "name", order: ASC }) {
+            //         _id
+            //         name
+            //         description
+            //         image
+            //         bgColor
+            //         createdBy
+            //     }
+            //}
         },
     },
     Mutation: {
@@ -79,6 +102,23 @@ const resolvers = {
                     return subject;
                 }
             }
+        },
+        addBetaFeedback: async (
+            parent,
+            { username, email, category, message, image },
+            context,
+            info
+        ) => {
+            console.log("addBetaFeedback");
+            //otherwise create the new user, and a sign in token and return it
+            const betaFeedback = await BetaFeedback.create({
+                username,
+                email,
+                category,
+                message,
+                image,
+            });
+            return betaFeedback;
         },
         addEmailVerificationToken: async (
             parent,

@@ -70,7 +70,7 @@ const typeDefs = gql`
         user(userId: ID!): User
         subjects(sortBy: SortBy): [Subject]!
         subject(subjectId: ID!): Subject
-        BetaFeedback(sortBy: SortBy): [BetaFeedback]!
+        betaFeedback(sortBy: SortBy): [BetaFeedback]!
     }
 
     type Mutation {

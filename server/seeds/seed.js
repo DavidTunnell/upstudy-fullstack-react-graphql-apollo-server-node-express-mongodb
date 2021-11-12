@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-const { User, TokenEmailVerification, Subject } = require("../models");
+const {
+    User,
+    TokenEmailVerification,
+    Subject,
+    BetaFeedback,
+} = require("../models");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -342,6 +347,17 @@ const subjectSeed = [
     },
 ];
 
+const betaFeedbackSeed = [
+    {
+        username: "Example Username",
+        email: "admin@upstudy.io",
+        category: "Suggestion",
+        message:
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+        image: "https://via.placeholder.com/150/0000FF/808080?Text=Upstudy.io",
+    },
+];
+
 //first delete user data in database and then populate with seed data
 User.deleteMany({})
     .then(() => User.insertMany(userSeed))
@@ -352,6 +368,22 @@ User.deleteMany({})
                 Object.keys({ userSeed })[0] +
                 " records inserted."
         );
+    })
+    .catch((err) => {
+        console.error(err);
+        process.exit(1);
+    });
+
+BetaFeedback.deleteMany({})
+    .then(() => BetaFeedback.insertMany(betaFeedbackSeed))
+    .then((data) => {
+        console.log(
+            data.length +
+                " " +
+                Object.keys({ betaFeedbackSeed })[0] +
+                " records inserted."
+        );
+        // process.exit(0);
     })
     .catch((err) => {
         console.error(err);
