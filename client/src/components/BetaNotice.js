@@ -11,14 +11,21 @@ const SearchBar = () => {
     const [validatorFeedback] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
+
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
-    const onSubmit = async () => {
+    const onSubmit = async (event) => {
+        //prevent server reload of page on click
+        event.preventDefault();
         const selectedCategory = document
             .querySelector(".feedback-type")
             .querySelector(".selectric")
             .querySelector(".label").innerHTML;
         setCategory(selectedCategory);
-
+        const feedbackModal = document.querySelector("#feedback-modal");
+        const feedbackModalBackdrop = document.querySelector(".modal-backdrop");
+        const feedbackModalOpen = document.querySelector(".modal-open");
+        const body = document.querySelector("body");
         if (validatorFeedback.allValid()) {
             try {
                 const { data } = await addBetaFeedback({
@@ -30,12 +37,24 @@ const SearchBar = () => {
                         image,
                     },
                 });
-                console.log(data);
+                //close
+                feedbackModal.classList.remove("show");
+                feedbackModal.style.cssText += "display: none;";
+                feedbackModalBackdrop.classList.remove("modal-backdrop");
+                feedbackModalOpen.classList.remove("modal-open");
+                body.style.cssText += "padding-right: 0px;";
+                //then show other modal
             } catch (err) {
-                //provide user with error message in modal using redux state date
+                //close
+                //then show other modal
                 // dispatch(modalActions.updateAndShowModal("Error", err.message));
                 console.log(err);
             }
+            setUsername("");
+            setEmail("");
+            //update category to suggestion?
+            setMessage("");
+            setImage("");
         } else {
             validatorFeedback.showMessages();
             //force update state to show validation messages to user
@@ -196,7 +215,6 @@ const SearchBar = () => {
                                                         );
                                                     }}
                                                     value={message}
-                                                    required
                                                 />
                                                 {validatorFeedback.message(
                                                     "message",
@@ -221,13 +239,13 @@ const SearchBar = () => {
                                                             );
                                                         }}
                                                         value={image}
-                                                        required
                                                     />
                                                 </div>
                                                 <button
                                                     type="submit"
                                                     class="btn btn-lg btn-primary w-100"
                                                     onClick={onSubmit}
+                                                    disabled={isDisabledButton}
                                                 >
                                                     Submit
                                                 </button>
