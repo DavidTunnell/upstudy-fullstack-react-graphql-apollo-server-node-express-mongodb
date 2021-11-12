@@ -1,7 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
+import SimpleReactValidator from "simple-react-validator";
 
 const SearchBar = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [category, setCategory] = useState("");
+    const [message, setMessage] = useState("");
+    const [image, setImage] = useState(""); //not sure
+    const [validatorFeedback] = useState(new SimpleReactValidator());
+    // eslint-disable-next-line
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+
+    const onSubmit = () => {
+        const selectedCategory = document
+            .querySelector(".feedback-type")
+            .querySelector(".selectric")
+            .querySelector(".label").innerHTML;
+        setCategory(selectedCategory);
+
+        if (validatorFeedback.allValid()) {
+            console.log("yay");
+        } else {
+            validatorFeedback.showMessages();
+            //force update state to show validation messages to user
+            forceUpdate();
+        }
+    };
+
     return (
         <>
             <section className="bg-light p-6">
@@ -80,20 +105,23 @@ const SearchBar = () => {
                                                         <input
                                                             type="text"
                                                             class="form-control"
-                                                            id="username"
-                                                            placeholder="Username"
-                                                            required
-                                                        />
-                                                        <div
-                                                            class="invalid-feedback"
-                                                            style={{
-                                                                width: "100%",
+                                                            onChange={(
+                                                                event
+                                                            ) => {
+                                                                setUsername(
+                                                                    event.target
+                                                                        .value
+                                                                );
                                                             }}
-                                                        >
-                                                            Your username is
-                                                            required.
-                                                        </div>
+                                                            value={username}
+                                                            placeholder="Username"
+                                                        />
                                                     </div>
+                                                    {validatorFeedback.message(
+                                                        "username",
+                                                        username,
+                                                        "required|min:3"
+                                                    )}
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="lastName">
@@ -103,9 +131,19 @@ const SearchBar = () => {
                                                         type="email"
                                                         class="form-control"
                                                         placeholder="user@upstudy.io"
-                                                        value=""
-                                                        required
+                                                        onChange={(event) => {
+                                                            setEmail(
+                                                                event.target
+                                                                    .value
+                                                            );
+                                                        }}
+                                                        value={email}
                                                     />
+                                                    {validatorFeedback.message(
+                                                        "email",
+                                                        email,
+                                                        "required|email"
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -113,7 +151,7 @@ const SearchBar = () => {
                                                 <label for="email">
                                                     Category
                                                 </label>
-                                                <div class="form-group">
+                                                <div class="form-group feedback-type">
                                                     <select class="form-control">
                                                         <option>
                                                             Suggestion
@@ -136,8 +174,19 @@ const SearchBar = () => {
                                                         height: "100%",
                                                     }}
                                                     placeholder="I noticed that..."
+                                                    onChange={(event) => {
+                                                        setMessage(
+                                                            event.target.value
+                                                        );
+                                                    }}
+                                                    value={message}
                                                     required
                                                 />
+                                                {validatorFeedback.message(
+                                                    "message",
+                                                    message,
+                                                    "required"
+                                                )}
                                             </div>
                                             <hr class="mb-2" />
                                             <div>
@@ -149,12 +198,20 @@ const SearchBar = () => {
                                                         type="file"
                                                         class="form-control"
                                                         name="image"
+                                                        onChange={(event) => {
+                                                            setImage(
+                                                                event.target
+                                                                    .value
+                                                            );
+                                                        }}
+                                                        value={image}
                                                         required
                                                     />
                                                 </div>
                                                 <button
                                                     type="submit"
                                                     class="btn btn-lg btn-primary w-100"
+                                                    onClick={onSubmit}
                                                 >
                                                     Submit
                                                 </button>

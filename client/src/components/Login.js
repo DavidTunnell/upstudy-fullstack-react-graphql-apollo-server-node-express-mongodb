@@ -305,7 +305,7 @@ const Login = ({
                                                         {validatorCreate.message(
                                                             "username",
                                                             userCreateData.createUsername,
-                                                            "required"
+                                                            "required|min:3"
                                                         )}
                                                     </div>
                                                     <div className="form-group">
