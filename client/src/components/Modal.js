@@ -8,10 +8,8 @@ const Modal = (params) => {
         <>
             <div
                 className={`modal fade ${showModal ? "show" : ""}`}
-                id="exampleModal"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
                 style={{ display: `${showModal ? "block" : "none"}` }}
             >
@@ -42,6 +40,7 @@ const Modal = (params) => {
                 </div>
             </div>
             <div
+                onClick={() => closeModal()}
                 className={` ${showModal ? "modal-backdrop fade show" : ""}`}
             ></div>
         </>

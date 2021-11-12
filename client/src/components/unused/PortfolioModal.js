@@ -9,7 +9,6 @@ const PortfolioModal = ({ projectData }) => {
                 id="project-modal"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
             >
                 <div
