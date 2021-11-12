@@ -2,6 +2,8 @@ import React, { useState, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { useMutation } from "@apollo/client";
 import { ADD_BETA_FEEDBACK } from "../utils/mutations";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../redux/actions/";
 const SearchBar = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -12,8 +14,10 @@ const SearchBar = () => {
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [isDisabledButton, setIsDisabledButton] = useState(false);
-
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
+    //to save data to redux store
+    const dispatch = useDispatch();
+
     const onSubmit = async (event) => {
         //prevent server reload of page on click
         event.preventDefault();
@@ -28,7 +32,7 @@ const SearchBar = () => {
         const body = document.querySelector("body");
         if (validatorFeedback.allValid()) {
             try {
-                const { data } = await addBetaFeedback({
+                await addBetaFeedback({
                     variables: {
                         username,
                         email,
@@ -38,18 +42,28 @@ const SearchBar = () => {
                     },
                 });
                 //close
-                feedbackModal.classList.remove("show");
-                feedbackModal.style.cssText += "display: none;";
-                feedbackModalBackdrop.classList.remove("modal-backdrop");
-                feedbackModalOpen.classList.remove("modal-open");
-                body.style.cssText += "padding-right: 0px;";
+                dispatch(
+                    modalActions.updateAndShowModal(
+                        "Success",
+                        "We received your feedback. Thank you for being a part of Upstudy.io!"
+                    )
+                );
                 //then show other modal
             } catch (err) {
                 //close
                 //then show other modal
-                // dispatch(modalActions.updateAndShowModal("Error", err.message));
-                console.log(err);
+                dispatch(
+                    modalActions.updateAndShowModal(
+                        "Error",
+                        "There was an error either with graphQL or MongoDB. Please try again later."
+                    )
+                );
             }
+            feedbackModal.classList.remove("show");
+            feedbackModal.style.cssText += "display: none;";
+            feedbackModalBackdrop.classList.remove("modal-backdrop");
+            feedbackModalOpen.classList.remove("modal-open");
+            body.style.cssText += "padding-right: 0px;";
             setUsername("");
             setEmail("");
             //update category to suggestion?
@@ -60,6 +74,11 @@ const SearchBar = () => {
             //force update state to show validation messages to user
             forceUpdate();
         }
+    };
+
+    const handleWriteUsClick = async (event) => {
+        // const body = document.querySelector("body");
+        // body.style.cssText += "padding-right: 0px;";
     };
 
     return (
@@ -84,6 +103,7 @@ const SearchBar = () => {
                                     className="btn btn-white btn-rounded px-5"
                                     data-toggle="modal"
                                     data-target="#feedback-modal"
+                                    onClick={handleWriteUsClick}
                                 >
                                     Write Us
                                 </button>
