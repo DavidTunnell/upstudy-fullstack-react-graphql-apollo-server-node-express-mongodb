@@ -52,6 +52,7 @@ const typeDefs = gql`
         category: String
         message: String
         image: String
+        createdAt: String
     }
 
     type TokenEmailVerification {

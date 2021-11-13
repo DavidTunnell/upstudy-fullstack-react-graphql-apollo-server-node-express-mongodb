@@ -1,28 +1,22 @@
-import { Link, useHistory } from "react-router-dom";
-import Auth from "../utils/auth";
-import { useSelector } from "react-redux";
-import { useState, useEffect, useReducer } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_BETA_FEEDBACK } from "../utils/queries";
+import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-const BetaFeedback = ({ toTop }) => {
-    //get whether user is logged in from redux store
-    const user = useSelector((state) => state.loggedInUser);
-    //use react router history
-    const history = useHistory();
+const BetaFeedback = () => {
+    const { loading, data } = useQuery(GET_BETA_FEEDBACK);
 
-    //if the user isn't logged in send them to login screen
-    // useEffect(() => {
-    //     console.log(user);
-    //     if (user.roles.some((e) => e.role === "admin") && Auth.loggedIn()) {
-    //         /* vendors contains the element we're looking for */
-    //         console.log("is admin and is logged in");
-    //     } else if (Auth.loggedIn()) {
-    //         console.log("is NOT admin and is logged in");
-    //     }
-    //     if (!Auth.loggedIn()) {
-    //         console.log("not logged in");
-    //         history.push("/login");
-    //     }
-    // });
+    useEffect(() => {
+        console.log("bbbbbbbbbbbbbbbb");
+        console.log(data);
+        console.log("bbbbbbbbbbbbbbbb");
+        if (!loading) {
+            console.log(data);
+        } else {
+            console.log("loading");
+        }
+    }, [data, loading]);
 
     return (
         <>
@@ -34,26 +28,34 @@ const BetaFeedback = ({ toTop }) => {
                             <thead>
                                 <tr>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Order</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Message</th>
+                                    <th scope="col">Details</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">July 20, 2018</th>
-                                    <td>#110</td>
-                                    <td>$8021.47</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">July 20, 2018</th>
-                                    <td>#111</td>
-                                    <td>$8021.47</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">July 22, 2018</th>
-                                    <td>#112</td>
-                                    <td>$815</td>
-                                </tr>
+                                {data &&
+                                    data.betaFeedback.map((feedback) => (
+                                        <tr>
+                                            <th scope="row">
+                                                {new Date(
+                                                    parseInt(feedback.createdAt)
+                                                ).toLocaleDateString("en-US")}
+                                            </th>
+                                            <td>{feedback.category}</td>
+                                            <td>
+                                                {feedback.message.substring(
+                                                    0,
+                                                    40
+                                                )}
+                                            </td>
+                                            <td className="text-center">
+                                                <FontAwesomeIcon
+                                                    icon={faShareSquare}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
