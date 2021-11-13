@@ -74,6 +74,12 @@ export const ARCHIVE_BETA_FEEDBACK = gql`
     mutation ArchiveBetaFeedback($feedbackId: ID!) {
         archiveBetaFeedback(feedbackId: $feedbackId) {
             _id
+            username
+            email
+            category
+            message
+            image
+            createdAt
             archived
         }
     }

@@ -82,6 +82,7 @@ export const GET_BETA_FEEDBACK = gql`
             message
             image
             createdAt
+            archived
         }
     }
 `;

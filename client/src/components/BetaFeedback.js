@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_BETA_FEEDBACK } from "../utils/queries";
 import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
-import { useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { modalActions } from "../redux/actions/";
@@ -10,19 +10,18 @@ import { useDispatch } from "react-redux";
 const BetaFeedback = () => {
     const { loading, data } = useQuery(GET_BETA_FEEDBACK);
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
+    const [feedbackData, setFeedbackData] = useState(data?.betaFeedback);
     //to save data to redux store
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     console.log("bbbbbbbbbbbbbbbb");
-    //     console.log(data);
-    //     console.log("bbbbbbbbbbbbbbbb");
-    //     if (!loading) {
-    //         console.log(data);
-    //     } else {
-    //         console.log("loading");
-    //     }
-    // }, [data, loading]);
+    useEffect(() => {
+        if (!loading) {
+            setFeedbackData(data.betaFeedback);
+            // console.log(feedbackData);
+        } else {
+            console.log("loading");
+        }
+    }, [loading]);
 
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
@@ -52,7 +51,23 @@ const BetaFeedback = () => {
                     feedbackId: idSelected,
                 },
             });
-            console.log(data);
+
+            //update state of feedbackData to reflect archived: true
+            //find and replace object in array and then set state to new one
+            //^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            const copy = { ...feedbackData };
+
+            console.log(feedbackData);
+            //copy isnt an array.. this is an issue!!!!!!!!
+            console.log(copy);
+            const foundIndex = copy.findIndex((x) => x._id == idSelected);
+
+            copy[foundIndex] = data.archiveBetaFeedback;
+            setFeedbackData(copy);
+            console.log("feedbackData");
+            console.log(feedbackData);
+            console.log("feedbackData");
             //maybe update state of data.betaFeedback? maybe it should be put in state...
         } catch (err) {
             dispatch(modalActions.updateAndShowModal("Error", err.message));
