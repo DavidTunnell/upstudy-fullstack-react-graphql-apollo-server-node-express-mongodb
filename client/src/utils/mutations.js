@@ -44,7 +44,7 @@ export const ADD_SUBJECT = gql`
 `;
 
 export const ADD_BETA_FEEDBACK = gql`
-    mutation Mutation(
+    mutation AddBetaFeedback(
         $username: String!
         $email: String!
         $category: String!
@@ -64,6 +64,8 @@ export const ADD_BETA_FEEDBACK = gql`
             category
             message
             image
+            createdAt
+            archived
         }
     }
 `;

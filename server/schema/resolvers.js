@@ -117,6 +117,7 @@ const resolvers = {
                 category,
                 message,
                 image,
+                archived: false,
             });
             return betaFeedback;
         },

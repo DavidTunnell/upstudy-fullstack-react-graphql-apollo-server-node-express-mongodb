@@ -13,15 +13,19 @@ const betaFeedbackSchema = new Schema(
         },
         category: {
             type: String,
-            required: false,
+            required: true,
         },
         message: {
             type: String,
-            required: false,
+            required: true,
         },
         image: {
             type: String,
             required: false,
+        },
+        archived: {
+            type: Boolean,
+            required: true,
         },
     },
     { timestamps: {} },

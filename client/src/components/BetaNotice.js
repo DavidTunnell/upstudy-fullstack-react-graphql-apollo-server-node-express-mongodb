@@ -55,6 +55,7 @@ const SearchBar = () => {
                         category: selectedCategory,
                         message,
                         image,
+                        archived: false,
                     },
                 });
                 //close

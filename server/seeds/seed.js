@@ -355,6 +355,7 @@ const betaFeedbackSeed = [
         message:
             "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
         image: "https://via.placeholder.com/150/0000FF/808080?Text=Upstudy.io",
+        archived: false,
     },
 ];
 

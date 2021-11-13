@@ -47,12 +47,13 @@ const typeDefs = gql`
 
     type BetaFeedback {
         _id: ID
-        username: String
-        email: String
-        category: String
-        message: String
+        username: String!
+        email: String!
+        category: String!
+        message: String!
         image: String
-        createdAt: String
+        createdAt: String!
+        archived: Boolean!
     }
 
     type TokenEmailVerification {
