@@ -1,8 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import Profile from "./Profile";
+import BetaFeedback from "./BetaFeedback";
+import { useState, useEffect, useReducer } from "react";
+import Auth from "../utils/auth";
+
 const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isMod, setIsMod] = useState(false);
+    const [isUser, setIsUser] = useState(false);
+
     const bgColor = "#3c66ff";
+    //use react router history
+    const history = useHistory();
+
+    //if the user isn't logged in send them to login screen
+    useEffect(() => {
+        if (!Auth.loggedIn()) {
+            history.push("/login");
+        }
+        if (user.roles.some((e) => e.role === "admin") && Auth.loggedIn()) {
+            setIsAdmin(true);
+        }
+        if (user.roles.some((e) => e.role === "mod") && Auth.loggedIn()) {
+            setIsMod(true);
+        }
+        if (user.roles.some((e) => e.role === "user") && Auth.loggedIn()) {
+            setIsUser(true);
+        }
+    });
     return (
         <section
             style={{ backgroundColor: bgColor }}
@@ -66,27 +94,42 @@ const Dashboard = () => {
                                     <div className="row justify-content-center">
                                         <div className="col col-md-10 col-lg-8">
                                             <div className="nav nav-tabs mb-1">
-                                                <a
-                                                    className="nav-item nav-link active"
-                                                    data-toggle="tab"
-                                                    href="#profile"
-                                                >
-                                                    Profile
-                                                </a>
-                                                <a
-                                                    className="nav-item nav-link"
-                                                    data-toggle="tab"
-                                                    href="#feedback"
-                                                >
-                                                    Feedback
-                                                </a>
-                                                <a
-                                                    className="nav-item nav-link"
-                                                    data-toggle="tab"
-                                                    href="#example3"
-                                                >
-                                                    Example #3
-                                                </a>
+                                                {isUser && (
+                                                    <a
+                                                        className="nav-item nav-link active"
+                                                        data-toggle="tab"
+                                                        href="#profile"
+                                                    >
+                                                        Profile
+                                                    </a>
+                                                )}
+                                                {isAdmin && (
+                                                    <>
+                                                        <a
+                                                            className="nav-item nav-link"
+                                                            data-toggle="tab"
+                                                            href="#feedback"
+                                                        >
+                                                            Feedback
+                                                        </a>
+                                                        <a
+                                                            className="nav-item nav-link"
+                                                            data-toggle="tab"
+                                                            href="#mod-tools"
+                                                        >
+                                                            Mod Tools
+                                                        </a>
+                                                    </>
+                                                )}
+                                                {isMod && (
+                                                    <a
+                                                        className="nav-item nav-link"
+                                                        data-toggle="tab"
+                                                        href="#mod-tools"
+                                                    >
+                                                        Mod Tools
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -116,81 +159,20 @@ const Dashboard = () => {
                                         >
                                             <div className="row justify-content-center">
                                                 <div className="col-md-10 col-lg-8">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="table-responsive-md">
-                                                                <table class="table table-lined">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">
-                                                                                Date
-                                                                            </th>
-                                                                            <th scope="col">
-                                                                                Order
-                                                                            </th>
-                                                                            <th scope="col">
-                                                                                Price
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th scope="row">
-                                                                                July
-                                                                                20,
-                                                                                2018
-                                                                            </th>
-                                                                            <td>
-                                                                                #110
-                                                                            </td>
-                                                                            <td>
-                                                                                $8021.47
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">
-                                                                                July
-                                                                                20,
-                                                                                2018
-                                                                            </th>
-                                                                            <td>
-                                                                                #111
-                                                                            </td>
-                                                                            <td>
-                                                                                $8021.47
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th scope="row">
-                                                                                July
-                                                                                22,
-                                                                                2018
-                                                                            </th>
-                                                                            <td>
-                                                                                #112
-                                                                            </td>
-                                                                            <td>
-                                                                                $815
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <BetaFeedback />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div
                                             className="tab-pane"
-                                            id="example3"
+                                            id="mod-tools"
                                             role="tabpanel"
-                                            aria-labelledby="#example3"
+                                            aria-labelledby="#mod-tools"
                                         >
                                             <div className="row justify-content-center">
                                                 <div className="col-md-10 col-lg-8">
-                                                    Example #3 Panel
+                                                    Mod Tools will go here...
                                                 </div>
                                             </div>
                                         </div>

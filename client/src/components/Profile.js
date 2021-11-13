@@ -1,6 +1,6 @@
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect, useReducer } from "react";
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import SimpleReactValidator from "simple-react-validator";
@@ -28,15 +28,15 @@ const Dashboard = () => {
     //graphql mutation to update password
     const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
 
-    //use react router history
-    const history = useHistory();
+    // //use react router history
+    // const history = useHistory();
 
-    //if the user isn't logged in send them to login screen
-    useEffect(() => {
-        if (!Auth.loggedIn()) {
-            history.push("/login");
-        }
-    });
+    // //if the user isn't logged in send them to login screen
+    // useEffect(() => {
+    //     if (!Auth.loggedIn()) {
+    //         history.push("/login");
+    //     }
+    // });
 
     //update state for field input
     const handleOldPasswordInputChange = (event) => {
@@ -85,6 +85,9 @@ const Dashboard = () => {
                 }
                 //disable update button to prevent spamming
                 setIsDisabled(true);
+                setOldPassword("");
+                setNewPassword("");
+                setRepeatNewPassword("");
             } catch (err) {
                 dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
