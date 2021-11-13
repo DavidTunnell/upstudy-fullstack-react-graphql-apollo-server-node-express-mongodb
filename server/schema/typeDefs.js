@@ -108,6 +108,8 @@ const typeDefs = gql`
             image: String
         ): BetaFeedback
 
+        archiveBetaFeedback(feedbackId: ID!): BetaFeedback
+
         addBook(
             userId: ID!
             authors: [String]!

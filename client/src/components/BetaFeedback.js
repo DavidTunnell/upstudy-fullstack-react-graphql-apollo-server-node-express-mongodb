@@ -11,16 +11,16 @@ const BetaFeedback = () => {
     //to save data to redux store
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log("bbbbbbbbbbbbbbbb");
-        console.log(data);
-        console.log("bbbbbbbbbbbbbbbb");
-        if (!loading) {
-            console.log(data);
-        } else {
-            console.log("loading");
-        }
-    }, [data, loading]);
+    // useEffect(() => {
+    //     console.log("bbbbbbbbbbbbbbbb");
+    //     console.log(data);
+    //     console.log("bbbbbbbbbbbbbbbb");
+    //     if (!loading) {
+    //         console.log(data);
+    //     } else {
+    //         console.log("loading");
+    //     }
+    // }, [data, loading]);
 
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
@@ -37,6 +37,13 @@ const BetaFeedback = () => {
                 result.message
             )
         );
+    };
+
+    const handleFeedbackArchiveClick = (event) => {
+        event.preventDefault();
+        const idSelected = event.target.getAttribute("data-index");
+        console.log("handleFeedbackArchiveClick");
+        console.log(idSelected);
     };
 
     return (
@@ -98,7 +105,15 @@ const BetaFeedback = () => {
                                                         >
                                                             Details
                                                         </button>
-                                                        <button class="dropdown-item">
+                                                        <button
+                                                            class="dropdown-item"
+                                                            data-index={
+                                                                feedback._id
+                                                            }
+                                                            onClick={
+                                                                handleFeedbackArchiveClick
+                                                            }
+                                                        >
                                                             Archive
                                                         </button>
                                                     </div>

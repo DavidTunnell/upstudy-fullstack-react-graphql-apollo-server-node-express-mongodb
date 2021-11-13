@@ -121,6 +121,18 @@ const resolvers = {
             });
             return betaFeedback;
         },
+        archiveBetaFeedback: async (parent, { feedbackId }, context, info) => {
+            //find and update with ID
+            try {
+                const feedback = await BetaFeedback.findOneAndUpdate(
+                    { feedbackId },
+                    { archived: true }
+                );
+                return feedback;
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
+        },
         addEmailVerificationToken: async (
             parent,
             { userId, username, email },
