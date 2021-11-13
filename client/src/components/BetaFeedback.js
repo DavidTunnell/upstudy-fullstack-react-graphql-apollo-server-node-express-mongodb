@@ -1,5 +1,6 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_BETA_FEEDBACK } from "../utils/queries";
+import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 const BetaFeedback = () => {
     const { loading, data } = useQuery(GET_BETA_FEEDBACK);
+    const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
     //to save data to redux store
     const dispatch = useDispatch();
 
@@ -39,11 +41,22 @@ const BetaFeedback = () => {
         );
     };
 
-    const handleFeedbackArchiveClick = (event) => {
+    const handleFeedbackArchiveClick = async (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
         console.log("handleFeedbackArchiveClick");
         console.log(idSelected);
+        try {
+            const { data } = await archiveBetaFeedback({
+                variables: {
+                    feedbackId: idSelected,
+                },
+            });
+            console.log(data);
+            //maybe update state of data.betaFeedback? maybe it should be put in state...
+        } catch (err) {
+            dispatch(modalActions.updateAndShowModal("Error", err.message));
+        }
     };
 
     return (

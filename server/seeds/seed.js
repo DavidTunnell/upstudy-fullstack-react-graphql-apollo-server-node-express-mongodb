@@ -358,7 +358,7 @@ const betaFeedbackSeed = [
         archived: false,
     },
 ];
-
+1
 //first delete user data in database and then populate with seed data
 User.deleteMany({})
     .then(() => User.insertMany(userSeed))

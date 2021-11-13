@@ -123,11 +123,18 @@ const resolvers = {
         },
         archiveBetaFeedback: async (parent, { feedbackId }, context, info) => {
             //find and update with ID
+            console.log("archiveBetaFeedback on server");
+            console.log(feedbackId);
             try {
-                const feedback = await BetaFeedback.findOneAndUpdate(
-                    { feedbackId },
-                    { archived: true }
-                );
+                const feedback = await BetaFeedback.findOne({
+                    _id: feedbackId,
+                });
+                console.log("findOneAndUpdate returns");
+                if (feedback) {
+                    console.log(feedback);
+                    feedback.archived = true;
+                    feedback.save();
+                }
                 return feedback;
             } catch (error) {
                 throw new AuthenticationError(error.message);

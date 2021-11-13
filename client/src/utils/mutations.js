@@ -70,6 +70,15 @@ export const ADD_BETA_FEEDBACK = gql`
     }
 `;
 
+export const ARCHIVE_BETA_FEEDBACK = gql`
+    mutation ArchiveBetaFeedback($feedbackId: ID!) {
+        archiveBetaFeedback(feedbackId: $feedbackId) {
+            _id
+            archived
+        }
+    }
+`;
+
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     mutation AddEmailVerificationTokenMutation(
         $userId: String!
