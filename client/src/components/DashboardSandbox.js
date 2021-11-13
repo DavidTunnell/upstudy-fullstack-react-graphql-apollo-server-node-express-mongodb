@@ -17,7 +17,7 @@ const DashboardSandbox = () => {
                                     <img
                                         className="mr-3 avatar avatar-xl rounded"
                                         src="../../assets/images/demo/user-2.jpg"
-                                        alt="Generic placeholder image"
+                                        alt="Generic placeholder"
                                     />
                                 </div>
                                 <div className="col">
@@ -175,7 +175,7 @@ const DashboardSandbox = () => {
                                                                 <img
                                                                     className="avatar rounded mr-1"
                                                                     src="../../assets/images/demo/user-2.jpg"
-                                                                    alt="Image"
+                                                                    alt="placeholder"
                                                                 />
                                                                 <div className="media-body">
                                                                     <span className="mt-0">
@@ -206,7 +206,7 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <img
                                                                     src="../../assets/images/demo/image-square-1.jpg"
-                                                                    alt="Image"
+                                                                    alt="placeholder"
                                                                 />
                                                             </a>
                                                         </figure>
@@ -217,7 +217,7 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <img
                                                                     src="../../assets/images/demo/image-square-2.jpg"
-                                                                    alt="Image"
+                                                                    alt="placeholder"
                                                                 />
                                                             </a>
                                                         </figure>
@@ -228,7 +228,7 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <img
                                                                     src="../../assets/images/demo/image-square-3.jpg"
-                                                                    alt="Image"
+                                                                    alt="placeholder"
                                                                 />
                                                             </a>
                                                         </figure>
@@ -238,7 +238,7 @@ const DashboardSandbox = () => {
                                                     <div className="row">
                                                         <div className="col">
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="btn btn-ico btn-sm rounded btn-outline-light text-red"
                                                             >
                                                                 <i className="icon-heart2 fs-22"></i>
@@ -248,7 +248,7 @@ const DashboardSandbox = () => {
                                                             <div className="dropdown">
                                                                 <a
                                                                     className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                    href="#"
+                                                                    href="/"
                                                                     role="button"
                                                                     id="dropdownMenuLink"
                                                                     data-toggle="dropdown"
@@ -264,14 +264,14 @@ const DashboardSandbox = () => {
                                                                 >
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Make
                                                                         Primary
                                                                     </a>
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Remove
                                                                     </a>
@@ -294,7 +294,7 @@ const DashboardSandbox = () => {
                                                                 <img
                                                                     className="avatar rounded mr-1"
                                                                     src="../../assets/images/demo/user-2.jpg"
-                                                                    alt="Image"
+                                                                    alt="placeholder"
                                                                 />
                                                                 <div className="media-body">
                                                                     <span className="mt-0">
@@ -333,7 +333,7 @@ const DashboardSandbox = () => {
                                                     <div className="row">
                                                         <div className="col">
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="btn btn-ico btn-sm rounded btn-outline-light text-red"
                                                             >
                                                                 <i className="icon-heart2 fs-22"></i>
@@ -343,7 +343,7 @@ const DashboardSandbox = () => {
                                                             <div className="dropdown">
                                                                 <a
                                                                     className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                    href="#"
+                                                                    href="/"
                                                                     role="button"
                                                                     id="dropdownMenuLink-2"
                                                                     data-toggle="dropdown"
@@ -359,14 +359,14 @@ const DashboardSandbox = () => {
                                                                 >
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Make
                                                                         Primary
                                                                     </a>
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Remove
                                                                     </a>
@@ -394,7 +394,7 @@ const DashboardSandbox = () => {
                                         <div className="col-md-4">
                                             <figure className="user">
                                                 <a
-                                                    href=""
+                                                    href="/"
                                                     className="user-photo"
                                                 >
                                                     <img
@@ -408,21 +408,27 @@ const DashboardSandbox = () => {
                                                     <ul className="socials bordered">
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-facebook fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-instagram fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-twitter fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </figcaption>
@@ -431,7 +437,7 @@ const DashboardSandbox = () => {
                                         <div className="col-md-4">
                                             <figure className="user">
                                                 <a
-                                                    href=""
+                                                    href="/"
                                                     className="user-photo"
                                                 >
                                                     <img
@@ -445,21 +451,27 @@ const DashboardSandbox = () => {
                                                     <ul className="socials bordered">
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-facebook fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-instagram fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-twitter fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </figcaption>
@@ -468,7 +480,7 @@ const DashboardSandbox = () => {
                                         <div className="col-md-4">
                                             <figure className="user">
                                                 <a
-                                                    href=""
+                                                    href="/"
                                                     className="user-photo"
                                                 >
                                                     <img
@@ -482,21 +494,27 @@ const DashboardSandbox = () => {
                                                     <ul className="socials bordered">
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-facebook fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-instagram fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a
-                                                                href=""
+                                                                href="/"
                                                                 className="icon-twitter fs-20"
-                                                            ></a>
+                                                            >
+                                                                Test
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </figcaption>
@@ -533,7 +551,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-3"
                                                                 data-toggle="dropdown"
@@ -549,13 +567,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -590,7 +608,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-4"
                                                                 data-toggle="dropdown"
@@ -606,13 +624,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -647,7 +665,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-5"
                                                                 data-toggle="dropdown"
@@ -663,13 +681,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -704,7 +722,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-6"
                                                                 data-toggle="dropdown"
@@ -720,13 +738,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -761,7 +779,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-7"
                                                                 data-toggle="dropdown"
@@ -777,13 +795,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -814,7 +832,7 @@ const DashboardSandbox = () => {
                                                         <div className="col-6">
                                                             <img
                                                                 src="../../assets/images/demo/logo/logo-2.png"
-                                                                alt="Image"
+                                                                alt="placeholder"
                                                             />
                                                         </div>
                                                     </div>
@@ -866,7 +884,7 @@ const DashboardSandbox = () => {
                                                             <div className="dropdown">
                                                                 <a
                                                                     className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                    href="#"
+                                                                    href="/"
                                                                     role="button"
                                                                     id="dropdownMenuLink-8"
                                                                     data-toggle="dropdown"
@@ -882,14 +900,14 @@ const DashboardSandbox = () => {
                                                                 >
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Make
                                                                         Primary
                                                                     </a>
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Remove
                                                                     </a>
@@ -907,7 +925,7 @@ const DashboardSandbox = () => {
                                                         <div className="col-6">
                                                             <img
                                                                 src="../../assets/images/demo/logo/logo-3.png"
-                                                                alt="Image"
+                                                                alt="placeholder"
                                                             />
                                                         </div>
                                                     </div>
@@ -959,7 +977,7 @@ const DashboardSandbox = () => {
                                                             <div className="dropdown">
                                                                 <a
                                                                     className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                    href="#"
+                                                                    href="/"
                                                                     role="button"
                                                                     id="dropdownMenuLink-9"
                                                                     data-toggle="dropdown"
@@ -975,14 +993,14 @@ const DashboardSandbox = () => {
                                                                 >
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Make
                                                                         Primary
                                                                     </a>
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Remove
                                                                     </a>
@@ -1000,7 +1018,7 @@ const DashboardSandbox = () => {
                                                         <div className="col-6">
                                                             <img
                                                                 src="../../assets/images/demo/logo/logo-5.png"
-                                                                alt="Image"
+                                                                alt="placeholder"
                                                             />
                                                         </div>
                                                     </div>
@@ -1052,7 +1070,7 @@ const DashboardSandbox = () => {
                                                             <div className="dropdown">
                                                                 <a
                                                                     className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                    href="#"
+                                                                    href="/"
                                                                     role="button"
                                                                     id="dropdownMenuLink-10"
                                                                     data-toggle="dropdown"
@@ -1068,14 +1086,14 @@ const DashboardSandbox = () => {
                                                                 >
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Make
                                                                         Primary
                                                                     </a>
                                                                     <a
                                                                         className="dropdown-item"
-                                                                        href="#"
+                                                                        href="/"
                                                                     >
                                                                         Remove
                                                                     </a>
@@ -1115,7 +1133,7 @@ const DashboardSandbox = () => {
                                                             <b>Valerie</b> Doe
                                                         </h4>
                                                         <a
-                                                            href=""
+                                                            href="/"
                                                             className="fs-14 link text-primary"
                                                         >
                                                             Change Avatar
@@ -1123,7 +1141,7 @@ const DashboardSandbox = () => {
                                                     </div>
                                                     <div className="col-md-4 text-center text-md-right mt-1 mt-md-0">
                                                         <a
-                                                            href=""
+                                                            href="/"
                                                             className="btn btn-primary btn-rounded"
                                                         >
                                                             Upgrade Plan
@@ -1300,7 +1318,7 @@ const DashboardSandbox = () => {
                                                     <div className="col-3 col-md-2">
                                                         <img
                                                             src="../../assets/images/demo/stock/mastercard.png"
-                                                            alt="Image"
+                                                            alt="placeholder"
                                                         />
                                                     </div>
                                                     <div className="col-7 col-md-5">
@@ -1315,7 +1333,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-11"
                                                                 data-toggle="dropdown"
@@ -1331,13 +1349,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
@@ -1351,7 +1369,7 @@ const DashboardSandbox = () => {
                                                     <div className="col-3 col-md-2">
                                                         <img
                                                             src="../../assets/images/demo/stock/visa.png"
-                                                            alt="Image"
+                                                            alt="placeholder"
                                                         />
                                                     </div>
                                                     <div className="col-7 col-md-5">
@@ -1366,7 +1384,7 @@ const DashboardSandbox = () => {
                                                         <div className="dropdown">
                                                             <a
                                                                 className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                                href="#"
+                                                                href="/"
                                                                 role="button"
                                                                 id="dropdownMenuLink-12"
                                                                 data-toggle="dropdown"
@@ -1382,13 +1400,13 @@ const DashboardSandbox = () => {
                                                             >
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Make Primary
                                                                 </a>
                                                                 <a
                                                                     className="dropdown-item"
-                                                                    href="#"
+                                                                    href="/"
                                                                 >
                                                                     Remove
                                                                 </a>
