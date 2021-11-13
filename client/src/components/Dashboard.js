@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Profile from "./Profile";
-const DashboardSandbox = () => {
+const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
     const bgColor = "#3c66ff";
     return (
@@ -69,21 +69,21 @@ const DashboardSandbox = () => {
                                                 <a
                                                     className="nav-item nav-link active"
                                                     data-toggle="tab"
-                                                    href="#demo-2-1"
+                                                    href="#profile"
                                                 >
                                                     Profile
                                                 </a>
                                                 <a
                                                     className="nav-item nav-link"
                                                     data-toggle="tab"
-                                                    href="#demo-2-2"
+                                                    href="#feedback"
                                                 >
                                                     Feedback
                                                 </a>
                                                 <a
                                                     className="nav-item nav-link"
                                                     data-toggle="tab"
-                                                    href="#demo-2-3"
+                                                    href="#example3"
                                                 >
                                                     Example #3
                                                 </a>
@@ -97,9 +97,9 @@ const DashboardSandbox = () => {
                                     <div className="tab-content" id="demo-2">
                                         <div
                                             className="tab-pane show active"
-                                            id="demo-2-1"
+                                            id="profile"
                                             role="tabpanel"
-                                            aria-labelledby="demo-2-1"
+                                            aria-labelledby="profile"
                                         >
                                             <div className="row justify-content-center">
                                                 <div className="col-md-12 col-lg-12">
@@ -110,9 +110,9 @@ const DashboardSandbox = () => {
 
                                         <div
                                             className="tab-pane"
-                                            id="demo-2-2"
+                                            id="feedback"
                                             role="tabpanel"
-                                            aria-labelledby="demo-2-2"
+                                            aria-labelledby="feedback"
                                         >
                                             <div className="row justify-content-center">
                                                 <div className="col-md-10 col-lg-8">
@@ -184,9 +184,9 @@ const DashboardSandbox = () => {
 
                                         <div
                                             className="tab-pane"
-                                            id="demo-2-3"
+                                            id="example3"
                                             role="tabpanel"
-                                            aria-labelledby="demo-2-3"
+                                            aria-labelledby="#example3"
                                         >
                                             <div className="row justify-content-center">
                                                 <div className="col-md-10 col-lg-8">
@@ -214,4 +214,4 @@ const DashboardSandbox = () => {
     );
 };
 
-export default DashboardSandbox;
+export default Dashboard;
