@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import Dashboard from "./components/Dashboard";
+
 import DashboardSandbox from "./components/DashboardSandbox";
 import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
@@ -23,6 +23,9 @@ import { setContext } from "@apollo/client/link/context";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions, userActions } from "./redux/actions/";
+
+//to delete - for testing
+import Profile from "./components/Profile";
 
 // Construct the main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -105,7 +108,7 @@ function App() {
                             <ForgotPassword />
                         </Route>
                         <Route exact path="/dashboard">
-                            <Dashboard />
+                            <Profile />
                         </Route>
                         <Route exact path="/dashboardsb">
                             <DashboardSandbox />
