@@ -4,6 +4,7 @@ import Modal from "./components/Modal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Dashboard from "./components/Dashboard";
+import DashboardSandbox from "./components/DashboardSandbox";
 import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
 import Error from "./components/Error";
@@ -105,6 +106,9 @@ function App() {
                         </Route>
                         <Route exact path="/dashboard">
                             <Dashboard />
+                        </Route>
+                        <Route exact path="/dashboardsb">
+                            <DashboardSandbox />
                         </Route>
                         <Route path="/404">
                             <NotFound />

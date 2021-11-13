@@ -121,6 +121,15 @@ const Dashboard = () => {
                                                 Profile
                                             </Link>
                                         </div>
+                                        <div className="nav nav-tabs mb-1">
+                                            <Link
+                                                className="nav-item nav-link active"
+                                                data-toggle="tab"
+                                                to="/dashboard"
+                                            >
+                                                Feedback
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="tab-content">
