@@ -45,8 +45,8 @@ const BetaFeedback = () => {
             <div className="row">
                 <div className="col">
                     <div className="table-responsive-md">
-                        <table className="table table-lined">
-                            <thead>
+                        <table className="table table-lined ">
+                            <thead style={{ textAlign: "center" }}>
                                 <tr>
                                     <th scope="col">Date</th>
                                     <th scope="col">Category</th>
@@ -71,20 +71,38 @@ const BetaFeedback = () => {
                                                 )}
                                             </td>
                                             <td className="text-center">
-                                                <button
-                                                    className="btn"
-                                                    data-index={feedback._id}
-                                                    onClick={
-                                                        handleFeedbackDetailsClick
-                                                    }
-                                                >
-                                                    {/* <FontAwesomeIcon
-                                                        icon={faInfoCircle}
-                                                        size="lg"
-                                                        disabled={true}
-                                                    /> */}
-                                                    ...
-                                                </button>
+                                                <div class="dropdown">
+                                                    <span
+                                                        class="btn btn-ico btn-outline-light text-dark rounded btn-sm"
+                                                        role="button"
+                                                        id="dropdownMenuLink-3"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                    >
+                                                        <i class="icon-more-vertical fs-22"></i>
+                                                    </span>
+
+                                                    <div
+                                                        class="dropdown-menu"
+                                                        aria-labelledby="dropdownMenuLink-3"
+                                                    >
+                                                        <button
+                                                            class="dropdown-item"
+                                                            data-index={
+                                                                feedback._id
+                                                            }
+                                                            onClick={
+                                                                handleFeedbackDetailsClick
+                                                            }
+                                                        >
+                                                            Details
+                                                        </button>
+                                                        <button class="dropdown-item">
+                                                            Archive
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}
