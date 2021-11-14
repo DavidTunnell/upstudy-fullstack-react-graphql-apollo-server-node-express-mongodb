@@ -51,9 +51,10 @@ const SearchBar = () => {
         const feedbackModalOpen = document.querySelector(".modal-open");
         const body = document.querySelector("body");
         if (validatorFeedback.allValid()) {
-            if (imageFile) {
-                //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
-                try {
+            //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
+            try {
+                let imageUrl = "";
+                if (imageFile) {
                     //get secure url from our server
                     const urlReturnObject = await getS3Url({
                         variables: {
@@ -62,8 +63,7 @@ const SearchBar = () => {
                     });
                     const urlObject = urlReturnObject.data;
                     const url = urlObject.getS3Url;
-                    console.log(url);
-                    console.log(imageFile); //maybe wrong
+
                     //post the image directly to the s3 bucket
                     await fetch(url, {
                         method: "PUT",
@@ -73,43 +73,42 @@ const SearchBar = () => {
                         body: imageFile,
                     });
                     //get back image url from s3
-                    const imageUrl = url.split("?")[0];
-                    console.log(imageUrl);
-                    try {
-                        await addBetaFeedback({
-                            variables: {
-                                username,
-                                email,
-                                category: selectedCategory,
-                                message,
-                                image: imageUrl,
-                                archived: false,
-                            },
-                        });
-                        //close
-                        dispatch(
-                            modalActions.updateAndShowModal(
-                                "Success",
-                                "We received your feedback. Thank you for being a part of Upstudy.io!"
-                            )
-                        );
-                        //then show other modal
-                    } catch (err) {
-                        //close
-                        //then show other modal
-                        dispatch(
-                            modalActions.updateAndShowModal(
-                                "Error",
-                                "There was an error either with graphQL or MongoDB. Please try again later."
-                            )
-                        );
-                    }
-                } catch (error) {
-                    console.log(error);
+                    imageUrl = url.split("?")[0];
+                }
+                //write to db
+                try {
+                    await addBetaFeedback({
+                        variables: {
+                            username,
+                            email,
+                            category: selectedCategory,
+                            message,
+                            image: imageUrl,
+                            archived: false,
+                        },
+                    });
+                    //close
                     dispatch(
-                        modalActions.updateAndShowModal("Error", error.message)
+                        modalActions.updateAndShowModal(
+                            "Success",
+                            "We received your feedback. Thank you for being a part of Upstudy.io!"
+                        )
+                    );
+                } catch (err) {
+                    //close
+                    //then show other modal
+                    dispatch(
+                        modalActions.updateAndShowModal(
+                            "Error",
+                            "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
+                        )
                     );
                 }
+            } catch (error) {
+                console.log(error);
+                dispatch(
+                    modalActions.updateAndShowModal("Error", error.message)
+                );
             }
 
             feedbackModal.classList.remove("show");
