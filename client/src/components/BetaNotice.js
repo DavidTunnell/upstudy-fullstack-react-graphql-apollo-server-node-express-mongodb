@@ -97,7 +97,14 @@ const SearchBar = () => {
         // const body = document.querySelector("body");
         // body.style.cssText += "padding-right: 0px;";
     };
+    const handleImageSelection = async (event) => {
+        console.log("image selected");
+        const input = event.target;
 
+        const reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+        console.log(reader);
+    };
     return (
         <>
             <section className="bg-light p-6">
@@ -273,10 +280,10 @@ const SearchBar = () => {
                                                         type="file"
                                                         className="form-control"
                                                         name="image"
+                                                        accept="image/*"
                                                         onChange={(event) => {
-                                                            setImage(
-                                                                event.target
-                                                                    .value
+                                                            handleImageSelection(
+                                                                event
                                                             );
                                                         }}
                                                         value={image}

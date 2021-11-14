@@ -91,7 +91,6 @@ const BetaFeedback = () => {
                                     <th scope="col">Category</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">Details</th>
-                                    <th scope="col">archived</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -117,6 +116,7 @@ const BetaFeedback = () => {
                                                         0,
                                                         40
                                                     )}
+                                                    ...
                                                 </td>
                                                 <td className="text-center">
                                                     <div class="dropdown">
@@ -130,7 +130,6 @@ const BetaFeedback = () => {
                                                         >
                                                             <i class="icon-more-vertical fs-22"></i>
                                                         </span>
-
                                                         <div
                                                             class="dropdown-menu"
                                                             aria-labelledby="dropdownMenuLink-3"
@@ -159,11 +158,6 @@ const BetaFeedback = () => {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    {feedback.archived
-                                                        ? "true"
-                                                        : "false"}
                                                 </td>
                                             </tr>
                                         ))}
