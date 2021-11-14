@@ -10,18 +10,24 @@ import { useDispatch } from "react-redux";
 const BetaFeedback = () => {
     const { loading, data } = useQuery(GET_BETA_FEEDBACK);
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
-    const [feedbackData, setFeedbackData] = useState(data?.betaFeedback);
+    const [feedbackData, setFeedbackData] = useState();
     //to save data to redux store
     const dispatch = useDispatch();
-
     useEffect(() => {
         if (!loading) {
+            // dispatch(categoriesActions.categories(data));
+            // dispatch(filteredCategoriesActions.setAllCategories(data));
             setFeedbackData(data.betaFeedback);
-            // console.log(feedbackData);
-        } else {
-            console.log("loading");
         }
-    }, [loading]);
+    }, [data]);
+    // useEffect(() => {
+    //     if (!loading) {
+    //         setFeedbackData(data.betaFeedback);
+    //         console.log(feedbackData);
+    //     } else {
+    //         console.log("loading");
+    //     }
+    // }, [loading]);
 
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
@@ -43,35 +49,67 @@ const BetaFeedback = () => {
     const handleFeedbackArchiveClick = async (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
-        console.log("handleFeedbackArchiveClick");
-        console.log(idSelected);
         try {
-            const { data } = await archiveBetaFeedback({
-                variables: {
-                    feedbackId: idSelected,
-                },
-            });
+            // 1. Make a shallow copy of the items
+            let items = [...feedbackData];
+            // 2. Make a shallow copy of the item you want to mutate
+            const foundIndex = items.findIndex((x) => x._id == idSelected);
+            let item = { ...items[foundIndex] };
+            // 3. Replace the property you're intested in
+            item.archived = true;
+            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+            items[foundIndex] = item;
+            // 5. Set the state to our new copy
+            setFeedbackData(items);
+            //https://stackoverflow.com/questions/4689856/how-to-change-value-of-object-which-is-inside-an-array-using-javascript-or-jquer/45341595
+            // let copy = [...feedbackData],
+            //     //Find index of specific object using findIndex method.
+            //     objIndex = copy.findIndex((obj) => obj._id == idSelected);
+
+            // //Log object to Console.
+            // console.log("Before update: ", copy[objIndex]);
+            // console.log(copy[objIndex].archived);
+            // //Update object's name property.
+
+            // copy[objIndex].archived = true;
+
+            // //Log object to console again.
+            // console.log("After update: ", copy[objIndex]);
+            // console.log(feedbackData);
+            // const copy = [...feedbackData];
+            // console.log(copy);
+            // const foundIndex = copy.findIndex((x) => x._id == idSelected);
+            // console.log((copy[foundIndex].archived = true));
+            //the problem is you aren't setting the copies archive value to true <<<<<<<<<<
+            // copy[foundIndex].archived = true;
+            // console.log(copy[foundIndex].archived);
+            // const { data } = await archiveBetaFeedback({
+            //     variables: {
+            //         feedbackId: idSelected,
+            //     },
+            // });
 
             //update state of feedbackData to reflect archived: true
             //find and replace object in array and then set state to new one
             //^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            const copy = { ...feedbackData };
+            // const copy = [...feedbackData];
 
-            console.log(feedbackData);
-            //copy isnt an array.. this is an issue!!!!!!!!
-            console.log(copy);
-            const foundIndex = copy.findIndex((x) => x._id == idSelected);
+            // console.log(feedbackData);
+            // //copy isnt an array.. this is an issue!!!!!!!!
+            // console.log(copy);
+            // const foundIndex = copy.findIndex((x) => x._id == idSelected);
 
-            copy[foundIndex] = data.archiveBetaFeedback;
-            setFeedbackData(copy);
-            console.log("feedbackData");
-            console.log(feedbackData);
-            console.log("feedbackData");
+            // copy[foundIndex] = data.archiveBetaFeedback;
+            // setFeedbackData(copy);
+            // console.log("feedbackData");
+            // console.log(feedbackData);
+            // console.log("feedbackData");
             //maybe update state of data.betaFeedback? maybe it should be put in state...
         } catch (err) {
             dispatch(modalActions.updateAndShowModal("Error", err.message));
         }
+        console.log(feedbackData);
     };
 
     return (
@@ -87,11 +125,12 @@ const BetaFeedback = () => {
                                     <th scope="col">Category</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">Details</th>
+                                    <th scope="col">archived</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {data &&
-                                    data.betaFeedback.map((feedback) => (
+                                {feedbackData &&
+                                    feedbackData.map((feedback) => (
                                         <tr key={feedback._id}>
                                             <th scope="row">
                                                 {new Date(
@@ -146,6 +185,11 @@ const BetaFeedback = () => {
                                                         </button>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                {feedback.archived
+                                                    ? "true"
+                                                    : "false"}
                                             </td>
                                         </tr>
                                     ))}
