@@ -124,6 +124,7 @@ function App() {
                     show={modalSettings.show}
                     title={modalSettings.title}
                     content={modalSettings.content}
+                    imageUrl={modalSettings.imageUrl}
                     closeModal={() => dispatch(modalActions.hideModal())}
                 />
                 <BetaNotice />

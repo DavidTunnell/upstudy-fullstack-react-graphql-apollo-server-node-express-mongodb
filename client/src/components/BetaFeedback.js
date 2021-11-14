@@ -41,7 +41,8 @@ const BetaFeedback = () => {
                 `${result.username} - ${new Date(
                     parseInt(result.createdAt)
                 ).toLocaleDateString("en-US")}`,
-                result.message + " | " + result.image
+                result.message,
+                result.image
             )
         );
     };

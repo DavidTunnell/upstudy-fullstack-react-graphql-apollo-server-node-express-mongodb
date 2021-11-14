@@ -1,9 +1,11 @@
 import * as actions from "../actionTypes";
 
-export const updateAndShowModal = (title, content) => {
+export const updateAndShowModal = (title, content, imageUrl) => {
+    console.log("updateAndShowModal!!!!!!!!!");
+    console.log(imageUrl);
     return {
         type: actions.UPDATE_AND_SHOW_MODAL,
-        payload: { title, content, show: true },
+        payload: { title, content, imageUrl, show: true },
     };
 };
 export const hideModal = () => {

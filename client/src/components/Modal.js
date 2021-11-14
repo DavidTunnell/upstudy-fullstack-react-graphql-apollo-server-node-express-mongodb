@@ -4,6 +4,7 @@ const Modal = (params) => {
     let closeModal = params.closeModal;
     let title = params.title;
     let content = params.content;
+    let imageUrl = params.imageUrl;
     return (
         <>
             <div
@@ -35,6 +36,11 @@ const Modal = (params) => {
                         <div className="modal-body text-center">
                             <h3>{title}</h3>
                             <p>{content}</p>
+                            {imageUrl?.toString().length > 0 && (
+                                <div>
+                                    <img src={imageUrl} alt={title} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
