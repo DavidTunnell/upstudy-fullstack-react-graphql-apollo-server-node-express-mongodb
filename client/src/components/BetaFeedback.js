@@ -61,7 +61,6 @@ const BetaFeedback = () => {
             items[foundIndex] = item;
             // 5. Set the state to our new copy
             setFeedbackData(items);
-
             try {
                 const { data } = await archiveBetaFeedback({
                     variables: {
@@ -97,69 +96,77 @@ const BetaFeedback = () => {
                             </thead>
                             <tbody>
                                 {feedbackData &&
-                                    feedbackData.map((feedback) => (
-                                        <tr key={feedback._id}>
-                                            <th scope="row">
-                                                {new Date(
-                                                    parseInt(feedback.createdAt)
-                                                ).toLocaleDateString("en-US")}
-                                            </th>
-                                            <td>{feedback.category}</td>
-                                            <td>
-                                                {feedback.message.substring(
-                                                    0,
-                                                    40
-                                                )}
-                                            </td>
-                                            <td className="text-center">
-                                                <div class="dropdown">
-                                                    <span
-                                                        class="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                        role="button"
-                                                        id="dropdownMenuLink-3"
-                                                        data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                    >
-                                                        <i class="icon-more-vertical fs-22"></i>
-                                                    </span>
+                                    feedbackData
+                                        .filter(
+                                            (feedback) => !feedback.archived
+                                        )
+                                        .map((feedback) => (
+                                            <tr key={feedback._id}>
+                                                <th scope="row">
+                                                    {new Date(
+                                                        parseInt(
+                                                            feedback.createdAt
+                                                        )
+                                                    ).toLocaleDateString(
+                                                        "en-US"
+                                                    )}
+                                                </th>
+                                                <td>{feedback.category}</td>
+                                                <td>
+                                                    {feedback.message.substring(
+                                                        0,
+                                                        40
+                                                    )}
+                                                </td>
+                                                <td className="text-center">
+                                                    <div class="dropdown">
+                                                        <span
+                                                            class="btn btn-ico btn-outline-light text-dark rounded btn-sm"
+                                                            role="button"
+                                                            id="dropdownMenuLink-3"
+                                                            data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="false"
+                                                        >
+                                                            <i class="icon-more-vertical fs-22"></i>
+                                                        </span>
 
-                                                    <div
-                                                        class="dropdown-menu"
-                                                        aria-labelledby="dropdownMenuLink-3"
-                                                    >
-                                                        <button
-                                                            class="dropdown-item"
-                                                            data-index={
-                                                                feedback._id
-                                                            }
-                                                            onClick={
-                                                                handleFeedbackDetailsClick
-                                                            }
+                                                        <div
+                                                            class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink-3"
                                                         >
-                                                            Details
-                                                        </button>
-                                                        <button
-                                                            class="dropdown-item"
-                                                            data-index={
-                                                                feedback._id
-                                                            }
-                                                            onClick={
-                                                                handleFeedbackArchiveClick
-                                                            }
-                                                        >
-                                                            Archive
-                                                        </button>
+                                                            <button
+                                                                class="dropdown-item"
+                                                                data-index={
+                                                                    feedback._id
+                                                                }
+                                                                onClick={
+                                                                    handleFeedbackDetailsClick
+                                                                }
+                                                            >
+                                                                Details
+                                                            </button>
+                                                            <button
+                                                                class="dropdown-item"
+                                                                data-index={
+                                                                    feedback._id
+                                                                }
+                                                                onClick={
+                                                                    handleFeedbackArchiveClick
+                                                                }
+                                                            >
+                                                                Archive
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {feedback.archived
-                                                    ? "true"
-                                                    : "false"}
-                                            </td>
-                                        </tr>
-                                    ))}
+                                                </td>
+                                                <td>
+                                                    {feedback.archived
+                                                        ? "true"
+                                                        : "false"}
+                                                </td>
+                                            </tr>
+                                        ))}
                             </tbody>
                         </table>
                     </div>
