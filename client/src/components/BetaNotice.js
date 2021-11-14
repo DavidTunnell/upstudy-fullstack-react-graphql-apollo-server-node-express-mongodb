@@ -13,7 +13,28 @@ const SearchBar = () => {
     const [message, setMessage] = useState("");
     const [image, setImage] = useState("");
     const [imageFile, setImageFile] = useState(null);
-    const [validatorFeedback] = useState(new SimpleReactValidator());
+    const [validatorFeedback] = useState(
+        new SimpleReactValidator({
+            validators: {
+                maxFileSize: {
+                    // name the rule
+                    message: "The max file size is 5MB.",
+                    rule: (val, params, validator) => {
+                        if (val) {
+                            const fileSize = val.size / 1024 / 1024; // in MiB
+                            console.log(fileSize);
+                            if (fileSize > 5) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    },
+                    required: false, // optional
+                },
+            },
+        })
+    );
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -116,8 +137,10 @@ const SearchBar = () => {
             feedbackModalBackdrop.classList.remove("modal-backdrop");
             feedbackModalOpen.classList.remove("modal-open");
             body.style.cssText += "padding-right: 0px;";
-            setUsername("");
-            setEmail("");
+            if (!Auth.loggedIn()) {
+                setUsername("");
+                setEmail("");
+            }
             //update category to suggestion?
             setMessage("");
             setImage("");
@@ -320,6 +343,11 @@ const SearchBar = () => {
                                                         }}
                                                         value={image}
                                                     />
+                                                    {validatorFeedback.message(
+                                                        "maxFileSize",
+                                                        imageFile,
+                                                        "maxFileSize"
+                                                    )}
                                                 </div>
                                                 <button
                                                     type="submit"
