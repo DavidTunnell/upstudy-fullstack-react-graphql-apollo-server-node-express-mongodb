@@ -73,8 +73,8 @@ export const GET_SUBJECT = gql`
 `;
 
 export const GET_BETA_FEEDBACK = gql`
-    query BetaFeedback($sortBy: SortBy) {
-        betaFeedback(sortBy: $sortBy) {
+    query BetaFeedback {
+        betaFeedback(sortBy: { field: "createdAt", order: DESC }) {
             _id
             username
             email

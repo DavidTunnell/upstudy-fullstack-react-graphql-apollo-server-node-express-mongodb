@@ -19,7 +19,7 @@ const BetaFeedback = () => {
             // dispatch(filteredCategoriesActions.setAllCategories(data));
             setFeedbackData(data.betaFeedback);
         }
-    }, [data]);
+    }, [data, loading]);
     // useEffect(() => {
     //     if (!loading) {
     //         setFeedbackData(data.betaFeedback);

@@ -22,7 +22,6 @@ const SearchBar = () => {
                     rule: (val, params, validator) => {
                         if (val) {
                             const fileSize = val.size / 1024 / 1024; // in MiB
-                            console.log(fileSize);
                             if (fileSize > 5) {
                                 return false;
                             } else {
