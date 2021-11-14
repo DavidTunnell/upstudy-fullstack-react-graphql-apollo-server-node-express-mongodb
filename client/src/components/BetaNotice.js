@@ -62,15 +62,25 @@ const SearchBar = () => {
                     });
                     const urlObject = urlReturnObject.data;
                     const url = urlObject.getS3Url;
-                    console.log(url);
-                    console.log(imageFile);
                     //post the image directly to the s3 bucket
+                    await fetch(url, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                        body: imageFile,
+                    });
+                    //get back image url from s3
+                    const imageUrl = url.split("?")[0];
+                    console.log(imageUrl);
                     // make another request to our node server to update DB with URL of image
+                    
                 } catch (error) {
                     console.log(error);
                     dispatch(
                         modalActions.updateAndShowModal("Error", error.message)
                     );
+                    return;
                 }
             }
 
@@ -113,6 +123,7 @@ const SearchBar = () => {
             //update category to suggestion?
             setMessage("");
             setImage("");
+            setImageFile(null);
         } else {
             validatorFeedback.showMessages();
             //force update state to show validation messages to user
@@ -126,9 +137,7 @@ const SearchBar = () => {
     };
     const handleImageSelection = async (event) => {
         const input = event.target;
-        const reader = new FileReader();
-        reader.readAsDataURL(input.files[0]);
-        setImageFile(reader);
+        setImageFile(input.files[0]);
     };
     return (
         <>
