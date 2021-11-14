@@ -11,7 +11,7 @@ const SearchBar = () => {
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
-    const [image, setImage] = useState(""); //not sure
+    const [image, setImage] = useState("");
     const [imageFile, setImageFile] = useState(null);
     const [validatorFeedback] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
@@ -62,6 +62,8 @@ const SearchBar = () => {
                     });
                     const urlObject = urlReturnObject.data;
                     const url = urlObject.getS3Url;
+                    console.log(url);
+                    console.log(imageFile); //maybe wrong
                     //post the image directly to the s3 bucket
                     await fetch(url, {
                         method: "PUT",
@@ -73,46 +75,43 @@ const SearchBar = () => {
                     //get back image url from s3
                     const imageUrl = url.split("?")[0];
                     console.log(imageUrl);
-                    // make another request to our node server to update DB with URL of image
-                    
+                    try {
+                        await addBetaFeedback({
+                            variables: {
+                                username,
+                                email,
+                                category: selectedCategory,
+                                message,
+                                image: imageUrl,
+                                archived: false,
+                            },
+                        });
+                        //close
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Success",
+                                "We received your feedback. Thank you for being a part of Upstudy.io!"
+                            )
+                        );
+                        //then show other modal
+                    } catch (err) {
+                        //close
+                        //then show other modal
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Error",
+                                "There was an error either with graphQL or MongoDB. Please try again later."
+                            )
+                        );
+                    }
                 } catch (error) {
                     console.log(error);
                     dispatch(
                         modalActions.updateAndShowModal("Error", error.message)
                     );
-                    return;
                 }
             }
 
-            try {
-                await addBetaFeedback({
-                    variables: {
-                        username,
-                        email,
-                        category: selectedCategory,
-                        message,
-                        image,
-                        archived: false,
-                    },
-                });
-                //close
-                dispatch(
-                    modalActions.updateAndShowModal(
-                        "Success",
-                        "We received your feedback. Thank you for being a part of Upstudy.io!"
-                    )
-                );
-                //then show other modal
-            } catch (err) {
-                //close
-                //then show other modal
-                dispatch(
-                    modalActions.updateAndShowModal(
-                        "Error",
-                        "There was an error either with graphQL or MongoDB. Please try again later."
-                    )
-                );
-            }
             feedbackModal.classList.remove("show");
             feedbackModal.style.cssText += "display: none;";
             feedbackModalBackdrop.classList.remove("modal-backdrop");
