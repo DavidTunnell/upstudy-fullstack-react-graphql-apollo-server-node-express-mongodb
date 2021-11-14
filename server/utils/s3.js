@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
-import aws from "aws-sdk";
-import crypto from "crypto";
-import { promisify } from "util";
+const dotenv = require("dotenv");
+const aws = require("aws-sdk");
+const crypto = require("crypto");
+const { promisify } = require("util");
 const randomBytes = promisify(crypto.randomBytes);
 
 dotenv.config();
@@ -17,3 +17,20 @@ const s3 = new aws.S3({
     secretAccessKey,
     signatureVersion: "v4",
 });
+
+//create secure url that the client can use to post images to the s3 bucket
+module.exports = {
+    generateUploadURL: async function () {
+        const rawBytes = await randomBytes(16);
+        const imageName = rawBytes.toString("hex");
+
+        const params = {
+            Bucket: bucketName,
+            Key: imageName,
+            Expires: 60,
+        };
+
+        const uploadURL = await s3.getSignedUrlPromise("putObject", params);
+        return uploadURL;
+    },
+};

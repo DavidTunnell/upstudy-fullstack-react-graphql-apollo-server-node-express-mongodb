@@ -14,6 +14,7 @@ const {
     sendEmail,
     generatePassword,
 } = require("../utils/email");
+const s3 = require("../utils/s3");
 const { getGraphQLRateLimiter } = require("graphql-rate-limit");
 
 const rateLimiter = getGraphQLRateLimiter({ identifyContext: (ctx) => ctx.id });
@@ -318,6 +319,11 @@ const resolvers = {
             throw new AuthenticationError(
                 "You must be logged in to perform this action."
             );
+        },
+        getS3Url: async (parent, { isLoggedIn }) => {
+            const url = s3.generateUploadURL();
+            const isLoggedInCheck = isLoggedIn;
+            return url;
         },
         addBook: async (
             parent,
