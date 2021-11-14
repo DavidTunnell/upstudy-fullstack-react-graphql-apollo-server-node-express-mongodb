@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { useMutation } from "@apollo/client";
-import { ADD_BETA_FEEDBACK } from "../utils/mutations";
+import { ADD_BETA_FEEDBACK, GET_S3_URL } from "../utils/mutations";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
+import Auth from "../utils/auth";
+
 const SearchBar = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
     const [image, setImage] = useState(""); //not sure
+    const [imageFile, setImageFile] = useState(null);
     const [validatorFeedback] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isMuted, setIsMuted] = useState("");
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
+    const [getS3Url] = useMutation(GET_S3_URL);
     //to save data to redux store
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
@@ -47,6 +51,29 @@ const SearchBar = () => {
         const feedbackModalOpen = document.querySelector(".modal-open");
         const body = document.querySelector("body");
         if (validatorFeedback.allValid()) {
+            if (imageFile) {
+                //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
+                try {
+                    //get secure url from our server
+                    const urlReturnObject = await getS3Url({
+                        variables: {
+                            isLoggedIn: Auth.loggedIn(),
+                        },
+                    });
+                    const urlObject = urlReturnObject.data;
+                    const url = urlObject.getS3Url;
+                    console.log(url);
+                    console.log(imageFile);
+                    //post the image directly to the s3 bucket
+                    // make another request to our node server to update DB with URL of image
+                } catch (error) {
+                    console.log(error);
+                    dispatch(
+                        modalActions.updateAndShowModal("Error", error.message)
+                    );
+                }
+            }
+
             try {
                 await addBetaFeedback({
                     variables: {
@@ -98,15 +125,10 @@ const SearchBar = () => {
         // body.style.cssText += "padding-right: 0px;";
     };
     const handleImageSelection = async (event) => {
-        console.log("image selected");
         const input = event.target;
         const reader = new FileReader();
         reader.readAsDataURL(input.files[0]);
-        console.log(reader);
-        //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
-        //get secure url from our server
-        //post the image directly to the s3 bucket
-        // make another request to our node server to update DB with URL of image
+        setImageFile(reader);
     };
     return (
         <>

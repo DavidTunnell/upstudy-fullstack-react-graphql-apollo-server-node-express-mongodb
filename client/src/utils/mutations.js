@@ -160,6 +160,13 @@ export const USER_UPDATE_PASSWORD = gql`
         }
     }
 `;
+
+export const GET_S3_URL = gql`
+    mutation Mutation($isLoggedIn: Boolean!) {
+        getS3Url(isLoggedIn: $isLoggedIn)
+    }
+`;
+
 export const ADD_BOOK = gql`
     mutation addBook(
         $userId: ID!
