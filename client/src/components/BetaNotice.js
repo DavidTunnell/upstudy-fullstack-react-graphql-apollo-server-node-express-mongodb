@@ -100,10 +100,13 @@ const SearchBar = () => {
     const handleImageSelection = async (event) => {
         console.log("image selected");
         const input = event.target;
-
         const reader = new FileReader();
         reader.readAsDataURL(input.files[0]);
         console.log(reader);
+        //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
+        //get secure url from our server
+        //post the image directly to the s3 bucket
+        // make another request to our node server to update DB with URL of image
     };
     return (
         <>
