@@ -1,5 +1,8 @@
 const Category = (params) => {
     var passedData = params.data;
+    console.log("in category component");
+    console.log(passedData);
+    console.log("in category component");
     const bgColor = "#3c66ff";
     //Category Component! - {passedData}
     return (
@@ -26,7 +29,11 @@ const Category = (params) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12 align-self-center text-center">
-                                    <h1 className="display-2">{passedData}</h1>
+                                    <h1 className="display-2">
+                                        {passedData.name}
+                                    </h1>
+                                    <p>{passedData.description}</p>
+                                    <p>Id: {passedData._id}</p>
                                 </div>
                             </div>
                         </div>

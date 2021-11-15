@@ -31,19 +31,6 @@ function App() {
         console.log("nothing in redux");
         categories = data.subjects;
     }
-    const createCategoryPaths = (categories) => {
-        const pathArray = [];
-        categories.forEach((category) => {
-            const path = category.name.toLowerCase().replace(/\s/g, "");
-            pathArray.push(path);
-        });
-        return pathArray;
-    };
-    const pathify = (str) => {
-        return str.toLowerCase().replace(/\s/g, "");
-    };
-    const categoryRouterPaths = createCategoryPaths(categories);
-    // console.log(categoryRouterPaths);
     //get redux store data for modal
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
@@ -101,11 +88,11 @@ function App() {
                         <Route exact path="/dashboard">
                             <Dashboard />
                         </Route>
-                        {categoryRouterPaths &&
-                            categoryRouterPaths.map((path) => (
-                                <Route exact path={`/${path}`}>
+                        {categories &&
+                            categories.map((category) => (
+                                <Route exact path={`/${category.path}`}>
                                     {/* next is pass the category object as a parameter here and then consume in category component */}
-                                    <Category data={path} />
+                                    <Category data={category} />
                                 </Route>
                             ))}
                         <Route path="/404">
