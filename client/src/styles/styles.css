@@ -34,11 +34,27 @@
 }
 
 .circle-icon {
+    right: 15px;
+    top: 110px;
+    position: absolute;
     border-radius: 50%;
     text-align: center;
-    line-height: 100px;
     vertical-align: middle;
-    padding: 13px;
+    padding: 8px;
+}
+
+.large-profile-pic {
+    border-radius: 10px;
+}
+
+.profile-pic:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.circle-icon:hover {
+    opacity: 0.9;
+    cursor: pointer;
 }
 
 @media (min-width: 576px) {

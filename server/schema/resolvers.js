@@ -59,6 +59,15 @@ const resolvers = {
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
+            //https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+            function randomIntFromInterval(min, max) {
+                // min and max included
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+            const profilePic = `../../assets/images/default-profile-pics/default-profile-pic-${randomIntFromInterval(
+                1,
+                5
+            )}.jpg`;
             //check if user with the credentials provided already exists
             const userCheck = await User.findOne({
                 $or: [{ email }, { username }],
@@ -70,7 +79,12 @@ const resolvers = {
                 );
             } else {
                 //otherwise create the new user, and a sign in token and return it
-                const user = await User.create({ username, email, password });
+                const user = await User.create({
+                    username,
+                    email,
+                    password,
+                    profilePic,
+                });
                 const token = signToken(user);
                 return { token, user };
             }

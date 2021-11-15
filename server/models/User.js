@@ -22,6 +22,10 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+        profilePic: {
+            type: String,
+            required: true,
+        },
         isVerified: { type: Boolean, default: false },
         roles: {
             type: [roleSchema],

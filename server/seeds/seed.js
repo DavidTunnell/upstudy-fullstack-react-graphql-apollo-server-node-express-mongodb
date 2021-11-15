@@ -31,13 +31,24 @@ const hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
 };
 
+//https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+function randomIntFromInterval(min, max) {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 //data object to be inserted in to db
 const userSeed = [
     {
         username: "upstudy_admin",
         email: "admin@upstudy.io",
         password: hashPassword("12345"),
+
         isVerified: false,
+        profilePic: `../../assets/images/default-profile-pics/default-profile-pic-${randomIntFromInterval(
+            1,
+            5
+        )}.jpg`,
         roles: [{ role: "admin" }, { role: "user" }],
         savedBooks: [],
         createdAt: new Date(),
@@ -48,6 +59,10 @@ const userSeed = [
         email: "mod@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
+        profilePic: `../../assets/images/default-profile-pics/default-profile-pic-${randomIntFromInterval(
+            1,
+            5
+        )}.jpg`,
         roles: [
             {
                 role: "mod",
@@ -67,6 +82,10 @@ const userSeed = [
         email: "user@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
+        profilePic: `../../assets/images/default-profile-pics/default-profile-pic-${randomIntFromInterval(
+            1,
+            5
+        )}.jpg`,
         savedBooks: [],
         createdAt: new Date(),
         updatedAt: new Date(),
