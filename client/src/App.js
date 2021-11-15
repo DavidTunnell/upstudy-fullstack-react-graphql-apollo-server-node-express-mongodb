@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-
+import Category from "./components/Category";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import VerifyEmail from "./components/VerifyEmail";
@@ -50,6 +50,20 @@ const client = new ApolloClient({
 
 //top use the react router package, surround the whole app with the router component
 function App() {
+    const categories = useSelector((state) => state.categories);
+    console.log("App()---");
+    console.log(categories);
+    console.log("App()---");
+    const createCategoryPaths = (categories) => {
+        const pathArray = [];
+        categories.forEach((category) => {
+            const path = category.name.toLowerCase().replace(/\s/g, "");
+            pathArray.push(path);
+        });
+        return pathArray;
+    };
+    const categoryRouterPaths = createCategoryPaths(categories);
+    console.log(categoryRouterPaths);
     //get redux store data for modal
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
@@ -107,6 +121,12 @@ function App() {
                         <Route exact path="/dashboard">
                             <Dashboard />
                         </Route>
+                        {categoryRouterPaths &&
+                            categoryRouterPaths.map((path) => (
+                                <Route exact path={`/${path}`}>
+                                    <Category />
+                                </Route>
+                            ))}
                         <Route path="/404">
                             <NotFound />
                         </Route>
