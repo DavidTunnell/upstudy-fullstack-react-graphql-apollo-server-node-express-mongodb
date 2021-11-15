@@ -95,7 +95,8 @@ const VerifyEmail = () => {
                             user._id,
                             user.username,
                             user.email,
-                            user.isVerified
+                            user.isVerified,
+                            user.profilePic
                         )
                     );
                 } catch (error) {

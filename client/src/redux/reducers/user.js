@@ -11,6 +11,7 @@ function userReducer(state = { loggedIn: false }, action) {
                 isVerified: action.payload.isVerified,
                 loggedIn: true,
                 roles: action.payload.roles,
+                profilePic: action.payload.profilePic,
             };
         case actions.LOGOUT_REDUX:
             console.log(action);

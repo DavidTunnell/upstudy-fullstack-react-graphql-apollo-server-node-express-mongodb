@@ -13,9 +13,9 @@ const Dashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
-    const [profilePicUrl, setProfilePicUrl] = useState(
-        "../../assets/images/default-profile-pics/default-profile-pic-3.jpg"
-    );
+    // const [profilePicUrl, setProfilePicUrl] = useState(
+    //     "../../assets/images/default-profile-pics/default-profile-pic-3.jpg"
+    // );
 
     const bgColor = "#3c66ff";
     //use react router history
@@ -61,7 +61,9 @@ const Dashboard = () => {
                                                     <div class="col-4 col-lg-3">
                                                         <img
                                                             class="mr-3 avatar avatar-xl rounded profile-pic"
-                                                            src={profilePicUrl}
+                                                            src={
+                                                                user.profilePic
+                                                            }
                                                             alt="Generic placeholder"
                                                             data-toggle="modal"
                                                             data-target="#update-profile-pic-modal"
@@ -253,7 +255,7 @@ const Dashboard = () => {
                                 <div>
                                     <img
                                         class="img-fluid mx-auto d-block large-profile-pic"
-                                        src={profilePicUrl}
+                                        src={user.profilePic}
                                         alt="profile pic"
                                     />
                                 </div>

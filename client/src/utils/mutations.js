@@ -13,6 +13,7 @@ export const ADD_USER = gql`
                     role
                     associatedIds
                 }
+                profilePic
             }
         }
     }
@@ -130,6 +131,7 @@ export const USER_LOGIN = gql`
                 username
                 email
                 isVerified
+                profilePic
                 roles {
                     role
                     associatedIds

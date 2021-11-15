@@ -34,6 +34,7 @@ const typeDefs = gql`
         isVerified: Boolean!
         roles: [Role]
         savedBooks: [Book]
+        profilePic: String
     }
 
     type Subject {

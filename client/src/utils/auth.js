@@ -33,12 +33,19 @@ class AuthService {
         return localStorage.getItem("id_token");
     }
 
-    login(idToken, id, username, email, isVerified, roles) {
+    login(idToken, id, username, email, isVerified, roles, profilePic) {
         // Saves user token to localStorage
         localStorage.setItem("id_token", idToken);
         //add user data to redux state on login
         store.dispatch(
-            userActions.loginRedux(id, username, email, isVerified, roles)
+            userActions.loginRedux(
+                id,
+                username,
+                email,
+                isVerified,
+                roles,
+                profilePic
+            )
         );
     }
 

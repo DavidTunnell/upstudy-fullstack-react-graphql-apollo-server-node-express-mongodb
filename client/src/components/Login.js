@@ -72,6 +72,7 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
+                console.log(data);
                 //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
                 Auth.login(
                     data.login.token,
@@ -79,7 +80,8 @@ const Login = ({
                     data.login.user.username,
                     data.login.user.email,
                     data.login.user.isVerified,
-                    data.login.user.roles
+                    data.login.user.roles,
+                    data.login.user.profilePic
                 );
                 //send user to homepage after login
                 history.push("/");
@@ -114,7 +116,8 @@ const Login = ({
                     data.addUser.user.username,
                     data.addUser.user.email,
                     data.addUser.user.isVerified,
-                    data.addUser.user.roles
+                    data.addUser.user.roles,
+                    data.addUser.user.profilePic
                 );
                 //after user is created, forward them to a page to verify their email address
                 if (!data.addUser.user.isVerified) {
