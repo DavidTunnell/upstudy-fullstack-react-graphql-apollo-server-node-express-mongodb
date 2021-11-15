@@ -15,6 +15,10 @@ const subjectSchema = new Schema(
             type: String,
             required: false,
         },
+        path: {
+            type: String,
+            required: false,
+        },
         bgColor: {
             type: String,
             required: false,

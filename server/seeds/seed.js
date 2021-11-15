@@ -79,6 +79,7 @@ const subjectSeed = [
         description:
             "Computer science is the study of computers and computing as well as their theoretical and practical applications.",
         image: "./assets/images/subjects/open/computer-science.jpg",
+        path: "computer-science",
         bgColor: "#0e458c",
         createdBy: "ADMIN_SEED",
     },
@@ -87,6 +88,7 @@ const subjectSeed = [
         description:
             "Software development is the process of conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components.",
         image: "./assets/images/subjects/open/software-development.jpg",
+        path: "software-development",
         bgColor: "#232427",
         createdBy: "ADMIN_SEED",
     },
@@ -103,6 +105,7 @@ const subjectSeed = [
         description:
             "Information technology (IT) is the use of computers to create, process, store, retrieve and exchange all kinds of electronic data[1] and information. IT is typically used within the context of business operations as opposed to personal or entertainment technologies.",
         image: "./assets/images/subjects/open/information-Technology.jpg",
+        path: "information-technology",
         bgColor: "#3a1dad",
         createdBy: "ADMIN_SEED",
     },
@@ -111,6 +114,7 @@ const subjectSeed = [
         description:
             "Mathematics includes the study of such topics as numbers (arithmetic and number theory), formulas and related structures (algebra), shapes and spaces in which they are contained (geometry), and quantities and their changes (calculus and analysis).",
         image: "./assets/images/subjects/open/mathematics.jpg",
+        path: "mathematics",
         bgColor: "#f2353b",
         createdBy: "ADMIN_SEED",
     },
@@ -119,6 +123,7 @@ const subjectSeed = [
         description:
             "Statistics is the discipline that concerns the collection, organization, analysis, interpretation, and presentation of data.",
         image: "./assets/images/subjects/open/statistics.jpg",
+        path: "statistics",
         bgColor: "#9798c8",
         createdBy: "ADMIN_SEED",
     },
@@ -127,6 +132,7 @@ const subjectSeed = [
         description:
             "Nursing is a profession within the health care sector focused on the care of individuals, families, and communities so they may attain, maintain, or recover optimal health and quality of life.",
         image: "./assets/images/subjects/open/nursing.jpg",
+        path: "nursing",
         bgColor: "#e73838",
         createdBy: "ADMIN_SEED",
     },
@@ -135,6 +141,7 @@ const subjectSeed = [
         description:
             "Finance is a term for matters regarding the management, creation, and study of money and investments.",
         image: "./assets/images/subjects/open/finance.jpg",
+        path: "finance",
         bgColor: "#49b2cd",
         createdBy: "ADMIN_SEED",
     },
@@ -143,6 +150,7 @@ const subjectSeed = [
         description:
             "Accounting or accountancy is the measurement, processing, and communication of financial and non financial information about economic entities such as businesses and corporations.",
         image: "./assets/images/subjects/open/accounting.jpg",
+        path: "accounting",
         bgColor: "#1b52dd",
         createdBy: "ADMIN_SEED",
     },
@@ -151,6 +159,7 @@ const subjectSeed = [
         description:
             "Economics is the social science that studies the production, distribution, and consumption of goods and services.",
         image: "./assets/images/subjects/open/economics.jpg",
+        path: "economics",
         bgColor: "#eb8c51",
         createdBy: "ADMIN_SEED",
     },
@@ -159,14 +168,16 @@ const subjectSeed = [
         description:
             "Physics is the natural science that studies matter, its fundamental constituents, its motion and behavior through space and time, and the related entities of energy and force.",
         image: "./assets/images/subjects/open/physics.jpg",
+        path: "physics",
         bgColor: "#2fa55a",
         createdBy: "ADMIN_SEED",
     },
     {
-        name: "Business",
+        name: "Business Administration",
         description:
             "Business is the activity of making one's living or making money by producing or buying and selling products (such as goods and services).",
         image: "./assets/images/subjects/open/business-administration.jpg",
+        path: "business-administration",
         bgColor: "#005b96",
         createdBy: "ADMIN_SEED",
     },
@@ -175,6 +186,7 @@ const subjectSeed = [
         description:
             "Graphic design is the profession and academic discipline whose activity consists in projecting visual communications intended to transmit specific messages to social groups, with specific objectives.",
         image: "./assets/images/subjects/open/graphic-design.jpg",
+        path: "graphic-design",
         bgColor: "#3529b2",
         createdBy: "ADMIN_SEED",
     },
@@ -183,6 +195,7 @@ const subjectSeed = [
         description:
             "Marketing is the process of intentionally stimulating demand for and purchases of goods and services.",
         image: "./assets/images/subjects/open/marketing.jpg",
+        path: "marketing",
         bgColor: "#0ff1ce",
         createdBy: "ADMIN_SEED",
     },
@@ -191,6 +204,7 @@ const subjectSeed = [
         description:
             "English studies (usually called simply English) is an academic discipline taught in primary, secondary, and post-secondary education in English-speaking countries.",
         image: "./assets/images/subjects/open/english.jpg",
+        path: "english",
         bgColor: "#ddb963",
         createdBy: "ADMIN_SEED",
     },
@@ -199,6 +213,7 @@ const subjectSeed = [
         description:
             "Political science is the scientific study of politics. It is a social science dealing with systems of governance and power, and the analysis of political activities, political thought, political behavior, and associated constitutions and laws.",
         image: "./assets/images/subjects/open/political-science.jpg",
+        path: "political-science",
         bgColor: "#b4bfd1",
         createdBy: "ADMIN_SEED",
     },
@@ -206,6 +221,7 @@ const subjectSeed = [
         name: "History",
         description: "History is the study of the past.",
         image: "./assets/images/subjects/open/history.jpg",
+        path: "history",
         bgColor: "#d19b47",
         createdBy: "ADMIN_SEED",
     },
@@ -214,6 +230,7 @@ const subjectSeed = [
         description:
             "Philosophy is the study of general and fundamental questions, such as those about existence, reason, knowledge, values, mind, and language.",
         image: "./assets/images/subjects/open/philosophy.jpg",
+        path: "philosophy",
         bgColor: "#ffba2d",
         createdBy: "ADMIN_SEED",
     },
@@ -222,6 +239,7 @@ const subjectSeed = [
         description:
             "Spanish is a Romance language that evolved from colloquial spoken Latin in the Iberian Peninsula of Europe.",
         image: "./assets/images/subjects/open/spanish.jpg",
+        path: "spanish",
         bgColor: "#febe2a",
         createdBy: "ADMIN_SEED",
     },
@@ -230,6 +248,7 @@ const subjectSeed = [
         description:
             "Communication studies or communication science is an academic discipline that deals with processes of human communication and behavior, patterns of communication in interpersonal relationships, social interactions and communication in different cultures.",
         image: "./assets/images/subjects/open/communications.jpg",
+        path: "communications",
         bgColor: "#913886",
         createdBy: "ADMIN_SEED",
     },
@@ -238,6 +257,7 @@ const subjectSeed = [
         description:
             "Chemistry is the scientific study of the properties and behavior of matter.",
         image: "./assets/images/subjects/open/chemistry.jpg",
+        path: "chemistry",
         bgColor: "#f3c442",
         // bgColor: "#f3c442",
         createdBy: "ADMIN_SEED",
@@ -246,6 +266,7 @@ const subjectSeed = [
         name: "Biology",
         description: "Biology is the scientific study of life.",
         image: "./assets/images/subjects/open/biology.jpg",
+        path: "biology",
         bgColor: "#add143",
         createdBy: "ADMIN_SEED",
     },
@@ -262,6 +283,7 @@ const subjectSeed = [
         description:
             "Sociology is a social science that focuses on society, human social behaviour, patterns of social relationships, social interaction, and aspects of culture associated with everyday life.",
         image: "./assets/images/subjects/open/sociology.jpg",
+        path: "sociology",
         bgColor: "#a6b991",
         createdBy: "ADMIN_SEED",
     },
@@ -270,6 +292,7 @@ const subjectSeed = [
         description:
             "Electrical engineering is an engineering discipline concerned with the study, design and application of equipment, devices and systems which use electricity, electronics, and electromagnetism.",
         image: "./assets/images/subjects/open/electrical-engineering.jpg",
+        path: "electrical-engineering",
         bgColor: "#34c3c9",
         createdBy: "ADMIN_SEED",
     },
@@ -278,6 +301,7 @@ const subjectSeed = [
         description:
             "Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.",
         image: "./assets/images/subjects/open/mechanical-engineering.jpg",
+        path: "mechanical-engineering",
         bgColor: "#757d8b",
         createdBy: "ADMIN_SEED",
     },
@@ -286,6 +310,7 @@ const subjectSeed = [
         description:
             "Chemical engineering is a certain type of engineering which deals with the study of operation and design of chemical plants as well as methods of improving production.",
         image: "./assets/images/subjects/open/chemical-engineering.jpg",
+        path: "chemical-engineering",
         bgColor: "#abb7c3",
         createdBy: "ADMIN_SEED",
     },
@@ -294,6 +319,7 @@ const subjectSeed = [
         description:
             "Industrial engineering is an engineering profession that is concerned with the optimization of complex processes, systems, or organizations by developing, improving and implementing integrated systems of people, money, knowledge, information and equipment.",
         image: "./assets/images/subjects/open/industrial-engineering.jpg",
+        path: "industrial-engineering",
         bgColor: "#0d5799",
         createdBy: "ADMIN_SEED",
     },
@@ -302,6 +328,7 @@ const subjectSeed = [
         description:
             "Civil engineering is a professional engineering discipline that deals with the design, construction, and maintenance of the physical and naturally built environment, including public works such as roads, bridges, canals, dams, airports, sewage systems, pipelines, structural components of buildings, and railways.",
         image: "./assets/images/subjects/open/civil-engineering.jpg",
+        path: "civil-engineering",
         bgColor: "#f1a443",
         createdBy: "ADMIN_SEED",
     },
@@ -310,6 +337,7 @@ const subjectSeed = [
         description:
             "Computer engineering is a branch of engineering that integrates several fields of computer science and electronic engineering required to develop computer hardware and software.",
         image: "./assets/images/subjects/open/computer-engineering.jpg",
+        path: "computer-engineering",
         bgColor: "#13664f",
         createdBy: "ADMIN_SEED",
     },
@@ -318,6 +346,7 @@ const subjectSeed = [
         description:
             "Biological engineering or bioengineering is the application of principles of biology and the tools of engineering to create usable, tangible, economically-viable products.",
         image: "./assets/images/subjects/open/biological-engineering.jpg",
+        path: "biological-engineering",
         bgColor: "#f78589",
         createdBy: "ADMIN_SEED",
     },
@@ -326,6 +355,7 @@ const subjectSeed = [
         description:
             "In finance, stock consists of all of the shares into which ownership of a corporation or company is divided.",
         image: "./assets/images/subjects/open/stock-market.jpg",
+        path: "stock-market",
         bgColor: "#61d15d",
         createdBy: "ADMIN_SEED",
     },
@@ -334,6 +364,7 @@ const subjectSeed = [
         description:
             "A cryptocurrency is a collection of binary data which is designed to work as a medium of exchange wherein individual coin ownership records are stored in a ledger which is a computerized database using strong cryptography to secure transaction records, to control the creation of additional coins, and to verify the transfer of coin ownership.",
         image: "./assets/images/subjects/open/cryptocurrency.jpg",
+        path: "cryptocurrency",
         bgColor: "#d3af2d",
         createdBy: "ADMIN_SEED",
     },
@@ -342,6 +373,7 @@ const subjectSeed = [
         description:
             "A blockchain is a growing list of records, called blocks, that are linked together using cryptography.",
         image: "./assets/images/subjects/open/blockchain.jpg",
+        path: "blockchain",
         bgColor: "#364e66",
         createdBy: "ADMIN_SEED",
     },
@@ -358,7 +390,11 @@ const betaFeedbackSeed = [
         archived: false,
     },
 ];
-1
+
+const pathify = (str) => {
+    return str.toLowerCase().replace(/\s/g, "");
+};
+
 //first delete user data in database and then populate with seed data
 User.deleteMany({})
     .then(() => User.insertMany(userSeed))

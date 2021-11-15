@@ -17,6 +17,7 @@ import { Route, Switch, useHistory } from "react-router-dom";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions, userActions } from "./redux/actions/";
+
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "./utils/queries";
 
@@ -37,6 +38,9 @@ function App() {
             pathArray.push(path);
         });
         return pathArray;
+    };
+    const pathify = (str) => {
+        return str.toLowerCase().replace(/\s/g, "");
     };
     const categoryRouterPaths = createCategoryPaths(categories);
     // console.log(categoryRouterPaths);
