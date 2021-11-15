@@ -34,7 +34,7 @@ const hashPassword = (password) => {
 //data object to be inserted in to db
 const userSeed = [
     {
-        username: "Admin Man",
+        username: "upstudy_admin",
         email: "admin@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
@@ -44,7 +44,7 @@ const userSeed = [
         updatedAt: new Date(),
     },
     {
-        username: "Mod Buddy",
+        username: "mod_tester",
         email: "mod@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,
@@ -63,7 +63,7 @@ const userSeed = [
         updatedAt: new Date(),
     },
     {
-        username: "User Dude",
+        username: "user_tester",
         email: "user@upstudy.io",
         password: hashPassword("12345"),
         isVerified: false,

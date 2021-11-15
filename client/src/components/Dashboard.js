@@ -4,6 +4,8 @@ import Profile from "./Profile";
 import BetaFeedback from "./BetaFeedback";
 import { useState, useEffect, useReducer } from "react";
 import Auth from "../utils/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
@@ -53,6 +55,13 @@ const Dashboard = () => {
                                                         src="../../assets/images/demo/user-2.jpg"
                                                         alt="Generic placeholder"
                                                     />
+                                                    <span className="control-color circle-icon bg-primary">
+                                                        <FontAwesomeIcon
+                                                            icon={faCamera}
+                                                            className="text-light"
+                                                            size="lg"
+                                                        />
+                                                    </span>
                                                 </div>
 
                                                 <div class="col">

@@ -33,6 +33,14 @@
     /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06); */
 }
 
+.circle-icon {
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 13px;
+}
+
 @media (min-width: 576px) {
     .card-columns {
         column-count: 1;

@@ -35,46 +35,50 @@ const Categories = () => {
             <section className="p-3">
                 <div className="card-columns p-1 subject-card-columns">
                     {filteredCategories.map((subject) => (
-                        <div
-                            className="card text-white text-center category-cards mt-1"
-                            key={subject.id}
-                            style={{ backgroundColor: subject.bgColor }}
-                        >
-                            <img
-                                className="card-img-top p-2 subject-image"
-                                src={subject.image}
-                                alt={subject.name}
-                            />
-                            <div className="card-body mt-0 pt-0">
-                                <h4 className="card-title">{subject.name}</h4>
-                                <div className="btn-group">
-                                    <label className="btn btn-secondary subject-button-controls">
-                                        <div>
-                                            <span className="control-color">
-                                                <FontAwesomeIcon
-                                                    icon={faShareSquare}
-                                                />
-                                            </span>
-                                            <span className="control-color m-1">
-                                                Share
-                                            </span>
-                                        </div>
-                                    </label>
-                                    <label className="btn btn-secondary subject-button-controls">
-                                        <div>
-                                            <span className="control-color">
-                                                <FontAwesomeIcon
-                                                    icon={faBookmark}
-                                                />
-                                            </span>
-                                            <span className="control-color m-1">
-                                                Save
-                                            </span>
-                                        </div>
-                                    </label>
+                        <Link to={`/${subject.path}`}>
+                            <div
+                                className="card text-white text-center category-cards mt-1"
+                                key={subject.id}
+                                style={{ backgroundColor: subject.bgColor }}
+                            >
+                                <img
+                                    className="card-img-top p-2 subject-image"
+                                    src={subject.image}
+                                    alt={subject.name}
+                                />
+                                <div className="card-body mt-0 pt-0">
+                                    <h4 className="card-title">
+                                        {subject.name}
+                                    </h4>
+                                    <div className="btn-group">
+                                        <label className="btn btn-secondary subject-button-controls">
+                                            <div>
+                                                <span className="control-color">
+                                                    <FontAwesomeIcon
+                                                        icon={faShareSquare}
+                                                    />
+                                                </span>
+                                                <span className="control-color m-1">
+                                                    Share
+                                                </span>
+                                            </div>
+                                        </label>
+                                        <label className="btn btn-secondary subject-button-controls">
+                                            <div>
+                                                <span className="control-color">
+                                                    <FontAwesomeIcon
+                                                        icon={faBookmark}
+                                                    />
+                                                </span>
+                                                <span className="control-color m-1">
+                                                    Save
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
