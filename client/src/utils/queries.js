@@ -55,6 +55,7 @@ export const GET_SUBJECTS = gql`
             image
             bgColor
             createdBy
+            path
         }
     }
 `;
@@ -68,6 +69,7 @@ export const GET_SUBJECT = gql`
             image
             bgColor
             createdBy
+            path
         }
     }
 `;

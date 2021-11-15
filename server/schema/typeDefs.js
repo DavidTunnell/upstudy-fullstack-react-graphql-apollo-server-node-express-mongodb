@@ -43,6 +43,7 @@ const typeDefs = gql`
         image: String
         bgColor: String
         createdBy: String
+        path: String
     }
 
     type BetaFeedback {

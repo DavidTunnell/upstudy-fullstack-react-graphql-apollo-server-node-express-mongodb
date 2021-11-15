@@ -39,6 +39,7 @@ export const ADD_SUBJECT = gql`
             image
             bgColor
             createdBy
+            path
         }
     }
 `;

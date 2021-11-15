@@ -391,10 +391,6 @@ const betaFeedbackSeed = [
     },
 ];
 
-const pathify = (str) => {
-    return str.toLowerCase().replace(/\s/g, "");
-};
-
 //first delete user data in database and then populate with seed data
 User.deleteMany({})
     .then(() => User.insertMany(userSeed))

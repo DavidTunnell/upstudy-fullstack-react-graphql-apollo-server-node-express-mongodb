@@ -99,6 +99,7 @@ const resolvers = {
                         image,
                         bgColor,
                         createdBy,
+                        path: name.toLowerCase().replace(/\s/g, "-"),
                     });
                     return subject;
                 }
