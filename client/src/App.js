@@ -23,6 +23,8 @@ import { setContext } from "@apollo/client/link/context";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions, userActions } from "./redux/actions/";
+import { useQuery } from "@apollo/client";
+import { GET_SUBJECTS } from "../utils/queries";
 
 // Construct the main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -51,9 +53,13 @@ const client = new ApolloClient({
 //top use the react router package, surround the whole app with the router component
 function App() {
     const categories = useSelector((state) => state.categories);
-    console.log("App()---");
-    console.log(categories);
-    console.log("App()---");
+    const { loading, data } = useQuery(GET_SUBJECTS);
+    if ((!categories || categories.length === 0) && !loading) {
+        //if nothing in redux, pull from dashboard
+
+        console.log("nothing in redux");
+        console.log(data);
+    }
     const createCategoryPaths = (categories) => {
         const pathArray = [];
         categories.forEach((category) => {
