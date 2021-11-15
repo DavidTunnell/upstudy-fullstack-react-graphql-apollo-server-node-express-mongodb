@@ -100,7 +100,8 @@ function App() {
                         {categoryRouterPaths &&
                             categoryRouterPaths.map((path) => (
                                 <Route exact path={`/${path}`}>
-                                    <Category />
+                                    {/* next is pass the category object as a parameter here and then consume in category component */}
+                                    <Category data={path} />
                                 </Route>
                             ))}
                         <Route path="/404">
