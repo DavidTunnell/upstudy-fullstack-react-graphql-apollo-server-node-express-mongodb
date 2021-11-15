@@ -13,52 +13,22 @@ import BetaNotice from "./components/BetaNotice";
 import Auth from "./utils/auth";
 import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { modalActions, userActions } from "./redux/actions/";
 import { useQuery } from "@apollo/client";
-import { GET_SUBJECTS } from "../utils/queries";
-
-// Construct the main GraphQL API endpoint
-const httpLink = createHttpLink({
-    uri: "/graphql",
-});
-
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
-const authLink = setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
-    const token = localStorage.getItem("id_token");
-    // return the headers to the context so httpLink can read them
-    return {
-        headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : "",
-        },
-    };
-});
-
-const client = new ApolloClient({
-    // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-});
+import { GET_SUBJECTS } from "./utils/queries";
 
 //top use the react router package, surround the whole app with the router component
 function App() {
-    const categories = useSelector((state) => state.categories);
+    let categories = useSelector((state) => state.categories);
     const { loading, data } = useQuery(GET_SUBJECTS);
     if ((!categories || categories.length === 0) && !loading) {
         //if nothing in redux, pull from dashboard
 
         console.log("nothing in redux");
-        console.log(data);
+        categories = data.subjects;
     }
     const createCategoryPaths = (categories) => {
         const pathArray = [];
@@ -69,7 +39,7 @@ function App() {
         return pathArray;
     };
     const categoryRouterPaths = createCategoryPaths(categories);
-    console.log(categoryRouterPaths);
+    // console.log(categoryRouterPaths);
     //get redux store data for modal
     const modalSettings = useSelector((state) => state.modalSettings); //for putting in modal
     const dispatch = useDispatch();
@@ -92,7 +62,7 @@ function App() {
     });
 
     return (
-        <ApolloProvider client={client}>
+        <>
             {/* ^ the apollo provider wrapper allows the use of graphql calls throughout the app */}
             <div className="App">
                 <Header toTop={toTop} />
@@ -156,7 +126,7 @@ function App() {
                 <BetaNotice />
                 <Footer toTop={toTop} />
             </div>
-        </ApolloProvider>
+        </>
     );
 }
 
