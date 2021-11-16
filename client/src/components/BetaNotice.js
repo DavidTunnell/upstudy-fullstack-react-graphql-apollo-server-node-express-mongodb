@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { useMutation } from "@apollo/client";
 import { ADD_BETA_FEEDBACK, GET_S3_URL } from "../utils/mutations";
+import { GET_BETA_FEEDBACK } from "../utils/queries";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 import Auth from "../utils/auth";
@@ -38,7 +39,9 @@ const SearchBar = () => {
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isMuted, setIsMuted] = useState("");
-    const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK);
+    const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK, {
+        refetchQueries: [{ query: GET_BETA_FEEDBACK }],
+    });
     const [getS3Url] = useMutation(GET_S3_URL);
     //to save data to redux store
     const dispatch = useDispatch();
