@@ -6,6 +6,10 @@ import { useState, useEffect, useReducer } from "react";
 import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import SimpleReactValidator from "simple-react-validator";
+import { modalActions } from "../redux/actions/";
+import { useMutation } from "@apollo/client";
+import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 
 const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
@@ -13,6 +17,39 @@ const Dashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
+
+    const [imageFile, setImageFile] = useState(null);
+    const [validatorProfilePic] = useState(
+        new SimpleReactValidator({
+            validators: {
+                maxFileSize: {
+                    // name the rule
+                    message: "The max file size is 5MB.",
+                    rule: (val, params, validator) => {
+                        if (val) {
+                            const fileSize = val.size / 1024 / 1024; // in MiB
+                            if (fileSize > 5) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    },
+                    required: false, // optional
+                },
+            },
+        })
+    );
+    function closeModal() {
+        document.getElementById("backdrop").style.display = "none";
+        document.getElementById("update-profile-pic-modal").style.display =
+            "none";
+        document
+            .getElementById("update-profile-pic-modal")
+            .classList.remove("show");
+    }
+
+    const dispatch = useDispatch();
     // const [profilePicUrl, setProfilePicUrl] = useState(
     //     "../../assets/images/default-profile-pics/default-profile-pic-3.jpg"
     // );
@@ -37,8 +74,28 @@ const Dashboard = () => {
         }
     });
 
-    const viewUpdateProfilePic = () => {
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        if (validatorProfilePic.allValid()) {
+            try {
+                console.log(imageFile);
+            } catch (error) {
+                console.log(error);
+                dispatch(
+                    modalActions.updateAndShowModal("Error", error.message)
+                );
+            }
+        }
         console.log("clicked");
+        //is there a way to fire instead?
+        // data-toggle="modal"
+        // data-target="#update-profile-pic-modal"
+        // $("#newModal").modal("toggle");
+    };
+
+    const handleImageSelection = async (event) => {
+        const input = event.target;
+        setImageFile(input.files[0]);
     };
 
     return (
@@ -67,16 +124,8 @@ const Dashboard = () => {
                                                             alt="Generic placeholder"
                                                             data-toggle="modal"
                                                             data-target="#update-profile-pic-modal"
-                                                            onClick={
-                                                                viewUpdateProfilePic
-                                                            }
                                                         />
-                                                        <span
-                                                            className="control-color circle-icon bg-primary"
-                                                            onClick={
-                                                                viewUpdateProfilePic
-                                                            }
-                                                        >
+                                                        <span className="control-color circle-icon bg-primary">
                                                             <FontAwesomeIcon
                                                                 icon={faCamera}
                                                                 className="text-light"
@@ -215,15 +264,6 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">
-                            Button
-                        </a> */}
                             </div>
                         </div>
                     </div>
@@ -273,23 +313,24 @@ const Dashboard = () => {
                                                         className="form-control"
                                                         name="image"
                                                         accept="image/*"
-                                                        // onChange={(event) => {
-                                                        //     handleImageSelection(
-                                                        //         event
-                                                        //     );
-                                                        // }}
-                                                        // value={image}
+                                                        onChange={(event) => {
+                                                            handleImageSelection(
+                                                                event
+                                                            );
+                                                        }}
                                                     />
-                                                    {/* {validatorFeedback.message(
+                                                    {validatorProfilePic.message(
                                                         "maxFileSize",
                                                         imageFile,
                                                         "maxFileSize"
-                                                    )} */}
+                                                    )}
                                                 </div>
                                                 <button
                                                     type="submit"
                                                     className="btn btn-lg btn-primary w-100"
-                                                    // onClick={onSubmit}
+                                                    onClick={(event) => {
+                                                        onSubmit(event);
+                                                    }}
                                                 >
                                                     Update
                                                 </button>

@@ -152,6 +152,31 @@ const resolvers = {
                 throw new AuthenticationError(error.message);
             }
         },
+        updateProfilePic: async (
+            parent,
+            { userId, profilePic },
+            context,
+            info
+        ) => {
+            //confirm they are logged in....
+            //context.use
+            if (true) {
+                //user model update
+                const user = await User.findOne({ _id: userId });
+                user.profilePic = profilePic;
+                await user.save();
+                //if the user doesn't exist let user know
+                if (!user) {
+                    throw new AuthenticationError(
+                        "This user id doesn't exist. Which is pretty weird. "
+                    );
+                }
+                return user;
+            }
+            throw new AuthenticationError(
+                "You must be logged in to perform this action."
+            );
+        },
         addEmailVerificationToken: async (
             parent,
             { userId, username, email },

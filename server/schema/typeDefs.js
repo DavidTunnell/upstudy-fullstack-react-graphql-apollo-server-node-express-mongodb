@@ -81,6 +81,9 @@ const typeDefs = gql`
         getS3Url(isLoggedIn: Boolean!): String!
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
+
+        updateProfilePic(userId: ID!, profilePic: String!): User
+
         verifyEmail(email: String!, token: String!): TokenEmailVerification
         forgotPassword(email: String!): User
         updatePassword(

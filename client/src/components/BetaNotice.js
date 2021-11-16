@@ -130,12 +130,13 @@ const SearchBar = () => {
                     modalActions.updateAndShowModal("Error", error.message)
                 );
             }
-
+            //this is wrong - need to move into state!!!!!!! ****
             feedbackModal.classList.remove("show");
             feedbackModal.style.cssText += "display: none;";
             feedbackModalBackdrop.classList.remove("modal-backdrop");
             feedbackModalOpen.classList.remove("modal-open");
             body.style.cssText += "padding-right: 0px;";
+            ///////////////////////////////
             if (!Auth.loggedIn()) {
                 setUsername("");
                 setEmail("");
