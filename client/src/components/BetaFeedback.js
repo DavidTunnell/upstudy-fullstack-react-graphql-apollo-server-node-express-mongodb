@@ -1,26 +1,24 @@
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_BETA_FEEDBACK } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
 import React, { useState, useEffect } from "react";
 import { modalActions } from "../redux/actions/";
 import { useDispatch } from "react-redux";
 
-const BetaFeedback = () => {
-    const { loading, data } = useQuery(GET_BETA_FEEDBACK);
+const BetaFeedback = (params) => {
+    let betaFeedbackData = params.feedback;
+    // const { loading, data } = useQuery(GET_BETA_FEEDBACK);
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
-    const [feedbackData, setFeedbackData] = useState();
+    const [feedbackData, setFeedbackData] = useState(betaFeedbackData);
     //to save data to redux store
     const dispatch = useDispatch();
     useEffect(() => {
-        if (!loading) {
-            setFeedbackData(data.betaFeedback);
-        }
-    }, [data, loading]);
+        setFeedbackData(betaFeedbackData);
+    }, [betaFeedbackData]);
 
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
-        const result = data.betaFeedback.filter((obj) => {
+        const result = feedbackData.filter((obj) => {
             return obj._id === idSelected;
         })[0];
         dispatch(

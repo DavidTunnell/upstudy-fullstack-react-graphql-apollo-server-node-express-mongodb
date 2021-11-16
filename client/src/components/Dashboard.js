@@ -10,14 +10,17 @@ import SimpleReactValidator from "simple-react-validator";
 import { modalActions } from "../redux/actions/";
 // import { useMutation } from "@apollo/client";
 // import { ADD_BETA_FEEDBACK } from "../utils/mutations";
-// import { useQuery, useMutation } from "@apollo/client";
-// import { GET_BETA_FEEDBACK } from "../utils/queries";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
+import { GET_BETA_FEEDBACK } from "../utils/queries";
 
 const Dashboard = (params) => {
     const bgColor = params.bgColor;
     const user = useSelector((state) => state.loggedInUser);
-    // const [getBetaFeedbackData, { loading, data }] =
-    //     useQuery(GET_BETA_FEEDBACK);
+    const [betaFeedback, setBetaFeedback] = useState(null);
+    const [getBetaFeedbackData] = useLazyQuery(GET_BETA_FEEDBACK, {
+        onCompleted: (data) => setBetaFeedback(data.betaFeedback),
+        fetchPolicy: "network-only",
+    });
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
@@ -99,12 +102,6 @@ const Dashboard = (params) => {
     const handleImageSelection = async (event) => {
         const input = event.target;
         setImageFile(input.files[0]);
-    };
-
-    const handleFeedbackLoad = async (event) => {
-        event.preventDefault();
-        console.log("handleFeedbackLoad");
-        // getBetaFeedbackData();
     };
 
     return (
@@ -199,8 +196,8 @@ const Dashboard = (params) => {
                                                                 className="nav-item nav-link"
                                                                 data-toggle="tab"
                                                                 href="#feedback"
-                                                                onClick={
-                                                                    handleFeedbackLoad
+                                                                onClick={() =>
+                                                                    getBetaFeedbackData()
                                                                 }
                                                             >
                                                                 Feedback
@@ -255,7 +252,11 @@ const Dashboard = (params) => {
                                             >
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-10 col-lg-8">
-                                                        <BetaFeedback />
+                                                        <BetaFeedback
+                                                            feedback={
+                                                                betaFeedback
+                                                            }
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
