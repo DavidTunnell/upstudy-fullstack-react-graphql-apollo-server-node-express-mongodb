@@ -1,11 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
-const Error = () => {
+const Error = (params) => {
     //local styling
-    const styles = {
-        notFoundStyle: {
-            backgroundImage: "url(/assets/images/404-bg.jpg)",
-        },
-    };
+    const bgColor = params.bgColor;
     //use react router history
     const history = useHistory();
     //get data passed via history on another component
@@ -15,7 +11,7 @@ const Error = () => {
             <div className="viewport">
                 <div
                     className="image image-overlay image-blur"
-                    style={styles.notFoundStyle}
+                    style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">

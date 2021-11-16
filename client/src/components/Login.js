@@ -13,6 +13,7 @@ const Login = ({
     signInInsideVal,
     signUpTopVal,
     signUpInsideVal,
+    bgColor,
 }) => {
     //to save data to redux store
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Login = ({
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     //local styling
-    const bgColor = "#3c66ff";
+
     //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);
     const [addUser] = useMutation(ADD_USER);
@@ -161,8 +162,7 @@ const Login = ({
         <>
             <section className="viewport">
                 <div
-                    className="image image-overlay"
-                    // style={{ backgroundImage: `url(${bgImage})` }}
+                    className="image"
                     style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container mt-8">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-const HomeHero = () => {
-    const bgColor = "#2e4fc7";
+const HomeHero = (params) => {
+    const bgColor = params.bgColor;
     return (
         <>
             <section

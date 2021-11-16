@@ -23,6 +23,7 @@ import { GET_SUBJECTS } from "./utils/queries";
 
 //top use the react router package, surround the whole app with the router component
 function App() {
+    const mainColor = "#2e4fc7";
     let categories = useSelector((state) => state.categories);
     const { loading, data } = useQuery(GET_SUBJECTS);
     if ((!categories || categories.length === 0) && !loading) {
@@ -61,7 +62,7 @@ function App() {
                     {/* switch/route renders different components based on url */}
                     <Switch>
                         <Route exact path="/">
-                            <Home />
+                            <Home bgColor={mainColor} />
                         </Route>
                         <Route exact path="/login">
                             <Login
@@ -69,6 +70,7 @@ function App() {
                                 signInInsideVal="581.075px"
                                 signUpTopVal="0px"
                                 signUpInsideVal="0px"
+                                bgColor={mainColor}
                             />
                         </Route>
                         <Route exact path="/signup">
@@ -77,6 +79,7 @@ function App() {
                                 signInInsideVal="0px"
                                 signUpTopVal="383.333px"
                                 signUpInsideVal="581.075px"
+                                bgColor={mainColor}
                             />
                         </Route>
                         <Route exact path="/verify">
@@ -86,7 +89,7 @@ function App() {
                             <ForgotPassword />
                         </Route>
                         <Route exact path="/dashboard">
-                            <Dashboard />
+                            <Dashboard bgColor={mainColor} />
                         </Route>
                         {categories &&
                             categories.map((category) => (
@@ -100,10 +103,10 @@ function App() {
                                 </Route>
                             ))}
                         <Route path="/404">
-                            <NotFound />
+                            <NotFound bgColor={mainColor} />
                         </Route>
                         <Route path="/error">
-                            <Error error="test" />
+                            <Error bgColor={mainColor} />
                         </Route>
                         {/* all other routes go to a 404 page - must be at bottom*/}
                         <Route path="*">

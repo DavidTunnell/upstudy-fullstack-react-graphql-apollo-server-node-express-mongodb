@@ -121,6 +121,7 @@ export const VERIFY_EMAIL = gql`
                     role
                     associatedIds
                 }
+                profilePic
             }
         }
     }

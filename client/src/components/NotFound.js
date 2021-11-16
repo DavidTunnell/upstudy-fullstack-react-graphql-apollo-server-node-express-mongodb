@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
-const NotFound = () => {
-    //local styling
-    const styles = {
-        notFoundStyle: {
-            backgroundImage: "url(./assets/images/404-bg.jpg)",
-        },
-    };
+const NotFound = (params) => {
+    const bgColor = params.bgColor;
+
     return (
         <>
             <div className="viewport">
                 <div
                     className="image image-overlay image-blur"
-                    style={styles.notFoundStyle}
+                    style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">

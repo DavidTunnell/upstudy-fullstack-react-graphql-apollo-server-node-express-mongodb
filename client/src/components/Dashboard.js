@@ -11,7 +11,8 @@ import { modalActions } from "../redux/actions/";
 // import { useMutation } from "@apollo/client";
 // import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 
-const Dashboard = () => {
+const Dashboard = (params) => {
+    const bgColor = params.bgColor;
     const user = useSelector((state) => state.loggedInUser);
 
     const [isAdmin, setIsAdmin] = useState(false);
@@ -55,7 +56,6 @@ const Dashboard = () => {
     //     "../../assets/images/default-profile-pics/default-profile-pic-3.jpg"
     // );
 
-    const bgColor = "#3c66ff";
     //use react router history
     const history = useHistory();
 
