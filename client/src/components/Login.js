@@ -37,7 +37,6 @@ const Login = ({
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     //local styling
-    const bgImage = "/assets/images/login-bg.jpg";
     const bgColor = "#3c66ff";
     //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);

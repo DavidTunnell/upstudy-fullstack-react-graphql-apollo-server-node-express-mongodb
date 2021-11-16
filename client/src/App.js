@@ -90,7 +90,11 @@ function App() {
                         </Route>
                         {categories &&
                             categories.map((category) => (
-                                <Route exact path={`/${category.path}`}>
+                                <Route
+                                    exact
+                                    path={`/${category.path}`}
+                                    key={category._id}
+                                >
                                     {/* next is pass the category object as a parameter here and then consume in category component */}
                                     <Category data={category} />
                                 </Route>

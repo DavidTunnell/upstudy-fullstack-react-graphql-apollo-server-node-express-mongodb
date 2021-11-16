@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
-import { Link, useHistory } from "react-router-dom";
-import React, { useState, useEffect, useReducer } from "react";
+import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const Categories = () => {
             dispatch(categoriesActions.categories(data));
             dispatch(filteredCategoriesActions.setAllCategories(data));
         }
-    }, [data]);
+    }, [data, loading, dispatch]);
 
     // const currentCategories = () => {
     //     if (filteredCategories.length === 0) {
@@ -35,7 +35,7 @@ const Categories = () => {
             <section className="p-3">
                 <div className="card-columns p-1 subject-card-columns">
                     {filteredCategories.map((subject) => (
-                        <Link to={`/${subject.path}`}>
+                        <Link to={`/${subject.path}`} key={subject._id}>
                             <div
                                 className="card text-white text-center category-cards mt-1"
                                 key={subject.id}

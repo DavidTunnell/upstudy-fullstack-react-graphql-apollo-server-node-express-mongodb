@@ -96,6 +96,7 @@ const VerifyEmail = () => {
                             user.username,
                             user.email,
                             user.isVerified,
+                            user.roles,
                             user.profilePic
                         )
                     );

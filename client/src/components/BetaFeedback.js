@@ -1,9 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_BETA_FEEDBACK } from "../utils/queries";
 import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
-import React, { useState, useEffect, useReducer } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
 import { modalActions } from "../redux/actions/";
 import { useDispatch } from "react-redux";
 
@@ -54,7 +52,7 @@ const BetaFeedback = () => {
             // 1. Make a shallow copy of the items
             let items = [...feedbackData];
             // 2. Make a shallow copy of the item you want to mutate
-            const foundIndex = items.findIndex((x) => x._id == idSelected);
+            const foundIndex = items.findIndex((x) => x._id === idSelected);
             let item = { ...items[foundIndex] };
             // 3. Replace the property you're interested in
             item.archived = true;
@@ -63,7 +61,7 @@ const BetaFeedback = () => {
             // 5. Set the state to our new copy
             setFeedbackData(items);
             try {
-                const { data } = await archiveBetaFeedback({
+                await archiveBetaFeedback({
                     variables: {
                         feedbackId: idSelected,
                     },

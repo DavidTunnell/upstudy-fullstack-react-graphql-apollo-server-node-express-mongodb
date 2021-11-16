@@ -1,5 +1,5 @@
 // import { Link, useHistory } from "react-router-dom";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useReducer } from "react";
 // import Auth from "../utils/auth";
 import { USER_UPDATE_PASSWORD } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
@@ -11,10 +11,6 @@ const Dashboard = () => {
     //to save and get data to redux store
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
-
-    //local styling
-    const bgColor = "#3c66ff";
-    const cardBgColor = "#f5f5f5";
 
     //state
     const [oldPassword, setOldPassword] = useState("");

@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Profile from "./Profile";
 import BetaFeedback from "./BetaFeedback";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import SimpleReactValidator from "simple-react-validator";
 import { modalActions } from "../redux/actions/";
-import { useMutation } from "@apollo/client";
-import { ADD_BETA_FEEDBACK } from "../utils/mutations";
+// import { useMutation } from "@apollo/client";
+// import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 
 const Dashboard = () => {
     const user = useSelector((state) => state.loggedInUser);
@@ -40,14 +40,15 @@ const Dashboard = () => {
             },
         })
     );
-    function closeModal() {
-        document.getElementById("backdrop").style.display = "none";
-        document.getElementById("update-profile-pic-modal").style.display =
-            "none";
-        document
-            .getElementById("update-profile-pic-modal")
-            .classList.remove("show");
-    }
+
+    // function closeModal() {
+    //     document.getElementById("backdrop").style.display = "none";
+    //     document.getElementById("update-profile-pic-modal").style.display =
+    //         "none";
+    //     document
+    //         .getElementById("update-profile-pic-modal")
+    //         .classList.remove("show");
+    // }
 
     const dispatch = useDispatch();
     // const [profilePicUrl, setProfilePicUrl] = useState(
@@ -63,13 +64,13 @@ const Dashboard = () => {
         if (!Auth.loggedIn()) {
             history.push("/login");
         }
-        if (user.roles.some((e) => e.role === "admin") && Auth.loggedIn()) {
+        if (user?.roles.some((e) => e.role === "admin") && Auth.loggedIn()) {
             setIsAdmin(true);
         }
-        if (user.roles.some((e) => e.role === "mod") && Auth.loggedIn()) {
+        if (user?.roles.some((e) => e.role === "mod") && Auth.loggedIn()) {
             setIsMod(true);
         }
-        if (user.roles.some((e) => e.role === "user") && Auth.loggedIn()) {
+        if (user?.roles.some((e) => e.role === "user") && Auth.loggedIn()) {
             setIsUser(true);
         }
     });
@@ -86,7 +87,6 @@ const Dashboard = () => {
                 );
             }
         }
-        console.log("clicked");
         //is there a way to fire instead?
         // data-toggle="modal"
         // data-target="#update-profile-pic-modal"

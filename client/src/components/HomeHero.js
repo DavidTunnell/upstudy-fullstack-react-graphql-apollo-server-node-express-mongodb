@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 const HomeHero = () => {
     const bgColor = "#2e4fc7";
     return (
@@ -39,7 +39,7 @@ const HomeHero = () => {
                                     </span>
                                     {/* <span className="p-1">
                                         <Link
-                                            to="/signup"
+                                            to="/about"
                                             className="btn btn-white btn-lg btn-rounded px-5"
                                         >
                                             How It Works

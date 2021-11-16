@@ -117,6 +117,10 @@ export const VERIFY_EMAIL = gql`
                 username
                 email
                 isVerified
+                roles {
+                    role
+                    associatedIds
+                }
             }
         }
     }
