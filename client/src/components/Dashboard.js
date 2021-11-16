@@ -105,19 +105,19 @@ const Dashboard = (params) => {
                 className="pb-5 pt-5 viewport"
             >
                 <div style={{ backgroundColor: bgColor, height: "5rem" }}></div>
-                <div class="d-flex justify-content-center flex-nowrap mb-1 row">
-                    <div class="card bg-light col-8">
-                        <div class="mt-n3"></div>
-                        <div class="mt-n10 mb-6">
-                            <div class="card-body p-0 mt-n10">
-                                <div class="p-0 mt-n10">
-                                    <div class="container mt-n10">
-                                        <div class="row justify-content-center align-items-end vh-50 mb-5 mt-n10">
-                                            <div class="col-4 col-md-10 col-lg-8 mt-n10">
-                                                <div class="row align-items-center">
-                                                    <div class="col-4 col-lg-3">
+                <div className="d-flex justify-content-center flex-nowrap mb-1 row">
+                    <div className="card bg-light col-8">
+                        <div className="mt-n3"></div>
+                        <div className="mt-n10 mb-6">
+                            <div className="card-body p-0 mt-n10">
+                                <div className="p-0 mt-n10">
+                                    <div className="container mt-n10">
+                                        <div className="row justify-content-center align-items-end vh-50 mb-5 mt-n10">
+                                            <div className="col-4 col-md-10 col-lg-8 mt-n10">
+                                                <div className="row align-items-center">
+                                                    <div className="col-4 col-lg-3">
                                                         <img
-                                                            class="mr-3 avatar avatar-xl rounded profile-pic"
+                                                            className="mr-3 avatar avatar-xl rounded profile-pic"
                                                             src={
                                                                 user.profilePic
                                                             }
@@ -136,30 +136,30 @@ const Dashboard = (params) => {
                                                         </span>
                                                     </div>
 
-                                                    <div class="col">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-8">
-                                                                <h2 class="mb-0">
+                                                    <div className="col">
+                                                        <div className="row align-items-center">
+                                                            <div className="col-md-8">
+                                                                <h2 className="mb-0">
                                                                     <b>
                                                                         {
                                                                             user.username
                                                                         }
                                                                     </b>
                                                                 </h2>
-                                                                {/* <span class="text-muted">
+                                                                {/* <span className="text-muted">
                                                             Senior Visual
                                                             Designer
                                                         </span> */}
                                                             </div>
-                                                            {/* <div class="col-md-4 text-left text-md-right">
+                                                            {/* <div className="col-md-4 text-left text-md-right">
                                                         <button
                                                             type="button"
-                                                            class="btn btn-rounded btn-ico btn-white"
+                                                            className="btn btn-rounded btn-ico btn-white"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title="Add Friend"
                                                         >
-                                                            <i class="icon-plus2 fs-20"></i>
+                                                            <i className="icon-plus2 fs-20"></i>
                                                         </button>
                                                     </div> */}
                                                         </div>
@@ -294,7 +294,7 @@ const Dashboard = (params) => {
                             <div className="container">
                                 <div>
                                     <img
-                                        class="img-fluid mx-auto d-block large-profile-pic"
+                                        className="img-fluid mx-auto d-block large-profile-pic"
                                         src={user.profilePic}
                                         alt="profile pic"
                                     />

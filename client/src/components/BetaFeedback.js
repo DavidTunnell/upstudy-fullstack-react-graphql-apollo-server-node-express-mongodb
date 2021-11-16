@@ -13,24 +13,13 @@ const BetaFeedback = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (!loading) {
-            // dispatch(categoriesActions.categories(data));
-            // dispatch(filteredCategoriesActions.setAllCategories(data));
             setFeedbackData(data.betaFeedback);
         }
     }, [data, loading]);
-    // useEffect(() => {
-    //     if (!loading) {
-    //         setFeedbackData(data.betaFeedback);
-    //         console.log(feedbackData);
-    //     } else {
-    //         console.log("loading");
-    //     }
-    // }, [loading]);
 
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
-        console.log(idSelected);
         const result = data.betaFeedback.filter((obj) => {
             return obj._id === idSelected;
         })[0];
@@ -118,23 +107,23 @@ const BetaFeedback = () => {
                                                     ...
                                                 </td>
                                                 <td className="text-center">
-                                                    <div class="dropdown">
+                                                    <div className="dropdown">
                                                         <span
-                                                            class="btn btn-ico btn-outline-light text-dark rounded btn-sm"
+                                                            className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
                                                             role="button"
                                                             id="dropdownMenuLink-3"
                                                             data-toggle="dropdown"
                                                             aria-haspopup="true"
                                                             aria-expanded="false"
                                                         >
-                                                            <i class="icon-more-vertical fs-22"></i>
+                                                            <i className="icon-more-vertical fs-22"></i>
                                                         </span>
                                                         <div
-                                                            class="dropdown-menu"
+                                                            className="dropdown-menu"
                                                             aria-labelledby="dropdownMenuLink-3"
                                                         >
                                                             <button
-                                                                class="dropdown-item"
+                                                                className="dropdown-item"
                                                                 data-index={
                                                                     feedback._id
                                                                 }
@@ -145,7 +134,7 @@ const BetaFeedback = () => {
                                                                 Details
                                                             </button>
                                                             <button
-                                                                class="dropdown-item"
+                                                                className="dropdown-item"
                                                                 data-index={
                                                                     feedback._id
                                                                 }

@@ -72,7 +72,6 @@ const Login = ({
                 const { data } = await login({
                     variables: { ...userLoginData },
                 });
-                console.log(data);
                 //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
                 Auth.login(
                     data.login.token,

@@ -54,7 +54,6 @@ const VerifyEmail = () => {
     //create a new token and resent to user via email
     const handleResendVerificationEmail = async (event) => {
         event.preventDefault();
-        console.log("handleResendVerificationEmail");
         await addEmailVerificationToken({
             variables: {
                 userId,
