@@ -7,20 +7,13 @@ import { useDispatch } from "react-redux";
 
 const BetaFeedback = () => {
     const { loading, data } = useQuery(GET_BETA_FEEDBACK);
-
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
-    const [feedbackData, setFeedbackData] = useState([]);
+    const [feedbackData, setFeedbackData] = useState();
     //to save data to redux store
     const dispatch = useDispatch();
-
     useEffect(() => {
         if (!loading) {
-            const newResults = [...data.betaFeedback];
-            setFeedbackData(newResults);
-
-            console.log("feedbackData");
-            console.log(feedbackData);
-            console.log("feedbackData");
+            setFeedbackData(data.betaFeedback);
         }
     }, [data, loading]);
 

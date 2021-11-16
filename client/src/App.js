@@ -10,6 +10,7 @@ import VerifyEmail from "./components/VerifyEmail";
 import Error from "./components/Error";
 import ForgotPassword from "./components/ForgotPassword";
 import BetaNotice from "./components/BetaNotice";
+import Test from "./components/Test";
 import Auth from "./utils/auth";
 import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
@@ -102,6 +103,9 @@ function App() {
                                     <Category data={category} />
                                 </Route>
                             ))}
+                        <Route exact path="/test">
+                            <Test />
+                        </Route>
                         <Route path="/404">
                             <NotFound bgColor={mainColor} />
                         </Route>

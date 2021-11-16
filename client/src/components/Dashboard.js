@@ -10,11 +10,14 @@ import SimpleReactValidator from "simple-react-validator";
 import { modalActions } from "../redux/actions/";
 // import { useMutation } from "@apollo/client";
 // import { ADD_BETA_FEEDBACK } from "../utils/mutations";
+// import { useQuery, useMutation } from "@apollo/client";
+// import { GET_BETA_FEEDBACK } from "../utils/queries";
 
 const Dashboard = (params) => {
     const bgColor = params.bgColor;
     const user = useSelector((state) => state.loggedInUser);
-
+    // const [getBetaFeedbackData, { loading, data }] =
+    //     useQuery(GET_BETA_FEEDBACK);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
@@ -96,6 +99,12 @@ const Dashboard = (params) => {
     const handleImageSelection = async (event) => {
         const input = event.target;
         setImageFile(input.files[0]);
+    };
+
+    const handleFeedbackLoad = async (event) => {
+        event.preventDefault();
+        console.log("handleFeedbackLoad");
+        // getBetaFeedbackData();
     };
 
     return (
@@ -190,6 +199,9 @@ const Dashboard = (params) => {
                                                                 className="nav-item nav-link"
                                                                 data-toggle="tab"
                                                                 href="#feedback"
+                                                                onClick={
+                                                                    handleFeedbackLoad
+                                                                }
                                                             >
                                                                 Feedback
                                                             </a>
