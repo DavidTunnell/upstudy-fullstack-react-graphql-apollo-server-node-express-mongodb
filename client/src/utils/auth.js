@@ -55,7 +55,9 @@ class AuthService {
         //update redux store removing logged in users data
         await store.dispatch(userActions.logoutRedux());
         // this will reload the page and reset the state of the application, a no-no for react, unless for logout to refresh user experience
-        window.location.assign("/");
+        setTimeout(() => {
+            window.location.assign("/");
+        }, 100);
     }
 }
 
