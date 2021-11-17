@@ -157,9 +157,13 @@ const BetaNotice = () => {
         }
     };
 
-    const closeModal = async (event) => {
+    const closeModal = () => {
+        setShowModal(false);
+    };
+    const openModal = () => {
         setShowModal(true);
     };
+
     const handleImageSelection = async (event) => {
         const input = event.target;
         setImageFile(input.files[0]);
@@ -187,7 +191,7 @@ const BetaNotice = () => {
                                     className="btn btn-white btn-rounded px-5"
                                     data-toggle="modal"
                                     data-target="#feedback-modal"
-                                    onClick={() => setShowModal(true)}
+                                    onClick={openModal}
                                 >
                                     Write Us
                                 </button>
@@ -196,7 +200,11 @@ const BetaNotice = () => {
                     </div>
                 </div>
             </section>
-            <LargeGenericModal closeFunction={closeModal} />
+            <LargeGenericModal
+                closeFunction={closeModal}
+                openFunction={openModal}
+                showModal={showModal}
+            />
             {/* <div
                 className="modal fade"
                 id="feedback-modal"

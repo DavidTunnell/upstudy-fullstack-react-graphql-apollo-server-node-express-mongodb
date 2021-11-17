@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 const LargeGenericModal = (params) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
     let closeModal = params.closeFunction;
+    let openModal = params.openFunction;
+    let showModal = params.showModal;
     // let closeModal = params.closeModal;
     // let title = params.title;
     // let content = params.content;
@@ -10,10 +12,14 @@ const LargeGenericModal = (params) => {
     const [showBackdrop, setShowBackdrop] = useState(false);
 
     useEffect(() => {
-        const btn = document.getElementById("hidden-large-open-modal-button");
-        btn.click();
-        setShowBackdrop(true);
-    }, []);
+        if (showModal) {
+            const btn = document.getElementById(
+                "hidden-large-open-modal-button"
+            );
+            btn.click();
+            setShowBackdrop(true);
+        }
+    }, [showModal]);
 
     const handleBackdropClick = async (event) => {
         if (
