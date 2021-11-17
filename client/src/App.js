@@ -84,10 +84,10 @@ function App() {
                             />
                         </Route>
                         <Route exact path="/verify">
-                            <VerifyEmail />
+                            <VerifyEmail bgColor={mainColor} />
                         </Route>
                         <Route exact path="/forgot">
-                            <ForgotPassword />
+                            <ForgotPassword bgColor={mainColor} />
                         </Route>
                         <Route exact path="/dashboard">
                             <Dashboard bgColor={mainColor} />

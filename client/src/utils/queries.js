@@ -30,6 +30,7 @@ export const GET_USER = gql`
             username
             email
             password
+            isVerified
             savedBooks {
                 authors
                 description

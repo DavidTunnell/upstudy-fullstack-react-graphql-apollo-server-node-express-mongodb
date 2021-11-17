@@ -1,20 +1,18 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
+import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
-const VerifyEmail = () => {
+
+const VerifyEmail = (params) => {
+    const bgColor = params.bgColor;
     //to save and get data to redux store
     const user = useSelector((state) => state.loggedInUser);
+
     const dispatch = useDispatch();
-    //local styling
-    const styles = {
-        notFoundStyle: {
-            backgroundColor: "#3c66ff",
-        },
-    };
     //state
     const [isDisabledButton, setIsDisabledButton] = useState(false);
     //graphql mutations to save and send a token to user and to verify with that token
@@ -27,11 +25,15 @@ const VerifyEmail = () => {
     const history = useHistory();
     //get url query string parameters
     const search = window.location.search;
-    const params = new URLSearchParams(search);
-    let createdEmail = params.get("email");
-    let createdToken = params.get("token");
-    let userId = params.get("id");
-    let username = params.get("username");
+    const urlParams = new URLSearchParams(search);
+    let createdEmail = urlParams.get("email");
+    let createdToken = urlParams.get("token");
+    let userId = urlParams.get("id");
+    let username = urlParams.get("username");
+    //get user data from db to check if they are already verified
+    const { loading, data } = useQuery(GET_USER, {
+        variables: { userId },
+    });
     //wrapped mutation to create and generate token for email validation
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
@@ -107,16 +109,48 @@ const VerifyEmail = () => {
                 history.push("/404");
             }
         }
-        processUrlParams();
+
+        // processUrlParams();
+
+        if (!loading) {
+            console.log("loading");
+            console.log(loading);
+            console.log(data);
+            console.log("loading");
+            const isVerified = data.user.isVerified;
+            console.log("isVerified");
+            console.log(isVerified);
+            console.log(data);
+            console.log("isVerified");
+            if (!isVerified) {
+                //user is not verified
+                processUrlParams();
+            } else {
+                //user is verified
+                dispatch(
+                    userActions.loginRedux(
+                        user._id,
+                        user.username,
+                        user.email,
+                        true,
+                        user.roles,
+                        user.profilePic
+                    )
+                );
+            }
+            //CHECK IF ALREADY VERIFIED HERE, IF SO LET USER KNOW ELSE RUN processUrlParams();
+            // user.isVerified IS USED BELOW, SO MAKE SURE IT'S UPDATED CORRECTLY IF DB SHOWS USER IS ALREADY VERIFIED
+            //on page load check the db for user data and see if they already verified, if so update redux and page to let them know that they've verified'
+        }
         // eslint-disable-next-line
-    }, []);
+    }, [data, loading]);
 
     return (
         <>
             <div className="viewport">
                 <div
-                    className="image image-overlay image-blur"
-                    style={styles.notFoundStyle}
+                    className="image"
+                    style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">

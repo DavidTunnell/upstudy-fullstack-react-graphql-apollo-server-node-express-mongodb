@@ -5,7 +5,8 @@ import SimpleReactValidator from "simple-react-validator";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../redux/actions/";
 
-const ForgotPassword = () => {
+const ForgotPassword = (params) => {
+    const bgColor = params.bgColor;
     //to save data to redux store
     const dispatch = useDispatch();
     //local styling
@@ -65,8 +66,8 @@ const ForgotPassword = () => {
         <>
             <div className="viewport">
                 <div
-                    className="image image-overlay"
-                    style={{ backgroundImage: `url(${bgImage})` }}
+                    className="image"
+                    style={{ backgroundColor: bgColor }}
                 ></div>
                 <div className="container">
                     <div className="row justify-content-center align-items-center vh-100">
