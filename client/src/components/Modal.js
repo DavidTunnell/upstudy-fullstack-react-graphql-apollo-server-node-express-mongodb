@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Modal = (params) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
@@ -7,21 +7,28 @@ const Modal = (params) => {
     let title = params.title;
     let content = params.content;
     let imageUrl = params.imageUrl;
+    const [showBackdrop, setShowBackdrop] = useState(false);
 
     useEffect(() => {
         if (showModal) {
             var btn = document.getElementById("hidden-open-modal-button");
             btn.click();
+            setShowBackdrop(true);
         }
     });
 
     const handleBackdropClick = async (event) => {
-        if (event.target.id === "generic-modal") {
+        if (
+            event.target.id === "generic-modal" ||
+            event.target.id === "close-generic-modal-button" ||
+            event.target.id === "close-generic-modal-icon"
+        ) {
             console.log("handleBackdropClick");
             console.log(event.target.id);
             closeModal();
             var btn = document.getElementById("close-generic-modal-button");
             btn.click();
+            setShowBackdrop(false);
         }
     };
 
@@ -35,10 +42,10 @@ const Modal = (params) => {
                 data-target="#generic-modal"
                 data-backdrop="false"
             ></button>
-            {/* <div
-                className="modal-backdrop fade show"
+            <div
+                className={`${showBackdrop ? "modal-backdrop fade show" : ""}`}
                 onClick={handleBackdropClick}
-            ></div> */}
+            ></div>
             <div
                 class="modal fade"
                 id="generic-modal"
@@ -58,7 +65,11 @@ const Modal = (params) => {
                                 data-dismiss="modal"
                                 aria-label="Close"
                             >
-                                <span aria-hidden="true" class="icon-x"></span>
+                                <span
+                                    aria-hidden="true"
+                                    class="icon-x"
+                                    id="close-generic-modal-icon"
+                                ></span>
                             </button>
                         </div>
                         <div className="modal-body text-center  mt-n3">
