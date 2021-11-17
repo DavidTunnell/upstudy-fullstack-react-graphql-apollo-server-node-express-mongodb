@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 import Auth from "../utils/auth";
 
-const SearchBar = () => {
+const BetaNotice = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
@@ -162,6 +162,7 @@ const SearchBar = () => {
     const handleImageSelection = async (event) => {
         const input = event.target;
         setImageFile(input.files[0]);
+        // setImage("what");
     };
     return (
         <>
@@ -344,7 +345,7 @@ const SearchBar = () => {
                                                                 event
                                                             );
                                                         }}
-                                                        value={image}
+                                                        // value={image}
                                                     />
                                                     {validatorFeedback.message(
                                                         "maxFileSize",
@@ -372,4 +373,4 @@ const SearchBar = () => {
     );
 };
 
-export default SearchBar;
+export default BetaNotice;

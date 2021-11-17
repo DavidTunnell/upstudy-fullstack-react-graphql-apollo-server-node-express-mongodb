@@ -7,7 +7,7 @@ import SimpleReactValidator from "simple-react-validator";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions";
 
-const Dashboard = () => {
+const Profile = () => {
     //to save and get data to redux store
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
@@ -246,4 +246,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Profile;

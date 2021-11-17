@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Modal from "./components/Modal";
+import InfoModal from "./components/InfoModal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Category from "./components/Category";
@@ -119,7 +119,7 @@ function App() {
                     </Switch>
                 </div>
                 {/* the modal is available everywhere and modified via redux store*/}
-                <Modal
+                <InfoModal
                     show={modalSettings.show}
                     title={modalSettings.title}
                     content={modalSettings.content}

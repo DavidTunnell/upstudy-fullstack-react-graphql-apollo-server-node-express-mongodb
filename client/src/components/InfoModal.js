@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Modal = (params) => {
+const InfoModal = (params) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
     let showModal = params.show;
     let closeModal = params.closeModal;
@@ -38,6 +38,7 @@ const Modal = (params) => {
                 type="button"
                 id="hidden-open-modal-button"
                 className="invisible"
+                style={{ display: "none" }}
                 data-toggle="modal"
                 data-target="#generic-modal"
                 data-backdrop="false"
@@ -88,4 +89,4 @@ const Modal = (params) => {
     );
 };
 
-export default Modal;
+export default InfoModal;
