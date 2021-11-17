@@ -17,7 +17,7 @@ const InfoModal = (params) => {
         }
     });
 
-    const handleBackdropClick = async (event) => {
+    const handleExitModalClick = async (event) => {
         if (
             event.target.id === "generic-modal" ||
             event.target.id === "close-generic-modal-button" ||
@@ -45,7 +45,6 @@ const InfoModal = (params) => {
             ></button>
             <div
                 className={`${showBackdrop ? "modal-backdrop fade show" : ""}`}
-                onClick={handleBackdropClick}
             ></div>
             <div
                 class="modal fade"
@@ -54,7 +53,7 @@ const InfoModal = (params) => {
                 role="dialog"
                 aria-labelledby="generic-modal"
                 aria-hidden="true"
-                onClick={handleBackdropClick}
+                onClick={handleExitModalClick}
             >
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">

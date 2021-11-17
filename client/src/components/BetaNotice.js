@@ -6,6 +6,7 @@ import { GET_BETA_FEEDBACK } from "../utils/queries";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions/";
 import Auth from "../utils/auth";
+import LargeGenericModal from "./LargeGenericModal";
 
 const BetaNotice = () => {
     const [username, setUsername] = useState("");
@@ -37,6 +38,7 @@ const BetaNotice = () => {
     );
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+    const [showModal, setShowModal] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isMuted, setIsMuted] = useState("");
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK, {
@@ -155,9 +157,8 @@ const BetaNotice = () => {
         }
     };
 
-    const handleWriteUsClick = async (event) => {
-        // const body = document.querySelector("body");
-        // body.style.cssText += "padding-right: 0px;";
+    const closeModal = async (event) => {
+        setShowModal(true);
     };
     const handleImageSelection = async (event) => {
         const input = event.target;
@@ -186,7 +187,7 @@ const BetaNotice = () => {
                                     className="btn btn-white btn-rounded px-5"
                                     data-toggle="modal"
                                     data-target="#feedback-modal"
-                                    onClick={handleWriteUsClick}
+                                    onClick={() => setShowModal(true)}
                                 >
                                     Write Us
                                 </button>
@@ -195,7 +196,8 @@ const BetaNotice = () => {
                     </div>
                 </div>
             </section>
-            <div
+            <LargeGenericModal closeFunction={closeModal} />
+            {/* <div
                 className="modal fade"
                 id="feedback-modal"
                 tabIndex="-1"
@@ -368,7 +370,7 @@ const BetaNotice = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
