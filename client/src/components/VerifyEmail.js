@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
 import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -33,7 +33,12 @@ const VerifyEmail = (params) => {
     //get user data from db to check if they are already verified
     const { loading, data } = useQuery(GET_USER, {
         variables: { userId },
+        fetchPolicy: "network-only",
     });
+    // const [getCurrentUserData] = useLazyQuery(GET_USER, {
+    //     // onCompleted: (data) => setBetaFeedback(data.betaFeedback),
+    //     fetchPolicy: "network-only",
+    // });
     //wrapped mutation to create and generate token for email validation
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
@@ -109,19 +114,8 @@ const VerifyEmail = (params) => {
                 history.push("/404");
             }
         }
-
-        // processUrlParams();
-
         if (!loading) {
-            console.log("loading");
-            console.log(loading);
-            console.log(data);
-            console.log("loading");
             const isVerified = data.user.isVerified;
-            console.log("isVerified");
-            console.log(isVerified);
-            console.log(data);
-            console.log("isVerified");
             if (!isVerified) {
                 //user is not verified
                 processUrlParams();
@@ -138,9 +132,6 @@ const VerifyEmail = (params) => {
                     )
                 );
             }
-            //CHECK IF ALREADY VERIFIED HERE, IF SO LET USER KNOW ELSE RUN processUrlParams();
-            // user.isVerified IS USED BELOW, SO MAKE SURE IT'S UPDATED CORRECTLY IF DB SHOWS USER IS ALREADY VERIFIED
-            //on page load check the db for user data and see if they already verified, if so update redux and page to let them know that they've verified'
         }
         // eslint-disable-next-line
     }, [data, loading]);

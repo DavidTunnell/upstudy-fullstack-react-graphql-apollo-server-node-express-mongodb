@@ -205,7 +205,8 @@ const resolvers = {
             const emailOptions = generateVerificationEmailOptions(
                 username,
                 email,
-                newUserEmailToken
+                newUserEmailToken,
+                userId
             );
             //send email with options
             try {

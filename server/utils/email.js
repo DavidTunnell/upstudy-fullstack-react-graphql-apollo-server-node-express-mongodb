@@ -21,7 +21,12 @@ module.exports = {
         });
     },
     //create options object for email verification
-    generateVerificationEmailOptions: function (username, email, token) {
+    generateVerificationEmailOptions: function (
+        username,
+        email,
+        token,
+        userId
+    ) {
         return {
             from: "no-reply@upstudy.io",
             to: email,
@@ -36,6 +41,8 @@ module.exports = {
                 email +
                 "&token=" +
                 token.token +
+                "&id=" +
+                userId +
                 "\n\nThank You!\n",
         };
     },
