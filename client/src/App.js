@@ -11,6 +11,9 @@ import Error from "./components/Error";
 import ForgotPassword from "./components/ForgotPassword";
 import BetaNotice from "./components/BetaNotice";
 import Test from "./components/Test";
+
+import TestModal from "./components/LargeGenericModal";
+
 import Auth from "./utils/auth";
 import { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
@@ -128,6 +131,7 @@ function App() {
                 />
                 <BetaNotice />
                 <Footer toTop={toTop} />
+                <TestModal />
             </div>
         </>
     );
