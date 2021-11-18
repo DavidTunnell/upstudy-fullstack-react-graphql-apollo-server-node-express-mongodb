@@ -41,13 +41,10 @@ const UpdatePicModalBody = (params) => {
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const dispatch = useDispatch();
     const [getS3UrlAuthenticated] = useMutation(GET_S3_URL_AUTHENTICATED);
-    const [updateProfilePic] = useMutation(
-        UPDATE_PROFILE_PIC
-        // , {refetchQueries: [{ query: GET_BETA_FEEDBACK }],}
-    );
+    const [updateProfilePic] = useMutation(UPDATE_PROFILE_PIC);
     const onSubmit = async (event) => {
         event.preventDefault();
-        if (validatorProfilePic.allValid()) {
+        if (validatorProfilePic.allValid() && imageIsSquare) {
             try {
                 let imageUrl = "";
                 if (imageFile) {
