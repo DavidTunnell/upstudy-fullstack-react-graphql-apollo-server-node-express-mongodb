@@ -13,7 +13,7 @@ const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
     const handleModalExit = params.handleModalExit;
     const [imageFile, setImageFile] = useState(null);
-    const [imageIsSquare, setImageIsSquare] = useState(false);
+    const [imageIsSquare, setImageIsSquare] = useState();
     const [validatorProfilePic] = useState(
         new SimpleReactValidator({
             validators: {
@@ -32,34 +32,9 @@ const UpdatePicModalBody = (params) => {
                     },
                     required: true, // optional
                 },
-                imageSquare: {
-                    // name the rule
-                    message: "The image must be perfectly square.",
-                    rule: async (val, params, validator) => {
-                        if (val) {
-                            getImageInfo(val).then((data) => {
-                                console.log("data");
-                                console.log(data);
-                                console.log("data");
-                            });
-                        }
-                    },
-                    required: true, // optional
-                },
             },
         })
     );
-
-    const getImageInfo = (file) => {
-        const _URL = window.URL || window.webkitURL;
-        var image = new Image();
-        image.src = _URL.createObjectURL(file);
-        return new Promise(function (resolve, reject) {
-            image.onload = function () {
-                resolve([image.height, image.width]);
-            };
-        });
-    };
 
     //try function async await to get loaded
 
@@ -137,9 +112,30 @@ const UpdatePicModalBody = (params) => {
         }
     };
 
+    const getImageDimensions = async (file) => {
+        const getDimensions = () => {
+            const _URL = window.URL || window.webkitURL;
+            var image = new Image();
+            image.src = _URL.createObjectURL(file);
+            return new Promise(function (resolve, reject) {
+                image.onload = function () {
+                    resolve([image.height, image.width]);
+                };
+            });
+        };
+        const finalResults = await getDimensions(file);
+        return finalResults;
+    };
+
     const handleImageSelection = async (event) => {
         const input = event.target;
         setImageFile(input.files[0]);
+        const imageDimensions = await getImageDimensions(input.files[0]);
+        if (imageDimensions[0] === imageDimensions[1]) {
+            setImageIsSquare(true);
+        } else {
+            setImageIsSquare(false);
+        }
     };
 
     return (
@@ -174,7 +170,15 @@ const UpdatePicModalBody = (params) => {
                                         {validatorProfilePic.message(
                                             "maxFileSize",
                                             imageFile,
-                                            "maxFileSize|imageSquare"
+                                            "maxFileSize"
+                                        )}
+                                        {imageIsSquare ? (
+                                            <></>
+                                        ) : (
+                                            <>
+                                                The image must be a perfect
+                                                square.
+                                            </>
                                         )}
                                     </div>
                                     <button
