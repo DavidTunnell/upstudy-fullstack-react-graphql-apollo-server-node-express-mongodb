@@ -160,18 +160,22 @@ const resolvers = {
         ) => {
             //confirm they are logged in....
             //context.use
-            if (true) {
+            if (context.user) {
                 //user model update
                 const user = await User.findOne({ _id: userId });
-                user.profilePic = profilePic;
-                await user.save();
-                //if the user doesn't exist let user know
                 if (!user) {
                     throw new AuthenticationError(
-                        "This user id doesn't exist. Which is pretty weird. "
+                        "This user id doesn't exist. Which is pretty weird."
                     );
                 }
-                return user;
+                try {
+                    user.profilePic = profilePic;
+                    await user.save();
+                    //if the user doesn't exist let user know
+                    return user;
+                } catch (error) {
+                    throw new AuthenticationError(error.message);
+                }
             }
             throw new AuthenticationError(
                 "You must be logged in to perform this action."
@@ -362,9 +366,27 @@ const resolvers = {
             );
         },
         getS3Url: async (parent, { isLoggedIn }) => {
-            const url = s3.generateUploadURL();
-            const isLoggedInCheck = isLoggedIn;
-            return url;
+            try {
+                const url = s3.generateUploadURL();
+                const isLoggedInCheck = isLoggedIn;
+                return url;
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
+        },
+        getS3UrlAuthenticated: async (parent, { isLoggedIn }, context) => {
+            if (context.user && isLoggedIn) {
+                try {
+                    const url = s3.generateUploadURL();
+                    return url;
+                } catch (error) {
+                    throw new AuthenticationError(error.message);
+                }
+            } else {
+                throw new AuthenticationError(
+                    "You must be logged in to perform this action."
+                );
+            }
         },
         addBook: async (
             parent,

@@ -2,9 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { modalActions } from "../redux/actions";
+import { useMutation } from "@apollo/client";
+import {
+    GET_S3_URL_AUTHENTICATED,
+    UPDATE_PROFILE_PIC,
+} from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
+    console.log("UpdatePicModalBody user");
+    console.log(user);
+    console.log("UpdatePicModalBody user");
     const [imageFile, setImageFile] = useState(null);
     const [validatorProfilePic] = useState(
         new SimpleReactValidator({
@@ -29,12 +38,68 @@ const UpdatePicModalBody = (params) => {
     );
 
     const dispatch = useDispatch();
-
+    const [getS3UrlAuthenticated] = useMutation(GET_S3_URL_AUTHENTICATED);
+    const [updateProfilePic] = useMutation(
+        UPDATE_PROFILE_PIC
+        // , {refetchQueries: [{ query: GET_BETA_FEEDBACK }],}
+    );
     const onSubmit = async (event) => {
         event.preventDefault();
         if (validatorProfilePic.allValid()) {
             try {
+                ////////////////////////////////////////////////////////////////
+
                 console.log(imageFile);
+                let imageUrl = "";
+                if (imageFile) {
+                    //get secure url from our server
+                    const urlReturnObject = await getS3UrlAuthenticated({
+                        variables: {
+                            isLoggedIn: Auth.loggedIn(),
+                        },
+                    });
+                    const urlObject = urlReturnObject.data;
+                    const url = urlObject.getS3UrlAuthenticated;
+                    console.log(urlObject);
+                    console.log(url);
+                    //post the image directly to the s3 bucket
+                    await fetch(url, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                        body: imageFile,
+                    });
+                    //get back image url from s3
+                    imageUrl = url.split("?")[0];
+                    console.log(imageUrl); //write to db
+                    try {
+                        // await updateProfilePic({
+                        //     variables: {
+                        //         userId: user.id,
+                        //         profilePic: imageUrl,
+                        //     },
+                        // });
+
+                        //close
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Success",
+                                "Your profile pic has been updated."
+                            )
+                        );
+                    } catch (err) {
+                        //close
+                        //then show other modal
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Error",
+                                "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
+                            )
+                        );
+                    }
+                }
+                ////////////////////////////////////////////////////////////////
             } catch (error) {
                 console.log(error);
                 dispatch(
@@ -42,7 +107,6 @@ const UpdatePicModalBody = (params) => {
                 );
             }
         }
-        //
     };
 
     const handleImageSelection = async (event) => {

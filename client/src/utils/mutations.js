@@ -175,6 +175,22 @@ export const GET_S3_URL = gql`
     }
 `;
 
+export const GET_S3_URL_AUTHENTICATED = gql`
+    mutation Mutation($isLoggedIn: Boolean!) {
+        getS3UrlAuthenticated(isLoggedIn: $isLoggedIn)
+    }
+`;
+
+export const UPDATE_PROFILE_PIC = gql`
+    mutation Mutation($userId: ID!, $profilePic: String!) {
+        updateProfilePic(userId: $userId, profilePic: $profilePic) {
+            _id
+            username
+            profilePic
+        }
+    }
+`;
+
 export const ADD_BOOK = gql`
     mutation addBook(
         $userId: ID!
