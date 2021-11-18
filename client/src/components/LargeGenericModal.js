@@ -23,12 +23,14 @@ const LargeGenericModal = (params) => {
         if (
             event.target.id ===
                 `large-generic-modal-id-${BodyComponent.name}` ||
-            event.target.id === "close-large-generic-modal-button" ||
-            event.target.id === "close-large-generic-modal-icon"
+            event.target.id ===
+                `close-large-generic-modal-button-${BodyComponent.name}` ||
+            event.target.id ===
+                `close-large-generic-modal-icon-${BodyComponent.name}`
         ) {
             closeModal();
             const btn = document.getElementById(
-                "close-large-generic-modal-button"
+                `close-large-generic-modal-button-${BodyComponent.name}`
             );
             btn.click();
             setShowBackdrop(false);
@@ -37,7 +39,9 @@ const LargeGenericModal = (params) => {
 
     const submitForm = (event) => {
         closeModal();
-        const btn = document.getElementById("close-large-generic-modal-button");
+        const btn = document.getElementById(
+            `close-large-generic-modal-button-${BodyComponent.name}`
+        );
         btn.click();
         setShowBackdrop(false);
     };
@@ -75,7 +79,7 @@ const LargeGenericModal = (params) => {
                             <button
                                 type="button"
                                 class="close"
-                                id="close-large-generic-modal-button"
+                                id={`close-large-generic-modal-button-${BodyComponent.name}`}
                                 data-dismiss="modal"
                                 aria-label="Close"
                                 onClick={handleBackdropClick}
@@ -83,7 +87,7 @@ const LargeGenericModal = (params) => {
                                 <span
                                     aria-hidden="true"
                                     class="icon-x"
-                                    id="close-large-generic-modal-icon"
+                                    id={`close-large-generic-modal-icon-${BodyComponent.name}`}
                                     onClick={handleBackdropClick}
                                 ></span>
                             </button>
