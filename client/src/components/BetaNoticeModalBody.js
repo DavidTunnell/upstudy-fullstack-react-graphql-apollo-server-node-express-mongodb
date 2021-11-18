@@ -8,7 +8,10 @@ import { modalActions } from "../redux/actions";
 import Auth from "../utils/auth";
 import LargeGenericModal from "./LargeGenericModal";
 
-const BetaNoticeModalBody = () => {
+//need to pass close modal here to be used in submit button
+//^^^^^^^^^^^^^^^^^^^^^
+//^^^^^^^^^^^^^^^^^^^^
+const BetaNoticeModalBody = (params) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [category, setCategory] = useState("");
@@ -21,7 +24,7 @@ const BetaNoticeModalBody = () => {
                 maxFileSize: {
                     // name the rule
                     message: "The max file size is 5MB.",
-                    rule: (val, params, validator) => {
+                    rule: (val, parameters, validator) => {
                         if (val) {
                             const fileSize = val.size / 1024 / 1024; // in MiB
                             if (fileSize > 5) {
@@ -38,7 +41,7 @@ const BetaNoticeModalBody = () => {
     );
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isMuted, setIsMuted] = useState("");
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK, {
@@ -49,6 +52,9 @@ const BetaNoticeModalBody = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
 
+    let closeModal = params.closeFunction;
+    let handleModalExit = params.handleModalExit;
+    console.log(handleModalExit);
     useEffect(() => {
         if (user.email) {
             setIsDisabled(true);
@@ -108,6 +114,8 @@ const BetaNoticeModalBody = () => {
                             archived: false,
                         },
                     });
+                    //
+
                     //close
                     dispatch(
                         modalActions.updateAndShowModal(
@@ -139,6 +147,7 @@ const BetaNoticeModalBody = () => {
             setMessage("");
             setImage("");
             setImageFile(null);
+            handleModalExit();
         } else {
             validatorFeedback.showMessages();
             //force update state to show validation messages to user

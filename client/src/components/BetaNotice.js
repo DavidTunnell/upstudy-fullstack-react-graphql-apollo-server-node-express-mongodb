@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import LargeGenericModal from "./LargeGenericModal";
 import BetaNoticeModalBody from "./BetaNoticeModalBody";
-import Test from "./Test";
 
 const BetaNotice = () => {
     const [showModal, setShowModal] = useState(false);
@@ -46,7 +45,7 @@ const BetaNotice = () => {
                 closeFunction={closeModal}
                 openFunction={openModal}
                 showModal={showModal}
-                betaNoticeModalBody={BetaNoticeModalBody}
+                bodyComponent={BetaNoticeModalBody}
             />
         </>
     );

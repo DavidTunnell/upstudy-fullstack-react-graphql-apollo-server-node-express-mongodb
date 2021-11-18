@@ -5,11 +5,8 @@ const LargeGenericModal = (params) => {
     let closeModal = params.closeFunction;
     let openModal = params.openFunction;
     let showModal = params.showModal;
-    let BetaNoticeModalBody = params.betaNoticeModalBody;
-    // let closeModal = params.closeModal;
-    // let title = params.title;
-    // let content = params.content;
-    // let imageUrl = params.imageUrl;
+    let BodyComponent = params.bodyComponent;
+
     const [showBackdrop, setShowBackdrop] = useState(false);
 
     useEffect(() => {
@@ -39,27 +36,13 @@ const LargeGenericModal = (params) => {
         }
     };
 
-    //  <div
-    //     className="modal fade"
-    //     id="feedback-modal"
-    //     tabIndex="-1"
-    //     aria-hidden="true"
-    // >
-    //     <div className="modal-dialog modal-xl">
-    //         <div className="modal-content bg-light">
-    //             <div className="justify-content-end">
-    //                 <button
-    //                     type="button"
-    //                     className="close m-1"
-    //                     data-dismiss="modal"
-    //                     aria-label="Close"
-    //                 >
-    //                     <span
-    //                         aria-hidden="true"
-    //                         className="icon-x"
-    //                     ></span>
-    //                 </button>
-    //             </div>
+    const submitForm = (event) => {
+        closeModal();
+        const btn = document.getElementById("close-large-generic-modal-button");
+        btn.click();
+        setShowBackdrop(false);
+    };
+
     return (
         <>
             <button
@@ -106,7 +89,10 @@ const LargeGenericModal = (params) => {
                                 ></span>
                             </button>
                         </div>
-                        <BetaNoticeModalBody />
+                        <BodyComponent
+                            closeFunction={closeModal}
+                            handleModalExit={submitForm}
+                        />
                     </div>
                 </div>
             </div>
