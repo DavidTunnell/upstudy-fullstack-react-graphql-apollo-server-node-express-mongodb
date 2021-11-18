@@ -11,7 +11,7 @@ const InfoModal = (params) => {
 
     useEffect(() => {
         if (showModal) {
-            var btn = document.getElementById("hidden-open-modal-button");
+            const btn = document.getElementById("hidden-open-modal-button");
             btn.click();
             setShowBackdrop(true);
         }
@@ -26,7 +26,7 @@ const InfoModal = (params) => {
             console.log("handleBackdropClick");
             console.log(event.target.id);
             closeModal();
-            var btn = document.getElementById("close-generic-modal-button");
+            const btn = document.getElementById("close-generic-modal-button");
             btn.click();
             setShowBackdrop(false);
         }

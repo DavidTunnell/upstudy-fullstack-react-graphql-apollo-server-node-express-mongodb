@@ -1,5 +1,5 @@
 const Category = (params) => {
-    var passedData = params.data;
+    const passedData = params.data;
     console.log("in category component");
     console.log(passedData);
     console.log("in category component");

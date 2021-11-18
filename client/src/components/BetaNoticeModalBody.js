@@ -6,11 +6,7 @@ import { GET_BETA_FEEDBACK } from "../utils/queries";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../redux/actions";
 import Auth from "../utils/auth";
-import LargeGenericModal from "./LargeGenericModal";
 
-//need to pass close modal here to be used in submit button
-//^^^^^^^^^^^^^^^^^^^^^
-//^^^^^^^^^^^^^^^^^^^^
 const BetaNoticeModalBody = (params) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -52,9 +48,8 @@ const BetaNoticeModalBody = (params) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
 
-    let closeModal = params.closeFunction;
-    let handleModalExit = params.handleModalExit;
-    console.log(handleModalExit);
+    const handleModalExit = params.handleModalExit;
+
     useEffect(() => {
         if (user.email) {
             setIsDisabled(true);

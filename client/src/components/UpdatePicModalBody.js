@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import SimpleReactValidator from "simple-react-validator";
-import { modalActions } from "../redux/actions/";
+import { modalActions } from "../redux/actions";
 // import { useMutation } from "@apollo/client";
 // import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 import { useLazyQuery } from "@apollo/client";
@@ -15,7 +15,7 @@ import { GET_BETA_FEEDBACK } from "../utils/queries";
 import LargeGenericModal from "./LargeGenericModal";
 import BetaNoticeModalBody from "./BetaNoticeModalBody";
 
-const Dashboard = (params) => {
+const UpdatePicModalBody = (params) => {
     const bgColor = params.bgColor;
     const user = useSelector((state) => state.loggedInUser);
     const [betaFeedback, setBetaFeedback] = useState(null);
@@ -138,16 +138,8 @@ const Dashboard = (params) => {
                                                             alt="Generic placeholder"
                                                             data-toggle="modal"
                                                             data-target="#update-profile-pic-modal"
-                                                            onClick={() =>
-                                                                openModal()
-                                                            }
                                                         />
-                                                        <span
-                                                            className="control-color circle-icon bg-primary"
-                                                            onClick={() =>
-                                                                openModal()
-                                                            }
-                                                        >
+                                                        <span className="control-color circle-icon bg-primary">
                                                             <FontAwesomeIcon
                                                                 icon={faCamera}
                                                                 className="text-light"
@@ -382,4 +374,4 @@ const Dashboard = (params) => {
     );
 };
 
-export default Dashboard;
+export default UpdatePicModalBody;

@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import useScrollToTop from "../utils/useScrollToTop";
 
 const Home = (params) => {
-    var mainColor = params.bgColor;
+    const  mainColor = params.bgColor;
     //smooth scroll if on same page routing
     useScrollToTop();
     return (
