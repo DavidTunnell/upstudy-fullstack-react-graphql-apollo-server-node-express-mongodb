@@ -12,7 +12,7 @@ const LargeGenericModal = (params) => {
     useEffect(() => {
         if (showModal) {
             const btn = document.getElementById(
-                "hidden-large-open-modal-button"
+                `hidden-large-open-modal-button-${BodyComponent.name}`
             );
             btn.click();
             setShowBackdrop(true);
@@ -21,12 +21,11 @@ const LargeGenericModal = (params) => {
 
     const handleBackdropClick = async (event) => {
         if (
-            event.target.id === "large-generic-modal" ||
+            event.target.id ===
+                `large-generic-modal-id-${BodyComponent.name}` ||
             event.target.id === "close-large-generic-modal-button" ||
             event.target.id === "close-large-generic-modal-icon"
         ) {
-            console.log("handleBackdropClick");
-            console.log(event.target.id);
             closeModal();
             const btn = document.getElementById(
                 "close-large-generic-modal-button"
@@ -47,11 +46,11 @@ const LargeGenericModal = (params) => {
         <>
             <button
                 type="button"
-                id="hidden-large-open-modal-button"
+                id={`hidden-large-open-modal-button-${BodyComponent.name}`}
                 className="invisible"
                 style={{ display: "none" }}
                 data-toggle="modal"
-                data-target="#large-generic-modal"
+                data-target={`#large-generic-modal-id-${BodyComponent.name}`}
                 data-backdrop="false"
             ></button>
             <div
@@ -60,10 +59,10 @@ const LargeGenericModal = (params) => {
             ></div>
             <div
                 class="modal fade"
-                id="large-generic-modal"
+                id={`large-generic-modal-id-${BodyComponent.name}`}
                 tabindex="-1"
                 role="dialog"
-                aria-labelledby="large-generic-modal"
+                aria-labelledby={`large-generic-modal-id-${BodyComponent.name}`}
                 aria-hidden="true"
                 onClick={handleBackdropClick}
             >

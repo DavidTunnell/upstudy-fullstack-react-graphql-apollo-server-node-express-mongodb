@@ -46,7 +46,6 @@ const UpdatePicModalBody = (params) => {
     };
 
     const handleImageSelection = async (event) => {
-        console.log("new component");
         const input = event.target;
         setImageFile(input.files[0]);
     };

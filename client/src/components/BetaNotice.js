@@ -31,7 +31,7 @@ const BetaNotice = () => {
                                     type="button"
                                     className="btn btn-white btn-rounded px-5"
                                     data-toggle="modal"
-                                    data-target="#feedback-modal"
+                                    // data-target="#feedback-modal"
                                     onClick={openModal}
                                 >
                                     Write Us
@@ -41,6 +41,7 @@ const BetaNotice = () => {
                     </div>
                 </div>
             </section>
+            {/* THERE ARE TWO MODALS WITH THE SAME ID's NEED TO MAKE THEM UNIQUE!!! */}
             <LargeGenericModal
                 closeFunction={closeModal}
                 openFunction={openModal}
