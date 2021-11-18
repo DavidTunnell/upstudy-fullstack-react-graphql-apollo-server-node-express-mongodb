@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import SimpleReactValidator from "simple-react-validator";
 import { modalActions } from "../redux/actions";
 import { useMutation } from "@apollo/client";
@@ -13,28 +13,57 @@ const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
     const handleModalExit = params.handleModalExit;
     const [imageFile, setImageFile] = useState(null);
+    const [imageIsSquare, setImageIsSquare] = useState(false);
     const [validatorProfilePic] = useState(
         new SimpleReactValidator({
             validators: {
                 maxFileSize: {
                     // name the rule
-                    message: "The max file size is 5MB.",
+                    message: "The max file size is 250kb.",
                     rule: (val, params, validator) => {
                         if (val) {
                             const fileSize = val.size / 1024 / 1024; // in MiB
-                            if (fileSize > 5) {
+                            if (fileSize > 0.25) {
                                 return false;
                             } else {
                                 return true;
                             }
                         }
                     },
-                    required: false, // optional
+                    required: true, // optional
+                },
+                imageSquare: {
+                    // name the rule
+                    message: "The image must be perfectly square.",
+                    rule: async (val, params, validator) => {
+                        if (val) {
+                            await getImageInfo(val);
+                        }
+                    },
+                    required: true, // optional
                 },
             },
         })
     );
 
+    const getImageInfo = async (file) => {
+        var height = -1;
+        var width = -1;
+        const _URL = window.URL || window.webkitURL;
+        //Initiate the JavaScript Image object.
+        const image = new Image();
+        image.src = _URL.createObjectURL(file);
+        image.onload = () => {
+            height = image.height;
+            width = image.width;
+        };
+        console.log(height);
+        console.log(width);
+    };
+
+    //try function async await to get loaded
+
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
     const dispatch = useDispatch();
     const [getS3UrlAuthenticated] = useMutation(GET_S3_URL_AUTHENTICATED);
     const [updateProfilePic] = useMutation(
@@ -100,6 +129,11 @@ const UpdatePicModalBody = (params) => {
                     modalActions.updateAndShowModal("Error", error.message)
                 );
             }
+        } else {
+            //show issues with validation
+            validatorProfilePic.showMessages();
+            //force update state to show validation messages to user
+            forceUpdate();
         }
     };
 
@@ -140,7 +174,7 @@ const UpdatePicModalBody = (params) => {
                                         {validatorProfilePic.message(
                                             "maxFileSize",
                                             imageFile,
-                                            "maxFileSize"
+                                            "maxFileSize|imageSquare"
                                         )}
                                     </div>
                                     <button

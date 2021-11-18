@@ -3,7 +3,6 @@ import * as actions from "../actionTypes";
 function userReducer(state = { loggedIn: false }, action) {
     switch (action.type) {
         case actions.LOGIN_REDUX:
-            console.log(action);
             return {
                 id: action.payload.id,
                 username: action.payload.username,
@@ -14,7 +13,6 @@ function userReducer(state = { loggedIn: false }, action) {
                 profilePic: action.payload.profilePic,
             };
         case actions.LOGOUT_REDUX:
-            console.log(action);
             return {
                 loggedIn: false,
             };
