@@ -81,6 +81,12 @@ const UpdatePicModalBody = (params) => {
                             )
                         );
                         handleModalExit();
+                        setImageFile(null);
+
+                        const fileInput = document.getElementsByClassName(
+                            "profile-pic-file-input"
+                        )[0];
+                        fileInput.value = null;
                         dispatch(
                             userActions.updateProfilePicRedux(user.id, imageUrl)
                         );
@@ -130,7 +136,7 @@ const UpdatePicModalBody = (params) => {
         const input = event.target;
         setImageFile(input.files[0]);
         const imageDimensions = await getImageDimensions(input.files[0]);
-        if (imageDimensions[0] === imageDimensions[1]) {
+        if (imageDimensions && imageDimensions[0] === imageDimensions[1]) {
             setImageIsSquare(true);
         } else {
             setImageIsSquare(false);
@@ -159,7 +165,7 @@ const UpdatePicModalBody = (params) => {
                                         </label>
                                         <input
                                             type="file"
-                                            className="form-control"
+                                            className="form-control profile-pic-file-input"
                                             name="image"
                                             accept="image/*"
                                             onChange={(event) => {

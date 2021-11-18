@@ -142,6 +142,10 @@ const BetaNoticeModalBody = (params) => {
             setMessage("");
             setImage("");
             setImageFile(null);
+            const fileInput = document.getElementsByClassName(
+                "feedback-file-input"
+            )[0];
+            fileInput.value = null;
             handleModalExit();
         } else {
             validatorFeedback.showMessages();
@@ -259,7 +263,7 @@ const BetaNoticeModalBody = (params) => {
                                         </label>
                                         <input
                                             type="file"
-                                            className="form-control"
+                                            className="form-control feedback-file-input"
                                             name="image"
                                             accept="image/*"
                                             onChange={(event) => {
