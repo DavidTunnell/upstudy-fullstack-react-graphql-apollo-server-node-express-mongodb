@@ -13,7 +13,7 @@ const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
     const handleModalExit = params.handleModalExit;
     const [imageFile, setImageFile] = useState(null);
-    const [imageIsSquare, setImageIsSquare] = useState();
+    const [imageIsSquare, setImageIsSquare] = useState(true);
     const [validatorProfilePic] = useState(
         new SimpleReactValidator({
             validators: {
@@ -112,16 +112,18 @@ const UpdatePicModalBody = (params) => {
     const getImageDimensions = async (file) => {
         const getDimensions = () => {
             const _URL = window.URL || window.webkitURL;
-            var image = new Image();
-            image.src = _URL.createObjectURL(file);
+            const image = new Image();
+            image.src = _URL?.createObjectURL(file);
             return new Promise(function (resolve, reject) {
                 image.onload = function () {
                     resolve([image.height, image.width]);
                 };
             });
         };
-        const finalResults = await getDimensions(file);
-        return finalResults;
+        if (file) {
+            const finalResults = await getDimensions(file);
+            return finalResults;
+        }
     };
 
     const handleImageSelection = async (event) => {
