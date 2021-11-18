@@ -5,11 +5,14 @@ import { modalActions } from "../redux/actions/";
 import { useDispatch } from "react-redux";
 
 const BetaFeedback = (params) => {
+    //params from parent
     let betaFeedbackData = params.feedback;
-    // const { loading, data } = useQuery(GET_BETA_FEEDBACK);
+    //graphql mutations
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
+    //local component state
     const [feedbackData, setFeedbackData] = useState(betaFeedbackData);
     //to save data to redux store
+
     const dispatch = useDispatch();
     useEffect(() => {
         setFeedbackData(betaFeedbackData);
@@ -18,9 +21,11 @@ const BetaFeedback = (params) => {
     const handleFeedbackDetailsClick = (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
+        //get the relevant feedback data for the modal
         const result = feedbackData.filter((obj) => {
             return obj._id === idSelected;
         })[0];
+        //put modal options in redux store to show user
         dispatch(
             modalActions.updateAndShowModal(
                 `${result.username} - ${new Date(

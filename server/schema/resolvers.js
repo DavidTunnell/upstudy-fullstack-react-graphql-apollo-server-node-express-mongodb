@@ -28,6 +28,7 @@ const resolvers = {
             return User.findOne({ _id: userId });
         },
         subjects: async (obj, args, context) => {
+            //get categories/subjects sorted by date ASC
             const sortBy = {};
             if (args.sortBy) {
                 sortBy[args.sortBy.field] =
@@ -39,22 +40,13 @@ const resolvers = {
             return Subject.findOne({ _id: subjectId });
         },
         betaFeedback: async (obj, args, context) => {
+            //get beta feedback sorted by date ASC
             const sortBy = {};
             if (args.sortBy) {
                 sortBy[args.sortBy.field] =
                     args.sortBy.order === "ASC" ? 1 : -1;
             }
             return await BetaFeedback.find({}).sort(sortBy);
-            // query Subject {
-            //     subjects(sortBy: { field: "name", order: ASC }) {
-            //         _id
-            //         name
-            //         description
-            //         image
-            //         bgColor
-            //         createdBy
-            //     }
-            //}
         },
     },
     Mutation: {
@@ -64,6 +56,7 @@ const resolvers = {
                 // min and max included
                 return Math.floor(Math.random() * (max - min + 1) + min);
             }
+            //get url for random predefined profile pic
             const profilePic = `../../assets/images/default-profile-pics/default-profile-pic-${randomIntFromInterval(
                 1,
                 5
@@ -95,18 +88,15 @@ const resolvers = {
             context
         ) => {
             if (context.user) {
-                //check if user with the credentials provided already exists
-                console.log("addSubject");
+                //check if subject already exists
                 const subjectCheck = await Subject.findOne({ name });
-                console.log(subjectCheck);
-
                 //if so let user know
                 if (subjectCheck) {
                     throw new AuthenticationError(
                         "A subject with this name already exists."
                     );
                 } else {
-                    //otherwise create the new user, and a sign in token and return it
+                    //otherwise create the new subject and return it
                     const subject = await Subject.create({
                         name,
                         description,
@@ -125,20 +115,23 @@ const resolvers = {
             context,
             info
         ) => {
-            console.log("addBetaFeedback");
-            //otherwise create the new user, and a sign in token and return it
-            const betaFeedback = await BetaFeedback.create({
-                username,
-                email,
-                category,
-                message,
-                image,
-                archived: false,
-            });
-            return betaFeedback;
+            //create feedback document
+            try {
+                const betaFeedback = await BetaFeedback.create({
+                    username,
+                    email,
+                    category,
+                    message,
+                    image,
+                    archived: false,
+                });
+                return betaFeedback;
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
         },
         archiveBetaFeedback: async (parent, { feedbackId }, context, info) => {
-            //find and update with ID
+            //find with ID and update archive field
             try {
                 const feedback = await BetaFeedback.findOne({
                     _id: feedbackId,
@@ -158,20 +151,20 @@ const resolvers = {
             context,
             info
         ) => {
-            //confirm they are logged in....
-            //context.use
+            //confirm they are authenticateds
             if (context.user) {
                 //user model update
                 const user = await User.findOne({ _id: userId });
+                //if the user doesn't exist let user know
                 if (!user) {
                     throw new AuthenticationError(
                         "This user id doesn't exist. Which is pretty weird."
                     );
                 }
                 try {
+                    //update profile pic in db
                     user.profilePic = profilePic;
                     await user.save();
-                    //if the user doesn't exist let user know
                     return user;
                 } catch (error) {
                     throw new AuthenticationError(error.message);
@@ -188,6 +181,7 @@ const resolvers = {
             info
         ) => {
             var args = { userId, username, email };
+            //prevent users from doing this too frequently
             const errorMessage = await rateLimiter(
                 { parent, args, context, info },
                 {
@@ -367,6 +361,7 @@ const resolvers = {
         },
         getS3Url: async (parent, { isLoggedIn }) => {
             try {
+                //upload image file and return the new s3 URL
                 const url = s3.generateUploadURL();
                 const isLoggedInCheck = isLoggedIn;
                 return url;
@@ -375,8 +370,10 @@ const resolvers = {
             }
         },
         getS3UrlAuthenticated: async (parent, { isLoggedIn }, context) => {
+            //ensure user is authenticated
             if (context.user && isLoggedIn) {
                 try {
+                    //upload image file and return the new s3 URL
                     const url = s3.generateUploadURL();
                     return url;
                 } catch (error) {

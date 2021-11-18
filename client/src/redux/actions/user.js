@@ -18,7 +18,6 @@ export const logoutRedux = () => {
 };
 
 export const updateProfilePicRedux = (userId, profilePic) => {
-    console.log(updateProfilePicRedux);
     return {
         type: actions.UPDATE_PROFILE_PIC_REDUX,
         payload: { userId, profilePic },

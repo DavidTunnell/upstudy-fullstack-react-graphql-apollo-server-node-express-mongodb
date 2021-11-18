@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_EMAIL_VERIFICATION_TOKEN, VERIFY_EMAIL } from "../utils/mutations";
 import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -8,23 +8,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
 
 const VerifyEmail = (params) => {
+    //get bgColor from parent component
     const bgColor = params.bgColor;
-    //to save and get data to redux store
+    //to save and get data to redux store user object
     const user = useSelector((state) => state.loggedInUser);
-
+    //to update redux store
     const dispatch = useDispatch();
-    //state
+    //local component state
     const [isDisabledButton, setIsDisabledButton] = useState(false);
     //graphql mutations to save and send a token to user and to verify with that token
     const [addEmailVerificationToken] = useMutation(
         ADD_EMAIL_VERIFICATION_TOKEN
     );
     const [verifyEmail] = useMutation(VERIFY_EMAIL);
-
     //use react router history
     const history = useHistory();
     //get url query string parameters
     const search = window.location.search;
+    //parameters that come from the url query string (ex: ?id=6196c4b1442ed72c31ac36f6&username=upstudy_admin&email=admin@upstudy.io)
     const urlParams = new URLSearchParams(search);
     let createdEmail = urlParams.get("email");
     let createdToken = urlParams.get("token");
@@ -35,10 +36,6 @@ const VerifyEmail = (params) => {
         variables: { userId },
         fetchPolicy: "network-only",
     });
-    // const [getCurrentUserData] = useLazyQuery(GET_USER, {
-    //     // onCompleted: (data) => setBetaFeedback(data.betaFeedback),
-    //     fetchPolicy: "network-only",
-    // });
     //wrapped mutation to create and generate token for email validation
     const generateVerificationEmail = async (userId, username, email) => {
         await addEmailVerificationToken({
@@ -70,7 +67,6 @@ const VerifyEmail = (params) => {
         });
         setIsDisabledButton(true);
     };
-    //on  1st render run the following
     useEffect(() => {
         //internal function so it can be async
         async function processUrlParams() {

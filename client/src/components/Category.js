@@ -1,10 +1,7 @@
+//placeholder component for when a user enters a subject/category
 const Category = (params) => {
     const passedData = params.data;
-    console.log("in category component");
-    console.log(passedData);
-    console.log("in category component");
     const bgColor = "#3c66ff";
-    //Category Component! - {passedData}
     return (
         <>
             <section

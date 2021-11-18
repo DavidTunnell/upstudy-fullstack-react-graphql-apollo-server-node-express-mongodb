@@ -30,7 +30,6 @@ const subjectSchema = new Schema(
         // tags
         // wiki
         // mods
-        //
     },
     { timestamps: {} },
     {

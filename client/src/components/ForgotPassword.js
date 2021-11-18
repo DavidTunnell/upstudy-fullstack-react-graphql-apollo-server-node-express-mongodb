@@ -9,8 +9,6 @@ const ForgotPassword = (params) => {
     const bgColor = params.bgColor;
     //to save data to redux store
     const dispatch = useDispatch();
-    //local styling
-    const bgImage = "/assets/images/login-bg.jpg";
     //state
     const [emailInput, setEmailInput] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);

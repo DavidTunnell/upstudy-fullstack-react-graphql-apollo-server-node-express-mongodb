@@ -10,21 +10,22 @@ const InfoModal = (params) => {
     const [showBackdrop, setShowBackdrop] = useState(false);
 
     useEffect(() => {
+        //based on showModal state
         if (showModal) {
+            //show the modal and backdrop
             const btn = document.getElementById("hidden-open-modal-button");
             btn.click();
             setShowBackdrop(true);
         }
-    });
+    }, [showModal]);
 
     const handleExitModalClick = async (event) => {
+        //if the correct elements are clicked hide the modal and backdrop
         if (
             event.target.id === "generic-modal" ||
             event.target.id === "close-generic-modal-button" ||
             event.target.id === "close-generic-modal-icon"
         ) {
-            console.log("handleBackdropClick");
-            console.log(event.target.id);
             closeModal();
             const btn = document.getElementById("close-generic-modal-button");
             btn.click();
@@ -47,27 +48,30 @@ const InfoModal = (params) => {
                 className={`${showBackdrop ? "modal-backdrop fade show" : ""}`}
             ></div>
             <div
-                class="modal fade"
+                className="modal fade"
                 id="generic-modal"
-                tabindex="-1"
+                tabIndex="-1"
                 role="dialog"
                 aria-labelledby="generic-modal"
                 aria-hidden="true"
                 onClick={handleExitModalClick}
             >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-end ">
+                <div
+                    className="modal-dialog modal-dialog-centered"
+                    role="document"
+                >
+                    <div className="modal-content">
+                        <div className="modal-header justify-content-end ">
                             <button
                                 type="button"
-                                class="close"
+                                className="close"
                                 id="close-generic-modal-button"
                                 data-dismiss="modal"
                                 aria-label="Close"
                             >
                                 <span
                                     aria-hidden="true"
-                                    class="icon-x"
+                                    className="icon-x"
                                     id="close-generic-modal-icon"
                                 ></span>
                             </button>

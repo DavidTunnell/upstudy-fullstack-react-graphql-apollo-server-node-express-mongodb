@@ -24,12 +24,14 @@ import { GET_SUBJECTS } from "./utils/queries";
 
 //top use the react router package, surround the whole app with the router component
 function App() {
+    //this main color is used in child components in many places
     const mainColor = "#2e4fc7";
+    //get redux store data for categories
     let categories = useSelector((state) => state.categories);
     const { loading, data } = useQuery(GET_SUBJECTS);
+    //ensure categories is always populated
     if ((!categories || categories.length === 0) && !loading) {
         //if nothing in redux, pull from dashboard
-
         console.log("nothing in redux");
         categories = data.subjects;
     }
@@ -92,6 +94,7 @@ function App() {
                         <Route exact path="/dashboard">
                             <Dashboard bgColor={mainColor} />
                         </Route>
+                        {/* dynamic generation of component routes from db source */}
                         {categories &&
                             categories.map((category) => (
                                 <Route
@@ -99,7 +102,6 @@ function App() {
                                     path={`/${category.path}`}
                                     key={category._id}
                                 >
-                                    {/* next is pass the category object as a parameter here and then consume in category component */}
                                     <Category data={category} />
                                 </Route>
                             ))}

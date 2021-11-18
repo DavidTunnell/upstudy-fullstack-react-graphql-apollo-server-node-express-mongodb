@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Profile from "./Profile";
 import BetaFeedback from "./BetaFeedback";
@@ -6,49 +6,28 @@ import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import SimpleReactValidator from "simple-react-validator";
-import { modalActions } from "../redux/actions/";
-// import { useMutation } from "@apollo/client";
-// import { ADD_BETA_FEEDBACK } from "../utils/mutations";
 import { useLazyQuery } from "@apollo/client";
 import { GET_BETA_FEEDBACK } from "../utils/queries";
 import LargeGenericModal from "./LargeGenericModal";
 import UpdatePicModalBody from "./UpdatePicModalBody";
 
 const Dashboard = (params) => {
+    //get bgColor from parent via params
     const bgColor = params.bgColor;
+    //get user from redux store
     const user = useSelector((state) => state.loggedInUser);
     const [betaFeedback, setBetaFeedback] = useState(null);
+    //use lazy query to pull data from db on demand
     const [getBetaFeedbackData] = useLazyQuery(GET_BETA_FEEDBACK, {
+        //add data to state once returned
         onCompleted: (data) => setBetaFeedback(data.betaFeedback),
+        //ensures the most up to date data is shown
         fetchPolicy: "network-only",
     });
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
-
-    const [imageFile, setImageFile] = useState(null);
-    const [validatorProfilePic] = useState(
-        new SimpleReactValidator({
-            validators: {
-                maxFileSize: {
-                    // name the rule
-                    message: "The max file size is 5MB.",
-                    rule: (val, params, validator) => {
-                        if (val) {
-                            const fileSize = val.size / 1024 / 1024; // in MiB
-                            if (fileSize > 5) {
-                                return false;
-                            } else {
-                                return true;
-                            }
-                        }
-                    },
-                    required: false, // optional
-                },
-            },
-        })
-    );
+    // setup component local state and functions to pass to child components (these maybe could move to the child components in the future)
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => {
         setShowModal(false);
@@ -56,28 +35,14 @@ const Dashboard = (params) => {
     const openModal = () => {
         setShowModal(true);
     };
-    // function closeModal() {
-    //     document.getElementById("backdrop").style.display = "none";
-    //     document.getElementById("update-profile-pic-modal").style.display =
-    //         "none";
-    //     document
-    //         .getElementById("update-profile-pic-modal")
-    //         .classList.remove("show");
-    // }
-
-    const dispatch = useDispatch();
-    // const [profilePicUrl, setProfilePicUrl] = useState(
-    //     "../../assets/images/default-profile-pics/default-profile-pic-3.jpg"
-    // );
-
-    //use react router history
     const history = useHistory();
 
-    //if the user isn't logged in send them to login screen
     useEffect(() => {
+        //if the user isn't logged in send them to login screen
         if (!Auth.loggedIn()) {
             history.push("/login");
         }
+        //show appropriate nav tabs based on roles the user has
         if (user?.roles.some((e) => e.role === "admin") && Auth.loggedIn()) {
             setIsAdmin(true);
         }
@@ -87,7 +52,7 @@ const Dashboard = (params) => {
         if (user?.roles.some((e) => e.role === "user") && Auth.loggedIn()) {
             setIsUser(true);
         }
-    });
+    }, [user.roles, history]);
 
     return (
         <>

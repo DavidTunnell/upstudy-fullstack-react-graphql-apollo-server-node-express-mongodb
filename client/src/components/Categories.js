@@ -10,26 +10,19 @@ import {
     filteredCategoriesActions,
 } from "../redux/actions/";
 
-// import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 const Categories = () => {
+    //get filter categories from redux store
     let filteredCategories = useSelector((state) => state.filteredCategories);
+    //get categories from db
     const { loading, data } = useQuery(GET_SUBJECTS);
     const dispatch = useDispatch();
     useEffect(() => {
+        //get categories data into redux store
         if (!loading) {
             dispatch(categoriesActions.categories(data));
             dispatch(filteredCategoriesActions.setAllCategories(data));
         }
     }, [data, loading, dispatch]);
-
-    // const currentCategories = () => {
-    //     if (filteredCategories.length === 0) {
-    //         return categories;
-    //     } else {
-    //         return filteredCategories;
-    //     }
-    // };
-
     return (
         <>
             <section className="p-3">

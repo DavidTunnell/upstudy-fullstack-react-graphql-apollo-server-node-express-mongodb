@@ -3,7 +3,7 @@ import Auth from "../utils/auth";
 import { useSelector } from "react-redux";
 
 const Header = ({ toTop }) => {
-    //get current logged in user data from redux store
+    //get current logged in user data from redux store for conditional nav bar
     const user = useSelector((state) => state.loggedInUser);
     return (
         <>

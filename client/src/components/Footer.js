@@ -3,7 +3,7 @@ import Auth from "../utils/auth";
 import { useSelector } from "react-redux";
 
 const Footer = ({ toTop }) => {
-    //get whether user is logged in from redux store
+    //get whether user is logged in from redux store to show conditional nav bar
     const isLoggedIn = useSelector((state) => state.loggedInUser.loggedIn);
     return (
         <>

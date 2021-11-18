@@ -3,6 +3,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import { GET_BETA_FEEDBACK } from "../utils/queries";
 const Test = () => {
+    //test sandbox component to try out new functionality
     const [betaFeedback, setBetaFeedback] = useState(null);
     const [getBetaFeedbackData] = useLazyQuery(GET_BETA_FEEDBACK, {
         onCompleted: (data) => setBetaFeedback(data.betaFeedback),

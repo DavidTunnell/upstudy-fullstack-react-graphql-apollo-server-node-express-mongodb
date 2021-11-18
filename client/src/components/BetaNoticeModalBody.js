@@ -8,12 +8,12 @@ import { modalActions } from "../redux/actions";
 import Auth from "../utils/auth";
 
 const BetaNoticeModalBody = (params) => {
+    //local component state
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
-    const [image, setImage] = useState("");
     const [imageFile, setImageFile] = useState(null);
+    //validator for file size used for image upload field
     const [validatorFeedback] = useState(
         new SimpleReactValidator({
             validators: {
@@ -37,20 +37,22 @@ const BetaNoticeModalBody = (params) => {
     );
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-    // const [showModal, setShowModal] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isMuted, setIsMuted] = useState("");
+    //this mutation also refetches the beta feedback so things stay current
     const [addBetaFeedback] = useMutation(ADD_BETA_FEEDBACK, {
         refetchQueries: [{ query: GET_BETA_FEEDBACK }],
     });
+    //uploads and gets url for s3 image storage
     const [getS3Url] = useMutation(GET_S3_URL);
     //to save data to redux store
     const dispatch = useDispatch();
+    //get user from redux store
     const user = useSelector((state) => state.loggedInUser);
-
+    //params from parent component
     const handleModalExit = params.handleModalExit;
-
     useEffect(() => {
+        //populate and disable fields for user and email if a user is logged in
         if (user.email) {
             setIsDisabled(true);
             setEmail(user.email);
@@ -67,15 +69,17 @@ const BetaNoticeModalBody = (params) => {
     const onSubmit = async (event) => {
         //prevent server reload of page on click
         event.preventDefault();
+        //get the category the user has selected
         const selectedCategory = document
             .querySelector(".feedback-type")
             .querySelector(".selectric")
             .querySelector(".label").innerHTML;
-        setCategory(selectedCategory);
+        //input validation check
         if (validatorFeedback.allValid()) {
             //https://www.youtube.com/watch?v=yGYeYJpRWPM&t=137s
             try {
                 let imageUrl = "";
+                //if the user wants to upload an image there this needs to run
                 if (imageFile) {
                     //get secure url from our server
                     const urlReturnObject = await getS3Url({
@@ -97,7 +101,7 @@ const BetaNoticeModalBody = (params) => {
                     //get back image url from s3
                     imageUrl = url.split("?")[0];
                 }
-                //write to db
+                //write to db via graphql mutation
                 try {
                     await addBetaFeedback({
                         variables: {
@@ -109,9 +113,7 @@ const BetaNoticeModalBody = (params) => {
                             archived: false,
                         },
                     });
-                    //
-
-                    //close
+                    //let user know what happened
                     dispatch(
                         modalActions.updateAndShowModal(
                             "Success",
@@ -119,8 +121,6 @@ const BetaNoticeModalBody = (params) => {
                         )
                     );
                 } catch (err) {
-                    //close
-                    //then show other modal
                     dispatch(
                         modalActions.updateAndShowModal(
                             "Error",
@@ -134,13 +134,13 @@ const BetaNoticeModalBody = (params) => {
                     modalActions.updateAndShowModal("Error", error.message)
                 );
             }
+            //if the user isn't logged in clear these fields also
             if (!Auth.loggedIn()) {
                 setUsername("");
                 setEmail("");
             }
-            //update category to suggestion?
+            //clear form
             setMessage("");
-            setImage("");
             setImageFile(null);
             const fileInput = document.getElementsByClassName(
                 "feedback-file-input"
@@ -155,9 +155,9 @@ const BetaNoticeModalBody = (params) => {
     };
 
     const handleImageSelection = async (event) => {
+        //put image file in state
         const input = event.target;
         setImageFile(input.files[0]);
-        // setImage("what");
     };
     return (
         <>
@@ -269,7 +269,6 @@ const BetaNoticeModalBody = (params) => {
                                             onChange={(event) => {
                                                 handleImageSelection(event);
                                             }}
-                                            // value={image}
                                         />
                                         {validatorFeedback.message(
                                             "maxFileSize",

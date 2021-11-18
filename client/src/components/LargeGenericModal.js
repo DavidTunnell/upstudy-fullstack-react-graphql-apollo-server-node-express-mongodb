@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const LargeGenericModal = (params) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
     let closeModal = params.closeFunction;
-    let openModal = params.openFunction;
+    // let openModal = params.openFunction;
     let showModal = params.showModal;
     let BodyComponent = params.bodyComponent;
 
@@ -11,15 +11,17 @@ const LargeGenericModal = (params) => {
 
     useEffect(() => {
         if (showModal) {
+            //show modal with unique class name based on component name so multiple large generic modals can be used at once on screen
             const btn = document.getElementById(
                 `hidden-large-open-modal-button-${BodyComponent.name}`
             );
             btn.click();
             setShowBackdrop(true);
         }
-    }, [showModal]);
+    }, [showModal, BodyComponent.name]);
 
     const handleBackdropClick = async (event) => {
+        //close modal based on user event click
         if (
             event.target.id ===
                 `large-generic-modal-id-${BodyComponent.name}` ||
@@ -37,7 +39,8 @@ const LargeGenericModal = (params) => {
         }
     };
 
-    const submitForm = (event) => {
+    const submitForm = () => {
+        //close the modal on form submit
         closeModal();
         const btn = document.getElementById(
             `close-large-generic-modal-button-${BodyComponent.name}`
@@ -62,23 +65,23 @@ const LargeGenericModal = (params) => {
                 onClick={handleBackdropClick}
             ></div>
             <div
-                class="modal fade"
+                className="modal fade"
                 id={`large-generic-modal-id-${BodyComponent.name}`}
-                tabindex="-1"
+                tabIndex="-1"
                 role="dialog"
                 aria-labelledby={`large-generic-modal-id-${BodyComponent.name}`}
                 aria-hidden="true"
                 onClick={handleBackdropClick}
             >
                 <div
-                    class="modal-dialog modal-dialog-centered large-generic-modal "
+                    className="modal-dialog modal-dialog-centered large-generic-modal "
                     role="document"
                 >
-                    <div class="modal-content bg-light ">
-                        <div class="modal-header justify-content-end ">
+                    <div className="modal-content bg-light ">
+                        <div className="modal-header justify-content-end ">
                             <button
                                 type="button"
-                                class="close"
+                                className="close"
                                 id={`close-large-generic-modal-button-${BodyComponent.name}`}
                                 data-dismiss="modal"
                                 aria-label="Close"
@@ -86,7 +89,7 @@ const LargeGenericModal = (params) => {
                             >
                                 <span
                                     aria-hidden="true"
-                                    class="icon-x"
+                                    className="icon-x"
                                     id={`close-large-generic-modal-icon-${BodyComponent.name}`}
                                     onClick={handleBackdropClick}
                                 ></span>

@@ -101,9 +101,10 @@ const Contact = () => {
         await fetchCreate(
             process.env.REACT_APP_BASE_URL + "/api/contact/email",
             contactEntry
-        ).then((returnData) => {
-            console.log(returnData);
-        });
+        )
+        // .then((returnData) => {
+        //     console.log(returnData);
+        // });
     };
 
     //https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript

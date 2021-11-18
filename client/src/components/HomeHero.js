@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 const HomeHero = (params) => {
+    //get bgColor from parent component
     const bgColor = params.bgColor;
     return (
         <>

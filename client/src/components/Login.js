@@ -17,7 +17,7 @@ const Login = ({
 }) => {
     //to save data to redux store
     const dispatch = useDispatch();
-    //state
+    //local component state
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: "",
@@ -37,7 +37,6 @@ const Login = ({
     const [validatorCreate] = useState(new SimpleReactValidator());
     // eslint-disable-next-line
     const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-    //local styling
 
     //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);

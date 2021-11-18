@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 const Error = (params) => {
-    //local styling
+    //get styling from parent component via params
     const bgColor = params.bgColor;
     //use react router history
     const history = useHistory();

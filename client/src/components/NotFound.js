@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const NotFound = (params) => {
+    //get bgColor from parent component
     const bgColor = params.bgColor;
-
     return (
         <>
             <div className="viewport">

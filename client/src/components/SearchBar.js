@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filteredCategoriesActions } from "../redux/actions/";
 const SearchBar = () => {
+    //get categories from redux store
     const categories = useSelector((state) => state.categories);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
-    // filteredCategoriesActions.filterCategories({ value: "", categories });
     const handleSearchInputChange = (event) => {
+        //filter the categories and update redux store based on user input
         const { value } = event.target;
         setSearchInput(value);
         dispatch(
@@ -46,7 +47,6 @@ const SearchBar = () => {
                     </div>
                 </div>
             </section>
-            {/* <div className="border-top"></div> */}
         </>
     );
 };

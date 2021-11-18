@@ -12,7 +12,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.loggedInUser);
 
-    //state
+    //local component state
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatNewPassword, setRepeatNewPassword] = useState("");
@@ -24,17 +24,7 @@ const Profile = () => {
     //graphql mutation to update password
     const [updatePassword] = useMutation(USER_UPDATE_PASSWORD);
 
-    // //use react router history
-    // const history = useHistory();
-
-    // //if the user isn't logged in send them to login screen
-    // useEffect(() => {
-    //     if (!Auth.loggedIn()) {
-    //         history.push("/login");
-    //     }
-    // });
-
-    //update state for field input
+    //update state for password update field inputs
     const handleOldPasswordInputChange = (event) => {
         const { value } = event.target;
         setOldPassword(value);
