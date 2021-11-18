@@ -37,7 +37,11 @@ const UpdatePicModalBody = (params) => {
                     message: "The image must be perfectly square.",
                     rule: async (val, params, validator) => {
                         if (val) {
-                            await getImageInfo(val);
+                            getImageInfo(val).then((data) => {
+                                console.log("data");
+                                console.log(data);
+                                console.log("data");
+                            });
                         }
                     },
                     required: true, // optional
@@ -46,19 +50,15 @@ const UpdatePicModalBody = (params) => {
         })
     );
 
-    const getImageInfo = async (file) => {
-        var height = -1;
-        var width = -1;
+    const getImageInfo = (file) => {
         const _URL = window.URL || window.webkitURL;
-        //Initiate the JavaScript Image object.
-        const image = new Image();
+        var image = new Image();
         image.src = _URL.createObjectURL(file);
-        image.onload = () => {
-            height = image.height;
-            width = image.width;
-        };
-        console.log(height);
-        console.log(width);
+        return new Promise(function (resolve, reject) {
+            image.onload = function () {
+                resolve([image.height, image.width]);
+            };
+        });
     };
 
     //try function async await to get loaded
