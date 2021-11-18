@@ -13,10 +13,11 @@ export const HIDE_MODAL = "hideModal";
 
 export const LOGIN_REDUX = "loginRedux";
 export const LOGOUT_REDUX = "logoutRedux";
+export const UPDATE_PROFILE_PIC_REDUX = "updateProfilePicRedux";
 
 export const CATEGORIES = "Categories";
 
 export const FILTER_CATEGORIES = "filterCategories";
-export const SET_ALL_CATEGORIES = "SET_ALL_CATEGORIES";
+export const SET_ALL_CATEGORIES = "setAllCategories";
 
 export const CATEGORY = "Category";

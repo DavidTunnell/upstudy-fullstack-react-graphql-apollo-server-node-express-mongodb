@@ -18,6 +18,11 @@ function userReducer(state = { loggedIn: false }, action) {
             return {
                 loggedIn: false,
             };
+        case actions.UPDATE_PROFILE_PIC_REDUX:
+            return {
+                ...state, // take copy of state object
+                profilePic: action.payload.profilePic, // this will override the old
+            };
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;

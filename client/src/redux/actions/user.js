@@ -16,3 +16,11 @@ export const loginRedux = (
 export const logoutRedux = () => {
     return { type: actions.LOGOUT_REDUX };
 };
+
+export const updateProfilePicRedux = (userId, profilePic) => {
+    console.log(updateProfilePicRedux);
+    return {
+        type: actions.UPDATE_PROFILE_PIC_REDUX,
+        payload: { userId, profilePic },
+    };
+};

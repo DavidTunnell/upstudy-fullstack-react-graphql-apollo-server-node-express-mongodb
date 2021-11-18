@@ -8,7 +8,7 @@ import {
     UPDATE_PROFILE_PIC,
 } from "../utils/mutations";
 import Auth from "../utils/auth";
-
+import { userActions } from "../redux/actions/";
 const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
     const handleModalExit = params.handleModalExit;
@@ -80,6 +80,9 @@ const UpdatePicModalBody = (params) => {
                             )
                         );
                         handleModalExit();
+                        dispatch(
+                            userActions.updateProfilePicRedux(user.id, imageUrl)
+                        );
                     } catch (err) {
                         //close
                         //then show other modal
