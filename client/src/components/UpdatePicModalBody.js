@@ -11,9 +11,7 @@ import Auth from "../utils/auth";
 
 const UpdatePicModalBody = (params) => {
     const user = useSelector((state) => state.loggedInUser);
-    // console.log("UpdatePicModalBody user");
-    // console.log(user);
-    // console.log("UpdatePicModalBody user");
+    const handleModalExit = params.handleModalExit;
     const [imageFile, setImageFile] = useState(null);
     const [validatorProfilePic] = useState(
         new SimpleReactValidator({
@@ -68,7 +66,7 @@ const UpdatePicModalBody = (params) => {
                     //get back image url from s3
                     imageUrl = url.split("?")[0];
                     try {
-                        var test = await updateProfilePic({
+                        await updateProfilePic({
                             variables: {
                                 userId: user.id,
                                 profilePic: imageUrl,
@@ -81,6 +79,7 @@ const UpdatePicModalBody = (params) => {
                                 "Your profile pic has been updated."
                             )
                         );
+                        handleModalExit();
                     } catch (err) {
                         //close
                         //then show other modal
