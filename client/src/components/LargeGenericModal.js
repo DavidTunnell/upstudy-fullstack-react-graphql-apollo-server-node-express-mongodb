@@ -5,6 +5,7 @@ const LargeGenericModal = (params) => {
     let closeModal = params.closeFunction;
     let openModal = params.openFunction;
     let showModal = params.showModal;
+    let BetaNoticeModalBody = params.betaNoticeModalBody;
     // let closeModal = params.closeModal;
     // let title = params.title;
     // let content = params.content;
@@ -38,6 +39,27 @@ const LargeGenericModal = (params) => {
         }
     };
 
+    //  <div
+    //     className="modal fade"
+    //     id="feedback-modal"
+    //     tabIndex="-1"
+    //     aria-hidden="true"
+    // >
+    //     <div className="modal-dialog modal-xl">
+    //         <div className="modal-content bg-light">
+    //             <div className="justify-content-end">
+    //                 <button
+    //                     type="button"
+    //                     className="close m-1"
+    //                     data-dismiss="modal"
+    //                     aria-label="Close"
+    //                 >
+    //                     <span
+    //                         aria-hidden="true"
+    //                         className="icon-x"
+    //                     ></span>
+    //                 </button>
+    //             </div>
     return (
         <>
             <button
@@ -62,8 +84,11 @@ const LargeGenericModal = (params) => {
                 aria-hidden="true"
                 onClick={handleBackdropClick}
             >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                <div
+                    class="modal-dialog modal-dialog-centered large-generic-modal "
+                    role="document"
+                >
+                    <div class="modal-content bg-light ">
                         <div class="modal-header justify-content-end ">
                             <button
                                 type="button"
@@ -81,11 +106,7 @@ const LargeGenericModal = (params) => {
                                 ></span>
                             </button>
                         </div>
-
-                        <div className="modal-body text-center  mt-n3">
-                            <h3>test</h3>
-                            <p>p content</p>
-                        </div>
+                        <BetaNoticeModalBody />
                     </div>
                 </div>
             </div>
