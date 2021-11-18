@@ -13,7 +13,7 @@ import { modalActions } from "../redux/actions/";
 import { useLazyQuery } from "@apollo/client";
 import { GET_BETA_FEEDBACK } from "../utils/queries";
 import LargeGenericModal from "./LargeGenericModal";
-import BetaNoticeModalBody from "./BetaNoticeModalBody";
+import UpdatePicModalBody from "./UpdatePicModalBody";
 
 const Dashboard = (params) => {
     const bgColor = params.bgColor;
@@ -88,29 +88,6 @@ const Dashboard = (params) => {
             setIsUser(true);
         }
     });
-
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        if (validatorProfilePic.allValid()) {
-            try {
-                console.log(imageFile);
-            } catch (error) {
-                console.log(error);
-                dispatch(
-                    modalActions.updateAndShowModal("Error", error.message)
-                );
-            }
-        }
-        //is there a way to fire instead?
-        // data-toggle="modal"
-        // data-target="#update-profile-pic-modal"
-        // $("#newModal").modal("toggle");
-    };
-
-    const handleImageSelection = async (event) => {
-        const input = event.target;
-        setImageFile(input.files[0]);
-    };
 
     return (
         <>
@@ -302,82 +279,8 @@ const Dashboard = (params) => {
                 closeFunction={closeModal}
                 openFunction={openModal}
                 showModal={showModal}
-                bodyComponent={BetaNoticeModalBody}
+                bodyComponent={UpdatePicModalBody}
             />
-            {/* <div
-                className="modal fade"
-                id="update-profile-pic-modal"
-                tabIndex="-1"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog modal-xl">
-                    <div className="modal-content bg-light">
-                        <div className="justify-content-end">
-                            <button
-                                type="button"
-                                className="close m-1"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span
-                                    aria-hidden="true"
-                                    className="icon-x"
-                                ></span>
-                            </button>
-                        </div>
-                        <div className="modal-body text-left mt-n1">
-                            <div className="container">
-                                <div>
-                                    <img
-                                        className="img-fluid mx-auto d-block large-profile-pic"
-                                        src={user.profilePic}
-                                        alt="profile pic"
-                                    />
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <form className="mt-2">
-                                            <hr className="mb-2" />
-                                            <div>
-                                                <div className="form-group">
-                                                    <label htmlFor="image">
-                                                        Image Upload
-                                                    </label>
-                                                    <input
-                                                        type="file"
-                                                        className="form-control"
-                                                        name="image"
-                                                        accept="image/*"
-                                                        onChange={(event) => {
-                                                            handleImageSelection(
-                                                                event
-                                                            );
-                                                        }}
-                                                    />
-                                                    {validatorProfilePic.message(
-                                                        "maxFileSize",
-                                                        imageFile,
-                                                        "maxFileSize"
-                                                    )}
-                                                </div>
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-lg btn-primary w-100"
-                                                    onClick={(event) => {
-                                                        onSubmit(event);
-                                                    }}
-                                                >
-                                                    Update
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </>
     );
 };
