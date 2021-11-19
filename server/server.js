@@ -29,6 +29,21 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "../../client/build/index.html"));
 });
 
+app.use((req, res, next) => {
+    console.log("req.path");
+    console.log(req.path);
+    console.log("req.path");
+
+    // if (req.path.substr(-1) === "/" && req.path.length > 1) {
+    //     const query = req.url.slice(req.path.length);
+    //     const safepath = req.path.slice(0, -1).replace(/\/+/g, "/");
+    //     res.redirect(301, safepath + query);
+    // } else {
+    //     next();
+    // }
+    next();
+});
+
 //start server and listen
 db.once("open", () => {
     app.listen(PORT, () => {

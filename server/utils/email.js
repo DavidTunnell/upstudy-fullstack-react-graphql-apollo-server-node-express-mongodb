@@ -37,7 +37,7 @@ module.exports = {
                 ",\n\n" +
                 "Please verify your account by clicking the link: \n" +
                 process.env.APP_DOMAIN +
-                "/verify?email=" +
+                "verify?email=" +
                 email +
                 "&token=" +
                 token.token +
