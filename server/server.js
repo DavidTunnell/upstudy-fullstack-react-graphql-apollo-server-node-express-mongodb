@@ -27,7 +27,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
     router.use(express.static(path.join(__dirname, "../client/build")));
     //when the request comes to the server for any route and route you’re trying to access does not exist on the server-side go to the node build/index.html file
-    router.sendFile(path.join(__dirname, "../client/build/", "index.html"));
+    // router.sendFile(path.join(__dirname, "../client/build/", "index.html"));
 }
 
 //start server and listen
