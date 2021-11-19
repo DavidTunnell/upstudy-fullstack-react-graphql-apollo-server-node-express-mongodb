@@ -94,7 +94,7 @@ const Profile = () => {
                     </h5>
                     <form>
                         <div className="form-row">
-                            <div className="col">
+                            <div className="col-lg-6 col-xs-12">
                                 <div className="form-group">
                                     <label htmlFor="firstName">Username</label>
                                     <input
@@ -107,7 +107,7 @@ const Profile = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="col">
+                            <div className="col-lg-6 col-xs-12">
                                 <div className="form-group">
                                     <label htmlFor="secondName">
                                         Email Address

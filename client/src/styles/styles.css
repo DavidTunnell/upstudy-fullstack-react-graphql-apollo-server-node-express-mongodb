@@ -137,6 +137,17 @@
         flex: 0 0 100%;
         max-width: 87%;
     }
+    .profile-div {
+        margin-top: 22em;
+    }
+    .circle-icon {
+        margin-right: 9em !important;
+    }
+    .user-name-div {
+        padding-top: 2em;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
 }
 
 @media only screen and (max-width: 1199px) {
@@ -147,6 +158,9 @@
     .modal-image {
         flex: 0 0 100% !important;
         max-width: 100% !important;
+    }
+    .circle-icon {
+        margin-right: 22em;
     }
 }
 
@@ -163,5 +177,8 @@
     }
     .mobile-buttons .m-1 {
         margin-left: 0rem !important;
+    }
+    .circle-icon {
+        margin-right: 7em !important;
     }
 }

@@ -67,11 +67,11 @@ const Dashboard = (params) => {
                         <div className="mt-n10 mb-6">
                             <div className="card-body p-0 mt-n10">
                                 <div className="p-0 mt-n10">
-                                    <div className="container mt-n10">
-                                        <div className="row justify-content-center align-items-end vh-50 mb-5 mt-n10">
-                                            <div className="col-4 col-md-10 col-lg-8 mt-n10">
-                                                <div className="row align-items-center">
-                                                    <div className="col-4 col-lg-3">
+                                    <div className="container mt-n10 ">
+                                        <div className="row justify-content-center align-items-end vh-50 mb-5 mt-n10 ">
+                                            <div className="col-sm-12 col-md-10 col-lg-8 mt-n10">
+                                                <div className="row align-items-center profile-div">
+                                                    <div className="col-lg-3">
                                                         <img
                                                             className="mr-3 avatar avatar-xl rounded profile-pic"
                                                             src={
@@ -100,7 +100,7 @@ const Dashboard = (params) => {
                                                         </span>
                                                     </div>
 
-                                                    <div className="col">
+                                                    <div className="col user-name-div">
                                                         <div className="row align-items-center">
                                                             <div className="col-md-8">
                                                                 <h2 className="mb-0">
