@@ -26,9 +26,9 @@ app.use(express.json());
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === "production") {
-    router.use(express.static(path.join(__dirname, "../client/build")));
+    app.use(express.static(path.join(__dirname, "../client/build")));
     //when the request comes to the server for any route and route you’re trying to access does not exist on the server-side go to the node build/index.html file
-    // router.sendFile(path.join(__dirname, "../client/build/", "index.html"));
+    app.sendFile(path.join(__dirname, "../client/build/", "index.html"));
 }
 
 //start server and listen
