@@ -231,6 +231,7 @@ const Login = ({
                                                             type="password"
                                                             className="form-control"
                                                             id="password"
+                                                            placeholder="********"
                                                             onChange={
                                                                 handleLoginInputChange
                                                             }
@@ -338,6 +339,7 @@ const Login = ({
                                                             type="password"
                                                             className="form-control"
                                                             id="createPassword"
+                                                            placeholder="********"
                                                             onChange={
                                                                 handleCreateInputChange
                                                             }
@@ -364,6 +366,7 @@ const Login = ({
                                                             type="password"
                                                             className="form-control"
                                                             id="repeatPassword"
+                                                            placeholder="********"
                                                             onChange={
                                                                 handleCreateInputChange
                                                             }
