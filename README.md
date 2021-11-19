@@ -44,7 +44,7 @@ The application will be available by default at `http://localhost:3000/` and API
 
 ## GraphQL API
 
-Followed are example queries and mutations that can be run directly against the server.
+Followed are example queries and mutations that can be run directly against the server. Many available queries/mutations can be found at `./client/src/utils/queries.js` and `./client/src/utils/mutations.js`
 
 Get User:
 
