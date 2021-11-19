@@ -27,6 +27,11 @@ module.exports = {
         token,
         userId
     ) {
+        //heroku hack, for some reason it makes double slashes in prod but not in dev even working directly with node /3001 port
+        let slash = "";
+        if (process.env.NODE_ENV !== "production") {
+            slash = "/";
+        }
         return {
             from: "no-reply@upstudy.io",
             to: email,
@@ -37,6 +42,7 @@ module.exports = {
                 ",\n\n" +
                 "Please verify your account by clicking the link: \n" +
                 process.env.APP_DOMAIN +
+                slash +
                 "verify?email=" +
                 email +
                 "&token=" +
