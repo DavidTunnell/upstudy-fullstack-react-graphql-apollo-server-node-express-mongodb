@@ -6,7 +6,7 @@ const { ApolloServer } = require("apollo-server-express");
 const { authMiddleware } = require("./utils/auth");
 const { typeDefs, resolvers } = require("./schema");
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 // const { PORT = 3001, LOCAL_ADDRESS = "0.0.0.0" } = process.env;
 const app = express();
 
@@ -28,12 +28,12 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));
     //when the request comes to the server for any route and route you’re trying to access does not exist on the server-side go to the node build/index.html file
-    app.sendFile(path.join(__dirname, "../client/build/", "index.html"));
+    // app.sendFile(path.join(__dirname, "../client/build/", "index.html"));
 }
 
 //start server and listen
 db.once("open", () => {
-    app.listen(PORT, "0.0.0.0", () => {
+    app.listen(PORT, () => {
         console.log(`API server running on port ${PORT}!`);
         console.log(
             `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
