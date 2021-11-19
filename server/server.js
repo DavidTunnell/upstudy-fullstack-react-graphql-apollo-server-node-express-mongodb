@@ -23,20 +23,20 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// // if we're in production, serve client/build as static assets
-// if (process.env.NODE_ENV === "production") {
-//     app.use(express.static(path.join(__dirname, "../client/build")));
-//     //when the request comes to the server for any route and route you’re trying to access does not exist on the server-side go to the node build/index.html file
-//     // app.sendFile(path.join(__dirname, "../client/build/", "index.html"));
-// }
+// if we're in production, serve client/build as static assets
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/build")));
+    //when the request comes to the server for any route and route you’re trying to access does not exist on the server-side go to the node build/index.html file
+    // app.sendFile(path.join(__dirname, "../client/build/", "index.html"));
+}
 
-app.get("*", (req, res) => {
-    let url = path.join(__dirname, "../client/build", "index.html");
-    if (!url.startsWith("/app/"))
-        // since we're on local windows
-        url = url.substring(1);
-    res.sendFile(url);
-});
+// app.get("*", (req, res) => {
+//     let url = path.join(__dirname, "../client/build", "index.html");
+//     if (!url.startsWith("/app/"))
+//         // since we're on local windows
+//         url = url.substring(1);
+//     res.sendFile(url);
+// });
 
 //start server and listen
 db.once("open", () => {
