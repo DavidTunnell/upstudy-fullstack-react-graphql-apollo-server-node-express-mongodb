@@ -79,8 +79,18 @@ const BetaFeedback = (params) => {
                             <thead style={{ textAlign: "center" }}>
                                 <tr>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Message</th>
+                                    <th
+                                        scope="col"
+                                        className="d-none d-sm-table-cell"
+                                    >
+                                        Category
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="d-none d-sm-table-cell"
+                                    >
+                                        Message
+                                    </th>
                                     <th scope="col">Details</th>
                                 </tr>
                             </thead>
@@ -101,8 +111,10 @@ const BetaFeedback = (params) => {
                                                         "en-US"
                                                     )}
                                                 </th>
-                                                <td>{feedback.category}</td>
-                                                <td>
+                                                <td className="d-none d-sm-table-cell">
+                                                    {feedback.category}
+                                                </td>
+                                                <td className="d-none d-lg-table-cell">
                                                     {feedback.message.substring(
                                                         0,
                                                         40
