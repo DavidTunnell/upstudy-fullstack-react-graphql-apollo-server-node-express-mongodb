@@ -133,10 +133,6 @@
     .large-generic-modal {
         max-width: 95% !important;
     }
-    .dashboard-card {
-        flex: 0 0 100%;
-        max-width: 87%;
-    }
     .profile-div {
         margin-top: 22em;
     }
@@ -181,4 +177,12 @@
     .circle-icon {
         margin-right: 7em !important;
     }
+}
+
+.dashboard-card {
+    flex: 0 0 100%;
+    max-width: 87%;
+    overflow: hidden;
+    min-height: 100vh;
+    height: 100%;
 }
