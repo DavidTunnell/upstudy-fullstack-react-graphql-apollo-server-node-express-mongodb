@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../redux/actions/";
 
 const VerifyEmail = (params) => {
+    console.log("VerifyEmail start");
     //get bgColor from parent component
     const bgColor = params.bgColor;
     //to save and get data to redux store user object

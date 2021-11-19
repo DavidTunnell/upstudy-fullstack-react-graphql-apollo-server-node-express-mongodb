@@ -123,7 +123,7 @@ const subjectSeed = [
         name: "Information Technology",
         description:
             "Information technology (IT) is the use of computers to create, process, store, retrieve and exchange all kinds of electronic data[1] and information. IT is typically used within the context of business operations as opposed to personal or entertainment technologies.",
-        image: "./assets/images/subjects/open/information-Technology.jpg",
+        image: "./assets/images/subjects/open/information-technology.jpg",
         path: "information-technology",
         bgColor: "#3a1dad",
         createdBy: "ADMIN_SEED",
