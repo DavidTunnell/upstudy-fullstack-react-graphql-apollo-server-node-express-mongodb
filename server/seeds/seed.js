@@ -410,21 +410,21 @@ const betaFeedbackSeed = [
     },
 ];
 
-//first delete user data in database and then populate with seed data
-User.deleteMany({})
-    .then(() => User.insertMany(userSeed))
-    .then((data) => {
-        console.log(
-            data.length +
-                " " +
-                Object.keys({ userSeed })[0] +
-                " records inserted."
-        );
-    })
-    .catch((err) => {
-        console.error(err);
-        process.exit(1);
-    });
+// //first delete user data in database and then populate with seed data
+// User.deleteMany({})
+//     .then(() => User.insertMany(userSeed))
+//     .then((data) => {
+//         console.log(
+//             data.length +
+//                 " " +
+//                 Object.keys({ userSeed })[0] +
+//                 " records inserted."
+//         );
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//         process.exit(1);
+//     });
 
 BetaFeedback.deleteMany({})
     .then(() => BetaFeedback.insertMany(betaFeedbackSeed))
@@ -442,21 +442,21 @@ BetaFeedback.deleteMany({})
         process.exit(1);
     });
 
-Subject.deleteMany({})
-    .then(() => Subject.insertMany(subjectSeed))
-    .then((data) => {
-        console.log(
-            data.length +
-                " " +
-                Object.keys({ subjectSeed })[0] +
-                " records inserted."
-        );
-        process.exit(0);
-    })
-    .catch((err) => {
-        console.error(err);
-        process.exit(1);
-    });
+// Subject.deleteMany({})
+//     .then(() => Subject.insertMany(subjectSeed))
+//     .then((data) => {
+//         console.log(
+//             data.length +
+//                 " " +
+//                 Object.keys({ subjectSeed })[0] +
+//                 " records inserted."
+//         );
+//         process.exit(0);
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//         process.exit(1);
+//     });
 
 // const subjectSeed = [
 //     {
