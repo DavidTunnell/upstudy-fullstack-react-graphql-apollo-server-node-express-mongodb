@@ -112,7 +112,7 @@ const VerifyEmail = (params) => {
             }
         }
         if (!loading) {
-            const isVerified = data.user.isVerified;
+            const isVerified = data?.user.isVerified;
             if (!isVerified) {
                 //user is not verified
                 processUrlParams();
