@@ -158,7 +158,10 @@ const Login = ({
 
     return (
         <>
-            <section className="viewport">
+            <section
+                className="viewport login-section"
+                style={{ height: "60em" }}
+            >
                 <div
                     className="image"
                     style={{ backgroundColor: bgColor }}

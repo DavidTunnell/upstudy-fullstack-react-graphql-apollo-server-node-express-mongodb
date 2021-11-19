@@ -144,7 +144,7 @@ const Profile = () => {
                         </div>
                         <hr className="mt-2 mb-2" />
                         <div className="form-row">
-                            <div className="col-6">
+                            <div className="col-lg-6 col-xs-12">
                                 <h5 className="mb-2 fs-20 font-weight-normal">
                                     Update Password
                                 </h5>
@@ -219,9 +219,9 @@ const Profile = () => {
                             </div>
                         </div>
                         <div className="form-row mt-1 align-items-center">
-                            <div className="col-3">
+                            <div className="col-lg-3 col-xs-12">
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn btn-secondary col-lg-12 col-xs-12"
                                     onClick={handleSubmit}
                                     disabled={isDisabled}
                                 >

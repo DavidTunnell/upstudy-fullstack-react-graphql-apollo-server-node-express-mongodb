@@ -65,6 +65,10 @@
     max-width: 75% !important;
 }
 
+/* .login-section {
+    height: "300em";
+} */
+
 @media (min-width: 576px) {
     .card-columns {
         column-count: 1;
@@ -121,6 +125,17 @@
         margin: 0.1em;
         padding: 0;
         width: 100%;
+    }
+    .feedback-panel {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .large-generic-modal {
+        max-width: 95% !important;
+    }
+    .dashboard-card {
+        flex: 0 0 100%;
+        max-width: 87%;
     }
 }
 

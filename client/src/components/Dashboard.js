@@ -62,7 +62,7 @@ const Dashboard = (params) => {
             >
                 <div style={{ backgroundColor: bgColor, height: "5rem" }}></div>
                 <div className="d-flex justify-content-center flex-nowrap mb-1 row">
-                    <div className="card bg-light col-8">
+                    <div className="card bg-light col-8 dashboard-card">
                         <div className="mt-n3"></div>
                         <div className="mt-n10 mb-6">
                             <div className="card-body p-0 mt-n10">

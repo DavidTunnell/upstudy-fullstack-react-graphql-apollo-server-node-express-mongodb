@@ -13,7 +13,7 @@ const BetaNotice = () => {
     };
     return (
         <>
-            <section className="bg-light p-6">
+            <section className="bg-light p-6 feedback-panel">
                 <div className="container ">
                     <div className="boxed bg-primary p-5 text-white">
                         <div className="row justify-content-between align-items-center text-center text-md-left">
