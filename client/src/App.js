@@ -67,7 +67,7 @@ function App() {
                         <Route exact path="/">
                             <Home bgColor={mainColor} />
                         </Route>
-                        <Route exact path="login">
+                        <Route exact path="/login">
                             <Login
                                 signInTopVal="383.333px"
                                 signInInsideVal="581.075px"
@@ -76,7 +76,7 @@ function App() {
                                 bgColor={mainColor}
                             />
                         </Route>
-                        <Route exact path="signup">
+                        <Route exact path="/signup">
                             <Login
                                 signInTopVal="0px"
                                 signInInsideVal="0px"
@@ -85,13 +85,13 @@ function App() {
                                 bgColor={mainColor}
                             />
                         </Route>
-                        <Route exact path="verify">
+                        <Route exact path="/verify">
                             <VerifyEmail bgColor={mainColor} />
                         </Route>
-                        <Route exact path="forgot">
+                        <Route exact path="/forgot">
                             <ForgotPassword bgColor={mainColor} />
                         </Route>
-                        <Route exact path="dashboard">
+                        <Route exact path="/dashboard">
                             <Dashboard bgColor={mainColor} />
                         </Route>
                         {/* dynamic generation of component routes from db source */}
@@ -105,13 +105,13 @@ function App() {
                                     <Category data={category} />
                                 </Route>
                             ))}
-                        <Route exact path="test">
+                        <Route exact path="/test">
                             <Test />
                         </Route>
-                        <Route path="404">
+                        <Route path="/404">
                             <NotFound bgColor={mainColor} />
                         </Route>
-                        <Route path="error">
+                        <Route path="/error">
                             <Error bgColor={mainColor} />
                         </Route>
                         {/* all other routes go to a 404 page - must be at bottom*/}
