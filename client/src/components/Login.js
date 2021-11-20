@@ -159,14 +159,14 @@ const Login = ({
     return (
         <>
             <section
-                className="viewport login-section"
+                className="viewport login-section "
                 style={{ height: "65em" }}
             >
                 <div
                     className="image"
                     style={{ backgroundColor: bgColor }}
                 ></div>
-                <div className="container mt-8">
+                <div className="container mt-8 login-container">
                     <div className="row justify-content-center align-items-center vh-100">
                         <div className="col-md-6 col-lg-5">
                             <div
