@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
     key: "root",
     storage,
+    blacklist: ["modalSettings"],
 };
 //create a persisted reducer using standard reducer
 const persistedReducer = persistReducer(persistConfig, allReducers);
