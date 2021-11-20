@@ -160,7 +160,7 @@ const Login = ({
         <>
             <section
                 className="viewport login-section"
-                style={{ height: "60em" }}
+                style={{ height: "65em" }}
             >
                 <div
                     className="image"
