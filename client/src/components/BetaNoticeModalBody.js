@@ -114,25 +114,32 @@ const BetaNoticeModalBody = (params) => {
                         },
                     });
                     //let user know what happened
-                    dispatch(
-                        modalActions.updateAndShowModal(
-                            "Success",
-                            "We received your feedback. Thank you for being a part of Upstudy.io!"
-                        )
-                    );
+
+                    setTimeout(function () {
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Success",
+                                "We received your feedback. Thank you for being a part of Upstudy.io!"
+                            )
+                        );
+                    }, 250);
                 } catch (err) {
-                    dispatch(
-                        modalActions.updateAndShowModal(
-                            "Error",
-                            "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
-                        )
-                    );
+                    setTimeout(function () {
+                        dispatch(
+                            modalActions.updateAndShowModal(
+                                "Error",
+                                "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
+                            )
+                        );
+                    }, 250);
                 }
             } catch (error) {
                 console.log(error);
-                dispatch(
-                    modalActions.updateAndShowModal("Error", error.message)
-                );
+                setTimeout(function () {
+                    dispatch(
+                        modalActions.updateAndShowModal("Error", error.message)
+                    );
+                }, 250);
             }
             //if the user isn't logged in clear these fields also
             if (!Auth.loggedIn()) {

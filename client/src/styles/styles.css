@@ -65,10 +65,6 @@
     max-width: 75% !important;
 }
 
-/* .login-section {
-    height: "300em";
-} */
-
 @media (min-width: 576px) {
     .card-columns {
         column-count: 1;
@@ -144,6 +140,10 @@
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
     }
+    .dashboard-card {
+        flex: 0 0 100%;
+        max-width: 87%;
+    }
 }
 
 @media only screen and (max-width: 1199px) {
@@ -177,12 +177,4 @@
     .circle-icon {
         margin-right: 7em !important;
     }
-}
-
-.dashboard-card {
-    flex: 0 0 100%;
-    max-width: 87%;
-    overflow: hidden;
-    min-height: 100vh;
-    height: 100%;
 }

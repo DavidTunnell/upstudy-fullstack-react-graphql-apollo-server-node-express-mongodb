@@ -80,12 +80,15 @@ const UpdatePicModalBody = (params) => {
                             },
                         });
                         //let user know it was updated
-                        dispatch(
-                            modalActions.updateAndShowModal(
-                                "Success",
-                                "Your profile pic has been updated."
-                            )
-                        );
+                        setTimeout(function () {
+                            dispatch(
+                                modalActions.updateAndShowModal(
+                                    "Success",
+                                    "Your profile pic has been updated."
+                                )
+                            );
+                        }, 250);
+
                         //exist the modal and clear image that was attached to form
                         handleModalExit();
                         setImageFile(null);
@@ -98,12 +101,14 @@ const UpdatePicModalBody = (params) => {
                             userActions.updateProfilePicRedux(user.id, imageUrl)
                         );
                     } catch (err) {
-                        dispatch(
-                            modalActions.updateAndShowModal(
-                                "Error",
-                                "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
-                            )
-                        );
+                        setTimeout(function () {
+                            dispatch(
+                                modalActions.updateAndShowModal(
+                                    "Error",
+                                    "There was an error either with graphQL, MongoDB, or Amazon s3. Please try again later."
+                                )
+                            );
+                        }, 250);
                     }
                 }
             } catch (error) {
