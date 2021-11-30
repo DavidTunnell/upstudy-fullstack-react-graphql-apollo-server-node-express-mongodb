@@ -14,6 +14,7 @@ import ShareModal from "./ShareModal";
 const Categories = () => {
     //share modal state
     const [showModal, setShowModal] = useState(false);
+    const [sharePath, setSharePath] = useState(null);
     //get filter categories from redux store
     let filteredCategories = useSelector((state) => state.filteredCategories);
     //get categories from db
@@ -26,6 +27,12 @@ const Categories = () => {
             dispatch(filteredCategoriesActions.setAllCategories(data));
         }
     }, [data, loading, dispatch]);
+
+    const handleSocialClick = (path) => {
+        setShowModal(true);
+        setSharePath(path);
+    };
+
     return (
         <>
             <section className="p-3">
@@ -49,7 +56,10 @@ const Categories = () => {
                                     <div className="btn-group">
                                         <Link
                                             to="/"
-                                            onClick={() => setShowModal(true)}
+                                            data-path={subject.path}
+                                            onClick={() =>
+                                                handleSocialClick(subject.path)
+                                            }
                                         >
                                             <label
                                                 className="btn btn-secondary subject-button-controls"
@@ -89,7 +99,11 @@ const Categories = () => {
                     ))}
                 </div>
             </section>
-            <ShareModal showModal={showModal} setShowModal={setShowModal} />
+            <ShareModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                sharePath={sharePath}
+            />
             {/* <section className="bg-white p-5">
                 <div className="container">
                     <div className="row justify-content-center">

@@ -3,18 +3,9 @@ import {
     EmailShareButton,
     FacebookShareButton,
     FacebookMessengerShareButton,
-    HatenaShareButton,
-    InstapaperShareButton,
-    LineShareButton,
     LinkedinShareButton,
-    LivejournalShareButton,
-    MailruShareButton,
-    OKShareButton,
-    PinterestShareButton,
-    PocketShareButton,
     RedditShareButton,
     TelegramShareButton,
-    TumblrShareButton,
     TwitterShareButton,
     WhatsappShareButton,
 } from "react-share";
@@ -23,32 +14,20 @@ import {
     EmailIcon,
     FacebookIcon,
     FacebookMessengerIcon,
-    HatenaIcon,
-    InstapaperIcon,
-    LineIcon,
     LinkedinIcon,
-    LivejournalIcon,
-    MailruIcon,
-    OKIcon,
-    PinterestIcon,
-    PocketIcon,
     RedditIcon,
     TelegramIcon,
-    TumblrIcon,
     TwitterIcon,
-    ViberIcon,
-    VKIcon,
-    WeiboIcon,
     WhatsappIcon,
-    WorkplaceIcon,
 } from "react-share";
+require("dotenv").config();
 
 //https://www.npmjs.com/package/react-share
 
-const ShareModal = ({ showModal, setShowModal }) => {
+const ShareModal = ({ showModal, setShowModal, sharePath }) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
     const [showBackdrop, setShowBackdrop] = useState(false);
-
+    const shareUrl = process.env.REACT_APP_BASE_URL + "/" + sharePath;
     useEffect(() => {
         if (showModal) {
             const btn = document.getElementById(
@@ -116,27 +95,80 @@ const ShareModal = ({ showModal, setShowModal }) => {
                                 ></span>
                             </button>
                         </div>
+                        <div>{shareUrl}</div>
                         <div className="modal-body text-center mt-n3">
-                            <FacebookShareButton
-                                url={"https://peing.net/ja/"}
-                                quote={
-                                    "フェイスブックはタイトルが付けれるようです"
+                            <EmailShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
                                 }
-                                hashtag={"#hashtag"}
-                                description={"aiueo"}
-                                className="Demo__some-network__share-button"
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
                             >
-                                <FacebookIcon size={32} round /> Facebookでshare
-                            </FacebookShareButton>
-                            <br />
+                                <EmailIcon size={32} round />
+                            </EmailShareButton>{" "}
                             <TwitterShareButton
-                                title={"test"}
-                                url={"https://peing.net/ja/"}
-                                hashtags={["hashtag1", "hashtag2"]}
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
                             >
                                 <TwitterIcon size={32} round />
-                                Twitterでもshare
-                            </TwitterShareButton>
+                            </TwitterShareButton>{" "}
+                            <RedditShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <RedditIcon size={32} round />
+                            </RedditShareButton>{" "}
+                            <LinkedinShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <LinkedinIcon size={32} round />
+                            </LinkedinShareButton>{" "}
+                            <FacebookShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <FacebookIcon size={32} round />
+                            </FacebookShareButton>{" "}
+                            <FacebookMessengerShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <FacebookMessengerIcon size={32} round />
+                            </FacebookMessengerShareButton>{" "}
+                            <TelegramShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <TelegramIcon size={32} round />
+                            </TelegramShareButton>{" "}
+                            <WhatsappShareButton
+                                title={
+                                    "Upstudy.io - The first place to look when you study."
+                                }
+                                url={shareUrl}
+                                hashtags={["upstudy"]}
+                            >
+                                <WhatsappIcon size={32} round />
+                            </WhatsappShareButton>
                         </div>
                     </div>
                 </div>
