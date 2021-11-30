@@ -95,43 +95,42 @@ const ShareModal = ({ showModal, setShowModal, sharePath }) => {
                                 ></span>
                             </button>
                         </div>
-                        <div>{shareUrl}</div>
+                        <div className="text-center pb-2">{shareUrl}</div>
                         <div className="modal-body text-center mt-n3">
                             <EmailShareButton
-                                title={
+                                subject={
                                     "Upstudy.io - The first place to look when you study."
                                 }
                                 url={shareUrl}
-                                hashtags={["upstudy"]}
                             >
-                                <EmailIcon size={32} round />
+                                <EmailIcon size={40} round />
                             </EmailShareButton>{" "}
                             <TwitterShareButton
                                 title={
-                                    "Upstudy.io - The first place to look when you study."
+                                    "https://www.upstudy.io - The first place to look when you study. @upstudyio"
                                 }
                                 url={shareUrl}
                                 hashtags={["upstudy"]}
+                                related={["upstudyio"]}
                             >
-                                <TwitterIcon size={32} round />
+                                <TwitterIcon size={40} round />
                             </TwitterShareButton>{" "}
                             <RedditShareButton
                                 title={
                                     "Upstudy.io - The first place to look when you study."
                                 }
                                 url={shareUrl}
-                                hashtags={["upstudy"]}
                             >
-                                <RedditIcon size={32} round />
+                                <RedditIcon size={40} round />
                             </RedditShareButton>{" "}
+                            {/*delete if it doesnt work on prod */}
                             <LinkedinShareButton
                                 title={
                                     "Upstudy.io - The first place to look when you study."
                                 }
                                 url={shareUrl}
-                                hashtags={["upstudy"]}
                             >
-                                <LinkedinIcon size={32} round />
+                                <LinkedinIcon size={40} round />
                             </LinkedinShareButton>{" "}
                             <FacebookShareButton
                                 title={
@@ -140,34 +139,23 @@ const ShareModal = ({ showModal, setShowModal, sharePath }) => {
                                 url={shareUrl}
                                 hashtags={["upstudy"]}
                             >
-                                <FacebookIcon size={32} round />
+                                <FacebookIcon size={40} round />
                             </FacebookShareButton>{" "}
-                            <FacebookMessengerShareButton
-                                title={
-                                    "Upstudy.io - The first place to look when you study."
-                                }
-                                url={shareUrl}
-                                hashtags={["upstudy"]}
-                            >
-                                <FacebookMessengerIcon size={32} round />
-                            </FacebookMessengerShareButton>{" "}
                             <TelegramShareButton
                                 title={
                                     "Upstudy.io - The first place to look when you study."
                                 }
                                 url={shareUrl}
-                                hashtags={["upstudy"]}
                             >
-                                <TelegramIcon size={32} round />
+                                <TelegramIcon size={40} round />
                             </TelegramShareButton>{" "}
                             <WhatsappShareButton
                                 title={
                                     "Upstudy.io - The first place to look when you study."
                                 }
                                 url={shareUrl}
-                                hashtags={["upstudy"]}
                             >
-                                <WhatsappIcon size={32} round />
+                                <WhatsappIcon size={40} round />
                             </WhatsappShareButton>
                         </div>
                     </div>
