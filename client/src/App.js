@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import InfoModal from "./components/InfoModal";
-import ShareModal from "./components/ShareModal";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Category from "./components/Category";
@@ -129,7 +128,6 @@ function App() {
                     imageUrl={modalSettings.imageUrl}
                     closeModal={() => dispatch(modalActions.hideModal())}
                 />
-                <ShareModal />
                 <BetaNotice />
                 <Footer toTop={toTop} />
             </div>

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
 import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,11 @@ import {
     categoriesActions,
     filteredCategoriesActions,
 } from "../redux/actions/";
+import ShareModal from "./ShareModal";
 
 const Categories = () => {
+    //share modal state
+    const [showModal, setShowModal] = useState(false);
     //get filter categories from redux store
     let filteredCategories = useSelector((state) => state.filteredCategories);
     //get categories from db
@@ -44,18 +47,29 @@ const Categories = () => {
                                         {subject.name}
                                     </h4>
                                     <div className="btn-group">
-                                        <label className="btn btn-secondary subject-button-controls">
-                                            <div>
-                                                <span className="control-color">
-                                                    <FontAwesomeIcon
-                                                        icon={faShareSquare}
-                                                    />
-                                                </span>
-                                                <span className="control-color m-1">
-                                                    Share
-                                                </span>
-                                            </div>
-                                        </label>
+                                        <Link
+                                            to="/"
+                                            onClick={() => setShowModal(true)}
+                                        >
+                                            <label
+                                                className="btn btn-secondary subject-button-controls"
+                                                style={{
+                                                    borderRadius:
+                                                        "0.25rem 0rem 0rem 0.25rem",
+                                                }}
+                                            >
+                                                <div>
+                                                    <span className="control-color">
+                                                        <FontAwesomeIcon
+                                                            icon={faShareSquare}
+                                                        />
+                                                    </span>
+                                                    <span className="control-color m-1">
+                                                        Share
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </Link>
                                         <label className="btn btn-secondary subject-button-controls">
                                             <div>
                                                 <span className="control-color">
@@ -75,6 +89,7 @@ const Categories = () => {
                     ))}
                 </div>
             </section>
+            <ShareModal showModal={showModal} setShowModal={setShowModal} />
             {/* <section className="bg-white p-5">
                 <div className="container">
                     <div className="row justify-content-center">

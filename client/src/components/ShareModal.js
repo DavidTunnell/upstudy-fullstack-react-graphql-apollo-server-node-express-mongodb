@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 
-const ShareModal = () => {
+const ShareModal = ({ showModal, setShowModal }) => {
     //get params passed in when calling modal, these are ultimately derived form redux store
     const [showBackdrop, setShowBackdrop] = useState(false);
 
-    // useEffect(() => {
-    //     const btn = document.getElementById("hidden-open-modal-button");
-    //     btn.click();
-    //     setShowBackdrop(true);
-    // }, []);
+    useEffect(() => {
+        if (showModal) {
+            const btn = document.getElementById(
+                "hidden-open-modal-button-share"
+            );
+            btn.click();
+            setShowBackdrop(true);
+        }
+    }, [showModal]);
 
     const handleExitModalClick = async (event) => {
         //if the correct elements are clicked hide the modal and backdrop
         if (
-            event.target.id === "generic-modal" ||
-            event.target.id === "close-generic-modal-button" ||
-            event.target.id === "close-generic-modal-icon"
+            event.target.id === "share-modal" ||
+            event.target.id === "close-share-modal-button" ||
+            event.target.id === "close-share-modal-icon"
         ) {
-            const btn = document.getElementById("close-generic-modal-button");
+            const btn = document.getElementById("close-share-modal-button");
             btn.click();
             setShowBackdrop(false);
+            setShowModal(false);
         }
     };
 
@@ -27,11 +32,11 @@ const ShareModal = () => {
         <>
             <button
                 type="button"
-                id="hidden-open-modal-button"
+                id="hidden-open-modal-button-share"
                 className="invisible"
                 style={{ display: "none" }}
                 data-toggle="modal"
-                data-target="#generic-modal"
+                data-target="#share-modal"
                 data-backdrop="false"
             ></button>
             <div
@@ -39,10 +44,10 @@ const ShareModal = () => {
             ></div>
             <div
                 className="modal fade"
-                id="generic-modal"
+                id="share-modal"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="generic-modal"
+                aria-labelledby="share-modal"
                 aria-hidden="true"
                 onClick={handleExitModalClick}
             >
@@ -55,18 +60,18 @@ const ShareModal = () => {
                             <button
                                 type="button"
                                 className="close"
-                                id="close-generic-modal-button"
+                                id="close-share-modal-button"
                                 data-dismiss="modal"
                                 aria-label="Close"
                             >
                                 <span
                                     aria-hidden="true"
                                     className="icon-x"
-                                    id="close-generic-modal-icon"
+                                    id="close-share-modal-icon"
                                 ></span>
                             </button>
                         </div>
-                        <div className="modal-body text-center  mt-n3">
+                        <div className="modal-body text-center mt-n3">
                             Test!@#$%^&*()_+
                         </div>
                     </div>
