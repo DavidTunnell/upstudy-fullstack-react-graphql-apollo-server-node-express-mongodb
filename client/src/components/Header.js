@@ -60,7 +60,6 @@ const Header = ({ toTop }) => {
                                                 <Link
                                                     className="nav-link"
                                                     to={`/verify?id=${user.id}&username=${user.username}&email=${user.email}`}
-                                                    
                                                 >
                                                     Verify Email
                                                 </Link>
