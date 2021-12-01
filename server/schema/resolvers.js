@@ -4,6 +4,7 @@ const {
     TokenEmailVerification,
     Subject,
     BetaFeedback,
+    Bookmark,
 } = require("../models");
 const { signToken } = require("../utils/auth");
 const bcrypt = require("bcrypt");
@@ -47,6 +48,9 @@ const resolvers = {
                     args.sortBy.order === "ASC" ? 1 : -1;
             }
             return await BetaFeedback.find({}).sort(sortBy);
+        },
+        bookmarks: async (parent, { bookmarkId }) => {
+            return Bookmark.findOne({ _id: bookmarkId });
         },
     },
     Mutation: {
@@ -384,6 +388,23 @@ const resolvers = {
                     "You must be logged in to perform this action."
                 );
             }
+        },
+        addBookmark: async (parent, { userId, name, path }) => {
+            const bookmark = {
+                name,
+                path,
+            };
+
+            return User.findOneAndUpdate(
+                { _id: userId },
+                {
+                    $addToSet: { bookmarks: bookmark },
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
         },
         addBook: async (
             parent,

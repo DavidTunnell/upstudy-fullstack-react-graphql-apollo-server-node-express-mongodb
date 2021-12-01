@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 // import schema from Book.js
 const bookSchema = require("./Book");
 const roleSchema = require("./Role");
+const bookmarkSchema = require("./Bookmark");
 
 const userSchema = new Schema(
     {
@@ -34,6 +35,7 @@ const userSchema = new Schema(
         },
         // set savedBooks to be an array of data that adheres to the bookSchema
         savedBooks: [bookSchema],
+        bookmarks: [bookmarkSchema],
     },
     { timestamps: {} },
     // set this to use virtual below

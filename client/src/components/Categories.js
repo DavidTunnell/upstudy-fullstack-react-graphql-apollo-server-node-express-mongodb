@@ -43,7 +43,8 @@ const Categories = () => {
         } else {
             console.log(path);
             console.log(categoryId);
-            console.log(user);
+            console.log(user.id);
+            //classify as category also
         }
     };
 
