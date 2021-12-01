@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Profile from "./Profile";
 import BetaFeedback from "./BetaFeedback";
+import Bookmarks from "./Bookmarks";
 import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -143,13 +144,22 @@ const Dashboard = (params) => {
                                             <div className="col col-md-10 col-lg-8">
                                                 <div className="nav nav-tabs mb-1">
                                                     {isUser && (
-                                                        <a
-                                                            className="nav-item nav-link active"
-                                                            data-toggle="tab"
-                                                            href="#profile"
-                                                        >
-                                                            Profile
-                                                        </a>
+                                                        <>
+                                                            <a
+                                                                className="nav-item nav-link active"
+                                                                data-toggle="tab"
+                                                                href="#profile"
+                                                            >
+                                                                Profile
+                                                            </a>
+                                                            <a
+                                                                className="nav-item nav-link"
+                                                                data-toggle="tab"
+                                                                href="#bookmarks"
+                                                            >
+                                                                Bookmarks
+                                                            </a>
+                                                        </>
                                                     )}
                                                     {isAdmin && (
                                                         <>
@@ -217,6 +227,23 @@ const Dashboard = (params) => {
                                                             feedback={
                                                                 betaFeedback
                                                             }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className="tab-pane"
+                                                id="bookmarks"
+                                                role="tabpanel"
+                                                aria-labelledby="#bookmarks"
+                                            >
+                                                <div className="row justify-content-center">
+                                                    <div className="col-md-10 col-lg-8">
+                                                        <Bookmarks
+                                                        // feedback={
+                                                        //     betaFeedback
+                                                        // }
                                                         />
                                                     </div>
                                                 </div>
