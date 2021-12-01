@@ -4,12 +4,24 @@ const { Schema } = require("mongoose");
 //model definition
 const bookmarkSchema = new Schema(
     {
+        categoryId: {
+            type: Schema.ObjectId,
+            required: true,
+        },
         name: {
             type: String,
             required: true,
         },
         path: {
             type: String,
+            required: true,
+        },
+        type: {
+            type: String,
+            required: true,
+        },
+        archived: {
+            type: Boolean,
             required: true,
         },
     },

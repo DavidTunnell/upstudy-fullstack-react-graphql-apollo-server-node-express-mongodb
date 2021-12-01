@@ -45,6 +45,29 @@ export const ADD_SUBJECT = gql`
     }
 `;
 
+export const ADD_BOOKMARK = gql`
+    mutation AddBookmark(
+        $userId: ID!
+        $name: String!
+        $type: String!
+        $path: String!
+        $categoryId: ID!
+    ) {
+        addBookmark(
+            userId: $userId
+            name: $name
+            type: $type
+            path: $path
+            categoryId: $categoryId
+        ) {
+            _id
+            name
+            type
+            path
+        }
+    }
+`;
+
 export const ADD_BETA_FEEDBACK = gql`
     mutation AddBetaFeedback(
         $username: String!

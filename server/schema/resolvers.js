@@ -389,10 +389,16 @@ const resolvers = {
                 );
             }
         },
-        addBookmark: async (parent, { userId, name, path }) => {
+        addBookmark: async (
+            parent,
+            { userId, categoryId, name, type, path }
+        ) => {
             const bookmark = {
+                categoryId,
                 name,
+                type,
                 path,
+                archived: false,
             };
 
             return User.findOneAndUpdate(

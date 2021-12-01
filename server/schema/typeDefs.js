@@ -24,6 +24,7 @@ const typeDefs = gql`
     type Bookmark {
         _id: ID
         name: String
+        type: String
         path: String
     }
 
@@ -82,7 +83,8 @@ const typeDefs = gql`
         subjects(sortBy: SortBy): [Subject]!
         subject(subjectId: ID!): Subject
         betaFeedback(sortBy: SortBy): [BetaFeedback]!
-        bookmarks(sortBy: SortBy): [Bookmark]!
+        bookmarks(subjectId: ID!, sortBy: SortBy): [Bookmark]!
+        bookmark(subjectId: ID!): Subject
     }
 
     type Mutation {
@@ -125,7 +127,14 @@ const typeDefs = gql`
 
         archiveBetaFeedback(feedbackId: ID!): BetaFeedback
 
-        addBookmark(userId: ID!, name: String!, path: String!): Bookmark
+        addBookmark(
+            userId: ID!
+            categoryId: ID!
+            name: String!
+            type: String!
+            path: String!
+        ): Bookmark
+
         archiveBookmark(bookmarkId: ID!): Bookmark
 
         addBook(

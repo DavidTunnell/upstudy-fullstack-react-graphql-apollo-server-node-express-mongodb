@@ -10,7 +10,8 @@ import {
     filteredCategoriesActions,
 } from "../redux/actions/";
 import ShareModal from "./ShareModal";
-
+import { useMutation } from "@apollo/client";
+import { ADD_BOOKMARK } from "../utils/mutations";
 const Categories = () => {
     //get user from redux state
     const user = useSelector((state) => state.loggedInUser);
@@ -24,6 +25,8 @@ const Categories = () => {
     const dispatch = useDispatch();
     //use react router history
     const history = useHistory();
+    const [addBookmark] = useMutation(ADD_BOOKMARK);
+
     useEffect(() => {
         //get categories data into redux store
         if (!loading) {
@@ -37,14 +40,45 @@ const Categories = () => {
         setSharePath(path);
     };
 
-    const handleSaveClick = (path, categoryId) => {
+    const handleSaveClick = async (path, categoryId, categoryName) => {
         if (!user.loggedIn) {
             history.push("/signup");
         } else {
             console.log(path);
-            console.log(categoryId);
             console.log(user.id);
             //classify as category also
+            console.log("category");
+
+            try {
+                //create user via graphql mutation
+                const { data } = await addBookmark({
+                    variables: {
+                        userId: user.id,
+                        categoryId: categoryId,
+                        name: categoryName,
+                        type: "category",
+                        path: path,
+                    },
+                });
+
+                console.log("after submitted");
+                console.log(data);
+                console.log("after submitted");
+                
+                //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
+                // Auth.login(
+                //     data.addUser.token,
+                //     data.addUser.user._id,
+                //     data.addUser.user.username,
+                //     data.addUser.user.email,
+                //     data.addUser.user.isVerified,
+                //     data.addUser.user.roles,
+                //     data.addUser.user.profilePic
+                // );
+            } catch (err) {
+                //provide user with error message in modal using redux state date
+                // dispatch(modalActions.updateAndShowModal("Error", err.message));
+            }
         }
     };
 
@@ -105,7 +139,8 @@ const Categories = () => {
                                                 onClick={() =>
                                                     handleSaveClick(
                                                         subject.path,
-                                                        subject._id
+                                                        subject._id,
+                                                        subject.name
                                                     )
                                                 }
                                             >
