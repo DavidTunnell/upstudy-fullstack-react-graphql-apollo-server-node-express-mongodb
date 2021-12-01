@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
     EmailShareButton,
     FacebookShareButton,
-    FacebookMessengerShareButton,
     LinkedinShareButton,
     RedditShareButton,
     TelegramShareButton,
@@ -13,13 +12,13 @@ import {
 import {
     EmailIcon,
     FacebookIcon,
-    FacebookMessengerIcon,
     LinkedinIcon,
     RedditIcon,
     TelegramIcon,
     TwitterIcon,
     WhatsappIcon,
 } from "react-share";
+
 require("dotenv").config();
 
 //https://www.npmjs.com/package/react-share

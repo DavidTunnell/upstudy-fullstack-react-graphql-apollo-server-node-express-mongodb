@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_SUBJECTS } from "../utils/queries";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare, faBookmark } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,8 @@ import {
 import ShareModal from "./ShareModal";
 
 const Categories = () => {
+    //get user from redux state
+    const user = useSelector((state) => state.loggedInUser);
     //share modal state
     const [showModal, setShowModal] = useState(false);
     const [sharePath, setSharePath] = useState(null);
@@ -20,6 +22,8 @@ const Categories = () => {
     //get categories from db
     const { loading, data } = useQuery(GET_SUBJECTS);
     const dispatch = useDispatch();
+    //use react router history
+    const history = useHistory();
     useEffect(() => {
         //get categories data into redux store
         if (!loading) {
@@ -31,6 +35,16 @@ const Categories = () => {
     const handleSocialClick = (path) => {
         setShowModal(true);
         setSharePath(path);
+    };
+
+    const handleSaveClick = (path, categoryId) => {
+        if (!user.loggedIn) {
+            history.push("/signup");
+        } else {
+            console.log(path);
+            console.log(categoryId);
+            console.log(user);
+        }
     };
 
     return (
@@ -80,18 +94,32 @@ const Categories = () => {
                                                 </div>
                                             </label>
                                         </Link>
-                                        <label className="btn btn-secondary subject-button-controls">
-                                            <div>
-                                                <span className="control-color">
-                                                    <FontAwesomeIcon
-                                                        icon={faBookmark}
-                                                    />
-                                                </span>
-                                                <span className="control-color m-1">
-                                                    Save
-                                                </span>
-                                            </div>
-                                        </label>
+                                        <Link to="#">
+                                            <label
+                                                className="btn btn-secondary subject-button-controls"
+                                                style={{
+                                                    borderRadius:
+                                                        "0rem 0.25rem 0.25rem 0rem",
+                                                }}
+                                                onClick={() =>
+                                                    handleSaveClick(
+                                                        subject.path,
+                                                        subject._id
+                                                    )
+                                                }
+                                            >
+                                                <div>
+                                                    <span className="control-color">
+                                                        <FontAwesomeIcon
+                                                            icon={faBookmark}
+                                                        />
+                                                    </span>
+                                                    <span className="control-color m-1">
+                                                        Save
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
