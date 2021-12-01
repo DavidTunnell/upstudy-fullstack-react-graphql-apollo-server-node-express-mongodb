@@ -12,6 +12,9 @@ import {
 import ShareModal from "./ShareModal";
 import { useMutation } from "@apollo/client";
 import { ADD_BOOKMARK } from "../utils/mutations";
+import { modalActions } from "../redux/actions/";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Categories = () => {
     //get user from redux state
     const user = useSelector((state) => state.loggedInUser);
@@ -44,14 +47,9 @@ const Categories = () => {
         if (!user.loggedIn) {
             history.push("/signup");
         } else {
-            console.log(path);
-            console.log(user.id);
-            //classify as category also
-            console.log("category");
-
             try {
                 //create user via graphql mutation
-                const { data } = await addBookmark({
+                const response = addBookmark({
                     variables: {
                         userId: user.id,
                         categoryId: categoryId,
@@ -60,24 +58,14 @@ const Categories = () => {
                         path: path,
                     },
                 });
-
-                console.log("after submitted");
-                console.log(data);
-                console.log("after submitted");
-                
-                //also login via Auth utility to generate a token for extra security, this also adds logged in user data to redux store
-                // Auth.login(
-                //     data.addUser.token,
-                //     data.addUser.user._id,
-                //     data.addUser.user.username,
-                //     data.addUser.user.email,
-                //     data.addUser.user.isVerified,
-                //     data.addUser.user.roles,
-                //     data.addUser.user.profilePic
-                // );
+                toast.promise(response, {
+                    pending: "Saving...",
+                    success: "Bookmark Saved!",
+                    error: "There was an error.",
+                });
             } catch (err) {
                 //provide user with error message in modal using redux state date
-                // dispatch(modalActions.updateAndShowModal("Error", err.message));
+                dispatch(modalActions.updateAndShowModal("Error", err.message));
             }
         }
     };
@@ -168,6 +156,7 @@ const Categories = () => {
                 setShowModal={setShowModal}
                 sharePath={sharePath}
             />
+            <ToastContainer />
             {/* <section className="bg-white p-5">
                 <div className="container">
                     <div className="row justify-content-center">
