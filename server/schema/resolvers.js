@@ -49,8 +49,9 @@ const resolvers = {
             }
             return await BetaFeedback.find({}).sort(sortBy);
         },
-        bookmarks: async (parent, { bookmarkId }) => {
-            return Bookmark.findOne({ _id: bookmarkId });
+        bookmarks: async (parent, { userId }) => {
+            const user = await User.findOne({ _id: userId });
+            return user.bookmarks;
         },
     },
     Mutation: {

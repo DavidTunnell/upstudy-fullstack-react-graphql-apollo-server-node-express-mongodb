@@ -83,8 +83,7 @@ const typeDefs = gql`
         subjects(sortBy: SortBy): [Subject]!
         subject(subjectId: ID!): Subject
         betaFeedback(sortBy: SortBy): [BetaFeedback]!
-        bookmarks(subjectId: ID!, sortBy: SortBy): [Bookmark]!
-        bookmark(subjectId: ID!): Subject
+        bookmarks(userId: ID!, sortBy: SortBy): [Bookmark]!
     }
 
     type Mutation {

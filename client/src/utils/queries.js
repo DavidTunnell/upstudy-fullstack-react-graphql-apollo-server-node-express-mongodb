@@ -89,3 +89,17 @@ export const GET_BETA_FEEDBACK = gql`
         }
     }
 `;
+
+export const GET_BOOKMARKS = gql`
+    query Bookmarks($sortBy: SortBy, $userId: ID!) {
+        bookmarks(
+            sortBy: { field: "createdAt", order: DESC }
+            userId: $userId
+        ) {
+            _id
+            name
+            type
+            path
+        }
+    }
+`;

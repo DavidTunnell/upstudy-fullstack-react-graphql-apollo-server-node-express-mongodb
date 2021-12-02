@@ -84,13 +84,7 @@ const Bookmarks = (params) => {
                                         scope="col"
                                         className="d-none d-sm-table-cell"
                                     >
-                                        Category
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="d-none d-sm-table-cell"
-                                    >
-                                        Message
+                                        Title
                                     </th>
                                     <th scope="col">Details</th>
                                 </tr>
@@ -100,9 +94,6 @@ const Bookmarks = (params) => {
                                     <th scope="row">test 1</th>
                                     <td className="d-none d-sm-table-cell">
                                         2
-                                    </td>
-                                    <td className="d-none d-lg-table-cell">
-                                        3
                                     </td>
                                     <td className="text-center">
                                         <div className="dropdown">
@@ -127,7 +118,7 @@ const Bookmarks = (params) => {
                                                     //     handleFeedbackDetailsClick
                                                     // }
                                                 >
-                                                    Details
+                                                    Open
                                                 </button>
                                                 <button
                                                     className="dropdown-item"
