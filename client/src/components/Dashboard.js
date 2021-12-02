@@ -8,7 +8,7 @@ import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { useLazyQuery } from "@apollo/client";
-import { GET_BETA_FEEDBACK } from "../utils/queries";
+import { GET_BETA_FEEDBACK, GET_BOOKMARKS } from "../utils/queries";
 import LargeGenericModal from "./LargeGenericModal";
 import UpdatePicModalBody from "./UpdatePicModalBody";
 
@@ -18,10 +18,17 @@ const Dashboard = (params) => {
     //get user from redux store
     const user = useSelector((state) => state.loggedInUser);
     const [betaFeedback, setBetaFeedback] = useState(null);
+    const [bookmarks, setBookmarks] = useState(null);
     //use lazy query to pull data from db on demand
     const [getBetaFeedbackData] = useLazyQuery(GET_BETA_FEEDBACK, {
         //add data to state once returned
         onCompleted: (data) => setBetaFeedback(data.betaFeedback),
+        //ensures the most up to date data is shown
+        fetchPolicy: "network-only",
+    });
+    const [getBookmarks] = useLazyQuery(GET_BOOKMARKS, {
+        //add data to state once returned
+        onCompleted: (data) => setBookmarks(data),
         //ensures the most up to date data is shown
         fetchPolicy: "network-only",
     });
@@ -156,6 +163,20 @@ const Dashboard = (params) => {
                                                                 className="nav-item nav-link"
                                                                 data-toggle="tab"
                                                                 href="#bookmarks"
+                                                                onClick={() =>
+                                                                    getBookmarks(
+                                                                        {
+                                                                            variables:
+                                                                                {
+                                                                                    userId: user.id,
+                                                                                    sortBy: {
+                                                                                        field: "createdAt",
+                                                                                        order: "DESC",
+                                                                                    },
+                                                                                },
+                                                                        }
+                                                                    )
+                                                                }
                                                             >
                                                                 Bookmarks
                                                             </a>
@@ -241,9 +262,9 @@ const Dashboard = (params) => {
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-10 col-lg-8">
                                                         <Bookmarks
-                                                        // feedback={
-                                                        //     betaFeedback
-                                                        // }
+                                                            bookmarks={
+                                                                bookmarks
+                                                            }
                                                         />
                                                     </div>
                                                 </div>

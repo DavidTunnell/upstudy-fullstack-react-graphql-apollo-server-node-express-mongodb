@@ -3,10 +3,11 @@ import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
 import React, { useState, useEffect } from "react";
 import { modalActions } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Bookmarks = (params) => {
     //params from parent
-    // let betaFeedbackData = params.feedback;
+    let bookmarks = params.bookmarks;
     //graphql mutations
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
     //local component state
@@ -15,9 +16,13 @@ const Bookmarks = (params) => {
 
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     setFeedbackData(betaFeedbackData);
-    // }, [betaFeedbackData]);
+    useEffect(() => {
+        // setFeedbackData(betaFeedbackData);
+
+        console.log("inside bookmarks component");
+        console.log(bookmarks);
+        console.log("bookmarks");
+    });
 
     // const handleFeedbackDetailsClick = (event) => {
     //     event.preventDefault();
@@ -79,7 +84,6 @@ const Bookmarks = (params) => {
                         <table className="table table-lined ">
                             <thead style={{ textAlign: "center" }}>
                                 <tr>
-                                    <th scope="col">Date</th>
                                     <th
                                         scope="col"
                                         className="d-none d-sm-table-cell"
@@ -90,49 +94,63 @@ const Bookmarks = (params) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">test 1</th>
-                                    <td className="d-none d-sm-table-cell">
-                                        2
-                                    </td>
-                                    <td className="text-center">
-                                        <div className="dropdown">
-                                            <span
-                                                className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
-                                                role="button"
-                                                id="dropdownMenuLink-3"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                            >
-                                                <i className="icon-more-vertical fs-22"></i>
-                                            </span>
-                                            <div
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuLink-3"
-                                            >
-                                                <button
-                                                    className="dropdown-item"
-                                                    // data-index={feedback._id}
-                                                    // onClick={
-                                                    //     handleFeedbackDetailsClick
-                                                    // }
-                                                >
-                                                    Open
-                                                </button>
-                                                <button
-                                                    className="dropdown-item"
-                                                    // data-index={feedback._id}
-                                                    // onClick={
-                                                    //     handleFeedbackArchiveClick
-                                                    // }
-                                                >
-                                                    Archive
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {bookmarks &&
+                                    bookmarks.bookmarks
+                                        .filter(
+                                            (bookmark) => !bookmark.archived
+                                        )
+                                        .map((bookmark) => (
+                                            <tr>
+                                                <th scope="row">
+                                                    <Link to={bookmark.path}>
+                                                        {bookmark.name}
+                                                    </Link>
+                                                </th>
+                                                <td className="text-center">
+                                                    <div className="dropdown">
+                                                        <span
+                                                            className="btn btn-ico btn-outline-light text-dark rounded btn-sm"
+                                                            role="button"
+                                                            id="dropdownMenuLink-3"
+                                                            data-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="false"
+                                                        >
+                                                            <i className="icon-more-vertical fs-22"></i>
+                                                        </span>
+                                                        <div
+                                                            className="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink-3"
+                                                        >
+                                                            <button
+                                                                className="dropdown-item"
+                                                                // data-index={feedback._id}
+                                                                // onClick={
+                                                                //     handleFeedbackDetailsClick
+                                                                // }
+                                                            >
+                                                                <Link
+                                                                    to={
+                                                                        bookmark.path
+                                                                    }
+                                                                >
+                                                                    Open
+                                                                </Link>
+                                                            </button>
+                                                            <button
+                                                                className="dropdown-item"
+                                                                // data-index={feedback._id}
+                                                                // onClick={
+                                                                //     handleFeedbackArchiveClick
+                                                                // }
+                                                            >
+                                                                Archive
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                             </tbody>
                         </table>
                     </div>

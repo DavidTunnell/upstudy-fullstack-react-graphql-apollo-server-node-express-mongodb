@@ -91,11 +91,8 @@ export const GET_BETA_FEEDBACK = gql`
 `;
 
 export const GET_BOOKMARKS = gql`
-    query Bookmarks($sortBy: SortBy, $userId: ID!) {
-        bookmarks(
-            sortBy: { field: "createdAt", order: DESC }
-            userId: $userId
-        ) {
+    query Bookmarks($userId: ID!, $sortBy: SortBy) {
+        bookmarks(sortBy: $sortBy, userId: $userId) {
             _id
             name
             type
