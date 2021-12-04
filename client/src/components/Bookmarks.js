@@ -11,69 +11,52 @@ const Bookmarks = (params) => {
     //graphql mutations
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
     //local component state
-    // const [feedbackData, setFeedbackData] = useState(betaFeedbackData);
+    const [bookmarkData, setBookmarkData] = useState(bookmarks);
     //to save data to redux store
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // setFeedbackData(betaFeedbackData);
+        setBookmarkData(bookmarks);
 
         console.log("inside bookmarks component");
         console.log(bookmarks);
+        console.log(bookmarkData);
         console.log("bookmarks");
-    });
+    }, [bookmarks, bookmarkData]);
 
-    // const handleFeedbackDetailsClick = (event) => {
-    //     event.preventDefault();
-    //     const idSelected = event.target.getAttribute("data-index");
-    //     //get the relevant feedback data for the modal
-    //     const result = feedbackData.filter((obj) => {
-    //         return obj._id === idSelected;
-    //     })[0];
-    //     //put modal options in redux store to show user
-    //     dispatch(
-    //         modalActions.updateAndShowModal(
-    //             `${result.username} - ${new Date(
-    //                 parseInt(result.createdAt)
-    //             ).toLocaleDateString("en-US")}`,
-    //             result.message,
-    //             result.image
-    //         )
-    //     );
-    // };
-
-    // const handleFeedbackArchiveClick = async (event) => {
-    //     event.preventDefault();
-    //     const idSelected = event.target.getAttribute("data-index");
-    //     try {
-    //         // 1. Make a shallow copy of the items
-    //         let items = [...feedbackData];
-    //         // 2. Make a shallow copy of the item you want to mutate
-    //         const foundIndex = items.findIndex((x) => x._id === idSelected);
-    //         let item = { ...items[foundIndex] };
-    //         // 3. Replace the property you're interested in
-    //         item.archived = true;
-    //         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-    //         items[foundIndex] = item;
-    //         // 5. Set the state to our new copy
-    //         setFeedbackData(items);
-    //         try {
-    //             await archiveBetaFeedback({
-    //                 variables: {
-    //                     feedbackId: idSelected,
-    //                 },
-    //             });
-    //             setFeedbackData(items);
-    //         } catch (error) {
-    //             dispatch(
-    //                 modalActions.updateAndShowModal("Error", error.message)
-    //             );
-    //         }
-    //     } catch (err) {
-    //         dispatch(modalActions.updateAndShowModal("Error", err.message));
-    //     }
-    // };
+    const handleBookmarkArchiveClick = async (event) => {
+        event.preventDefault();
+        const idSelected = event.target.getAttribute("data-index");
+        console.log(idSelected);
+        try {
+            // 1. Make a shallow copy of the items
+            let items = [...bookmarks.bookmarks];
+            // 2. Make a shallow copy of the item you want to mutate
+            const foundIndex = items.findIndex((x) => x._id === idSelected);
+            let item = { ...items[foundIndex] };
+            // 3. Replace the property you're interested in
+            item.archived = true;
+            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+            items[foundIndex] = item;
+            // 5. Set the state to our new copy
+            setBookmarkData({ bookmarks: items });
+            // try {
+            //     await archiveBetaFeedback({
+            //         variables: {
+            //             bookmarkId: idSelected,
+            //         },
+            //     });
+            //     // setBookmarkData(items);
+            // } catch (error) {
+            //     dispatch(
+            //         modalActions.updateAndShowModal("Error", error.message)
+            //     );
+            // }
+        } catch (err) {
+            dispatch(modalActions.updateAndShowModal("Error", err.message));
+        }
+    };
 
     return (
         <>
@@ -94,8 +77,8 @@ const Bookmarks = (params) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {bookmarks &&
-                                    bookmarks.bookmarks
+                                {bookmarkData &&
+                                    bookmarkData.bookmarks
                                         .filter(
                                             (bookmark) => !bookmark.archived
                                         )
@@ -122,13 +105,7 @@ const Bookmarks = (params) => {
                                                             className="dropdown-menu"
                                                             aria-labelledby="dropdownMenuLink-3"
                                                         >
-                                                            <button
-                                                                className="dropdown-item"
-                                                                // data-index={feedback._id}
-                                                                // onClick={
-                                                                //     handleFeedbackDetailsClick
-                                                                // }
-                                                            >
+                                                            <button className="dropdown-item">
                                                                 <Link
                                                                     to={
                                                                         bookmark.path
@@ -139,10 +116,12 @@ const Bookmarks = (params) => {
                                                             </button>
                                                             <button
                                                                 className="dropdown-item"
-                                                                // data-index={feedback._id}
-                                                                // onClick={
-                                                                //     handleFeedbackArchiveClick
-                                                                // }
+                                                                data-index={
+                                                                    bookmark._id
+                                                                }
+                                                                onClick={
+                                                                    handleBookmarkArchiveClick
+                                                                }
                                                             >
                                                                 Archive
                                                             </button>

@@ -150,6 +150,21 @@ const resolvers = {
                 throw new AuthenticationError(error.message);
             }
         },
+        archiveBookmark: async (parent, { bookmarkId }, context, info) => {
+            //find with ID and update archive field
+            try {
+                const bookmark = await Bookmark.findOne({
+                    _id: bookmarkId,
+                });
+                if (bookmark) {
+                    bookmark.archived = true;
+                    bookmark.save();
+                }
+                return bookmark;
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
+        },
         updateProfilePic: async (
             parent,
             { userId, profilePic },
