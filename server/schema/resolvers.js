@@ -51,7 +51,9 @@ const resolvers = {
         },
         bookmarks: async (parent, { userId }) => {
             const user = await User.findOne({ _id: userId });
-            return user.bookmarks;
+            return user.bookmarks.filter(function (bookmark) {
+                return bookmark.archived == false;
+            });
         },
     },
     Mutation: {

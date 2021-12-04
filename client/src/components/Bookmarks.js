@@ -24,9 +24,6 @@ const Bookmarks = (params) => {
     const handleBookmarkArchiveClick = async (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
-        console.log(idSelected);
-        console.log("handleBookmarkArchiveClick");
-        console.log(userId);
         try {
             // 1. Make a shallow copy of the items
             let items = [...bookmarks.bookmarks];
