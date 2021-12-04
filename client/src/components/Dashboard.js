@@ -268,6 +268,7 @@ const Dashboard = (params) => {
                                                             setBookmarks={
                                                                 setBookmarks
                                                             }
+                                                            userId={user.id}
                                                         />
                                                     </div>
                                                 </div>

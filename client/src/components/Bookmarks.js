@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { ARCHIVE_BETA_FEEDBACK } from "../utils/mutations";
+import { ARCHIVE_BOOKMARK } from "../utils/mutations";
 import React, { useState, useEffect } from "react";
 import { modalActions } from "../redux/actions";
 import { useDispatch } from "react-redux";
@@ -9,21 +9,24 @@ const Bookmarks = (params) => {
     //params from parent
     let bookmarks = params.bookmarks;
     let setBookmarks = params.setBookmarks;
+    let userId = params.userId;
     //graphql mutations
-    const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
+    const [archiveBookmark] = useMutation(ARCHIVE_BOOKMARK);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log("inside bookmarks component");
-        console.log(bookmarks);
-        console.log("bookmarks");
-    }, [bookmarks]);
+    // useEffect(() => {
+    //     console.log("inside bookmarks component");
+    //     console.log(bookmarks);
+    //     console.log("bookmarks");
+    // }, [bookmarks]);
 
     const handleBookmarkArchiveClick = async (event) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
         console.log(idSelected);
+        console.log("handleBookmarkArchiveClick");
+        console.log(userId);
         try {
             // 1. Make a shallow copy of the items
             let items = [...bookmarks.bookmarks];
@@ -33,11 +36,12 @@ const Bookmarks = (params) => {
             // 5. Set the state to our new copy
             setBookmarks({ bookmarks: items });
             try {
-                // await archiveBetaFeedback({
-                //     variables: {
-                //         bookmarkId: idSelected,
-                //     },
-                // });
+                await archiveBookmark({
+                    variables: {
+                        userId: userId,
+                        bookmarkId: idSelected,
+                    },
+                });
             } catch (error) {
                 dispatch(
                     modalActions.updateAndShowModal("Error", error.message)
