@@ -150,17 +150,23 @@ const resolvers = {
                 throw new AuthenticationError(error.message);
             }
         },
-        archiveBookmark: async (parent, { bookmarkId }, context, info) => {
+        archiveBookmark: async (
+            parent,
+            { userId, bookmarkId },
+            context,
+            info
+        ) => {
             //find with ID and update archive field
             try {
-                const bookmark = await Bookmark.findOne({
-                    _id: bookmarkId,
-                });
-                if (bookmark) {
-                    bookmark.archived = true;
-                    bookmark.save();
-                }
-                return bookmark;
+                //its nows updating but the 1st one not the one found via bookmark...
+                var user = await User.findOneAndUpdate(
+                    {
+                        _id: userId,
+                        "bookmarks._id": bookmarkId,
+                    },
+                    { $set: { "bookmarks.$.archived": "true" } }
+                );
+                return user;
             } catch (error) {
                 throw new AuthenticationError(error.message);
             }

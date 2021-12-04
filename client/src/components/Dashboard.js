@@ -265,6 +265,9 @@ const Dashboard = (params) => {
                                                             bookmarks={
                                                                 bookmarks
                                                             }
+                                                            setBookmarks={
+                                                                setBookmarks
+                                                            }
                                                         />
                                                     </div>
                                                 </div>

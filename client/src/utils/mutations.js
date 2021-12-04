@@ -110,6 +110,14 @@ export const ARCHIVE_BETA_FEEDBACK = gql`
     }
 `;
 
+export const ARCHIVE_BOOKMARK = gql`
+    mutation AddBookmark($userId: ID!, $bookmarkId: ID!) {
+        archiveBookmark(userId: $userId, bookmarkId: $bookmarkId) {
+            _id
+        }
+    }
+`;
+
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     mutation AddEmailVerificationTokenMutation(
         $userId: String!

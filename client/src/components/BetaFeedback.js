@@ -53,11 +53,11 @@ const BetaFeedback = (params) => {
             // 5. Set the state to our new copy
             setFeedbackData(items);
             try {
-                await archiveBetaFeedback({
-                    variables: {
-                        feedbackId: idSelected,
-                    },
-                });
+                // await archiveBetaFeedback({
+                //     variables: {
+                //         feedbackId: idSelected,
+                //     },
+                // });
                 setFeedbackData(items);
             } catch (error) {
                 dispatch(

@@ -8,22 +8,17 @@ import { Link } from "react-router-dom";
 const Bookmarks = (params) => {
     //params from parent
     let bookmarks = params.bookmarks;
+    let setBookmarks = params.setBookmarks;
     //graphql mutations
     const [archiveBetaFeedback] = useMutation(ARCHIVE_BETA_FEEDBACK);
-    //local component state
-    const [bookmarkData, setBookmarkData] = useState(bookmarks);
-    //to save data to redux store
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setBookmarkData(bookmarks);
-
         console.log("inside bookmarks component");
         console.log(bookmarks);
-        console.log(bookmarkData);
         console.log("bookmarks");
-    }, [bookmarks, bookmarkData]);
+    }, [bookmarks]);
 
     const handleBookmarkArchiveClick = async (event) => {
         event.preventDefault();
@@ -34,25 +29,20 @@ const Bookmarks = (params) => {
             let items = [...bookmarks.bookmarks];
             // 2. Make a shallow copy of the item you want to mutate
             const foundIndex = items.findIndex((x) => x._id === idSelected);
-            let item = { ...items[foundIndex] };
-            // 3. Replace the property you're interested in
-            item.archived = true;
-            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-            items[foundIndex] = item;
+            items.splice(foundIndex, 1);
             // 5. Set the state to our new copy
-            setBookmarkData({ bookmarks: items });
-            // try {
-            //     await archiveBetaFeedback({
-            //         variables: {
-            //             bookmarkId: idSelected,
-            //         },
-            //     });
-            //     // setBookmarkData(items);
-            // } catch (error) {
-            //     dispatch(
-            //         modalActions.updateAndShowModal("Error", error.message)
-            //     );
-            // }
+            setBookmarks({ bookmarks: items });
+            try {
+                // await archiveBetaFeedback({
+                //     variables: {
+                //         bookmarkId: idSelected,
+                //     },
+                // });
+            } catch (error) {
+                dispatch(
+                    modalActions.updateAndShowModal("Error", error.message)
+                );
+            }
         } catch (err) {
             dispatch(modalActions.updateAndShowModal("Error", err.message));
         }
@@ -77,8 +67,8 @@ const Bookmarks = (params) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {bookmarkData &&
-                                    bookmarkData.bookmarks
+                                {bookmarks &&
+                                    bookmarks.bookmarks
                                         .filter(
                                             (bookmark) => !bookmark.archived
                                         )
