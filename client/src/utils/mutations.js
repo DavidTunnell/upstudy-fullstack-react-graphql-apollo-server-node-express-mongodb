@@ -177,6 +177,8 @@ export const USER_LOGIN = gql`
                     name
                     type
                     path
+                    categoryId
+                    archived
                 }
             }
         }

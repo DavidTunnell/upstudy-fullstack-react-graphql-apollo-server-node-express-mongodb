@@ -7,13 +7,13 @@ export const GET_USERS = gql`
             username
             email
             password
-            savedBooks {
-                authors
-                description
-                bookId
-                image
-                link
-                title
+            bookmarks {
+                _id
+                name
+                type
+                path
+                categoryId
+                archived
             }
             roles {
                 role
@@ -41,6 +41,8 @@ export const GET_USER = gql`
                 name
                 type
                 path
+                categoryId
+                archived
             }
         }
     }

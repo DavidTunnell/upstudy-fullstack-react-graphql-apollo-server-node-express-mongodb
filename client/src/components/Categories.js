@@ -23,6 +23,8 @@ const Categories = () => {
     const [sharePath, setSharePath] = useState(null);
     //get filter categories from redux store
     let filteredCategories = useSelector((state) => state.filteredCategories);
+    //get user bookmarks from redux
+    let userBookmarks = useSelector((state) => state.userBookmarks);
     //get categories from db
     const { loading, data } = useQuery(GET_SUBJECTS);
     const dispatch = useDispatch();
@@ -41,6 +43,20 @@ const Categories = () => {
     const handleSocialClick = (path) => {
         setShowModal(true);
         setSharePath(path);
+    };
+
+    //idea: make a function that checks whether a bookmark exists and returns disabled if so, then use in JSX loop
+    const isBookmarked = (categoryId) => {
+        console.log("//////////////////");
+        console.log(categoryId);
+        console.log(userBookmarks);
+
+        const checkId = (obj) => obj.categoryId === categoryId;
+        console.log(userBookmarks.some(checkId));
+        console.log("//////////////////");
+        //now getting category id.. use it to see if its a bookmark
+        return "";
+        // return "disabled";
     };
 
     const handleSaveClick = async (path, categoryId, categoryName) => {
@@ -119,7 +135,9 @@ const Categories = () => {
                                         </Link>
                                         <Link to="#">
                                             <label
-                                                className="btn btn-secondary subject-button-controls"
+                                                className={`btn btn-secondary subject-button-controls ${isBookmarked(
+                                                    subject._id
+                                                )}`}
                                                 style={{
                                                     borderRadius:
                                                         "0rem 0.25rem 0.25rem 0rem",

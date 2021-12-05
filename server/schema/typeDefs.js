@@ -26,6 +26,8 @@ const typeDefs = gql`
         name: String
         type: String
         path: String
+        categoryId: ID
+        archived: Boolean
     }
 
     type Role {
