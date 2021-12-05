@@ -4,8 +4,7 @@ function bookmarksReducer(state = [], action) {
     switch (action.type) {
         case actions.BOOKMARKS:
             if (action.payload) {
-                console.log(action.payload);
-                return action.payload.bookmarks;
+                return action.payload;
             }
             return state;
         default:

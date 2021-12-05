@@ -86,13 +86,7 @@ const Login = ({
                 );
                 //add bookmarks to redux - TODO
                 //need to get bookmarks from graphql call
-                // const { loading, error, data, refetch } = await getBookmarks({
-                //     variables: { ...userLoginData },
-                // });
-                console.log("data login button");
-                console.log(data);
-                console.log("data login button");
-                // dispatch(bookmarksActions.bookmarks());
+                dispatch(bookmarksActions.bookmarks(data.login.user.bookmarks));
                 //send user to homepage after login
                 history.push("/");
             } catch (err) {
