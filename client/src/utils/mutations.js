@@ -172,6 +172,12 @@ export const USER_LOGIN = gql`
                     role
                     associatedIds
                 }
+                bookmarks {
+                    _id
+                    name
+                    type
+                    path
+                }
             }
         }
     }

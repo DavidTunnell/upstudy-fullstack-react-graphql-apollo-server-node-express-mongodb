@@ -31,17 +31,16 @@ export const GET_USER = gql`
             email
             password
             isVerified
-            savedBooks {
-                authors
-                description
-                bookId
-                image
-                link
-                title
-            }
             roles {
                 role
                 associatedIds
+            }
+            profilePic
+            bookmarks {
+                _id
+                name
+                type
+                path
             }
         }
     }

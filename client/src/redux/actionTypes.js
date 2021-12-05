@@ -21,3 +21,5 @@ export const FILTER_CATEGORIES = "filterCategories";
 export const SET_ALL_CATEGORIES = "setAllCategories";
 
 export const CATEGORY = "Category";
+
+export const BOOKMARKS = "Bookmarks";

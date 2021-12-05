@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { USER_LOGIN, ADD_USER } from "../utils/mutations";
 import SimpleReactValidator from "simple-react-validator";
 import { useDispatch } from "react-redux";
-import { modalActions } from "../redux/actions/";
+import { modalActions, bookmarksActions } from "../redux/actions/";
+
+import { GET_BOOKMARKS } from "../utils/queries";
 
 //get parameters for size of cards to use in component
 const Login = ({
@@ -41,6 +43,7 @@ const Login = ({
     //get ability to use graphql mutations for create user and login user
     const [login] = useMutation(USER_LOGIN);
     const [addUser] = useMutation(ADD_USER);
+    // const [bookmarks] = useQuery(GET_BOOKMARKS);
     //on load (and whenever params change) set CSS of cards
     useEffect(() => {
         setSignInTop(signInTopVal);
@@ -81,6 +84,15 @@ const Login = ({
                     data.login.user.roles,
                     data.login.user.profilePic
                 );
+                //add bookmarks to redux - TODO
+                //need to get bookmarks from graphql call
+                // const { loading, error, data, refetch } = await getBookmarks({
+                //     variables: { ...userLoginData },
+                // });
+                console.log("data login button");
+                console.log(data);
+                console.log("data login button");
+                // dispatch(bookmarksActions.bookmarks());
                 //send user to homepage after login
                 history.push("/");
             } catch (err) {
