@@ -47,16 +47,25 @@ const Categories = () => {
 
     //idea: make a function that checks whether a bookmark exists and returns disabled if so, then use in JSX loop
     const isBookmarked = (categoryId) => {
-        console.log("//////////////////");
-        console.log(categoryId);
-        console.log(userBookmarks);
-
-        const checkId = (obj) => obj.categoryId === categoryId;
-        console.log(userBookmarks.some(checkId));
-        console.log("//////////////////");
-        //now getting category id.. use it to see if its a bookmark
-        return "";
-        // return "disabled";
+        let isBookmarked = false;
+        let isArchived = false;
+        for (let i = 0; i < userBookmarks.length; i++) {
+            const element = userBookmarks[i];
+            if (categoryId === element.categoryId) {
+                isBookmarked = true;
+            }
+            if (categoryId === element.categoryId && element.archived == true) {
+                isArchived = true;
+            }
+        }
+        if (isArchived) {
+            return "";
+        }
+        if (isBookmarked && !isArchived) {
+            return "disabled";
+        } else {
+            return "";
+        }
     };
 
     const handleSaveClick = async (path, categoryId, categoryName) => {
