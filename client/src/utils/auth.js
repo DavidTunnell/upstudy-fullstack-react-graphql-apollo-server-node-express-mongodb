@@ -1,7 +1,7 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
 import { store } from "../redux/store";
-import { userActions } from "../redux/actions/";
+import { userActions, bookmarksActions } from "../redux/actions/";
 
 class AuthService {
     // get user data from encoded token
@@ -54,6 +54,8 @@ class AuthService {
         localStorage.removeItem("id_token");
         //update redux store removing logged in users data
         await store.dispatch(userActions.logoutRedux());
+        //update redux store removing logged in users bookmarks
+        await store.dispatch(bookmarksActions.clearBookmarks());
         // this will reload the page and reset the state of the application, a no-no for react, unless for logout to refresh user experience
         setTimeout(() => {
             window.location.assign("/");

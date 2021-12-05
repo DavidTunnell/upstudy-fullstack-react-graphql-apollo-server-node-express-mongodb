@@ -7,6 +7,8 @@ function bookmarksReducer(state = [], action) {
                 return action.payload;
             }
             return state;
+        case actions.CLEAR_BOOKMARKS:
+            return [];
         default:
             //always return state at the end so the whole app doesn't break if there is an issue
             return state;

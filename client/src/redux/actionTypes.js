@@ -23,3 +23,4 @@ export const SET_ALL_CATEGORIES = "setAllCategories";
 export const CATEGORY = "Category";
 
 export const BOOKMARKS = "Bookmarks";
+export const CLEAR_BOOKMARKS = "clearBookmarks";
