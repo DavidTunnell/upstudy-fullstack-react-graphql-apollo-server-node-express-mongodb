@@ -7,3 +7,7 @@ export const bookmarks = (allBookmarks) => {
 export const clearBookmarks = () => {
     return { type: actions.CLEAR_BOOKMARKS };
 };
+
+export const archiveBookmarkRedux = (bookmarkId) => {
+    return { type: actions.ARCHIVE_BOOKMARK_REDUX, payload: bookmarkId };
+};

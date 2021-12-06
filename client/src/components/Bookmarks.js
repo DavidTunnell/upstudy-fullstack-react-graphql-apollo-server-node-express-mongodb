@@ -1,15 +1,16 @@
 import { useMutation } from "@apollo/client";
 import { ARCHIVE_BOOKMARK } from "../utils/mutations";
 import React, { useState, useEffect } from "react";
-import { modalActions } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { modalActions, bookmarksActions } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 const Bookmarks = (params) => {
     //params from parent
     let bookmarks = params.bookmarks;
     let setBookmarks = params.setBookmarks;
     let userId = params.userId;
+    //redux state
+    const userBookmarks = useSelector((state) => state.userBookmarks);
     //graphql mutations
     const [archiveBookmark] = useMutation(ARCHIVE_BOOKMARK);
 
@@ -25,13 +26,20 @@ const Bookmarks = (params) => {
         event.preventDefault();
         const idSelected = event.target.getAttribute("data-index");
         try {
-            // 1. Make a shallow copy of the items
-            let items = [...bookmarks.bookmarks];
-            // 2. Make a shallow copy of the item you want to mutate
-            const foundIndex = items.findIndex((x) => x._id === idSelected);
-            items.splice(foundIndex, 1);
+            dispatch(bookmarksActions.archiveBookmarkRedux(idSelected));
+
+            //REPLACE LOCAL STATE WITH REDUX HERE
+            //NEED TO ----------------------------------------------------------------
+            // UPDATE REDUX STATE SO THAT idSelected gets set to ARCHIVED = TRUE
+
+            // // 1. Make a shallow copy of the items
+            // let items = [...userBookmarks];
+            // // 2. Make a shallow copy of the item you want to mutate
+            // const foundIndex = items.findIndex((x) => x._id === idSelected);
+            // items.splice(foundIndex, 1);
             // 5. Set the state to our new copy
-            setBookmarks({ bookmarks: items });
+            // setBookmarks({ bookmarks: items });
+
             try {
                 await archiveBookmark({
                     variables: {
@@ -68,8 +76,8 @@ const Bookmarks = (params) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {bookmarks &&
-                                    bookmarks.bookmarks
+                                {userBookmarks &&
+                                    userBookmarks
                                         .filter(
                                             (bookmark) => !bookmark.archived
                                         )
