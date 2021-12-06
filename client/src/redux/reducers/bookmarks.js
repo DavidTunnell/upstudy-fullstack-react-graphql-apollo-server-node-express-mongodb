@@ -33,6 +33,7 @@ function bookmarksReducer(state = [], action) {
                 console.log("???>>>>>>>");
 
                 console.log(bookmark);
+                console.log(bookmark.bookmarkId);
                 console.log(bookmark.categoryId);
                 console.log(bookmark.name);
                 console.log(bookmark.path);
@@ -42,12 +43,16 @@ function bookmarksReducer(state = [], action) {
                 console.log(">>>>>>>>>>>>>>>>>>>>>>>>");
 
                 // 1. Make a shallow copy of the items
-                // let items = [...state];
-                // // 2. Make a shallow copy of the item you want to mutate and update it
-                // const foundIndex = items.findIndex((x) => x._id === bookmarkId);
-                // items[foundIndex].archived = true;
-                // //statelessly update
-                // return items;
+                let items = [...state];
+                items.push({
+                    _id: bookmark.bookmarkId,
+                    name: bookmark.name,
+                    type: bookmark.type,
+                    path: bookmark.path,
+                    archived: false,
+                    categoryId: bookmark.categoryId,
+                });
+                return items;
             }
             return state;
         default:
