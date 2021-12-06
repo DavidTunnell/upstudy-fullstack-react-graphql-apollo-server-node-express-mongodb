@@ -18,7 +18,7 @@ const Dashboard = (params) => {
     //get user from redux store
     const user = useSelector((state) => state.loggedInUser);
     const [betaFeedback, setBetaFeedback] = useState(null);
-    const [bookmarks, setBookmarks] = useState(null);
+    // const [bookmarks, setBookmarks] = useState(null);
     //use lazy query to pull data from db on demand
     const [getBetaFeedbackData] = useLazyQuery(GET_BETA_FEEDBACK, {
         //add data to state once returned
@@ -26,12 +26,12 @@ const Dashboard = (params) => {
         //ensures the most up to date data is shown
         fetchPolicy: "network-only",
     });
-    const [getBookmarks] = useLazyQuery(GET_BOOKMARKS, {
-        //add data to state once returned
-        onCompleted: (data) => setBookmarks(data),
-        //ensures the most up to date data is shown
-        fetchPolicy: "network-only",
-    });
+    // const [getBookmarks] = useLazyQuery(GET_BOOKMARKS, {
+    //     //add data to state once returned
+    //     onCompleted: (data) => setBookmarks(data),
+    //     //ensures the most up to date data is shown
+    //     fetchPolicy: "network-only",
+    // });
     const [isAdmin, setIsAdmin] = useState(false);
     const [isMod, setIsMod] = useState(false);
     const [isUser, setIsUser] = useState(false);
@@ -163,20 +163,20 @@ const Dashboard = (params) => {
                                                                 className="nav-item nav-link"
                                                                 data-toggle="tab"
                                                                 href="#bookmarks"
-                                                                onClick={() =>
-                                                                    getBookmarks(
-                                                                        {
-                                                                            variables:
-                                                                                {
-                                                                                    userId: user.id,
-                                                                                    sortBy: {
-                                                                                        field: "createdAt",
-                                                                                        order: "DESC",
-                                                                                    },
-                                                                                },
-                                                                        }
-                                                                    )
-                                                                }
+                                                                // onClick={() =>
+                                                                //     getBookmarks(
+                                                                //         {
+                                                                //             variables:
+                                                                //                 {
+                                                                //                     userId: user.id,
+                                                                //                     sortBy: {
+                                                                //                         field: "createdAt",
+                                                                //                         order: "DESC",
+                                                                //                     },
+                                                                //                 },
+                                                                //         }
+                                                                //     )
+                                                                // }
                                                             >
                                                                 Bookmarks
                                                             </a>
@@ -262,12 +262,12 @@ const Dashboard = (params) => {
                                                 <div className="row justify-content-center">
                                                     <div className="col-md-10 col-lg-8">
                                                         <Bookmarks
-                                                            bookmarks={
-                                                                bookmarks
-                                                            }
-                                                            setBookmarks={
-                                                                setBookmarks
-                                                            }
+                                                            // bookmarks={
+                                                            //     bookmarks
+                                                            // }
+                                                            // setBookmarks={
+                                                            //     setBookmarks
+                                                            // }
                                                             userId={user.id}
                                                         />
                                                     </div>

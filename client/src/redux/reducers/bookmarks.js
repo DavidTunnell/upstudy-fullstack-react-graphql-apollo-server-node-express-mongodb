@@ -12,13 +12,13 @@ function bookmarksReducer(state = [], action) {
         case actions.ARCHIVE_BOOKMARK_REDUX:
             if (action.payload) {
                 const bookmarkId = action.payload;
-                console.log("actions.ARCHIVE_BOOKMARK_REDUX");
-                console.log(bookmarkId);
-                console.log(state);
-                console.log("actions.ARCHIVE_BOOKMARK_REDUX");
-
+                // 1. Make a shallow copy of the items
+                let items = [...state];
+                // 2. Make a shallow copy of the item you want to mutate and update it
+                const foundIndex = items.findIndex((x) => x._id === bookmarkId);
+                items[foundIndex].archived = true;
                 //statelessly update
-                return action.payload;
+                return items;
             }
             return state;
         default:
