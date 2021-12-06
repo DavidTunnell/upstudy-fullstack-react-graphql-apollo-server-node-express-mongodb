@@ -134,7 +134,7 @@ const typeDefs = gql`
             name: String!
             type: String!
             path: String!
-        ): Bookmark
+        ): User
 
         archiveBookmark(userId: ID!, bookmarkId: ID!): Bookmark
 

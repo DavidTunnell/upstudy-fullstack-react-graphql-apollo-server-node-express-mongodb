@@ -20,6 +20,8 @@ export const addBookmarkRedux = (
     type,
     path
 ) => {
+    console.log("addBookmarkRedux");
+    console.log(bookmarkId);
     return {
         type: actions.ADD_BOOKMARK_REDUX,
         payload: { bookmarkId, userId, categoryId, name, type, path },

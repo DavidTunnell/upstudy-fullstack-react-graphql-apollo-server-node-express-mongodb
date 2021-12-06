@@ -22,6 +22,7 @@ function bookmarksReducer(state = [], action) {
             }
             return state;
         case actions.ADD_BOOKMARK_REDUX:
+            console.log("ADD_BOOKMARK_REDUX in reducer called");
             if (action.payload) {
                 // userId: user.id,
                 // categoryId: categoryId,

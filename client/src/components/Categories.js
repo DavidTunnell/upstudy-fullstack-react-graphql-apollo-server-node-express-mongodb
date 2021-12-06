@@ -83,13 +83,12 @@ const Categories = () => {
                         path: path,
                     },
                 });
-                console.log("create user via graphql mutation");
-                await response.then((value) => {
-                    console.log("value");
-                    console.log(value.data.addBookmark._id);
+                response.then((user) => {
                     dispatch(
                         bookmarksActions.addBookmarkRedux(
-                            value.data.addBookmark._id,
+                            user.data.addBookmark.bookmarks[
+                                user.data.addBookmark.bookmarks.length - 1
+                            ]._id,
                             user.id,
                             categoryId,
                             categoryName,
@@ -97,20 +96,7 @@ const Categories = () => {
                             path
                         )
                     );
-                    console.log("value");
-                    return value;
                 });
-                console.log("create user via graphql mutation");
-                //ADD THE SAVED BOOKMARK TO REDUX STATE HERE
-                // dispatch(
-                //     bookmarksActions.addBookmarkRedux(
-                //         user.id,
-                //         categoryId,
-                //         categoryName,
-                //         "category",
-                //         path
-                //     )
-                // );
                 toast.promise(response, {
                     pending: "Saving...",
                     success: "Bookmark Saved!",

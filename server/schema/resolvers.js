@@ -435,6 +435,13 @@ const resolvers = {
                     runValidators: true,
                 }
             );
+            // .exec((err, user) => {
+            //     // console.log(").exec((err, user) => {");
+            //     // console.log(user.bookmarks[user.bookmarks.length - 1]);
+            //     // console.log(").exec((err, user) => {");
+            //     return user.bookmarks[user.bookmarks.length - 1];
+            // });
+            //NEED TO RETURN NEWLY CREATED ID OF BOOKMARK
         },
         addBook: async (
             parent,

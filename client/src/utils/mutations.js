@@ -46,24 +46,29 @@ export const ADD_SUBJECT = gql`
 `;
 
 export const ADD_BOOKMARK = gql`
-    mutation AddBookmark(
+    mutation Mutation(
         $userId: ID!
+        $categoryId: ID!
         $name: String!
         $type: String!
         $path: String!
-        $categoryId: ID!
     ) {
         addBookmark(
             userId: $userId
+            categoryId: $categoryId
             name: $name
             type: $type
             path: $path
-            categoryId: $categoryId
         ) {
             _id
-            name
-            type
-            path
+            bookmarks {
+                _id
+                name
+                type
+                path
+                categoryId
+                archived
+            }
         }
     }
 `;
