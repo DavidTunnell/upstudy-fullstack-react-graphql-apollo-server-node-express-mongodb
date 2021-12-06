@@ -68,7 +68,14 @@ const Categories = () => {
         }
     };
 
-    const handleSaveClick = async (path, categoryId, categoryName) => {
+    const handleSaveClick = async (path, categoryId, categoryName, event) => {
+        if (
+            event.target
+                .closest(".subject-button-controls")
+                .classList.contains("disabled")
+        ) {
+            return;
+        }
         if (!user.loggedIn) {
             history.push("/signup");
         } else {
@@ -165,11 +172,12 @@ const Categories = () => {
                                                     borderRadius:
                                                         "0rem 0.25rem 0.25rem 0rem",
                                                 }}
-                                                onClick={() =>
+                                                onClick={(event) =>
                                                     handleSaveClick(
                                                         subject.path,
                                                         subject._id,
-                                                        subject.name
+                                                        subject.name,
+                                                        event
                                                     )
                                                 }
                                             >

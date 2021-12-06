@@ -22,27 +22,8 @@ function bookmarksReducer(state = [], action) {
             }
             return state;
         case actions.ADD_BOOKMARK_REDUX:
-            console.log("ADD_BOOKMARK_REDUX in reducer called");
             if (action.payload) {
-                // userId: user.id,
-                // categoryId: categoryId,
-                // name: categoryName,
-                // type: "category",
-                // path: path,
-
                 const bookmark = action.payload;
-                console.log("???>>>>>>>");
-
-                console.log(bookmark);
-                console.log(bookmark.bookmarkId);
-                console.log(bookmark.categoryId);
-                console.log(bookmark.name);
-                console.log(bookmark.path);
-                console.log(bookmark.type);
-                console.log(bookmark.userId);
-                console.log("test");
-                console.log(">>>>>>>>>>>>>>>>>>>>>>>>");
-
                 // 1. Make a shallow copy of the items
                 let items = [...state];
                 items.push({
