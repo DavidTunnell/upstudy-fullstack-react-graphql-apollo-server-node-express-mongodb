@@ -25,3 +25,4 @@ export const CATEGORY = "Category";
 export const BOOKMARKS = "Bookmarks";
 export const CLEAR_BOOKMARKS = "clearBookmarks";
 export const ARCHIVE_BOOKMARK_REDUX = "archiveBookmarkRedux";
+export const ADD_BOOKMARK_REDUX = "addBookmarkRedux";

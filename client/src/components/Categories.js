@@ -12,7 +12,7 @@ import {
 import ShareModal from "./ShareModal";
 import { useMutation } from "@apollo/client";
 import { ADD_BOOKMARK } from "../utils/mutations";
-import { modalActions } from "../redux/actions/";
+import { modalActions, bookmarksActions } from "../redux/actions/";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Categories = () => {
@@ -83,6 +83,17 @@ const Categories = () => {
                         path: path,
                     },
                 });
+                //ADD THE SAVED BOOKMARK TO REDUX STATE HERE
+                //REDUX STATE
+                dispatch(
+                    bookmarksActions.addBookmarkRedux(
+                        user.id,
+                        categoryId,
+                        categoryName,
+                        "category",
+                        path
+                    )
+                );
                 toast.promise(response, {
                     pending: "Saving...",
                     success: "Bookmark Saved!",
