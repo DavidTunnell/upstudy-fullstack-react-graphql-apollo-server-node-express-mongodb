@@ -69,16 +69,26 @@ const Categories = () => {
     };
 
     const handleSaveClick = async (path, categoryId, categoryName, event) => {
-        if (
-            event.target
-                .closest(".subject-button-controls")
-                .classList.contains("disabled")
-        ) {
-            return;
-        }
         if (!user.loggedIn) {
             history.push("/signup");
         } else {
+            if (
+                event.target
+                    .closest(".subject-button-controls")
+                    .classList.contains("disabled")
+            ) {
+                return;
+            }
+
+            if (true) {
+                console.log(categoryId);
+                console.log(userBookmarks);
+                //next check here if one exists
+                console.log(bookmarkExists(categoryId));
+                //if so return;
+            }
+            //need to check if it exists it being a record for the currently clicked save category
+            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             try {
                 //create user via graphql mutation
                 const response = addBookmark({
@@ -115,6 +125,12 @@ const Categories = () => {
             }
         }
     };
+
+    function bookmarkExists(categoryId) {
+        return userBookmarks.some(function (el) {
+            return el.categoryId === categoryId;
+        });
+    }
 
     return (
         <>
