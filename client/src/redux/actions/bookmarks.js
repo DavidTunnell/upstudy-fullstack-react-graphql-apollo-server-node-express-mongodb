@@ -12,6 +12,10 @@ export const archiveBookmarkRedux = (bookmarkId) => {
     return { type: actions.ARCHIVE_BOOKMARK_REDUX, payload: bookmarkId };
 };
 
+export const unarchiveBookmarkRedux = (categoryId) => {
+    return { type: actions.UNARCHIVE_BOOKMARK_REDUX, payload: categoryId };
+};
+
 export const addBookmarkRedux = (
     bookmarkId,
     userId,

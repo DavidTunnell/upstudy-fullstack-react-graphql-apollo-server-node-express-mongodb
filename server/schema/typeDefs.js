@@ -137,6 +137,7 @@ const typeDefs = gql`
         ): User
 
         archiveBookmark(userId: ID!, bookmarkId: ID!): Bookmark
+        unarchiveBookmark(userId: ID!, categoryId: ID!): Bookmark
 
         addBook(
             userId: ID!

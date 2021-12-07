@@ -11,7 +11,7 @@ import {
 } from "../redux/actions/";
 import ShareModal from "./ShareModal";
 import { useMutation } from "@apollo/client";
-import { ADD_BOOKMARK } from "../utils/mutations";
+import { ADD_BOOKMARK, UNARCHIVE_BOOKMARK } from "../utils/mutations";
 import { modalActions, bookmarksActions } from "../redux/actions/";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,7 +31,7 @@ const Categories = () => {
     //use react router history
     const history = useHistory();
     const [addBookmark] = useMutation(ADD_BOOKMARK);
-
+    const [unarchiveBookmark] = useMutation(UNARCHIVE_BOOKMARK);
     useEffect(() => {
         //get categories data into redux store
         if (!loading) {
@@ -80,15 +80,26 @@ const Categories = () => {
                 return;
             }
 
-            if (true) {
-                console.log(categoryId);
-                console.log(userBookmarks);
-                //next check here if one exists
-                console.log(bookmarkExists(categoryId));
-                //if so return;
+            if (bookmarkExists(categoryId)) {
+                //1st need to set archived back to false
+                dispatch(bookmarksActions.unarchiveBookmarkRedux(categoryId));
+                try {
+                    const response = unarchiveBookmark({
+                        variables: { userId: user.id, categoryId: categoryId },
+                    });
+                    toast.promise(response, {
+                        pending: "Saving...",
+                        success: "Bookmark Saved!",
+                        error: "There was an error.",
+                    });
+                } catch (error) {
+                    dispatch(
+                        modalActions.updateAndShowModal("Error", error.message)
+                    );
+                }
+
+                return;
             }
-            //need to check if it exists it being a record for the currently clicked save category
-            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             try {
                 //create user via graphql mutation
                 const response = addBookmark({

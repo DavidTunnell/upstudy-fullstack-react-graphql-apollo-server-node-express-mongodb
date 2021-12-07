@@ -173,6 +173,27 @@ const resolvers = {
                 throw new AuthenticationError(error.message);
             }
         },
+        unarchiveBookmark: async (
+            parent,
+            { userId, categoryId },
+            context,
+            info
+        ) => {
+            //find with ID and update archive field
+            try {
+                //its nows updating but the 1st one not the one found via bookmark...
+                var user = await User.findOneAndUpdate(
+                    {
+                        _id: userId,
+                        "bookmarks.categoryId": categoryId,
+                    },
+                    { $set: { "bookmarks.$.archived": "false" } }
+                );
+                return user;
+            } catch (error) {
+                throw new AuthenticationError(error.message);
+            }
+        },
         updateProfilePic: async (
             parent,
             { userId, profilePic },

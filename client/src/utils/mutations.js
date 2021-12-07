@@ -123,6 +123,14 @@ export const ARCHIVE_BOOKMARK = gql`
     }
 `;
 
+export const UNARCHIVE_BOOKMARK = gql`
+    mutation UnarchiveBookmark($userId: ID!, $categoryId: ID!) {
+        unarchiveBookmark(userId: $userId, categoryId: $categoryId) {
+            _id
+        }
+    }
+`;
+
 export const ADD_EMAIL_VERIFICATION_TOKEN = gql`
     mutation AddEmailVerificationTokenMutation(
         $userId: String!
