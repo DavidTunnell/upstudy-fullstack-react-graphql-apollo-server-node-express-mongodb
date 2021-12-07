@@ -79,7 +79,6 @@ const Categories = () => {
             ) {
                 return;
             }
-
             if (bookmarkExists(categoryId)) {
                 //1st need to set archived back to false
                 dispatch(bookmarksActions.unarchiveBookmarkRedux(categoryId));
@@ -97,7 +96,6 @@ const Categories = () => {
                         modalActions.updateAndShowModal("Error", error.message)
                     );
                 }
-
                 return;
             }
             try {
